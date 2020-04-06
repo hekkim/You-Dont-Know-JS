@@ -159,23 +159,41 @@ All major browsers and device makers have committed to keeping their JS implemen
 
 That means you can learn **one JS**, and rely on that same JS everywhere.
 
-### The Web Rules Everything About (JS)
+### JS의 지배자 웹 The Web Rules Everything About (JS)
+
+JS 환경이 브라우저에서 서버 그너머 로봇 등등 지속적으로 넓혀진데에 반해 JS를 지배한 단 하나의 환경은 웹입니다. 이 말인 즉슨 어떻게 JS가 웹을 위해 구현되는지가 실질적으로 중요한 현실이란 것입니다.
 
 While the array of environments that run JS is constantly expanding (from browsers, to servers (Node.js), to robots, to lightbulbs, to...), the one environment that rules JS is the web. In other words, how JS is implemented for web browsers is, in all practicality, the only reality that matters.
 
+대부분의 경우 특별한 환경에서든 브라우저 기반 JS 엔진에서 구동되든 JS는 정확히 똑같이 정의되어 있습니다. 하지만 약간의 차이에 관해 분명히 짚고 넘어가야됩니다.
+
 For the most part, the JS defined in the specification and the JS that runs in browser-based JS engines is the same. But there are some differences that must be considered.
+
+때때로 JS 스펙은 다소 새로운 방식 혹은 재정의된 행동을 수행하고 심지어 그러한 일들이 브라우저 기반 JS 엔진에서의 행동 양식과 정확히 일치하지 않기도 한다는 것입니다. 이러한 실수는 20여년이 넘도록 비정상적이지만 예측 가능한 범위에서 기능하고 있는 웹 컨텐츠들에 기반하고 있기 때문입니다. 그로인해, 그러한 웹 컨텐츠의 손상을 방지하고자 때때로 JS 엔진은 사양에 따른 변경을 따르지 않기도 할 것 입니다.
 
 Sometimes the JS specification will dictate some new or refined behavior, and yet that won't exactly match with how it works in browser-based JS engines. Such a mismatch is historical: JS engines have had 20+ years of observable behaviors around corner cases of features that have come to be relied on by web content. As such, sometimes the JS engines will refuse to conform to a specification-dictated change because it would break that web content.
 
+이러한 경우 종종 TC39는 역추적을 하기도하고 그러한 웹 환경의 특이점을 가볍게 수긍하기도 합니다. 예로 들어, TC39는 `contains(..)`라는 함수를 배열 (Array)에 추가할 계획을 갖고 있었지만 몇몇 사이트들에서 이 함수명이 오래된 JS 프레임워크에서 여전히 사용되고 있는 것을 발견했고, 그로인해 그들은 충돌이 발생하지 않는 `includes(..)`란 이름으로 함수를 변경하기도 했습니다. 이렇게 희극 혹은 비극같은 일은 "Smooshgate" 라고 별칭하는 되는 때에도 똑같이 발생했는데, 이 때는 `flatten(..)`으로 계획되었던 함수는 결국 `flat(..)`이라고 이름을 바꿔야만 됐습니다.
+
 In these cases, often TC39 will backtrack and simply choose to conform the specification to the reality of the web. For example, TC39 planned to add a `contains(..)` method for Arrays, but it was found that this name conflicted with old JS frameworks still in use on some sites, so they changed the name to a non-conflicting `includes(..)`. The same happened with a comedic/tragic JS *community crisis* dubbed "smooshgate," where the planned `flatten(..)` method was eventually renamed `flat(..)`.
+
+하지만 때때로, TC39는 스펙이 그러한 특이점에서도 정확하고 분명하게 작동하도록 결정할 것입니다. 그러한 브라우저 기반 JS 엔진에 잘 작동하지 못 할지라도 말이죠.
 
 But occasionally, TC39 will decide the specification should stick firm on some point even though it is unlikely that browser-based JS engines will ever conform.
 
+결론은? 부록 B "웹 브라우저를 위한 추가적인 ECMAScript 특징"[^specApB]에서 공식 JS 스펙과 웹에서 구동되고 있는 JS의 현실의 차이에 관한 자세한 스펙을 포함하고 있습니다. 다시 말해, 이러한 예외점들은 *오직* 웹 JS 환경에서만 있다는 것입니다. 다른 JS 환경은 설명서에 토씨하나에도 틀리지 않고 정확하게 작동되어야만 하죠.
+
 The solution? Appendix B, "Additional ECMAScript Features for Web Browsers".[^specApB] The JS specification includes this appendix to detail out any known mismatches between the official JS specification and the reality of JS on the web. In other words, these are exceptions that are allowed *only* for web JS; other JS environments must stick to the letter of the law.
+
+섹션 B.1과 B.2는 역사적인 근거에는 반하지만 TC39가 코어 JS에서는 형식적으로 구체적으로 설명치 않은 *추가적인* 웹 JS 문법 혹은 API에 관해 다루고 있습니다. `0` 접두사를 가진 8진법 숫자라던가 `escape(..)` / `unescape(..)` 유틸리티 함수라던가 String에 있는 `anchor(..)`, `blink()` 함수 RegExp에 있는 `compile(..)` 함수와 같은 것들에 관한 것이지요.
 
 Section B.1 and B.2 cover *additions* to JS (syntax and APIs) that web JS includes, again for historical reasons, but which TC39 does not plan to formally specify in the core of JS. Examples include `0`-prefixed octal literals, the global `escape(..)` / `unescape(..)` utilities, String "helpers" like `anchor(..)` and `blink()`, and the RegExp `compile(..)` method.
 
+섹션 B.3에서는 웹과 웹이 아닌 JS 엔진에서 똑같이 사용가능하지만 다른 행동 양식이 보인다던가 다른 결과물을 내는 충돌들에 관해 다룰 것입니다. 대부분의 이런 차이점들은 strict mode에서 구현되고 있던 초창기 에러들이라고 딱지표가 붙은 상황들로 구성되어 있습니다.
+
 Section B.3 includes some conflicts where code may run in both web and non-web JS engines, but where the behavior *could* be observably different, resulting in different outcomes. Most of the listed changes involve situations that are labeled as early errors when code is running in strict mode.
+
+부록 B *올ㅋ (gotchas)*에선 흔히 마주치긴 어렵지만 미래의 안전을 위해 피해야만하는 구조들에 관한 좋은 아이디어들에 관해 다룰 것입니다. 가능한 한 특정 JS 환경에서만 적용되는 동작에 의존하지 마시고 어디서든 사용 가능한 JS 사양을 준수하시기 바랍니다.
 
 Appendix B *gotchas* aren't encountered very often, but it's still a good idea to avoid these constructs to be future safe. Wherever possible, adhere to the JS specification and don't rely on behavior that's only applicable in certain JS engine environments.
 
