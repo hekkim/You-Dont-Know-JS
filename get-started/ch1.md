@@ -1,85 +1,161 @@
 # You Don't Know JS Yet: Get Started - 2nd Edition
+# 챕터 1: 자바스크립트란 무엇인가?
 # Chapter 1: What *Is* JavaScript?
 
+당신은 아직 JS를 모릅니다. 제가 완벽하게 그러하지 못 하고. 우리 중 그 누구도 그렇지 못 하죠. 하지만 우리 모두는 JS를 더 잘 알아갈 수는 있습니다.
 You don't know JS, yet. Neither do I, not fully anyway. None of us do. But we can all start getting to know JS better.
+
+*You Don't Know JS Yet* (YDKJSY) 시리즈의 첫 책의 첫 챕터에서는 앞으로 나아가기위한 기초 지식을 쌓을 것입니다. JS 라는 언어가 실제로 무엇인지에 관한 중요한 배경 지식의 디테일, 몇몇 미신들 그리고 오해에 관해 알아갈 것입니다.
 
 In this first chapter of the first book of the *You Don't Know JS Yet* (YDKJSY) series, we will take some time to build a foundation to move forward on. We need to start by covering a variety of important background housekeeping details, clearing up some myths and misconceptions about what the language really is (and isn't!).
 
+JS의 정체성에 관한 귀중한 깨달음과 어떻게 JS 구성되어 있고 유지되어 왔는지 알게 해주는 과정이 될 것입니다. 모든 JS 개발자들은 알아야하는 것이지요. JS에 관해 알고 싶어하는 분들을 위한 그 첫 발판이 되어줄 것입니다.
+
 This is valuable insight into the identity and process of how JS is organized and maintained; all JS developers should understand it. If you want to get to know JS, this is how to *get started* taking the first steps in that journey.
 
-## About This Book
+## 이 책에 관해서
+
+*JS를 알아가기*는 목적지가 아닌 방향성이기 때문에 여정이란 말을 강조하고 싶습니다. 여태까지 여러분이 얼마나 많은 시간을 이 언어와 함께하던지간에, 여러분은 이 언어에 관해 항상 다른 무언가 배우고 더 잘 이해할 수 있습니다. 그러므로 단기간에 무언가를 성취하기 위해 이 책을 허겁지겁 읽는 어리석은 짓을 하지마세요. 그 대신, 인내와 집요함만이 첫 몇 발걸음을 디디는 위한 최선의 선택이 될 것 입니다.
 
 I emphasize the word journey because *knowing JS* is not a destination, it's a direction. No matter how much time you spend with the language, you will always be able to find something else to learn and understand a little better. So don't look at this book as something to rush through for a quick achievement. Instead, patience and persistence are best as you take these first few steps.
 
+이 다음에 나올 배경 지식에 관한 챕터에서는, YDKJSY 책에서 다뤄질 이 책의 나머지부분에서 전반적으로 큰 그림들에 관해 다룰 것입니다.
+
 Following this background chapter, the rest of the book lays out a high-level map of what you will find as you dig into and study JS with the YDKJSY books.
+
+특히, 챕터 4는 JS를 구성하는 세 가지 주요 기초 지식인 스코프와 클로져, 프로토타입과 객체, 그리고 타입과 강제 변환에 관해 알아보게 될 것입니다. JS는 다양한 특징과 이용성이 있는 암시적이고 복잡한 언어이지만, JS는 이러한 세 가지 주요 기초지식에 기반하고 있습니다.
 
 In particular, Chapter 4 identifies three main pillars around which the JS language is organized: scope/closures, prototypes/objects, and types/coercion. JS is a broad and sophisticated language, with many features and capabilities. But all of JS is founded on these three foundational pillars.
 
+이 책의 주제가 "시작하기 (Get Started)"지만 단순한 초보자나 도입이 아님을 늘 새겨두세요. 이 책의 주요한 역할은 나머지 시리즈들에서 JS를 심도있게 공부하기 위함입니다. 그렇기에 나머지 시리즈는 독자분들이 이미 JS와 친숙하다고 가정한 채로 서술할 것입니다. 그러므로 *시작하기 (Get Started)*의 전반적인 지식을 얻기위해 충분히 많은 시간을 JS 코드를 작성하는데 할애하십시오.
+
 Keep in mind that even though this book is titled "Get Started," it's **not intended as a beginner/intro book**. This book's main job is to get you ready for studying JS deeply throughout the rest of the series; it's written assuming you already have familiarity with JS over at least several months experience before moving on in YDKJSY. So to get the most out of *Get Started*, make sure you spend plenty of time writing JS code to build up your experience.
+
+만약 이미 충분히 많은 JS 코드를 작성해봤었더라도, 이 책을 그저 훑어보거나 건너뛰지 마시고, 이 책의 내용을 이해하는데 충분히 많은 시간을 들여주세요. **좋은 시작은 언제나 견고한 첫 발걸음으로부터 늘 시작한답니다**
 
 Even if you've already written a lot of JS before, this book should not be skimmed over or skipped; take your time to fully process the material here. **A good start always depends on a solid first step.**
 
-## What's With That Name?
+## JavaScript, 그 이름의 유래
+
+JavaScript란 이름은 아마도 가장 크게 잘못 알려지고 오해받는 프로그래밍 언어 이름일 것입니다.
 
 The name JavaScript is probably the most mistaken and misunderstood programming language name.
 
+Java랑 연관이 있는 언어일까? Java 전용 스크립트형 언어일까? 단순 스크립트를 작성하는 실제 프로그램 작성을 위한 언어는 아닌 것일까?
+
 Is this language related to Java? Is it only the script form for Java? Is it only for writing scripts and not real programs?
+
+진실은 JavaScript란 언어의 이름은 마케팅용 전략의 산물이란 것입니다. Brendan Eich가 처음으로 이 언어를 구상했을 때만해도 Mocha란 코드명을 가지고 있었죠. Netscape 내부에서는 LiveScript라고 이용되었었습니다. 그런데, 이 언어를 대중에게 공개할 무렵 "JavaScript"란 이름이 투표에서 이겨버렸었죠.
 
 The truth is, the name JavaScript is an artifact of marketing shenanigans. When Brendan Eich first conceived of the language, he code-named it Mocha. Internally at Netscape, the brand LiveScript was used. But when it came time to publicly name the language, "JavaScript" won the vote.
 
+왜죠? 왜냐하면 이 언어는 근본적으로 대부분의 Java 개발자들의 관심을 끌기위해 설계되었었고, 그 무렵만해도 가벼운 프로그램을 지칭하는데 "script"란 용어를 쓰는게 대중적이였습니다. 이러한 가벼운 "script"는 웹(Web)이라고 불리우는 페이지 내부에 처음으로 도입됐죠.
+
 Why? Because this language was originally designed to appeal to an audience of mostly Java programmers, and because the word "script" was popular at the time to refer to lightweight programs. These lightweight "scripts" would be the first ones to embed inside of pages on this new thing called the web!
+
+다시 말해, JavaScript는 당시 무겁고 훨씬 더 잘 알려진 Java를 빛 좋은 대용 언어로 자리잡기 위한 마케팅 전략이였죠. "WebJava"라고 쉽게 부를 수도 있습니다.
 
 In other words, JavaScript was a marketing ploy to try to position this language as a palatable alternative to writing the heavier and more well-known Java of the day. It could just as easily have been called "WebJava," for that matter.
 
+JavaScript는 Java의 코드와 다소 표면적으로 비슷해 보이는 점은 있습니다만, 그 유사함은 공통적으로 개발하기 위함이 아니라, 두 언어 모두가 C 혹은 C++ 개발자들에게 익숙한 문법을 목표로했기 때문입니다.
+
 There are some superficial resemblances between JavaScript's code and Java code. Those similarities don't particularly come from shared development, but from both languages targeting developers with assumed syntax expectations from C (and to an extent, C++).
+
+예로 들어, `{`로 시작하고 `}`로 묶여있는 코드 블락은 C/C++ 그리고 Java에서 모두 공통적으로 사용됩니다. 또한 `;`을 통해 문장의 끝맺음 짖죠.
 
 For example, we use the `{` to begin a block of code and the `}` to end that block of code, just like C/C++ and Java. We also use the `;` to punctuate the end of a statement.
 
+어떤면에서는 법적관계는 이런 문법적인 관계보다 보다 더 깊숙이 연관되어 있습니다. 오라클 (Oracal, 전신 썬 마이크로시스템즈 - Sun)은 Java를 소유하고 운영하고 있을뿐만이 아닌 "JavaScript"의 공식 상표 역시도 소유하고 있습니다. 이 상표는 거의 시행되지 않았으며 현재로서는 사용이 불가능했을 것입니다.
+
 In some ways, legal relationships run even deeper than the syntax. Oracle (via Sun), the company that still owns and runs Java, also owns the official trademark for the name "JavaScript" (via Netscape). This trademark is almost never enforced, and likely couldn't be at this point.
+
+이러한 이유로 인해 몇몇 사람들은 JavaScript란 말 대신 JS라고 사용하자고 제안하곤 합니다. 공식적으로 대체할 단어가 없는 상황에서는 JS는 매우 흔히 쓰이는 약어입니다. 게다가, 이 시리즈 전반적으로 JS는 JavaScript를 칭할 때 주로 쓰이게 될 것입니다.
 
 For these reasons, some have suggested we use JS instead of JavaScript. That is a very common shorthand, if not a good candidate for an official language branding itself. Indeed, these books use JS almost exclusively to refer to the language.
 
+오라클이 소유 상표로 부터 약간의 거리를 내자면, TC39에 의해 지정되고 ECMA 표준기군에 의해 명명된 공식 명칭은 **ECMAScript** 입니다. 게다가 2016년 이후로 개정년도를 어미로 붙여 공식적으로 사용되고 있습니다. 현재 이 책이 쓰인 년도에 따라 ECMAScript 2019 혹은 줄여서 ES2019라고 쓰이고 있죠.
+
 Further distancing the language from the Oracle-owned trademark, the official name of the language specified by TC39 and formalized by the ECMA standards body is **ECMAScript**. And indeed, since 2016, the official language name has also been suffixed by the revision year; as of this writing, that's ECMAScript 2019, or otherwise abbreviated ES2019.
 
+다시 말해, 당신의 브라우저 혹은 Node.js에서 실행되는 JavaScript 혹은 JS는 ES2019 표준의 구현체란 것이지요.
+
 In other words, the JavaScript/JS that runs in your browser or in Node.js, is *an* implementation of the ES2019 standard.
+
+| 노트: |
+| :--- |
+| 이 언어를 언급할 때 "JS6" 또는 "ES8"과 같은 말로 명명해주지 말아주세요. 몇몇은 그렇게 사용하기도 하지만 이러한 용어들은 혼란을 지속시킬 뿐입니다. "ES20xx" 혹은 단순히 "JS" 란 용어를 지속해서 사용해주세요. |
 
 | NOTE: |
 | :--- |
 | Don't use terms like "JS6" or "ES8" to refer to the language. Some do, but those terms only serve to perpetuate confusion. "ES20xx" or just "JS" are what you should stick to. |
 
+이 언어를 JavaScript, JS, ECMAScript 혹은 ES2019 중 뭐라고 부르던간에, 이 언어는 정말 진심으로 Java의 변형이 아닙니다.
+
 Whether you call it JavaScript, JS, ECMAScript, or ES2019, it's most definitely not a variant of the Java language!
+
+> "Java는 JavaScript에게 있어 햄과 햄스터의 관계와 같다." --Jeremy Keith, 2009
 
 > "Java is to JavaScript as ham is to hamster." --Jeremy Keith, 2009
 
-## Language Specification
+## 언어 지침서
+
+이전에 언급하였던 TC39란 JS를 관리하는 기술 운영 위원회를 말합니다. 그들의 주요 업무는 언어의 공식 스펙을 관리하는 것이지요. 그들은 주기적으로 만나 변경점을 투표하고 ECMA란 표준 기구에 그 결과를 제출합니다.
 
 I mentioned TC39, the technical steering committee that manages JS. Their primary task is managing the official specification for the language. They meet regularly to vote on any agreed changes, which they then submit to ECMA, the standards organization.
 
+ES 지침서에는 이러한 JS의 문법과 행동 양식이 정의되어 있습니다.
+
 JS's syntax and behavior are defined in the ES specification.
+
+ES2019는 1995년 JS 창설 이래로있는 10번째 메이저 지침서이자 수정본이고, ECMA가 호스팅하고 있는 공식 URL을 통해 "10.0" 버전을 찾아볼 수 있습니다.
+
+https://www.ecma-international.org/ecma-262/10.0/
 
 ES2019 happens to be the 10th major numbered specification/revision since JS's inception in 1995, so in the specification's official URL as hosted by ECMA, you'll find "10.0":
 
 https://www.ecma-international.org/ecma-262/10.0/
 
+TC39 위원회는 모질라, 구글, 애플과 같은 웹 투자 회사 혹은 삼성과 같은 장비 개발사의 다방면에서 일하고 있는 50 ~ 100명으로 구성되어 있습니다. 아마도 회사로부터 많은 보상을 받고 있겠지만은 구성원 모두 자발적 참여자입니다.
+
 The TC39 committee is comprised of between 50 and about 100 different people from a broad section of web-invested companies, such as browser makers (Mozilla, Google, Apple) and device makers (Samsung, etc). All members of the committee are volunteers, though many of them are employees of these companies and so may receive compensation in part for their duties on the committee.
+
+TC39는 일반적으로 매달 모여 지난 회의 이후로의 작업물을 3일에 걸쳐 검토하고 문제에 관해 토론하고 제안들에 관해 투표를 합니다. 회의 장소는 회의를 주최하려는 회사들 사이에서 교대로 주최하게 됩니다.
 
 TC39 meets generally about every other month, usually for about three days, to review work done by members since the last meeting, discuss issues, and vote on proposals. Meeting locations rotate among member companies willing to host.
 
+모든 TC39 제안 과정은 스테이지 0부터 스테이지 4까지의 5개의 단계 통해 진행됩니다. 진행 과정에 관해서는 다음의 공식 사이트에서 더 자세히 알 수 있습니다 https://tc39.es/process-document/
+
 All TC39 proposals progress through a five-stage process—of course, since we're programmers, it's 0-based!—Stage 0 through Stage 4. You can read more about the Stage process here: https://tc39.es/process-document/
+
+스테이지 0는 간단히 얘기하자면 TC39 중 누군가가 괜찮은 아이디어에 관해 생각하고는 이를 주장하고 작업을 착수할 계획을 세웁니다. 즉, TC39의 위원회가 아닌 사람들도 소셜 네트워크나 블로그와 같은 비공식적인 채널을 통해 제안한 여러가지 아이디어는 실질적으로 "사전 스테이지 0"임을 뜻합니다. 이는 곧 TC39 위원회원이 "스테이지 0"에 공식적으로 제안을 주장할 수 있다는 뜻입니다.
 
 Stage 0 means roughly, someone on TC39 thinks it's a worthy idea and plans to champion and work on it. That means lots of ideas that non-TC39 members "propose," through informal means such as social media or blog posts, are really "pre-stage 0." You have to get a TC39 member to champion a proposal for it to be considered "Stage 0" officially.
 
+일단 어떠한 제안이 "스테이지 4"에 이르게 되면, 이는 그 다음해의 개정판에 포함되기 충분한 준비가 된 상태임을 뜻 합니다. 이러한 제안들은 그 과정이 몇 개월에서 몇 년까지도 걸리기도 합니다.
+
 Once a proposal reaches "Stage 4" status, it is eligible to be included in the next yearly revision of the language. It can take anywhere from several months to a few years for a proposal to work its way through these stages.
+
+TC39의 Github 저장소에 모든 제안들은 공식적으로 관리되고 있습니다: https://github.com/tc39/proposals
 
 All proposals are managed in the open, on TC39's Github repository: https://github.com/tc39/proposals
 
+TC39 위원회든 아니든간에 이런 공공 토론장과 과정에 참여하는 것은 환영받는 일입니다. 하지만 오직 TC39 위원회만이 회의에 참여하고 제안과 그 변경에 관해 투표할 수 있습니다. 따라서 사실상 TC39 위원회의 목소리가 JS가 미래 방향에 관해 많은 비중을 차지하고 있는 셈이지요.
+
 Anyone, whether on TC39 or not, is welcome to participate in these public discussions and the processes for working on the proposals. However, only TC39 members can attend meetings and vote on the proposals and changes. So in effect, the voice of a TC39 member carries a lot of weight in where JS will go.
+
+일부는 확신하고 절망적일만큼 지속되고 있는 미신과는 달리, 여러가지 버전의 JavaScript는 *존재하지 않습니다*. 오직 *한 가지 버전의 JS*만이 TC39와 ECMA에 의해 관리되고 있습니다.
 
 Contrary to some established and frustratingly perpetuated myth, there are *not* multiple versions of JavaScript in the wild. There's just **one JS**, the official standard as maintained by TC39 and ECMA.
 
+2000년대 초반으로 돌아가 마이크로소프트가 관리하던 분리되어지고 역공학된(reverse-engineered) 버전의 "JScript" (심지어는 완전히 호환되지도 않던)라고 명명됐던 JS는 여러 버전의 JS가 있었습니다. 하지만 이로부터 시간이 흘렀고 오늘날의 JS에 관해 얘기할 때 여러 버전의 JS가 있다는 것은 이제 완전히 구식이고 맞지않는 주장이 되었습니다.
+
 Back in the early 2000s, when Microsoft maintained a forked and reverse-engineered (and not entirely compatible) version of JS called "JScript," there were legitimately "multiple versions" of JS. But those days are long gone. It's outdated and inaccurate to make such claims about JS today.
 
+이제는 중앙 통제하에 모든 주요 브라우저들과 장비 제작자들은 그들의 JS 구현체를 준수하고 있습니다. 물론, 각 엔진의 특징들은 때때로 다르기도 합니다. 하지만 이는 v8 엔진 (크롬의 JS 엔진)의 특정 기능이 SpiderMonkey 엔진 (모질라의 JS 엔진)과 다르다거나 혹은 비호환적으로 작동한다는 뜻이 아닙니다.
+
 All major browsers and device makers have committed to keeping their JS implementations compliant with this one central specification. Of course, engines implement features at different times. But it should never be the case that the v8 engine (Chrome's JS engine) implements a specified feature differently or incompatibly as compared to the SpiderMonkey engine (Mozilla's JS engine).
+
+이는 곧 여러분이 **하나의 JS**를 공부할 수 있음을 뜻하고 어느곳에서든 똑같은 JS에 의존할 수 있음을 의미합니다.
 
 That means you can learn **one JS**, and rely on that same JS everywhere.
 

@@ -1,11 +1,12 @@
 # You Don't Know JS Yet: Get Started - 2nd Edition
 
+## 목차
 ## Table of Contents
 
-* Foreword
-* Preface
-* Chapter 1: What Is JavaScript?
-    * About This Book
+* 머리말
+* 서문
+* 챕터 1: 자바스크립트란 무엇인가?
+    * 이 책에 관해서
     * What's With That Name?
     * Language Specification
     * Many Faces
