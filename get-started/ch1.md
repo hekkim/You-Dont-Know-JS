@@ -333,29 +333,55 @@ JavaScript is most definitely a multi-paradigm language. You can write procedura
 
 ## Backwards & Forwards
 
+JavaScript가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*의 보호하자는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관되어 있지만 다른 용어인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
+
 One of the most foundational principles that guides JavaScript is preservation of *backwards compatibility*. Many are confused by the implications of this term, and often confuse it with a related but different term: *forwards compatibility*.
+
+지금부터 이 용어에 관해 정확하게 정의를 세워보도록 하겠습니다.
 
 Let's set the record straight.
 
+하위 호완성은 만약 JS에 적합하다고 일단 인정되어진 어떠한 특징들은 JS에서 부적합하다고 변경될 일이 없다는 것을 뜻합니다. 원시적이고 제한된 환경이기도 했던 1995에 작성된 코드일지라도 오늘날에도 여전히 작동되야 된다는 것이죠. TC39의 한 명으로써 말하자면 "저흰 웹을 파괴하지 않을 것입니다!"
+
 Backwards compatibility means that once something is accepted as valid JS, there will not be a future change to the language that causes that code to become invalid JS. Code written in 1995—however primitive or limited it may have been!—should still work today. As TC39 members often proclaim, "we don't break the web!"
+
+이러한 발상은 브라우저 업데이트로 인해 예상치 못 하게 작동하지 않는 일이 없도록 해주고 이러한 신뢰를 바탕으로 JS 개발자들이 코드를 작성할 수 있는데 기여합니다. 이로인해 향후 수 년 동안 프로그램을 위해 JS를 선택하는게 안전하며 현명한 투자가 되도록 해줍니다.
 
 The idea is that JS developers can write code with confidence that their code won't stop working unpredictably because a browser update is released. This makes the decision to choose JS for a program a more wise and safe investment, for years into the future.
 
+이러한 "보장(gurantee)"는 결코 작은 일이 아닙니다. 거의 25년에 가까운 언어의 역사에 긴 역사를 가진 언어의 하위 호환성을 유지하는 것은 몹시 부담스러운 일이고 각기 다른 고유의 도전 과제들의 항연이기도 합니다. 위원회가 하위호환성을 보존하기위해 다양한 예제들을 찾아보는 것에 큰 압박을 받을 수도 있습니다.
+
 That "guarantee" is no small thing. Maintaining backwards compatibility, stretched out across almost 25 years of the language's history, creates an enormous burden and a whole slew of unique challenges. You'd be hard pressed to find many other examples in computing of such a commitment to backwards compatibility.
+
+이러한 원칙을 지키는데 들어가는 비용은 결코 쉽게 넘어갈 수 없습니다. 언어를 변경시키고 확장하는 일은 정말로 높은 기준치를 불가피하게 만드는 것까지 포함하고 있습니다. 실수이든 아니든 그 어떠한 결정도 결론적으로 영구적이기 때문입니다. 일단 JS에 들어오게되면 정말 진심으로 이러한 특징을 제거하고 싶더라도 결코 빼는 것은 불가능합니다. 왜냐하면 이건 아마도 프로그램을 망가뜨릴 수도 있기 때문입니다.
 
 The costs of sticking to this principle should not be casually dismissed. It necessarily creates a very high bar to including changing or extending the language; any decision becomes effectively permanent, mistakes and all. Once it's in JS, it can't be taken out because it might break programs, even if we'd really, really like to remove it!
 
+이러한 규칙에 아주 작은 예외들도 있습니다. JS에는 몇몇 하위 비호환(backwards-imcompatible)되는 변경점들을 가지고 있는데 TC39는 절대 이러한 특징을 사용하지 않길 경고합니다. TC39는 이러한 예외들이 만들어내는 결과를 측정하기위해 웹상에 존재하는 코드들(수집된 브라우저 데이터를 통해)을 연구하곤 하는데, 이를 통해 브라우저들은 결과적으로 사용자들에게 미세한 예외들을 고칠 때 어떠한 이득에 반하는지 미세한 영향을 가늠하고 감수할지말지 결론을 짓고 투표를 합니다.
+
 There are some small exceptions to this rule. JS has had some backwards-incompatible changes, but TC39 is extremely cautious in doing so. They study existing code on the web (via browser data gathering) to estimate the impact of such breakage, and browsers ultimately decide and vote on whether they're willing to take the heat from users for a very small-scale breakage weighed against the benefits of fixing or improving some aspect of the language for many more sites (and users).
+
+이러한 종류의 변경은 몹시 드물고 대부분의 사이트에서 눈에 띄지 않게 깨지지 않는 특이한 경우들이 그 대부분을 차지합니다.
 
 These kinds of changes are rare, and are almost always in corner cases of usage that are unlikely to be observably breaking in many sites.
 
+*하위 호환성*과 대응 관계에 있는 *상위 호환성*과 비교해봅시다. 상위 호환이 된다는 것은 프로그램의 언어에 새로운 추가 기능을 포함해도 이전 버전의 JS 엔진에서 실행된 경우 해당 프로그램이 중단되지 않는다는 얘기입니다. 많은 이들이 원하거나 심지어는 오해하는 경우도 있지만 **JS는 상위 호환적이지 않습니다**.
+
 Compare *backwards compatibility* to its counterpart, *forwards compatibility*. Being forwards-compatible means that including a new addition to the language in a program would not cause that program to break if it were run in an older JS engine. **JS is not forwards-compatible**, despite many wishing such, and even incorrectly believing the myth that it is.
+
+반대로 HTML 그리고 CSS는 하위 호환적이지 않고 상위 호환적입니다. 1995년에 작성된 HTML이나 CSS 지금 살펴보면 불완전하게 작동한다던가 아니면 그 당시와는 다르게 작동하는 경우가 있습니다. 하지만 만약 2019년에 추가된 기능을 2010년에 만들어진 브라우저에서 사용할 경우 페이지가 망가진 않습니다 -- 인식되지 않는 CSS/HTML는 무시하고 그렇지 않는 CSS/HTML은 정상적으로 그에 맞게 작동합니다.
 
 HTML and CSS, by contrast, are forwards-compatible but not backwards-compatible. If you dug up some HTML or CSS written back in 1995, it's entirely possible it would not work (or work the same) today. But, if you use a new feature from 2019 in a browser from 2010, the page isn't "broken" -- the unrecognized CSS/HTML is skipped over, while the rest of the CSS/HTML would be processed accordingly.
 
+프로그래밍 언어 설계에 있어서 상위 호환성을 추구하는게 이상적인 것처럼 보이지만 이는 대게 비현실적입니다. HTML과 같은 마크업(Markup) 혹은 CSS와 같은 스타일링(styling)은 서술적이고 그래서 훨씬 더 인식되지 않는 선언문에 관해 최소한의 인식되는 선언문들에 최소한의 영향을 미치며 "무시"하는 것이 쉽습니다.
+
 It may seem desirable for forwards-compatibility to be included in programming language design, but it's generally impractical to do so. Markup (HTML) or styling (CSS) are declarative in nature, so it's much easier to "skip over" unrecognized declarations with minimal impact to other recognized declarations.
 
+반면 프로그래밍 언어 엔진이 선택적으로 인식되지 않는 특정 문장 혹은 표현문이라도 선택적으로 거르게 될 경우 혼돈과 비결정성이 따라오게 될 것입니다. 마치, 프로그래밍 언어 엔진이 예측하지 못하게 무시되어진 부분이 프로그램의 일부가 제대로 처리될지 안될지 확신을 주지 못 합니다.
+
 But chaos and non-determinism would ensue if a programming language engine selectively skipped statements (or even expressions!) that it didn't understand, as it's impossible to ensure that a subsequent part of the program wasn't expecting the skipped-over part to have been processed.
+
+JS는 상위 호환적이지 않고 그럴 수 없음에도 불구하고 JS에 있는 하위 호환성을 통해 얻어지는 웹 환경에 지속적인 이득과 제약 그리고 어려움을 걸 알고 있는 것은 중요합니다.
 
 Though JS isn't, and can't be, forwards-compatible, it's critical to recognize JS's backwards compatibility, including the enduring benefits to the web and the constraints and difficulties it places on JS as a result.
 
