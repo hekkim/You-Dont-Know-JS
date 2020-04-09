@@ -331,7 +331,7 @@ JavaScript 또한 다중 패러다임 언어입니다. JavaScript에서는 절�
 
 JavaScript is most definitely a multi-paradigm language. You can write procedural, class-oriented, or FP-style code, and you can make those decisions on a line-by-line basis instead of being forced into an all-or-nothing choice.
 
-## Backwards & Forwards
+## 하위 호환성 그리고 상위 호환성
 
 JavaScript가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*의 보호하자는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관되어 있지만 다른 용어인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
 
@@ -385,17 +385,29 @@ JS는 상위 호환적이지 않고 그럴 수 없음에도 불구하고 JS에 �
 
 Though JS isn't, and can't be, forwards-compatible, it's critical to recognize JS's backwards compatibility, including the enduring benefits to the web and the constraints and difficulties it places on JS as a result.
 
-### Jumping the Gaps
+### 버전간 간극을 뛰어넘기
+
+JS는 상위 호환적이지 않기때문에 유효한 JS 코드로 작성할 수 있는 코드와 지원 가능한 엔진 버전간의 간극이 언제나 발생할 수 있습니다. 만약 프로그램이 ES2019에서 추가된 특징들을 포함하고 있다면 2016 버전의 엔진에서는 프로그램이 동작하지 않거나 고장나는 것을 아마도 발견할 수 있을 것입니다.
 
 Since JS is not forwards-compatible, it means that there is always the potential for a gap between code that you can write that's valid JS, and the oldest engine that your site or application needs to support. If you run a program that uses an ES2019 feature in an engine from 2016, you're very likely to see the program break and crash.
 
+만약 새로 추가된 문법을 사용하면 프로그램은 일반적으로 완벽하게 컴파일되고 실행되지 않을 것이고 대게 문법 오류(syntax error)를 야기할 것입니다. 반면 ES6에서 새로 추가된 `Object.is(..)` API를 사용하면 프로그램은 아마도 해당 지점 직전까진 정상적으로 작동하겠지만 해당 문구에서 런타임 오류(runtime exception)을 만들 것이고 알수 없는 API를 만났다고 말하며 멈출 것입니다.
+
 If the feature is a new syntax, the program will in general completely fail to compile and run, usually throwing a syntax error. If the feature is an API (such as ES6's `Object.is(..)`), the program may run up to a point but then throw a runtime exception and stop once it encounters the reference to the unknown API.
+
+그래서 이것이 JS 개발자들이 항상 추가적인 기능들로부터 뒤쳐져야만 하고 오래된 JS 엔진 환경의 흔적들을 쫓아 코딩해야 된다는 뜻일까요? 그렇지 않습니다!
 
 Does this mean JS developers should always lag behind the pace of progress, using only code that is on the trailing edge of the oldest JS engine environments they need to support? No!
 
+다만 JS 개발자들은 이러한 간극에 주의할 필요할 필요가 있다는 애기입니다.
+
 But it does mean that JS developers need to take special care to address this gap.
 
+새롭지만 호환성이 없는 문법들의 경우 트랜스파일링(transpiling)이 해결책이 됩니다. 트랜스파일링은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 말합니다. 예를들어, 문법과 연관된 상위 호환성 문제는 트랜스파일러(transpiler) (대부분의 경우 babel (https://babeljs.io))를 통해 새로운 JS 문법을 그와 똑같이 동작하지만 구식의 문법으로 변경해줌으로써 이러한 문제를 해결할 수 있습니다.
+
 For new and incompatible syntax, the solution is transpiling. Transpiling is a contrived and community-invented term to describe using a tool to convert the source code of a program from one form to another (but still as textual source code). Typically, forwards-compatibility problems related to syntax are solved by using a transpiler (the most common one being Babel (https://babeljs.io)) to convert from that newer JS syntax version to an equivalent older syntax.
+
+아래와 같은 코드 문법을 작성했다고 생각해봅시다.
 
 For example, a developer may write a snippet of code like:
 
@@ -409,6 +421,8 @@ else {
     console.log(x);
 }
 ```
+
+어플리케이션의 소스 코드는 보통 위와 같은 방식으로 구성되어 있기 마련입니다. 하지만 공식 웹사이트에 해당 파일을 생성-배포할 때, 바벨 트랜스파일러 (Babel transpiler)는 이러한 코드를 아래와 같은 코드로 바꿀 것입니다:
 
 This is how the code would look in the source code tree for that application. But when producing the file(s) to deploy to the public website, the Babel transpiler might convert that code to look like this:
 
@@ -424,19 +438,35 @@ else {
 }
 ```
 
+원본 코드는 블록에 한정되어(block-scoped) `let`을 이용해 변수 `x`들을 `if`와 `else`문에 걸쳐 생성하고 있지만 상호간 간섭받는 관계에 있지 않습니다. 바벨이 최소한의 재작업을 통해 만든 동일한 프로그램은 두 변수에 각기 다른 이름을 부여하여 그들이 서로간의 혼선을 방지한 결과물을 만들었습니다.
+
 The original snippet relied on `let` to create block-scoped `x` variables in both the `if` and `else` clauses which did not interfere with each other. An equivalent program (with minimal re-working) that Babel can produce just chooses to name two different variables with unique names, producing the same non-interference outcome.
 
 | NOTE: |
 | :--- |
-| The `let` keyword was added in ES6 (in 2015). The preceding example of transpiling would only need to apply if an application needed to run in a pre-ES6 supporting JS environment. The example here is just for simplicity of illustration. When ES6 was new, the need for such a transpilation was quite prevalent, but in 2020 it's much less common to need to support pre-ES6 environments. The "target" used for transpiliation is thus a sliding window that shifts upward only as decisions are made for a site/application to stop supporting some old browser/engine. |
+| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일에서 "target"은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 그 이상 버전에서만 작동하도록 도와줍니다. |
+
+| NOTE: |
+| :--- |
+| The `let` keyword was added in ES6 (in 2015). The preceding example of transpiling would only need to apply if an application needed to run in a pre-ES6 supporting JS environment. The example here is just for simplicity of illustration. When ES6 was new, the need for such a transpilation was quite prevalent, but in 2020 it's much less common to need to support pre-ES6 environments.   |
+
+왜 새로운 버전의 문법을 오래된 버전의 문법으로 변경시키기 위해 도구를 사용하는 어려움을 겪어나가야만 하는지 궁금하실 겁니다. 두 변수를 따로 사용하고 `let`이란 키워드를 사용하지 않으면 문제없는 게 아닐까요? 그 이유는 개발자들간 최신 버전의 JS를 사용하여 코드를 깔끔하고 효율적인 의사소통을 도와주기 위함입니다. rm dldbsms roqkfwkemfdl chlt
 
 You may wonder: why go to the trouble of using a tool to convert from a newer syntax version to an older one? Couldn't we just write the two variables and skip using the `let` keyword? The reason is, it's strongly recommended that developers use the latest version of JS so that their code is clean and communicates its ideas most effectively.
 
+개발자들은 새로운 문법을 통해 코드를 깨끗하고 유지해야 합니다. 또한, 트랜스파일러를 이용하여 지원하기로 결정된 특정 버전 이상의 JS 엔진에서는 코드들이 적절하게 동작하는 상위 호환적인 버전의 결과물을 만드는데 집중해야 합니다.
+
 Developers should focus on writing the clean, new syntax forms, and let the tools take care of producing a forwards-compatible version of that code that is suitable to deploy and run on the oldest-supported JS engine environments.
+
+### 버전간 간극을 채워넣기
 
 ### Filling the Gaps
 
+만약 상위 호환 문제가 새로운 문법과 연관없다면 새롭게 추가된 API 함수로 인해 생긴 문제일 것입니다. 가장 흔한 해결법은 오래된 브라우저에서는 빠져있는 API 함수들을 정의해줘 마치 그런 오래된 환경에서도 이미 존재하고 작동했던 것처럼 만들어주는 방법이 있습니다. 이러한 방식을 폴리필(polyfill) 혹은 쉼(shim)이라고 부릅니다.
+
 If the forwards-compatibility issue is not related to new syntax, but rather to a missing API method that was only recently added, the most common solution is to provide a definition for that missing API method that stands in and acts as if the older environment had already had it natively defined. This pattern is called a polyfill (aka "shim").
+
+아래와 같은 코드를 한 번 봐주세요.
 
 Consider this code:
 
@@ -454,7 +484,11 @@ pr
 .finally(hideSpinner)  // always hide the spinner
 ```
 
+이 코드는 ES2019에서 프로미스(promise) 프로토타입(prototype)에 추가된 `finally(..)`라는 함수를 사용합니다. 만약 이러한 코드가 ES2019 이전의 환경에서 사용된다면 `finally(..)`라는 함수는 존재하지 않기에 대개의 경우 오류를 발생시킬것입니다.
+
 This code uses an ES2019 feature, the `finally(..)` method on the promise prototype. If this code were used in a pre-ES2019 environment, the `finally(..)` method would not exist, and an error would occur.
+
+ES2019 이전 버전에서의 `finally(..)`를 폴리필은 아래와 같습니다.
 
 A polyfill for `finally(..)` in pre-ES2019 environments could look like this:
 
@@ -479,15 +513,27 @@ if (!Promise.prototype.finally) {
 }
 ```
 
+| 경고: |
+| :--- |
+| 이건 `finally(..)`를 위한 폴리필에 대한 대략적인 설명일 뿐입니다. 폴리필을 여러분의 코드에 사용하지 마십시오. 항상 ES-Shim에 있는 폴리필/심의 집합체와 같이 쳬계적이고 공인된 폴리필을 사용하십시오. |
+
 | WARNING: |
 | :--- |
 | This is only a simple illustration of a basic (not entirely spec-compliant) polyfill for `finally(..)`. Don't use this polyfill in your code; always use a robust, official polyfill wherever possible, such as the collection of polyfills/shims in ES-Shim. |
 
+`if`문은 JS 엔진이 이미 해당 함수를 정의하고 있는 환경에서도 재정의 되는 것을 방지해줍니다. 오직 오래된 환경에서만 폴리필은 정의되고 새로운 환경에서는 `if`문은 실행되지 않고 무시될 것입니다.
+
 The `if` statement protects the polyfill definition by preventing it from running in any environment where the JS engine has already defined that method. In older environments, the polyfill is defined, but in newer environments the `if` statement is quietly skipped.
+
+바벨과 같은 트랜스파일러들은 여러분의 코드들에 필요한 것들을 감지하고 자동으로 폴리필해주는 대표적인 도구입니다. 물론 위의 예시에서 본 것처럼 때때로 그것들을 명시적으로 포함하거나 정의해줘야 될 때도 있습니다.
 
 Transpilers like Babel typically detect which polyfills your code needs and provide them automatically for you. But occasionally you may need to include/define them explicitly, which works similar to the snippet we just looked at.
 
+항상 그들의 의도에 가장 부합하는 적절한 기능들이 무엇인지 고려하여 코드를 작성해주세요. 이는 곧 가장 안정적인 최신 JS 버전을 사용하란 뜻이기도 합니다. 문법이나 API간의 간극을 수동적으로 조정해서 코드의 가독성에 부정적인 영향을 미칠 것을 지양하십시오. 그런 것들은 다른 도구들이 해야될 역할입니다!
+
 Always write code using the most appropriate features to communicate its ideas and intent effectively. In general, this means using the most recent stable JS version. Avoid negatively impacting the code's readability by trying to manually adjust for the syntax/API gaps. That's what tools are for!
+
+트랜스파일과 폴리필 하는 것은 최신의 안정적인 특성을 사용한 코드와 오래된 사이트, 어플리케이션을 지속적으로 지원해주기 위한 두 간극을 조정하기 위한 아주 효율적인 기술입니다. JS가 더이상 발전해나가지 않는 이상 이러한 간극은 사라지지 않을 것입니다. 두 기술은 모든 JS 프로젝트의 결과물의 호환성을 보장해주기 위해 사용되어야만 합니다.
 
 Transpilation and polyfilling are two highly effective techniques for addressing that gap between code that uses the latest stable features in the language and the old environments a site or application needs to still support. Since JS isn't going to stop improving, the gap will never go away. Both techniques should be embraced as a standard part of every JS project's production chain going forward.
 
