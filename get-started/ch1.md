@@ -537,15 +537,27 @@ Always write code using the most appropriate features to communicate its ideas a
 
 Transpilation and polyfilling are two highly effective techniques for addressing that gap between code that uses the latest stable features in the language and the old environments a site or application needs to still support. Since JS isn't going to stop improving, the gap will never go away. Both techniques should be embraced as a standard part of every JS project's production chain going forward.
 
+## 인터프리트(Interpretation)에는 무엇들이 있을까?
+
 ## What's in an Interpretation?
+
+JS에서 오래동안 논쟁된 이야기 중 하나는 이것이 인터프리트 스크립트(interpreted script)인지 아니면 컴파일된 프로그램(compiled program)인지에 관한 질문이다. 대다수의 의견은 JS는 인터프리트 (스크립트) 언어라고 얘기하곤 하지만 그 실상은 훨씬 더 복잡하다.
 
 A long-debated question for code written in JS: is it an interpreted script or a compiled program? The majority opinion seems to be that JS is an interpreted (scripting) language. But the truth is more complicated than that.
 
+프로그래밍 언어의 역사 전반에 있어서 "인터프리트" 언어와 "스크립트" 언어는 컴파일언어에 비해 상대적으로 하위 언어로 경시되곤 해왔습니다. 이러한 악감정에는 다양한 이유가 있는데 그 중 하나는 성능 최적화에 약점이 있단 인식이 있었습니다. 마치 몇몇 사람들이 스크립트 언어가 일반적으로 "더 분별력을 가진" 정적 타입 대신 동적 타입을 사용하는 특징을 혐오하는 것과 같았습니다.
+
 For much of the history of programming languages, "interpreted" languages and "scripting" languages have been looked down on as inferior compared to their compiled counterparts. The reasons for this acrimony are numerous, including the perception that there is a lack of performance optimization, as well as dislike of certain language characteristics, such as scripting languages generally using dynamic typing instead of the "more mature" statically typed languages.
+
+"컴파일 된" 언어는 일반적으로 추후에 실행되기 위해 배포되는 프로그램을 이식 가능한 (이진법의) 표현식을 만듭니다. 우린 이러한 종류의 모델을 JS에서 발견하지 못 하기때문에 (우린 이진형태가 아닌 소스 코드를 배포합니다), 많은 사람들은 JS는 컴파일 언어의 범주에 넣기에는 자격요건을 충족시키지 못 한다고 주장합니다. 하지만 실제로 "실행 가능한" 형태의 프로그램을 위한 배포 모델은 굉장히 다양해져왔고 또한 서로간의 연관성 역시 떨어져왔습니다. 다시 질문으로 돌아와 프로그램의 형태가 어떻던간에 큰 문제가 되지 않습니다.
 
 Languages regarded as "compiled" usually produce a portable (binary) representation of the program that is distributed for execution later. Since we don't really observe that kind of model with JS (we distribute the source code, not the binary form), many claim that disqualifies JS from the category. In reality, the distribution model for a program's "executable" form has become drastically more varied and also less relevant over the last few decades; to the question at hand, it doesn't really matter so much anymore what form of a program gets passed around.
 
+이러한 잘못 알려진 주장과 비판은 사라져야만 합니다. 이 문제에 있어서 정작 중요한 것은 JS가 인터프리트되는지 아니면 컴파일되는지 명확히 알아야되는 이유가 오류가 처리되는 방식과 연관되어 있습니다.
+
 These misinformed claims and criticisms should be set aside. The real reason it matters to have a clear picture on whether JS is interpreted or compiled relates to the nature of how errors are handled.
+
+역사적으로 스크립트 그리고 인터프리트 언어는 일반적으로 상의하달식(top-down)이고 한 줄씩(line-by-line) 실행됩니다. 이러한 실행 방식은 일반적으로 프로그램의 실행을 시작하기 전에 진행되는 첫 통과점이 아닙니다.
 
 Historically, scripted or interpreted languages were executed in generally a top-down and line-by-line fashion; there's typically not an initial pass through the program to process it before execution begins (see Figure 1).
 
@@ -555,7 +567,11 @@ Historically, scripted or interpreted languages were executed in generally a top
     <br><br>
 </figure>
 
+스크립트 그리고 인터프리트 언어에서 프로그램의 5번째 줄에 있는 에러는 1번째 줄에서 4번째 줄까지 실행될 때까지 발견되지 않습니다. 특히 5번째 줄에 있는 에러가 어떤 변수나 값이 해당 작업을 위해 적절한 값이 아니라거나 잘못된 문장이나 명령어를 가지고 있는 상황처럼 런타임 조건으로 일해 발생한 것일 수도 있습니다. 그 맥락에 따라 해당 줄에서 오류 처리를 미루는 것이 바람직할 수도 그렇지 않을 수도 있습니다.
+
 In scripted or interpreted languages, an error on line 5 of a program won't be discovered until lines 1 through 4 have already executed. Notably, the error on line 5 might be due to a runtime condition, such as some variable or value having an unsuitable value for an operation, or it may be due to a malformed statement/command on that line. Depending on context, deferring error handling to the line the error occurs on may be a desirable or undesirable effect.
+
+그림 2에 나와있는 것처럼 실행이 발생하기 전에 있는 처리 단계(일반적으로 파싱(parsing)이라 부르는)를 거치는 언어들과 비교해 보십시오.
 
 Compare that to languages which do go through a processing step (typically, called parsing) before any execution occurs, as illustrated in Figure 2:
 
@@ -565,35 +581,67 @@ Compare that to languages which do go through a processing step (typically, call
     <br><br>
 </figure>
 
+이러한 처리 모델에서는 5번째 줄에 있는 부정확한 명령어(예를들어 문법 오류)는 실행되기 전에 파싱 단계에서 잡힐 것이고 프로그램은 실행되지 않을 것입니다. 문법 오류(혹은 "정적" 오류)를 찾아내는 것은 잘못된 부분의 일부를 실행하기 앞서 발견하는 것이 일반적으로는 더 좋습니다.
+
 In this processing model, an invalid command (such as broken syntax) on line 5 would be caught during the parsing phase, before any execution has begun, and none of the program would run. For catching syntax (or otherwise "static") errors, generally it's preferred to know about them ahead of any doomed partial execution.
+
+그래서 "파싱되는" 언어와 "컴파일" 언어의 공통점은 무엇일까요? 우선, 모든 컴파일 언어는 파싱됩니다. 얘기인즉슨 파싱된 언어는 이미 컴파일되는 과정으로 향하고 있다는 얘기입니다. 대표적인 컴파일 이론에서 파싱에서 가장 마지막 단계는 실행가능한 형태의 코드를 생성하는 단계입니다.
 
 So what do "parsed" languages have in common with "compiled" languages? First, all compiled languages are parsed. So a parsed language is quite a ways down the road toward being compiled already. In classic compilation theory, the last remaining step after parsing is code generation: producing an executable form.
 
+일단 원본 프로그램이 전부 파싱이되면, 일반적으로 프로그램이 파싱된 형태(보통 추상 구문 트리(Abstract Syntax Tree(AST))라고 부르는)에서 실행가능한 형태로 변경시킵니다.
+
 Once any source program has been fully parsed, it's very common that its subsequent execution will, in some form or fashion, include a translation from the parsed form of the program—usually called an Abstract Syntax Tree (AST)—to that executable form.
+
+다른 말로, 파싱된 언어는 그 실행에 앞서 코드 생성을 보통 수행하고 그렇기에 이들을 컴파일 언어라고 얘기하는 것은 그리 쉬운일은 아닙니다.
 
 In other words, parsed languages usually also perform code generation before execution, so it's not that much of a stretch to say that, in spirit, they're compiled languages.
 
+JS 소스 코드는 실행되기 전에 파싱되어집니다. 파싱되는 과정은 그 코드가 실행되기 전에 보고되는 "조기 오류"(중복된 매개 변수명이 있는 상황과 같이 정적으로도 발견할 수 있는)를 찾아 보고해야하기 때문에 그만큼 많은 작업을 요구합니다. 이러한 오류들은 코드가 파싱되기 전까지는 발견할 수 없습니다.
+
 JS source code is parsed before it is executed. The specification requires as much, because it calls for "early errors"—statically determined errors in code, such as a duplicate parameter name—to be reported before the code starts executing. Those errors cannot be recognized without the code having been parsed.
+
+그러므로 **JS는 파싱된 언어**어지만 **컴파일된 언어**일까요?
 
 So **JS is a parsed language**, but is it *compiled*?
 
+이에 대한 대답은 거짓보다 참에 조금 더 근접합니다. 파싱된 JS는 최적화된 (이진형태의) 모양으로 바뀌고 그 "코드"의 일부는 실행됩니다 (그림 2). 파싱하는 힘든 작업을 모두 끝마친 이후에 JS 엔진은 한 줄씩 실행하는 형태로 돌아가진 않습니다 (대부분의 언어/엔진은 이러한 작업이 비효율적으므로 그렇지 않습니다) (그림 1).
+
 The answer is closer to yes than no. The parsed JS is converted to an optimized (binary) form, and that "code" is subsequently executed (Figure 2); the engine does not commonly switch back into line-by-line execution (like Figure 1) mode after it has finished all the hard work of parsing—most languages/engines wouldn't, because that would be highly inefficient.
+
+조금 더 명확하게 "컴파일"은 이진 바이트 코드(그 일부)를 생성하고 이 코드들은 "JS 가상 머신(JS virtual machine)"이 실행하게 됩니다. 누군가는 이 가상 머신(VM)이 바이트 코드를 인터프리팅한다고 얘기하길 좋아할 것입니다. 하지만 자바나 수십가지의 JVM 중심의 언어 역시도 컴파일이 아닌 인터프리트 된다고 주장하는 것과 같습니다. 물론 Java 혹은 그 외에의 언어가 컴파일 언어라는 일반적인 주장과 상반되어 있죠.
 
 To be specific, this "compilation" produces a binary byte code (of sorts), which is then handed to the "JS virtual machine" to execute. Some like to say this VM is "interpreting" the byte code. But then that means Java, and a dozen other JVM-driven languages, for that matter, are interpreted rather than compiled. Of course, that contradicts the typical assertion that Java/etc are compiled languages.
 
+흥미롭게도 Java와 JavaScript는 정말 다른 언어이지만 인터프리트/컴파일과 연관된 논쟁에 관해서는 상호밀접한 관계에 있죠!
+
 Interestingly, while Java and JavaScript are very different languages, the question of interpreted/compiled is pretty closely related between them!
+
+또다른 불편한 주장은 파싱 이후에 있는 코드 생성을 위해 여러 단계의 JIT(Just-In-Time) 처리 및 최적화를 할 수 있다는 얘기입니다. 그리고 이러한 주장은 또다시 관점에따라 "컴파일"과 "인터프리트"란 꼬리표를 달게 만들죠. 이는 실제로 저면 아래에 JS엔진의 몹시 복잡한 상황과 연관이 있습니다.
 
 Another wrinkle is that JS engines can employ multiple passes of JIT (Just-In-Time) processing/optimization on the generated code (post parsing), which again could reasonably be labeled either "compilation" or "interpretation" depending on perspective. It's actually a fantastically complex situation under the hood of a JS engine.
 
+그렇다면 핵심 세부 사항은 무엇일까요? 다시 JS 원본 프로그램의 큰 흐름으로 돌아가 생각해 보겠습니다.
+
 So what do these nitty-gritty details boil down to? Step back and consider the entire flow of a JS source program:
+
+1. 프로그램이 개발자 도구로부터 떠난 뒤로, 이 프로그램은 바벨(Babel) 트랜스파일되고 웹팩(Webpack)과 같은 빌드 툴을 통해 포장되어진 후, 각기 다른 형태의 JS 엔진으로 배포된다.
 
 1. After a program leaves a developer's editor, it gets transpiled by Babel, then packed by Webpack (and perhaps half a dozen other build processes), then it gets delivered in that very different form to a JS engine.
 
+2. JS 엔진은 코드를 AST로 파싱한다.
+
 2. The JS engine parses the code to an AST.
+
+3. 엔진은 AST를 일종의 이진(binary) 중간 표현식(intermediate representation(IR))을 가진 바이트 코드로 변경시키고, 이는 다시 최적화 JIT 컴파일러를 통해 정제되거나 변경된다.
 
 3. Then the engine converts that AST to a kind-of byte code, a binary intermediate representation (IR), which is then refined/converted even further by the optimizing JIT compiler.
 
+4. 마지막으로, JS 가상 머신(VM)은 프로그램을 실행한다.
+
 4. Finally, the JS VM executes the program.
+
+이 과정을 시각화하면 아래와 같습니다.
 
 To visualize those steps, again:
 
@@ -603,9 +651,15 @@ To visualize those steps, again:
     <br><br>
 </figure>
 
+JS는 그림 1에 있는 스크립트 한 줄씩 실행시키는 인터프리트 언어 혹은 그림 2, 3에 나와있듯 실행하기 전 몇몇 단계를 거치는 컴파일 언어에 더 가까울까요?
+
 Is JS handled more like an interpreted, line-by-line script, as in Figure 1, or is it handled more like a compiled language that's processed in one-to-several passes first, before execution (as in Figures 2 and 3)?
 
+그 실체가 어떻던간에 저는 명백하게 **JS는 컴파일 언어**라고 생각합니다.
+
 I think it's clear that in spirit, if not in practice, **JS is a compiled language**.
+
+다시 돌아가, 이러한 논쟁이 중요한 이유는 동적 오류(문법 오류와 같은)를 JS는 컴파일됨으로써 코드를 실행하기 전에도 알 수 있다는 것입니다. 이는 전통적인 "스크립트" 프로그램으로 부터 얻는 장점과는 다른 상호 작용 모델(interaction model)이고, 아마도 더 도움이 됩니다.
 
 And again, the reason that matters is, since JS is compiled, we are informed of static errors (such as malformed syntax) before our code is executed. That is a substantively different interaction model than we get with traditional "scripting" programs, and arguably more helpful!
 
