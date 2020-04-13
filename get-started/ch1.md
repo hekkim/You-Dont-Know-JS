@@ -663,31 +663,59 @@ I think it's clear that in spirit, if not in practice, **JS is a compiled langua
 
 And again, the reason that matters is, since JS is compiled, we are informed of static errors (such as malformed syntax) before our code is executed. That is a substantively different interaction model than we get with traditional "scripting" programs, and arguably more helpful!
 
+### 웹 어셈블리 (WASM)
+
 ### Web Assembly (WASM)
+
+JS의 진화를 주도하는 주요 관심사 중 하나는 성능입니다. JS가 얼마나 빠르게 파싱하고 컴파일하는지 그리고 얼마나 빠르게 컴파일된 코드를 실행시키는지에 관해서죠.
 
 One dominating concern that has driven a significant amount of JS's evolution is performance, both how quickly JS can be parsed/compiled and how quickly that compiled code can be executed.
 
+2013년 Mozilla Firefox 개발자들은 언리얼 3 게임 엔진을 C에서 JS로 포팅(port)하는데 성공했었습니다. 브라우저의 JS 엔진이 최적화를 통해 최대 60fps 성능으로 이 코드가 작동하리라고 예상됐었습니다. 왜냐하면 언리얼 엔진의 JS 버전은 "ASM.js"라는 JS 언어의 하위 세트에 유리한 코딩 스타일을 사용했기 때문입니다.
+
 In 2013, engineers from Mozilla Firefox demonstrated a port of the Unreal 3 game engine from C to JS. The ability for this code to run in a browser JS engine at full 60fps performance was predicated on a set of optimizations that the JS engine could perform specifically because the JS version of the Unreal engine's code used a style of code that favored a subset of the JS language, named "ASM.js".
+
+이 하위 세트는 다소 흔히 쓰이지 않는 코딩 스타일이지만 유효한 JS로 쓰여있었지만, 특정 중요한 정보를 엔진에 전달하고 이를 통해 중요한 최적화 되게됩니다. ASM.js는 JS의 런타임 성능에 가해지는 압력을 다루는 방식 중 하나로 도입됐습니다.
 
 This subset is valid JS written in ways that are somewhat uncommon in normal coding, but which signal certain important typing information to the engine that allow it to make key optimizations. ASM.js was introduced as one way of addressing the pressures on the runtime performance of JS.
 
+하지만 중요한 점은 개발자가 ASM.js를 직접 작성할 의도로 만들어지는게 아니고 (C와 같은) 다른 언어로부터 트랜스파일된 프로그램의 표현식이고 이러한 곳에는 자동으로 "주석(annotations)"이라고 삽입된다.
+
 But it's important to note that ASM.js was never intended to be code that was authored by developers, but rather a representation of a program having been transpiled from another language (such as C), where these typing "annotations" were inserted automatically by the tooling.
+
+수년 후 ASM.js가 JS 엔진에 의해 도구를 작성된 프로그램의 버전이 더욱더 효율적으로 처리할 수 있음을 증명하였고, 또다른 기술자 집단(물론 초기에는 Mozilla에서)은 웹 어셈브리 (WASM)을 출시했습니다.
 
 Several years after ASM.js demonstrated the validity of tooling-created versions of programs that can be processed more efficiently by the JS engine, another group of engineers (also, initially, from Mozilla) released Web Assembly (WASM).
 
+WASM은 이것의 원본의 성향이 JS 이외의 언어(C 등등의) 프로그램이 JS 엔진에서 구동될 수 있는 형태로 변경시키고자 하는 방향성이 ASM.js과 유사했습니다. 반면 WASM은 ASM.js와는 다르게 JS와는 전혀 다른 형태의 프로그램으로 표현함으로써 프로그램이 실행되기 전에 JS에서 파싱/컴파일에 들어가는 추가적인 지연 시간을 살펴보는 방식을 택했습니다.
+
 WASM is similar to ASM.js in that its original intent was to provide a path for non-JS programs (C, etc.) to be converted to a form that could run in the JS engine. Unlike ASM.js, WASM chose to additionally get around some of the inherent delays in JS parsing/compilation before a program can execute, by representing the program in a form that is entirely unlike JS.
+
+WASM는 어셈블리(이것의 이름에도 그러하듯이)와 유사항 형태로 표현되어 있고 이것은 JS 엔진에 의해 일반적으로 행해지는 파싱/컴파일 단계는 건너뛰어 실행이 가능하도록 되어있습니다. WASM이 목표로 삼고있는 프로그램의 파싱/컴파일 단계는 미리(ahead of time (AOT)) 발생하고 JS가 아주 작은 가공을 통해 실행할 수 있는 이진형태로 배포됩니다.
 
 WASM is a representation format more akin to Assembly (hence, its name) that can be processed by a JS engine by skipping the parsing/compilation that the JS engine normally does. The parsing/compilation of a WASM-targeted program happen ahead of time (AOT); what's distributed is a binary-packed program ready for the JS engine to execute with very minimal processing.
 
+WASM의 초기 의도는 잠재적 성능 향상에 목표로 하고 있습니다. 그리고 초기 의도에 집중하는 동시에 WASM은 JS 이외의 언어에 대한 더 많은 패리티(parity)를 웹 플랫폼으로 가져오는 것을 추가적인 목표로 삼았습니다. 예를들어 Go와 같은 언어에서 지원되는 스레드 프로그래밍(threaded programming)은 JS에서는 지원되지 않지만 WASM은 JS 언어 자체에 스레드 관련 기능이 추후에 추가되지 않더라도 Go 프로그램이 JS 엔진에서도 이해 가능한 형태로 변경될 잠재력을 제공해줍니다.
+
 An initial motivation for WASM was clearly the potential performance improvements. While that continues to be a focus, WASM is additionally motivated by the desire to bring more parity for non-JS languages to the web platform. For example, if a language like Go supports threaded programming, but JS (the language) does not, WASM offers the potential for such a Go program to be converted to a form the JS engine can understand, without needing a threads feature in the JS language itself.
+
+다시 말해, WASM은 JS에 다른 언어로부터 트랜스파일된 프로그램에만 일반적으로 그리고 독점적으로 쓰일 기능을 추가해야만하는 압박을 덜어주었습니다. 이는 곧 JS 기능 개발은 다른 언어의 이해관계나 요구에 의해 왜곡될 필요 없이 그 개발 스펙에 관해 (TC39으로부터) 결정내릴 수 있으며, 그와 동시에 다른 언어들이 웹으로 오기 위해 독자적인 방법을 채택할 수 있게됐다는 뜻입니다.
 
 In other words, WASM relieves the pressure to add features to JS that are mostly/exclusively intended to be used by transpiled programs from other languages. That means JS feature development can be judged (by TC39) without being skewed by interests/demands in other language ecosystems, while still letting those languages have a viable path onto the web.
 
+또다른 WASM의 등장에 관한 또다른 관점은 놀랍게도 웹과 직접적인 연관이 없습니다. WASM은 일단 프로그램이 컴파일되면 다양한 시스템 환경에 구동될 수 있는 크로스 플랫폼(cross-platform) 가상 머신(virtual machine(VM))의 일종으로 진화하고 있습니다.
+
 Another perspective on WASM that's emerging is, interestingly, not even directly related to the web (W). WASM is evolving to become a cross-platform virtual machine (VM) of sorts, where programs can be compiled once and run in a variety of different system environments.
+
+그래서 WASM은 단순 웹만을 위하거나 JS만을 위한 것이 아닙니다. WASM은 JS 엔진에서 구동됨에도 불구하고 WASM은 정적 타이핑 정보(static typing information)에 지나치게 의존하고 있으므로 JS는 WASM 프로그램을 위한 가장 적합한 언어입니다. 심지어 표면적으로 JS와 정적 타입의 조합인 타입스크립트(TS)는 WASM으로 트랜스파일되기 적절한 언어는 아니지만 어셈블리 스크립트(AssenblyScript)와 같은 변형된 언어는 JS/TS 그리고 WASM 간의 간극에 다리를 놓으려고 계속해서 시도하고 있습니다.
 
 So, WASM isn't only for the web, and WASM also isn't JS. Ironically, even though WASM runs in the JS engine, the JS language is one of the least suitable languages to source WASM programs with, because WASM relies heavily on static typing information. Even TypeScript (TS)—ostensibly, JS + static types—is not quite suitable (as it stands) to transpile to WASM, though language variants like AssemblyScript are attempting to bridge the gap between JS/TS and WASM.
 
+이 책은 WASM 관한 것이 아니기에 한 가지 마지막 요점에 관해 얘기하며 더 많은 시간을 토론하는데 소비하지 않겠습니다. *몇몇* 사람들은 JS가 웹에서 비중이 작아지고 그 부분을 WASM이 채울 것이라고 말해오고 있습니다. 이러한 분들은 종종 JS에 관한 안 좋은 생각을 가지고 있고 JS를 대체할 또다른 언어들을 원합니다. WASM은 다른 언어가 JS 엔진에서도 구동될 수 있게 도와주므로 이것의 실상은 완전히 환상적인 동화같은 것은 아닙니다.
+
 This book isn't about WASM, so I won't spend much more time discussing it, except to make one final point. *Some* folks have suggested WASM points to a future where JS is excised from, or minimized in, the web. These folks often harbor ill feelings about JS, and want some other language—any other language!—to replace it. Since WASM lets other languages run in the JS engine, on its face this isn't an entirely fanciful fairytale.
+
+제가 간단히 정리해드리겠습니다. WASM은 JS의 대체물이 아닙니다. WASM은 웹에 (JS를 포함하여) 성취할 수 있는 것을 상당히 많이 강화해줄 수 있습니다. JS를 사용하는 것으로부터 몇몇 사람들에게는 탈출구 역할을 할 수도 있는 전혀 다른 방향을 제시해주는 대단한 일이 될 수도 있습니다.
 
 But let me just state simply: WASM will not replace JS. WASM significantly augments what the web (including JS) can accomplish. That's a great thing, entirely orthogonal to whether some people will use it as an escape hatch from having to write JS.
 
