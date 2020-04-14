@@ -1,45 +1,88 @@
 # You Don't Know JS Yet: Get Started - 2nd Edition
+# 챕터 2: JS 조사하기
 # Chapter 2: Surveying JS
+
+JS를 배우는 가장 좋은 방법은 JS를 사용하기 시작하는 것 부터 시작합니다.
 
 The best way to learn JS is to start writing JS.
 
+JS를 사용하기 위해서는 이 언어가 어떻게 동작하는지 먼저 알아야하고 이에 대해 집중해서 파헤쳐보도록 하겠습니다. 다른 언어로 프로그래밍을 이미해봤을지라도, JS에 익숙해지기까지 충분한 시간을 들이고 각각의 예제들을 충분히 짚고 학습십시오.
+
 To do that, you need to know how the language works, and that's what we'll focus on here. Even if you've programmed in other languages before, take your time getting comfortable with JS, and make sure to practice each piece.
+
+이 챕터에서는 JS의 모든 문법에 관한 완전한 참고문가 되진 않을 것이지만 그렇다고 완전하게 "JS로의 입문"와 같은 완벽한 기본 입문서를 지향하고 있지는 않습니다.
 
 This chapter is not an exhaustive reference on every bit of syntax of the JS language. It's also not intended to be a complete "intro to JS" primer.
 
+대신 우리는 언어의 가장 중요한 몇가지 주제들에 관해 알아가고자 합니다. 우리의 목표는 더 많은 *깨달음*을 얻고 그로인해 더 큰 자신감을 가지고 우리의 프로그램을 개발해나가는데 있습니다. 이 책과 시리즈를 나아감에 따라 이런 주제들에 관해 성공적으로 더 많은 세부사항에 관해 다시 논의하게 될 것입니다.
+
 Instead, we're just going to survey some of the major topic areas of the language. Our goal is to get a better *feel* for it, so that we can move forward writing our own programs with more confidence. We'll revisit many of these topics in successively more detail as you go through the rest of this book, and the rest of the series.
 
+이 챕터를 쉽게 읽고 넘어갈 것이라고 생각하지 말아주세요. 이 챕터는 길고 짚고 넘어갈 충분히 많은 상세한 내용들이 있습니다. 그러니 천천히 짚고 넘어가길 바랍니다.
+
 Please don't expect this chapter to be a quick read. It's long and there's plenty of detail to chew on. Take your time.
+
+| 팁: |
+| :--- |
+| 만약 이미 충분히 JS와 친근하더라도 저는 여러분이 이곳에 충분히 많은 시간을 들이길 제안드립니다. 각 섹션을 충분히 숙지하시고 각 주제에 관해 충분한 시간을 들여 곰곰히 생각하고 분석해 보십시오. 존재하는 JS 프로그램을 살펴보고 코드와 여기에 있는 설명(그리고 의논들에 관해서도!)들에 관해 비교해 보십시오. 이 책과 시리즈를 통해 여러분은 JS의 *본질*에 관해 더 많은 것을 알아갈 수 있을 것입니다. |
 
 | TIP: |
 | :--- |
 | If you're still getting familiar with JS, I suggest you reserve plenty of extra time to work through this chapter. Take each section and ponder and explore the topic for awhile. Look through existing JS programs and compare what you see in them to the code and explanations (and opinions!) presented here. You will get a lot more out of the rest of the book and series with a solid foundation of JS's *nature*. |
 
+## 각 파일은 프로그램이다
+
 ## Each File is a Program
+
+우리가 사용하는 대부분의 웹 사이트 (웹 어플리케이션)는 여러개의 각기 다른 JS 파일(대표적으로 .js 확장자명을 갖고 있는)들로 구성되어 있습니다. 보통 파일들 전체를 하나로 생각하는 경향이 있습니다. 하지만 JS는 그렇게 바라보지 않습니다.
 
 Almost every website (web application) you use is comprised of many different JS files (typically with the .js file extension). It's tempting to think of the whole thing (the application) as one program. But JS sees it differently.
 
+JS에서 각각의 개별 파일들은 분리된 개별의 프로그램입니다.
+
 In JS, each standalone file is its own separate program.
+
+이 문제가 중요한 이유는 주로 에러 처리와 관련되어 있습니다. JS는 각각의 파일들을 개별 프로그램으로 여기기때문에 만약 한 파일에서 (파싱/컴파일 혹은 실행 도중) 에러가 발생하더라도 그것이 그 다음 파일이 처리를 막는 것을 의미하지 않습니다. 조금 더 정확하게는 여러분의 어플리케이션이 다섯개의 .js 파일에 구성되어 있고 그 중 하나에서 실패를 한다면 잘해야 전체 어플리케이션 중 일부는 작동할 수도 있다는 얘기입니다. 그 말인즉슨 각각의 파일들이 정확하게 동작 하고 다른 파일에서 발생할 수 있는 오류를 오류를 가능한 한 적절하게 처리하는 것이 중요합니다.
 
 The reason this matters is primarily around error handling. Since JS treats files as programs, one file may fail (during parse/compile or execution) and that will not necessarily prevent the next file from being processed. Obviously, if your application depends on five .js files, and one of them fails, the overall application will probably only partially operate, at best. It's important to ensure that each file works properly, and that to whatever extent possible, they handle failure in other files as gracefully as possible.
 
+분리된 .js 파일들을 별개의 JS 프로그램으로 여기는 것이 아마 조금 이상할 수도 있습니다. 어플리케이션을 사용하는 관점에 따르면 그저 단지 하나의 큰 프로그램으로 여겨지기 때문입니다. 그렇기에 어플리케이션을 실행하는 것은 이러한 여러 개별 *프로그램들*을 하나의 프로그램처럼 협력하고 행동하도록 만드는 것입니다.
+
 It may surprise you to consider separate .js files as separate JS programs. From the perspective of your usage of an application, it sure seems like one big program. That's because the execution of the application allows these individual *programs* to cooperate and act as one program.
+
+| 노트: |
+| :--- |
+| 많은 프로젝트들은 한 프로젝트를 개별 파일들을 결합하여 웹 페이지에 배포해주는 빌드 프로세스 툴(build process tool)을 사용합니다. 이러한 과정에서 JS는 하나의 통합된 파일로 합쳐지고 하나의 전체 프로그램으로 인식합니다. |
 
 | NOTE: |
 | :--- |
 | Many projects use build process tools that end up combining separate files from the project into a single file to be delivered to a web page. When this happens, JS treats this single combined file as the entire program. |
 
+여러개의 독자적인 .js 파일들을 하나의 프로그램처럼 동작하게 만드는 유일한 방법은 "글로벌 스코프(global scope)"를 통해 그들의 상태(그리고 그들의 공공 기능들에 접근해서)를 공유하는 것입니다. JS 프로그램은 글로벌 스코프 네임스페이스(global scope namespace)에 섞여지고 런타임(runtime) 동안 마치 하나인 것처럼 작동하게 됩니다.
+
 The only way multiple standalone .js files act as a single program is by sharing their state (and access to their public functionality) via the "global scope." They mix together in this global scope namespace, so at runtime they act as as whole.
+
+ES6부터는 일반적인 독립 JS 프로그램 포맷뿐만이 아니라 JS는 모듈(module) 포맷 또한 지원해오고 있습니다. 모듈 역시 파일 기반으로 돼있습니다. 파일이 `import` 문이나 `<script type="module">` 태그와 같은 모듈 로딩 방식으로 파일이 불러오면 이 모든 코드들이 단일 모듈로 취급됩니다.
 
 Since ES6, JS has also supported a module format in addition to the typical standalone JS program format. Modules are also file-based. If a file is loaded via module-loading mechanism such as an `import` statement or a `<script type=module>` tag, all its code is treated as a single module.
 
+상태들과 그 상태들을 조작하는 공개적으로 노출된 함수들의 집합체인 모듈을 일반적으로 독자적인 프로그램으로 생각하지 않을 수도 있지만 JS 실제로는 각각의 모듈을 독자적인 프로그램으로 간주합니다. "글로벌 스코프"가 런타임 기간동안 독자적인 파일간 서로간 혼합되어 사용 가능하게 만들어주는 방식은 모듈간에 서로 불로오는 것은 런타임 기간동안 서로 상호작용하도록 만들어주는 것과 흡사합니다.
+
 Though you wouldn't typically think about a module—a collection of state and publicly exposed methods to operate on that state—as a standalone program, JS does in fact still treat each module separately. Similar to how "global scope" allows standalone files to mix together at runtime, importing a module into another allows runtime interoperation between them.
+
+파일(독자적인 혹은 모듈)을 불러오는데 어떤 코드의 구조 패턴이 사용되는지에 상관없이 여러분은 여전히 각 파일들을 전체 어플리케이션의 그능들을 수행하는 다른 작은 프로그램들과 상호작용할 조그마한 프로그램으로 생각해야만 합니다.
 
 Regardless of which code organization pattern (and loading mechanism) is used for a file (standalone or module), you should still think of each file as its own (mini) program, which may then cooperate with other (mini) programs to perform the functions of your overall application.
 
+## 값
+
 ## Values
 
+프로그램에서 가장 근본적인 정보의 단위는 값(value)입니다. 값들은 곧 데이터입니다. 값들은 프로그램이 상태를 유지하는 방법입니다. 값들은 JS에서는 두 가지 형식으로 존재합니다: **원시(primitive)** 혹은 **객체(object)**
+
 The most fundamental unit of information in a program is a value. Values are data. They're how the program maintains state. Values come in two forms in JS: **primitive** and **object**.
+
+값들은 프로그램 내부에서 *리터럴(literals)*로 사용됩니다:
 
 Values are embedded in programs using *literals*:
 
@@ -47,9 +90,15 @@ Values are embedded in programs using *literals*:
 greeting("My name is Kyle.");
 ```
 
+이 프로그램에서 `"My name is Kyle."`이란 값은 원시 문자역 리터럴입니다. 문자열은 순서대로 나열된 문자들의 집합이며 보통 단어 혹은 문장을 표현하기위해 사용됩니다.
+
 In this program, the value `"My name is Kyle."` is a primitive string literal; strings are ordered collections of characters, usually used to represent words and sentences.
 
+큰따옴표 `"`는 문자열 값의 *범위를 정하는데(delimit)* (감싸고, 분리하고, 정의하는데) 사용됩니다. 하지만 작은따옴표 `'` 역시 문자열을 위해 사용될 수 있습니다. 어떠한 따옴표를 사용할 지에 관해서는 전적으로 그 스타일에따라 달려있습니다. 중요한 것은 프로그램의 전반에 있어 코드의 가독성 유지보수성을 위해 그 중 한가지를 선택해 꾸준히 사용해야 된다는 것입니다.
+
 I used the double-quote `"` character to *delimit* (surround, separate, define) the string value. But I could have used the single-quote `'` character as well. The choice of which quote character is entirely stylistic. The important thing, for code readability and maintainability sake, is to pick one and to use it consistently throughout the program.
+
+문자열의 리터럴의 범위를 정하는 또 다른 선택지는 백틱(back-tick) `` ` ``을 사용하는 것입니다. 다만, 이 선택지는 단순히 스타일적인 문제가 아닙니다. 왜냐하면 동작하는데 차이가 있기 때문이죠.
 
 Another option to delimit a string literal is to use the back-tick `` ` `` character. However, this choice is not merely stylistic; there's a behavioral difference as well. Consider:
 
@@ -64,7 +113,11 @@ console.log(`My name is ${ firstName }.`);
 // My name is Kyle.
 ```
 
+이 프로그램에서 `firstName`이란 이름의 변수가 `"Kyle"`이란 값을 가지고 있다고 가정할 때, `` ` ``으로 한정된 문자열은 변수 표현식(`${ .. }`으로 나타나는)을 현재 값을 치환합니다. 이러한 것을 **인터폴레이션(interpolation)**이라 부릅니다.
+
 Assuming this program has already defined a variable `firstName` with the string value `"Kyle"`, the `` ` ``-delimited string then resolves the variable expression (indicated with `${ .. }`) to its current value. This is called **interpolation**.
+
+문자열을 한정짓는 백틱은 인터폴레이션 표현식 없이도 사용될 수 있지만 문자열 리터럴 문법을 전부 다 대체하기에는 결점이 있습니다.
 
 The back-tick `` ` ``-delimited string can be used without including interpolated expressions, but that defeats the whole purpose of that alternate string literal syntax:
 
@@ -75,7 +128,11 @@ console.log(
 // Am I confusing you by omitting interpolation?
 ```
 
+`"` 그리고 `'` (다시 한번 더 얘기하지만 하나만 선택해서 사용하십시오!)을 사용하는 더 좋은 방법은 인터폴레이션이 필요없는 문자열만을 위해 사용하고 `` ` ``는 오직 인터폴레이션이 필요한 곳에서만 사용하는 방법이 있습니다.
+
 The better approach is to use `"` or `'` (again, pick one and stick to it!) for strings *unless you need* interpolation; reserve `` ` `` only for strings that will include interpolated expressions.
+
+문자열과 다르게 JS 프로그램은 종종 다른 불리언(boolean)과 숫자처럼 원시 리터럴 값에 포함된 값도 포함합니다.
 
 Other than strings, JS programs often contain other primitive literal values such as booleans and numbers:
 
@@ -85,11 +142,19 @@ while (false) {
 }
 ```
 
+`while` 은 반복문을 표현하고 *while* 문의 조건이 참일 때 계속해서 내부 연산 작업을 반복하도록 작동합니다.
+
 `while` represents a loop type, a way to repeat operations *while* its condition is true.
+
+이러한 경우 `false(거짓)` 불리언 값을 조건문의 조건에 사용하였기에 반복문 내부는 실행되지 않습니다(아무것도 출력되지 않습니다). 반복문 조건이 `true(참)`일 경우 영원토록 반복되기에 주의를 기울여야 됩니다!
 
 In this case, the loop will never run (and nothing will be printed), because we used the `false` boolean value as the loop conditional. `true` would have resulted in a loop that keeps going forever, so be careful!
 
+숫자 `3.141592`는 아시다시피 파이(PI)의 소수점 첫 6자리까지 나타난 유사값입니다. 값을 직접 집어넣는 대신 일반적으로 이미 정의되어있는 `Math.PI` 값을 이용할 것입니다. 숫자들의 또다른 변형의 `bigint` (big-integer)란 원시값으로 임의의 큰 숫자를 저장하기위해 사용됩니다.
+
 The number `3.141592` is, as you may know, an approximation of mathematical PI to the first six digits. Rather than embed such a value, however, you would typically use the predefined `Math.PI` value for that purpose. Another variation on numbers is the `bigint` (big-integer) primitive type, which is used for storing arbitrarily large numbers.
+
+숫자들은 종종 프로그램에서 반복문과 같이 단계를 센다던가 숫자 위치의 정보(배열의 인덱스라고도 부르는)에 접근하는데 사용됩니다. 배열과 객체에 관해 예제와 함께 조금 다뤄보도록 하겠습니다. `names`라고 불리우는 배열이 있을 때 두번째 자리에 있는 요소(element)에 접근하기 위해서는 아래와 같이 할 수 있습니다.
 
 Numbers are most often used in programs for counting steps, such as loop iterations, and accessing information in numeric positions (i.e., an array index). We'll cover arrays/objects in a little bit, but as an example, if there was an array called `names`, we could access the element in its second position like this:
 
@@ -98,9 +163,15 @@ console.log(`My name is ${ names[1] }.`);
 // My name is Kyle.
 ```
 
+두 번째 위치에 있는 요소에 접근하위해 `2` 대신 `1`을 사용하였는데 이는 JS 배열은 0에서부터 시작하기 때문입니다 (`0`이 첫 번째 자리입니다).
+
 We used `1` for the element in the second position, instead of `2`, because like in most programming languages, JS array indices are 0-based (`0` is the first position).
 
+문자열, 숫자, 그리고 불리언 외에 JS 프로그램에 있는 두 *원시*값은 `널(null)` 그리고 `정의되지 않은(undefined)`입니다. 이 두 가지 원시값은 (역사적으로도 현대로 봐도) 다르지만 *빈 값* (혹은 값의 부재)를 나타내는 용도로 대부분 사용됩니다.
+
 In addition to strings, numbers, and booleans, two other *primitive* values in JS programs are `null` and `undefined`. While there are differences between them (some historic and some contemporary), for the most part both values serve the purpose of indicating *emptiness* (or absence) of a value.
+
+많은 개발자들은 이러한 형식으로 일관되게 마치 두 값은 구분이 불가능한 값처럼 이 두 값을 대하길 선호합니다. 주의를 기울이면 가능한 편이지만, `널(null)`이 조금 더 짧기에 사용하는데 더 용의해 보이지만 `정의되지 않은(undefined)`만이 오직 비어있는 값으로서 사용하는 것이 가장 안전하고 최선의 방법입니다!
 
 Many developers prefer to treat them both consistently in this fashion, which is to say that the values are assumed to be indistinguishable. If care is taken, this is often possible. However, it's safest and best to use only `undefined` as the single empty value, even though `null` seems attractive in that it's shorter to type!
 
@@ -110,12 +181,16 @@ while (value != undefined) {
 }
 ```
 
+마지막 원시값은 숨겨지고 추측이 불가능한 값으로써 특수한 목적을 가진 심볼(symbol)입니다. 심볼은 대게 객체에 특수 키를 위해 사용됩니다.
+
 The final primitive value to be aware of is a symbol, which is a special-purpose value that behaves as a hidden unguessable value. Symbols are almost exclusively used as special keys on objects:
 
 ```js
 hitchhikersGuide[ Symbol("meaning of life") ];
 // 42
 ```
+
+일반적인 JS 프로그램에서 심볼을 직접 사용할 일은 없을 것입니다. 심볼은 라이브러리나 프레임워크와 같은 하위 단계(low-level)의 코드에서 보통 사용됩니다.
 
 You won't encounter direct usage of symbols very often in typical JS programs. They're mostly used in low-level code such as in libraries and frameworks.
 
