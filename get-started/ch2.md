@@ -194,9 +194,15 @@ hitchhikersGuide[ Symbol("meaning of life") ];
 
 You won't encounter direct usage of symbols very often in typical JS programs. They're mostly used in low-level code such as in libraries and frameworks.
 
+### 배열과 객체
+
 ### Arrays And Objects
 
+원시값 이외에 JS에 있는 또다른 타입은 객체 값입니다.
+
 Besides primitives, the other value type in JS is an object value.
+
+이미 언급드렸듯이 배열은 순서가 있고 숫자로 된 인덱스가 있는 데이터들로 구성된 객체의 특수한 타입입니다.
 
 As mentioned earlier, arrays are a special type of object that's comprised of an ordered and numerically indexed list of data:
 
@@ -213,11 +219,19 @@ names[1];
 // Kyle
 ```
 
+JS 배열은 원시값 혹은 객체(다른 배열 역시 포함해서)인 모든 타입의 값을 가지고 있을 수 있습니다. 챕터 3의 마지막에 향하며 볼 것이지만, 함수 역시도 배열이나 함수에 등록될 수 있는 값입니다.
+
 JS arrays can hold any value type, either primitive or object (including other arrays). As we'll see toward the end of Chapter 3, even functions are values that can be held in arrays or objects.
+
+| 노트: |
+| :--- |
+| 배열과 같은 함수는 객체의 특수한 (부분 집합으로도 알려진) 종류입니다. 함수에 관해서 조금 더 자세히 추후에 다로도록 하겠습니다. |
 
 | NOTE: |
 | :--- |
 | Functions, like arrays, are a special kind (aka, sub-type) of object. We'll cover functions in more detail in a bit. |
+
+객체는 조금 더 일반적입니다. 순서가 없으며 key를 통해 접근 가능한 아무 종류의 값들의 모음입니다. 다른말로, 숫자 (배열에서와 마찬가지로) 대신 문자열로 된 위치명을 가진 ("키(key)" 혹은 "프로퍼티(property)"라고도 알려진) 값을 이용해 요소에 접근합니다. 예를 들어,
 
 Objects are more general: an unordered, keyed collection of any various values. In other words, you access the element by a string location name (aka "key" or "property") rather than by its numeric position (as with arrays). For example:
 
@@ -231,6 +245,8 @@ var me = {
 
 console.log(`My name is ${ me.first }.`);
 ```
+
+여기서 `me`는 객체를 가르키고 있고 `first`는 객체(값의 모음)에서 정보의 위치를 가르키는 이름입니다. 객체에서 객체의 프로퍼티/키를 이용해 정보에 접근할 수 있는 방법은 대괄호 `[]`를 다음과 같이 `me["first"]` 이용하는 방법입니다.
 
 Here, `me` represents an object, and `first` represents the name of a location of information in that object (value collection). Another syntax option that accesses information in an object by its property/key uses the square-brackets `[ ]`, such as  `me["first"]`.
 
