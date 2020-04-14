@@ -719,64 +719,114 @@ This book isn't about WASM, so I won't spend much more time discussing it, excep
 
 But let me just state simply: WASM will not replace JS. WASM significantly augments what the web (including JS) can accomplish. That's a great thing, entirely orthogonal to whether some people will use it as an escape hatch from having to write JS.
 
+## *정확하게* 말하자면
+
 ## *Strict*ly Speaking
+
+다시 돌아가 2009년 ES5가 배포되던 당시 JS는 더 나은 JS 프로그램을 만들기 위한 옵트 인(opt-in) 방식으로 *엄격 모드(strict mode)*를 추가했습니다.
 
 Back in 2009 with the release of ES5, JS added *strict mode* as an opt-in mechanism for encouraging better JS programs.
 
+엄격 모드의 장점은 그 비용 대비하여 몹시 크지만, 오래된 습관을 버리긴 힘들뿐더러 이미 광성처럼 존재하는 (흔히 "레거시(legacy)"라고 알려진) 코드 기반은 바꾸기 어렵습니다. 그래서 슬프지만 10년이 지난 후에도 엄격 모드의 *선택성*은 엄격 모드가 JS 프로그래머들을 기본 선택 사항(default)이 아님을 의미합니다.
+
 The benefits of strict mode far outweigh the costs, but old habits die hard and the inertia of existing (aka "legacy") code bases is really hard to shift. So sadly, more than 10 years later, strict mode's *optionality* means that it's still not necessarily the default for JS programmers.
+
+어째서 엄격 모드를 사용할까요? 엄격 모드는 여러분의 능력에 관한 제약이 아닌 JS 엔진이 코드를 최적화하고 효율적으로 구동하기위한 최선책을 갖게하기위한 최선의 방법으로 가는 안내서와 같은 것입니다. 대부분의 JS 코드는 개발자들에 의해 작업되기에 엄격 모드의 *엄격*함은 비엄격 모드에서 발생할 수도 있는 실수를 피하게 해줘 자주 협업을 도와주게 됩니다.
 
 Why strict mode? Strict mode shouldn't be thought of as a restriction on what you can't do, but rather as a guide to the best way to do things so that the JS engine has the best chance of optimizing and efficiently running the code. Most JS code is worked on by teams of developers, so the *strict*-ness of strict mode (along with tooling like linters!) often helps collaboration on code by avoiding some of the more problematic mistakes that slip by in non-strict mode.
 
+대부분의 엄격 모드는 *조기 오류(early errors)*와 같은 형태로 제어됩니다. 이 말인 즉슨 엄밀하겐 문법 오류는 아니지만 컴파일 단계(코드가 실행되기 전인)에서 오류를 발견할 수 있다는 애기입니다. 예를 들어 엄격 모드는 두 함수 파라미터를 같은 이름을 갖게 못하고 그 결과를 조기 에러 단계에서 만들어줍니다. `this`가 전역 객체 대신 `undefined`로 기본값을 갖고 있는 것처럼 엄격 모드가 런타임에서만 제어되기도 합니다.
+
 Most strict mode controls are in the form of *early errors*, meaning errors that aren't strictly syntax errors but are still thrown at compile time (before the code is run). For example, strict mode disallows naming two function parameters the same, and results in an early error. Some other strict mode controls are only observable at runtime, such as how `this` defaults to `undefined` instead of the global object.
 
+부모님이 하지 말라는 것에 반항하는 아이들처럼 엄격 모드에 관해 토론하고 논쟁하는 대신 가장 좋은 마음 가짐은 엄격 모드를 JS가 최상의 품질과 성능을 위해 쓰이도록 돕는 린터와 같이 생각하는 것입니다. 엄격 모드에서 일하려고 노력하는게 마치 자기 자신에게 수갑을 채우는 것처럼만 느껴진다면, 그 것은 다시 백업하고 전체 접근법에 관해 다시 고려해봐야할 필요가 있는 빨간 경고 표시와 같은 것입니다.
+
 Rather than fighting and arguing with strict mode, like a kid who just wants to defy whatever their parents tell them not to do, the best mindset is that strict mode is like a linter reminding you how JS *should* be written to have the highest quality and best chance at performance. If you find yourself feeling handcuffed, trying to work around strict mode, that should be a blaring red warning flag that you need to back up and rethink the whole approach.
+
+특수 프로그마(pragma)를 이용해 파일별로 엄격 모드로 바꿀 수 있습니다 (이 프래그마 이전에는 주석이나 빈공백(whitespace)을 제외하고는 그 어떠한 것도 있을 수 없습니다).
 
 Strict mode is switched on per file with a special pragma (nothing allowed before it except comments/whitespace):
 
 ```js
+// 오직 빈공란이나 주석만이 use-strict 프래그마 전에 있을 수 있습니다
 // only whitespace and comments are allowed
 // before the use-strict pragma
 "use strict";
+// 엄격 모드로 구동될 파일의 나머지 부분
 // the rest of the file runs in strict mode
 ```
+
+| 경고: |
+| :--- |
+| 심지어 `;` 조차 엄격 모드 프래그마 이전에 위치한다면 이 프래그마는 무용지물로 만들어 버립니다. 이 프래그마는 오류도 발생하지 않는데 이는 단지 문자열 리터럴 표현을 가지고 있는 우효한 JS이기 때문입니다. 물론 묵시적으로 엄격 모드로 바꾸지도 *않습니다*! |
 
 | WARNING: |
 | :--- |
 | Something to be aware of is that even a stray `;` all by itself appearing before the strict mode pragma will render the pragma useless; no errors are thrown because it's valid JS to have a string literal expression in a statement position, but it also will silently *not* turn on strict mode! |
 
+대신 엄격 모드는 함수의 내부에서 동일한 규치하에 각 함수별로 적용될 수도 있습니다:
+
 Strict mode can alternatively be turned on per-function scope, with exactly the same rules about its surroundings:
 
 ```js
 function someOperations() {
+    // 공란과 주석은 프래그마 이전에 있어도 괜찮습니다
     // whitespace and comments are fine here
     "use strict";
 
+    // 엄격 모드로 작동할 모든 코드들입니다
     // all this code will run in strict mode
 }
 ```
 
+흥미롭게도 한 파일이 엄격 모드로 바뀔 경우 함수 단위의 엄격 모드 프래그마는 사용할 수 없습니다. 그렇기에 여러분은 이 중 하나만 선택해서 사용해야 합니다.
+
 Interestingly, if a file has strict mode turned on, the function-level strict mode pragmas are disallowed. So you have to pick one or the other.
+
+함수별로 엄격 모드를 사용하는 타당한 경우는 **오직** 비엄격 모드의 프로그램 파일을 그 일부만을 바꿔야할 때 뿐입니다. 그 외에는 한 파일/프로그램의 전체를 엄격 모드로 바꾸는 게 훨씬 더 낫습니다.
 
 The **only** valid reason to use a per-function approach to strict mode is when you are converting an existing non-strict mode program file and need to make the changes little by little over time. Otherwise, it's vastly better to simply turn strict mode on for the entire file/program.
 
+많은 이들이 JS를 엄격 모드를 기본값으로 만드는 적절한 시기에 관해 궁금해합니다. 이에대한 대답은 거의 확실하게 할 수 없다입니다. 이미 일전에 하위 호환성에 관해 이야기 했듯이 만약 엄격 모드라고 적혀있지 않더라도 엄격 모드라고 여기도록 JS 엔진을 업데이트하면, 엄격 모드의 규제로 인해 코드가 고장날 수도 있기 때문입니다.
+
 Many have wondered if there would ever be a time when JS made strict mode the default? The answer is, almost certainly not. As we discussed earlier around backwards compatibility, if a JS engine update started assuming code was strict mode even if it's not marked as such, it's possible that this code would break as a result of strict mode's controls.
+
+하지만 엄격 모드가 기본값이 아닌 "모호함"으로 인해 발생하는 미래의 영향들을 제거할 수 있는 몇몇 요소이 있습니다.
 
 However, there are a few factors that reduce the future impact of this non-default "obscurity" of strict mode.
 
+우선 첫번째로, 원본 소스코드가 그렇지 않더라고 트랜스파일된 모든 가상의 코드를 엄격 모드로 끝나게 트랜스파일 할 수 있습니다. 제품에 있는 대부분의 JS 코드는 트랜스파일 되어왔고, 그렇기에 이는 곧 대부분의 JS는 엄격 모드에 기생하고 있다고 볼 수 있습니다. 또한 이러한 가정을 원상태로 돌려놓을수도 있지만 실제로 되돌려야 할 가능성은 매우 낮습니다.
+
 For one, virtually all transpiled code ends up in strict mode even if the original source code isn't written as such. Most JS code in production has been transpiled, so that means most JS is already adhering to strict mode. It's possible to undo that assumption, but you really have to go out of your way to do so, so it's highly unlikely.
+
+게다가 더 많은 그리고 대부분의 새로운 JS 코드를 ES6 모듈을 사용하고자하는 큰 변화가 발생하고 있습니다. ES6 모듈은 엄격 모드 특성을 취하고 있고 그렇기에 이러한 파일들의 모든 코드는 자동으로 엄격 모드를 기본값으로 설정하고 있습니다.
 
 Moreover, a wide shift is happening toward more/most new JS code being written using the ES6 module format. ES6 modules assume strict mode, so all code in such files is automatically defaulted to strict mode.
 
+종합해서, 기술적으로보아 엄격 모드가 실제로 기본값이 아닐지라도 사실상 기본값이라고 볼 수 있습니다.
+
 Taken together, strict mode is largely the de facto default even though technically it's not actually the default.
+
+## 정의된
 
 ## Defined
 
+JS는 ECMAScript 표준(여기서는 ES2019 버전)의 구현체이고 이는 ECMA에 의해 주최되는 TC39에 의해 그 방향이 결정되고 있습니다. JS는 브라우저 그리고 Node.js와 같은 환경 모두에서 동작할 수 있습니다.
+
 JS is an implementation of the ECMAScript standard (version ES2019 as of this writing), which is guided by the TC39 committee and hosted by ECMA. It runs in browsers and other JS environments such as Node.js.
+
+JS는 다중 패러다임 언어입니다. 이는 곧 개발자들이 절차지향적, 객체지향 혹은 그리고 함수형 프로그래밍과 같은 다양한 주요 패러다임들의 개념들을 혼합하고 그에 맞춰 사용할 수 있는 문법과 사용성을 가지고 의미입니다.
 
 JS is a multi-paradigm language, meaning the syntax and capabilities allow a developer to mix and match (and bend and reshape!) concepts from various major paradigms, such as procedural, object-oriented (OO/classes), and functional (FP).
 
+JS는 컴파일 언어입니다. JS는 이것이 실행되기 전에 프로그램 관련한 처리를 진행하고 유효성을 검사하는 도구(JS 엔진을 포함한)임을 의미합니다.
+
 JS is a compiled language, meaning the tools (including the JS engine) process and verify a program (reporting any errors!) before it executes.
 
+이제 *정의된* 언어와 함께 이것의 자세한 안과 밖에관해 알아가봅시다.
+
 With our language now *defined*, let's start getting to know its ins and outs.
+
+[^specApB]: ECMAScript 2019 언어 스펙, 부록 B: 웹 브라우저를 위한 ECMAScript의 추가적인 기능들, https://www.ecma-international.org/ecma-262/10.0/#sec-additional-ecmascript-features-for-web-browsers (2020년 1월 기준)
 
 [^specApB]: ECMAScript 2019 Language Specification, Appendix B: Additional ECMAScript Features for Web Browsers, https://www.ecma-international.org/ecma-262/10.0/#sec-additional-ecmascript-features-for-web-browsers (latest as of time of this writing in January 2020)
