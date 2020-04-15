@@ -684,17 +684,31 @@ JS does not provide a mechanism for structural equality comparison of object val
 
 But beware, it's more complicated than you'll assume. For example, how might you determine if two function references are "structurally equivalent"? Even stringifying to compare their source code text wouldn't take into account things like closure. JS doesn't provide structural equality comparison because it's almost intractable to handle all the corner cases!
 
+### 강제적인 비교
+
 ### Coercive Comparisons
+
+강제 변환(coercion)은 하나의 값의 타입을 이에 대응되는 또다른 타입으로 변환 시키는 것을 말합니다. 챕터 4에서 다뤘듯이, 강제 변환은 합리적인 이유로 피할 수 있는 선택적인 특성이 아닌 JS의 핵심적인 요소입니다.
 
 Coercion means a value of one type being converted to its respective representation in another type (to whatever extent possible). As we'll discuss in Chapter 4, coercion is a core pillar of the JS language, not some optional feature that can reasonably be avoided.
 
+하지만 강제 변환이 비교 연산자를 만났을 때는 불행하게도 혼란과 절망이 보다 더 자주 발생합니다.
+
 But where coercion meets comparison operators (like equality), confusion and frustration unfortunately crop up more often than not.
+
+흔히 "느슨한 동등(loose equality)" 연산자라고 알려진 `==` 연산자는 JS 커뮤니티에서 많은 노여움을 사고 있고 이로인해 이 보다 더 많은 노여움을 사는 JS의 특징은 아주 적습니다. JS상에서 공개적인 의견 다수는 `==` 연산자가 JS 프로그램에서 사용될 때 형편없이 설계됐으며 위험하고 버그가 들끓는 공공 담론 비난합니다. 심지어 언어의 설계자인 Brendan Eich 마저도 이 연산자의 설계 방법에 큰 실수가 있었다고 한탄하기까지 했습니다.
 
 Few JS features draw more ire in the broader JS community than the `==` operator, generally referred to as the "loose equality" operator. The majority of all writing and public discourse on JS condemns this operator as poorly designed and dangerous/bug-ridden when used in JS programs. Even the creator of the language himself, Brendan Eich, has lamented how it was designed as a big mistake.
 
+제가 해줄 수 있는 이야기는 혼란스러운 아주 소수의 특이한 경우들로부터 이러한 절망이 야기했으며 더 심각한 문제는 이 비교 연산자가 값을 비교할 때 타입을 고려하지 않고 한다는 아주 넓게퍼진 오해에 있습니다.
+
 From what I can tell, most of this frustration comes from a pretty short list of confusing corner cases, but a deeper problem is the extremely widespread misconception that it performs its comparisons without considering the types of its compared values.
 
+`==` 연산자는 동등성 비교를 `===`가 수행하는 것과 유사하게 수행합니다. 실은 두 연산자 모두 값을 비교할 때 값의 타입을 고려하며 비교를 합니다. 그리고 비교하는데 있어서 값의 타입이 서로 같다면 `==`와 `===`는 **어떠한 차이도 없이 정확히 똑같이 합니다.**
+
 The `==` operator performs an equality comparison similarly to how the `===` performs it. In fact, both operators consider the type of the values being compared. And if the comparison is between the same value type, both `==` and `===` **do exactly the same thing, no difference whatsoever.**
+
+비교를 할 때 값의 타입이 다르다면 `==`는 비교 직전에 타입의 강제 변환을 할 수 있다는 점에서 `===`와 다릅니다. 다른말로 하자면 두 연산자 모두 값을 비교하지만 `==`는 타입 전환을 *우선* 수행하고 일단 타입이 동일하게 변환되면 `==`는 `===`와 동일하게 작동한다는 것입니다. 그러므로 `==` 연산자는 "느슨한 동등(loose equality)"이 아니라 "강제적인 동등(coercive equality)"라고 설명되야만 합니다.
 
 If the value types being compared are different, the `==` differs from `===` in that it allows coercion before the comparison. In other words, they both want to compare values of like types, but `==` allows type conversions *first*, and once the types have been converted to be the same on both sides, then `==` does the same thing as `===`. Instead of "loose equality," the `==` operator should be described as "coercive equality."
 
@@ -705,13 +719,23 @@ Consider:
 1 == true;              // true
 ```
 
+위 예시의 두 비교문에서 값의 타입은 다르지만 `==`는 숫자가 아닌 값들(`"42"`와 `true`)를 숫자(각각 `42` 그리고 `1`)로 비교를 하기 전에 변경시킵니다.
+
 In both comparisons, the value types are different, so the `==` causes the non-number values (`"42"` and `true`) to be converted to numbers (`42` and `1`, respectively) before the comparisons are made.
+
+단지 원시 숫자 비교를 선호하는 `==`의 특성을 알고 있다면 이러한 특이한 경우들을 피하는 데에 도움이 될 것입니다. 예를 들어 `"" == 0` 라던가 `0 == false`와 같은 상황을 피할 수 있죠.
 
 Just being aware of this nature of `==`—that it prefers primitive numeric comparisons—helps you avoid most of the troublesome corner cases, such as staying away from a gotchas like `"" == 0` or `0 == false`.
 
+아마도 여러분은 "이러한 특별한 경우를 피하기 위해 모든 강제 전환 비교(`===`을 사용하는 대신)를 사용하지 말아야겠네"라고 생각하실 수도 있습니다. 하지만 여러분의 희망처럼 일이 흘리가진 않을 것입니다.
+
 You may be thinking, "Oh, well, I will just always avoid any coercive equality comparison (using `===` instead) to avoid those corner cases"! Eh, sorry, that's not quite as likely as you would hope.
 
+`<`, `>` (그리고 `<=`, `>=`)와 같은 상대 비교 연산자를 사용하는 경우가 있을 것입니다.
+
 There's a pretty good chance that you'll use relational comparison operators like `<`, `>` (and even `<=` and `>=`).
+
+상대 비교 연산자들은 타입이 이미 동일할 경우 마치 "엄격한"한 비교 연산자인 것처럼 행동하겠지만 타입이 다를 경우네는 `==` 연산자처럼 강제 변환(일반적으로는 숫자로)을 먼저 수행하게 될 것입니다.
 
 Just like `==`, these operators will perform as if they're "strict" if the types being relationally compared already match, but they'll allow coercion first (generally, to numbers) if the types differ.
 
@@ -724,7 +748,11 @@ for (let i = 0; i < arr.length && arr[i] < 500; i++) {
 }
 ```
 
+`i < arr.length` 비교는 `i`와 `arr.length` 모두 숫자이기에 강제 변환으로부터 "안전"합니다. 하지만 모든 `arr[i]` 값이 문자열이기에 `arr[i] < 500`은 강제 변환이 발생하게 됩니다. 이러한 비교는 곧 `1 < 500`, `10 < 500`, `100 < 500`, `1000 < 500`으로 바귀게 되죠. 네번째 연산은 거짓이기에 세 번의 반복이후 더 이상의 순환을 멈추게 됩니다.
+
 The `i < arr.length` comparison is "safe" from coercion because `i` and `arr.length` are always numbers. The `arr[i] < 500` invokes coercion, though, because the `arr[i]` values are all strings. Those comparisons thus become `1 < 500`, `10 < 500`, `100 < 500`, and `1000 < 500`. Since that fourth one is false, the loop stops after its third iteration.
+
+이러한 비교 연산자는 **두 값** 모두 문자열인 경우를 제외하고는 일반적으로 숫자들을 비교할 때 사용됩니다. 두 값이 모두 문자열일 경우에는 문자열을 영어의 알파벳순으로 비교하게 됩니다.
 
 These relational operators typically use numeric comparisons, except in the case where **both** values being compared are already strings; in this case, they use alphabetical (dictionary-like) comparison of the strings:
 
@@ -735,9 +763,15 @@ var y = "9";
 x < y;      // true, watch out!
 ```
 
+비교 연산자에서 타입이 같지 않을 때는 절대 사용하지 않는 방법외에는 강제 변환을 피할 수 있는 방법은 없습니다. 아마도 대단한 목표이지만, 타입이 *아마도* 다른 경우를 마주할 상황이 많이 있을 것입니다.
+
 There's no way to get these relational operators to avoid coercion, other than to just never use mismatched types in the comparisons. That's perhaps admirable as a goal, but it's still pretty likely you're going to run into a case where the types *may* differ.
 
+조금 더 현명한 접근법은 강제 비교를 피하는 게 아닌 이 연산자들의 전후사정을 포용하고 배우는 것일 겁니다.
+
 The wiser approach is not to avoid coercive comparisons, but to embrace and learn their ins and outs.
+
+JS에서 강제 비교는 조건문(`if` 등등)과 같은 곳에서도 발생하곤 하는데, 부록 A "강제 조건부 비교"에서 다시 다루도록 하겠습니다.
 
 Coercive comparisons crop up in other places in JS, such as conditionals (`if`, etc.), which we'll revisit in Appendix A, "Coercive Conditional Comparison."
 
