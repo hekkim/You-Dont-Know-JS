@@ -1112,17 +1112,31 @@ forAgainstLet.print();
 
 The only observable difference here is the lack of using `new`, calling the module factories as normal functions.
 
+#### ES 모듈
+
 #### ES Modules
+
+ES 모듈(ES modules(ESM))은 ES6에서 JS에 처음으로 소개되었고 이미 존재하는 *전통 모듈*과 동일한 목표를 제공해줍니다. 특히, 중요한 변형이나 ADM, UMD, CommonJS와 같은 사용 관례를 고려하여 만들어졌습니다.
 
 ES modules (ESM), introduced to the JS language in ES6, are meant to serve much the same spirit and purpose as the existing *classic modules* just described, especially taking into account important variations and use cases from AMD, UMD, and CommonJS.
 
+하지만, 그 접근 방법은 상당히 달랐습니다.
+
 The implementation approach does, however, differ significantly.
+
+우선 모듈을 *정의*하기 위한 하나의 감싸진 함수가 없습니다. 대신, 하나의 파일에 이에 관해 감싸져 있습니다. ESM은 항상 파일을 기반으로 하고 있습니다. 하나의 파일은 하나의 모듈이죠.
 
 First, there's no wrapping function to *define* a module. The wrapping context is a file. ESMs are always file-based; one file, one module.
 
+두번째로 모듈의 "API"와 명시적으로 상호작용하지 않는 대신 `export`라는 키워드를 사용하여 변수나 함수를 공공 API에 노출시켜줍니다. 모듈 내에 `export` 없이 정의된 것들은 (*전통 모듈*에서도 그러했듯이) 감춰진 상태로 머무르게 됩니다.
+
 Second, you don't interact with a module's "API" explicitly, but rather use the `export` keyword to add a variable or method to its public API definition. If something is defined in a module but not `export`ed, then it stays hidden (just as with *classic modules*).
 
+세번째로 아마도 이전에 얘기했던 패턴과 가장 눈에 띄는 차이점은 ES 모듈을 "인스턴스화(instantiate)" 하지 않는 다는 것입니다. 대신 `import`를 사용하여 하나의 인스턴스를 사용할 수 있습니다. 실은, ESM는 프로그램에서 `import`를 처음으로 부를 때 하나의 인스턴스만 생성되고 그 이외에의 모든 `import`에서는 이미 만들어진 인스턴스의 참조값만 가져오도록 되어있는 "싱글턴(singletons)" 패턴입니다. 만약 모듈이 여러개의 인스턴스를 필요로 한다면 *전통 모듈 형태(classic module-style)*의 팩토리 함수를 ESM에 그 용도에 맞게 정의하고 제공해줘야 될 것입니다.
+
 Third, and maybe most noticeably different from previously discussed patterns, you don't "instantiate" an ES module, you just `import` it to use its single instance. ESMs are, in effect, "singletons," in that there's only one instance ever created, at first `import` in your program, and all other `import`s just receive a reference to that same single instance. If your module needs to support multiple instantiations, you have to provide a *classic module-style* factory function on your ESM definition for that purpose.
+
+ESM과 *전통 모듈*을 석어 사용하는 아래 예제를 통해 여러개의 인스턴스에 관해 알 수 있을 것입니다.
 
 In our running example, we do assume multiple-instantiation, so these following snippets will mix both ESM and *classic modules*.
 
@@ -1148,6 +1162,8 @@ export function create(title,author,pubDate) {
 }
 ```
 
+이 모듈을 다른 ES 모듈(`blogpost.js`)에서 가져와 사용하는 방법은 아래와 같습니다.
+
 To import and use this module, from another ES module like `blogpost.js`:
 
 ```js
@@ -1171,6 +1187,8 @@ export function create(title,author,pubDate,URL) {
 }
 ```
 
+마지막으로 또다른 ES 모듈 `main.js`에서 위 모듈을 가져와 사용하는 방법입니다.
+
 And finally, to use this module, we import into another ES module like `main.js`:
 
 ```js
@@ -1190,18 +1208,34 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 
+| 노트: |
+| :--- |
+| `import` 문에 있는 `as newBlogPost` 절은 선택적으로 사용할 수 있습니다. 만약 해당 절이 없을 경우에는 단지 `create(..)`라는 이름으로 불릴 것입니다. 이 경우 가독성을 향상시키기 위한 목적으로 이름을 다시 지은 것입니다. `create(..)`의 일반적인 팩토리 이름이 그 용도에 맞게 조금 더 상세한 이름인 `newBlogPost(..)` 갖게 됐습니다. |
+
 | NOTE: |
 | :--- |
 | The `as newBlogPost` clause in the `import` statement is optional; if omitted, a top-level function just named `create(..)` would be imported. In this case, I'm renaming it for readability sake; its more generic factory name of `create(..)` becomes more semantically descriptive of its purpose as `newBlogPost(..)`. |
 
+보시는 바와 같이 ES 모듈은 여러개의 인스턴스를 지원해야 할 필요가 있을 경우 *전통 모듈*을 내부적으로 사용할 수도 있습니다. 동일한 결과를 만드는 또 다른 방법으로는 `create(..)`라는 팩토리 함수가 아닌 `클래스(class)`를 노출시킬 수도 있습니다. 하지만 이 시점에 ESM을 이미 사용하고 있으므로 *전통 모듈*을 `클래스(class)` 대신 사용하는 것을 추천드립니다.
+
 As shown, ES modules can use *classic modules* internally if they need to support multiple-instantiation. Alternatively, we could have exposed a `class` from our module instead of a `create(..)` factory function, with generally the same outcome. However, since you're already using ESM at that point, I'd recommend sticking with *classic modules* instead of `class`.
+
+오직 한개의 인스턴스만을 필요로 한다면 `export`를 이용해 공용 함수들을 직접 내보냄으로써 복잡한 추가 과정을 건너 뛸 수 있습니다.
 
 If your module only needs a single instance, you can skip the extra layers of complexity: `export` its public methods directly.
 
+## 토끼굴 깊이 파고들기
+
 ## The Rabbit Hole Deepens
+
+이 챕터의 상단에서 약속했듯이 JS 언어의 전반적인 주요 사항들에 관해 광범위한 표면들을 훑어보았습니다. 여전히 여러분의 머리속에 맴돌고 있겠지만 이는 전적으로 자연스러운 일입니다!
 
 As promised at the top of this chapter, we just glanced over a wide surface area of the main parts of the JS language. Your head may still be spinning, but that's entirely natural after such a firehose of information!
 
+단지 JS에 관한 "짧게" 살펴보았을 뿐이지만 이미 조심 스럽게 살펴보고 친숙한지 확실히 해야만 할 수많은 세부 내용들의 전반에 관해 다루었고 자그마한 암시들 역시 알게되었습니다. 진지하게 저는 이 챕터를 몇 번이고 다시 읽어보길 제안해드립니다.
+
 Even with just this "brief" survey of JS, we covered or hinted at a ton of details you should carefully consider and ensure you are comfortable with. I'm serious when I suggest: re-read this chapter, maybe several times.
+
+다음 챕터에서는 JS가 그 중심부에서 어떻게 작동하는지 몇몇 중요한 면모에 관해 조금 더 깊이 파고들 예정입니다. 더 깊은 도끼 굴에 따라들어오기 전에 우리가 다루었던 것들을 충분히 소화할 시간을 가지시길 바랍니다.
 
 In the next chapter, we're going to dig much deeper into some important aspects of how JS works at its core. But before you follow that rabbit hole deeper, make sure you've taken adequate time to fully digest what we've just covered here.
