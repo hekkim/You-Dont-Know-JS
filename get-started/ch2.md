@@ -775,17 +775,31 @@ JS에서 강제 비교는 조건문(`if` 등등)과 같은 곳에서도 발생�
 
 Coercive comparisons crop up in other places in JS, such as conditionals (`if`, etc.), which we'll revisit in Appendix A, "Coercive Conditional Comparison."
 
+## JS에서 코드를 조직하는 방법
+
 ## How We Organize in JS
+
+JS 환경에 넓리 사용되는 코드(데이터와 연산)를 조직하는 주요 두 가지 패턴은 클래스(classes)와 모듈(modules)입니다. 이 패턴은 배타적인 관계는 아니고 많은 프로그램은 둘 다 사용 가능하며 사용하고 있습니다. 다른 프로그램은 오직 한 가지 패턴에 집착하거나 그 어떠한 패턴도 사용하지 않기도 합니다!
 
 Two major patterns for organizing code (data and behavior) are used broadly across the JS ecosystem: classes and modules. These patterns are not mutually exclusive; many programs can and do use both. Other programs will stick with just one pattern, or even neither!
 
+몇몇 부분에서 이러한 패턴들은 아주 다릅니다. 하지만 흥미롭게도 이 패턴들은 동전의 양면과도 같습니다. JS에 능숙해지기 위해서는 두 패턴 모두에 관해 깊이있게 이해하고 어느 상황에 적절하고 그렇지 않은지 알아야만 합니다.
+
 In some respects, these patterns are very different. But interestingly, in other ways, they're just different sides of the same coin. Being proficient in JS requires understanding both patterns and where they are appropriate (and not!).
+
+### 클래스
 
 ### Classes
 
+"객체 지향(object-oriented)", "클래스 지향(class-oriented)" "클래스(classes)"는 그 세부 사항과 미묘한 차이까지 매우 잘 포괄한 용어입니다. 그 정의에 따르면 이것들은 보편적이지는 않습니다.
+
 The terms "object-oriented," "class-oriented," and "classes" are all very loaded full of detail and nuance; they're not universal in definition.
 
+C++, Java와 같은 "객체 지향" 언어에 대한 배경 지식이 있는 분들에게 가장 친숙한 일반적이며 다소 전통적인 정의를 사용해보겠습니다.
+
 We will use a common and somewhat traditional definition here, the one most likely familiar to those with backgrounds in "object-oriented" languages like C++ and Java.
+
+프로그램에서 클래스란 데이터와 데이터 간의 연산들에 관해 정의한 행동 양식 모두를 포함한 자료 구조 "타입"입니다. 클래스 이러한 데이터 구조가 어떻게 작동을 할지 정의하지만 클래스 그 자체로 실체가 있는 값은 아닙니다. 프로그램에서 실체가 있는 값을 얻기 위해서는 클래스는 *인스턴스화(instantiated)* (`new`란 키워드를 통해) 되어야만 합니다.
 
 A class in a program is a definition of a "type" of custom data structure that includes both data and behaviors that operate on that data. Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be *instantiated* (with the `new` keyword) one or more times.
 
@@ -827,17 +841,31 @@ mathNotes.print();
 // ..
 ```
 
+`Page` 클래스에는 `this.text`라는 멤버 프로퍼티(member property) 내부에 문자열 형태의 데이터를 가지고 있습니다. 그리고 `print()`라는 이 문자열을 콘솔에 출력하는 메서드(method)를 가지고 있습니다.
+
 In the `Page` class, the data is a string of text stored in a `this.text` member property. The behavior is `print()`, a method that dumps the text to the console.
+
+`Notebook` 클래스에서는 `Page`이 인스턴스 배열을 데이터 가지고 있습니다. 또한 `addPage(..)`는 `Page`를 초기화하고 배열안에 추가하는 메서드입니다. 마찬가지로 `print()`는 노트북에 있는 모든 페이지를 출력하는 메서드입니다.
 
 For the `Notebook` class, the data is an array of `Page` instances. The behavior is `addPage(..)`, a method that instantiates new `Page` pages and adds them to the list, as well as `print()` (which prints out all the pages in the notebook).
 
+명령문 `mathNotes = new Notebook()`은 `Notebook` 클래스의 인스턴스를 생성하고 `page = new Page(text)`는 `Page` 클래스의 인스턴스가 생성됩니다.
+
 The statement `mathNotes = new Notebook()` creates an instance of the `Notebook` class, and `page = new Page(text)` is where instances of the `Page` class are created.
+
+메서드(methods)는 (클래스 스스로가 아닌) 인스턴스를 통해서만 불리울 수 있습니다. 예를들어 `mathNotes.addPage(..)`나 `page.print()`와 같이 말입니다.
 
 Behavior (methods) can only be called on instances (not the classes themselves), such as `mathNotes.addPage(..)` and `page.print()`.
 
+`class`를 이용하여 데이터(`text`와 `page`)를 묶을 수 있고 그들의 행동 양식(`addPage(..)`와 `print()`)을 함께 구성해 낼 수 있습니다. `class` 정의를 하나도 하지 않고 동일한 프로그램을 구성할 수도 있지만, 이렇게 될 경우 코드가 잘 구조화되어 있지 않게 되고 코드를 읽고 이유를 추론하는 것이 어려워지며 더 많은 버그와를 수준이하의 유지보수성을 가지게 될 수 있습니다.
+
 The `class` mechanism allows packaging data (`text` and `pages`) to be organized together with their behaviors (e.g., `addPage(..)` and `print()`). The same program could have been built without any `class` definitions, but it would likely have been much less organized, harder to read and reason about, and more susceptible to bugs and subpar maintenance.
 
+#### 클래스 상속
+
 #### Class Inheritance
+
+JS에 조금은 덜 사용되긴 하지만 전통적인 "클래스 지향" 설계에 내재된 또다른 특징은 "상속(inheritance)" (그리고 "다형성(polymorphism)")이 있습니다.
 
 Another aspect inherent to traditional "class-oriented" design, though a bit less commonly used in JS, is "inheritance" (and "polymorphism"). Consider:
 
@@ -859,7 +887,11 @@ class Publication {
 }
 ```
 
+`Publication` 클래스는 출판에 필요한 일반적인 행동 양식을 정의하고 있습니다.
+
 This `Publication` class defines a set of common behavior that any publication might need.
+
+`Book`이나 `BlogPost`처럼 조금 더 특별한 타입의 출판에 관해 생각해 보도록 하겠습니다.
 
 Now let's consider more specific types of publication, like `Book` and `BlogPost`:
 
@@ -897,6 +929,8 @@ class BlogPost extends Publication {
 }
 ```
 
+`Book`과 `BlogPost` 모두 `extends`라는 절을 사용해 `Publication`의 공통된 정의 그리고 추가적인 행동 양식을 포함해서 조금 더 확장하였습니다. 각 생성자(constructor)에서는 `super(..)`를 호출하여 부모 클래스 `Publication`의 생성자에 초기화 작업을 위임하였고, 그 이후 각각의 출판 타입("서브 클래스(sub-class)" 혹은 "자식 클래스(child class)"라도 알려진)에 맞는 조금 더 상세한 작업을 수행하였습니다.
+
 Both `Book` and `BlogPost` use the `extends` clause to *extend* the general definition of `Publication` to include additional behavior. The `super(..)` call in each constructor delegates to the parent `Publication` class's constructor for its initialization work, and then they do more specific things according to their respective publication type (aka, "sub-class" or "child class").
 
 Now consider using these child classes:
@@ -931,9 +965,15 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 
+두 자식 클래스의 인스턴스 부모 `Publication` 클래스로부터 상속되고 `print()` 자식 클래스에서 오버라이드된(overridden)된 `print()` 메서드를 가지고 있는 걸 신경 써서 봐주시기 바랍니다. 각 오버라이드된 클래스의 `print()` 메서드는 `super.print()`를 통해 부모로부터 상속받은 `print()` 메서드를 호출할 수 잇습니다.
+
 Notice that both child class instances have a `print()` method, which was an override of the *inherited* `print()` method from the parent `Publication` class. Each of those overridden child class `print()` methods call `super.print()` to invoke the inherited version of the `print()` method.
 
+상속받거나 오버라이드된 메서드 모두 동일한 이름을 가지고 동시에 존재할 수 있는 현상을 *다형성(polymorphism)*이라고 부릅니다.
+
 The fact that both the inherited and overridden methods can have the same name and co-exist is called *polymorphism*.
+
+
 
 Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
 
