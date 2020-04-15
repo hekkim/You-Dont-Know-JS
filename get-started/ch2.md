@@ -246,11 +246,15 @@ var me = {
 console.log(`My name is ${ me.first }.`);
 ```
 
-여기서 `me`는 객체를 가르키고 있고 `first`는 객체(값의 모음)에서 정보의 위치를 가르키는 이름입니다. 객체에서 객체의 프로퍼티/키를 이용해 정보에 접근할 수 있는 방법은 대괄호 `[]`를 다음과 같이 `me["first"]` 이용하는 방법입니다.
+여기서 `me`는 객체를 가르키고 있고 `first`는 객체(값의 모음)에서 정보의 위치를 가르키는 이름입니다. 객체에서 객체의 프로퍼티/키를 이용해 정보에 접근할 수 있는 방법은 대괄호 `[]`를 통해 다음과 같이 `me["first"]` 이용하는 방법입니다.
 
 Here, `me` represents an object, and `first` represents the name of a location of information in that object (value collection). Another syntax option that accesses information in an object by its property/key uses the square-brackets `[ ]`, such as  `me["first"]`.
 
+### 값 타입 측정
+
 ### Value Type Determination
+
+값을 구분하기 위한 `typeof` 연산자는 값이 타입을 알려주는데 객체가 아닌 원시값일 경우 내장형(built-in) 타입을 알려줍니다.
 
 For distinguishing values, the `typeof` operator tells you its built-in type, if primitive, or `"object"` otherwise:
 
@@ -265,19 +269,35 @@ typeof [1,2,3];             // "object"
 typeof function hello(){};  // "function"
 ```
 
+| 경고: |
+| :--- |
+| `typeof null`은 불행하게도 `"null"` 대신 `"object"`를 반환해줍니다. 또한, `typeof`는 함수에 관해서는 `"function"`라고 반환하지만 배열에게는 예상과는 다르게 `"array"`가 아닌 `"object"`를 반환합니다.
+
 | WARNING: |
 | :--- |
 | `typeof null` unfortunately returns `"object"` instead of the expected `"null"`. Also, `typeof` returns the specific `"function"` for functions, but not the expected `"array"` for arrays. |
 
+문자열을 숫자로 바꾸는 것처럼 하나의 값의 타입을 다른 걸로 바꾸는 것은 JS에서는 "강제 변환(coercion)"이라고 부릅니다. 추후에 이 챕터에서 조금 더 자세히 다루도록 하겠습니다.
+
 Converting from one value type to another, such as from string to number, is referred to in JS as "coercion." We'll cover this in more detail later in this chapter.
+
+원시 값과 객체는 값이 부여되거나 전달될 때 서로 다르게 작동합니다. 이에 관해 자세한 사항은 부록 A, "값 vs 참조"에서 다루겠습니다.
 
 Primitive values and object values behave differently when they're assigned or passed around. We'll cover these details in Appendix A, "Values vs References."
 
+## 변수 선언과 사용
+
 ## Declaring and Using Variables
+
+이전 섹션에서 자세히 설명하지 않았던 것을 명쾌하게 설명드리겠습니다. JS 프로그램에서 값(value)은 리터럴 값(많은 이전 예제들에서 사용된 것처럼)으로 존재하기도 하고 변수가 직접 들고 있을 수도 있습니다. 여기서 변수를 단순히 값을 담을 그릇으로 생각해주시기 바랍니다.
 
 To be explicit about something that may not have been obvious in the previous section: in JS programs, values can either appear as literal values (as many of the preceding examples illustrate), or they can be held in variables; think of variables as just containers for values.
 
+변수가 사용되기 위해서는 반드시 선언이 되어야만 합니다. 변수를 선언("식별자(identifiers)"라고도 알려진)하는 여러 종류의 방식이 있는데 각 방식은 그 행동양식이 다르게 적용됩니다.
+
 Variables have to be declared (created) to be used. There are various syntax forms that declare variables (aka, "identifiers"), and each form has different implied behaviors.
+
+예를 들어 `var` 문을 보면,
 
 For example, consider the `var` statement:
 
@@ -286,7 +306,11 @@ var myName = "Kyle";
 var age;
 ```
 
+`var` 키워드는 프로그램의 일부분으로 변수를 선언하기 위해 사용되고 선택적으로 변수에 초기값을 할당할 수도 있습니다.
+
 The `var` keyword declares a variable to be used in that part of the program, and optionally allows an initial assignment of a value.
+
+또다른 비슷한 키워드는 `let` 입니다.
 
 Another similar keyword is `let`:
 
@@ -295,7 +319,11 @@ let myName = "Kyle";
 let age;
 ```
 
+`let` 키워드는 `var`와는 조금 다른데 가장 큰 차이점은 `let`은 변수에대한 접근 권한을 `var`에 비해 제한하는데 있습니다. 일반 혹은 정규 스코핑 혹은 함수 스코핑과는 달리 "블락 스코핑(block scoping)"이라고 부릅니다.
+
 The `let` keyword has some differences to `var`, with the most obvious being that `let` allows a more limited access to the variable than `var`. This is called "block scoping" as opposed to regular or function scoping.
+
+예를 보면,
 
 Consider:
 
@@ -315,17 +343,30 @@ console.log(age);
 // Error!
 ```
 
+`age`는 `myName`과는 다르게 `if`문 내부 블락에 스코핑되어 있으므로(block-scoped) `if` 문 밖에서 `age`에 접근하려는 시도가 오류를 발생시켰습니다.
+
 The attempt to access `age` outside of the `if` statement results in an error, because `age` was block-scoped to the `if`, whereas `myName` was not.
+
+블락 스코핑은 여러분의 프로그램에서 퍼져있는 변수 선언으로 인해 변수 이름이 의도치 않게 중복되어 사용되는 걸 방지하는데 큰 도움이 됩니다.
 
 Block-scoping is very useful for limiting how widespread variable declarations are in our programs, which helps prevent accidental overlap of their names.
 
+하지만 `var` 역시 "조금 더 넓은 범위(함수 전체와 같이)에서 이 함수는 사용될 것입니다"라고 알려준다는 점에서 여전히 유용합니다. 두 변수 선언 방식 모두 프로그램에서 적절한 장소에서 그 환경에 맞게 사용할 수 있습니다.
+
 But `var` is still useful in that it communicates "this variable will be seen by a wider scope (of the whole function)". Both declaration forms can be appropriate in any given part of a program, depending on the circumstances.
+
+| 노트: |
+| `let`(혹은 `const`)을 장점을 살리기 위해 `var`를 사용하는 것을 피하자는 의견은 아주 흔합니다. JS의 초창기부터 이어온 `var`의 스코핑 행동 양식이 일반적으로 혼동된다는 의식 때문입니다. 하지만 저는 이러한 의견이 지나치게 제한된 조언이며 궁극적으로는 전혀 도움이 되지 않는다고 생각합니다. 이는 여러분이 어떠한 기능을 잘 학습하지도 못하고 다른 기능들과 함께 잘 사용할 수 없다고 가정하기에 생겨난다고 생각합니다. 대신에 저는 여러분이 어떠한 사용가능한 기술이든 배울수 있으며 그 기능들을 적절한 곳에서 사용할 *가능성이 있고* *그래야만 한다고* 생각합니다!
 
 | NOTE: |
 | :--- |
 | It's very common to suggest that `var` should be avoided in favor of `let` (or `const`!), generally because of perceived confusion over how the scoping behavior of `var` has worked since the beginning of JS. I believe this to be overly restrictive advice and ultimately unhelpful. It's assuming you are unable to learn and use a feature properly in combination with other features. I believe you *can* and *should* learn any features available, and use them where appropriate! |
 
+세 번째 변수 선언 방식은 `const`입니다. 이것은 `let`과 비슷하지만 선언된 당시에 부여된 값만을 가지고 있으며 절대 다시 다른 값으로 재할당 할 수 없는 제약이 있습니다.
+
 A third declaration form is `const`. It's like `let` but has an additional limitation that it must be given a value at the moment it's declared, and cannot be re-assigned a different value later.
+
+예제를 살펴보겠습니다.
 
 Consider:
 
@@ -339,7 +380,11 @@ if (myBirthday) {
 }
 ```
 
+`myBirthday` 상수는 값을 재할당하는 게 불가능합니다.
+
 The `myBirthday` constant is not allowed to be re-assigned.
+
+`const`로 선언된 변수는 "불변하며" 절대 다른 값을 재할당 할 수 없습니다. `const`를 객체 값과사용하는 것은 문제의 소지가 있습니다. 변수에 다른 값을 재할당 할 수는 없지만 객체 내부에 있는 값들은 여전히 변경할 수 있기 때문입니다. 이로인해 아래의 예제와 같은 혼란을 초래할 수 있으므로 이러한 상황은 피하는 게 현명하다고 생각됩니다.
 
 `const` declared variables are not "unchangeable", they just cannot be re-assigned. It's ill-advised to use `const` with object values, because those values can still be changed even though the variable can't be re-assigned. This leads to potential confusion down the line, so I think it's wise to avoid situations like:
 
@@ -352,11 +397,19 @@ actors[2] = "Tom Cruise";   // OK :(
 actors = [];                // Error!
 ```
 
+최선의 안정적인 `const` 사용방법은 `true` 대신 `myBirthday`를 사용하는 것처럼 단순 원시값에 유의미한 이름을 부여하는 경우입니다. 이로인해 프로그램은 한층 더 읽기 쉬어지게 됩니다.
+
 The best semantic use of a `const` is when you have a simple primitive value that you want to give a useful name to, such as using `myBirthday` instead of `true`. This makes programs easier to read.
+
+| 팁: |
+| :--- |
+| `const`를 원시값을 사용할 때만 쓴다면 재할당(re-assign(불가능합니다))과 뮤테이션(mutation(가능합니다))로 인해 오는 혼동을 피할 수 있습니다! 그리고 이는 곧 가장 안전하며 최고의 `const` 사용 방법입니다.
 
 | TIP: |
 | :--- |
 | If you stick to using `const` only with primitive values, you avoid any confusion of re-assignment (not allowed) vs. mutation (allowed)! That's the safest and best way to use `const`. |
+
+`var` / `let` / `const` 외에도 다양한 스코프에서 식별자를 선언하는 또 다른 방식들이 있습니다. 예를들어,
 
 Besides `var` / `let` / `const`, there are other syntactic forms that declare identifiers (variables) in various scopes. For example:
 
@@ -369,7 +422,11 @@ hello("Kyle");
 // Hello, Kyle.
 ```
 
+식별자 `hello`는 바깥 스코프에서 생성됐고 함수를 참조하도록 자동으로 연결이 됩니다. 하지만 `myName`으로 이름이 붙여진 파라미터는 함수 내부에서만 생성됐고 그래서 함수 스코프 내부에서만 접근이 가능합니다. `hello` 그리고 `myName`은 일반적으로 `var`로 선언된 변수처럼 행동합니다.
+
 The identifier `hello` is created in the outer scope, and it's also automatically associated so that it references the function. But the named parameter `myName` is created only inside the function, and thus is only accessible inside that function's scope. `hello` and `myName` generally behave as `var`-declared.
+
+또다른 변수를 선언하는 방식은 `catch` 절에 있습니다.
 
 Another syntax that declares a variable is a `catch` clause:
 
@@ -382,7 +439,11 @@ catch (err) {
 }
 ```
 
+여기서 `err`은 블록 스코프 변수로 `catch` 절에서 마치 `let`을 통해 선언된 것처럼 존재합니다.
+
 The `err` is a block-scoped variable that exists only inside the `catch` clause, as if it had been declared with `let`.
+
+## 함수
 
 ## Functions
 
