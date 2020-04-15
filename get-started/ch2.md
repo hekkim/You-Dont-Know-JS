@@ -973,23 +973,39 @@ Notice that both child class instances have a `print()` method, which was an ove
 
 The fact that both the inherited and overridden methods can have the same name and co-exist is called *polymorphism*.
 
-
+상속은 데이터와 그 행동 양식을 분리된 논리 단위(클래스라고 하는)로 나누며 자식 클래스가 그 부모의 데이터와 행동 양식을 사용하고 접근하여 협력할 수 있게 하는 훌륭한 방법입니다.
 
 Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
 
+### 모듈
+
 ### Modules
+
+모듈 패턴은 근본적으로 클래스 패턴과 같이 데이터와 그 행동 양식을 각각의 논리적인 단위로 모아 놓는다는 동일한 목표를 가지고 있습니다. 모듈은 협력을 목표로하고 다른 모듈을 "포함"할 때도 있고 "접근"할 때도 있습니다.
 
 The module pattern has essentially the same goal as the class pattern, which is to group data and behavior together into logical units. Also like classes, modules can "include" or "access" the data and behaviors of other modules, for cooperation sake.
 
+하지만 모듈은 클래스와 몇몇 중요한 차이점들이 있습니다. 가장 눈에 띄는 차이점은 뭄법이 전반적으로 다르다는 것입니다.
+
 But modules have some important differences from classes. Most notably, the syntax is entirely different.
+
+#### 전통적 모듈
 
 #### Classic Modules
 
+ES6가 JS 문법에 모듈 문법을 추가했었습니다. 그러나 초기의 JS에서부터 모듈은 특별한 문법이 없음에도 불구하고 수많은 JS 프로그램에서 이용되는 중요하고 일반적인 패턴이였습니다.
+
 ES6 added a module syntax form to native JS syntax, which we'll look at in a moment. But from the early days of JS, modules was an important and common pattern that was leveraged in countless JS programs, even without a dedicated syntax.
+
+*전통 모듈*의 중요한 특징은 내부 데이터와 이를 조작할 몇몇 접근 가능한 함수를 가진 모듈 "인스턴스"를 반환하는 외부 함수(최소 한 번은 실행되는)라는 것입니다.
 
 The key hallmarks of a *classic module* are an outer function (that runs at least once), which returns an "instance" of the module with one or more functions exposed that can operate on the module instance's internal (hidden) data.
 
+이러한 형식의 모듈은 *단지 함수*였고 이 함수를 호출하여 모듈의 *인스턴스*를 생성하였기에 이 함수를 "모듈 팩토리(module factories)"라고 설명하기도 했습니다.
+
 Because a module of this form is *just a function*, and calling it produces an "instance" of the module, another description for these functions is "module factories".
+
+한 번 `Publication`, `Book`, `BlogPost`를 전통 모듈에선 어떤 형식이였을지 살펴봅시다.
 
 Consider the classic module form of the earlier `Publication`, `Book`, and `BlogPost` classes:
 
@@ -1042,13 +1058,23 @@ function BlogPost(title,author,pubDate,URL) {
 }
 ```
 
+`class` 형식일 때와 비교해서 차이점보다 더 많은 유사함을 가지고 있습니다.
+
 Comparing these forms to the `class` forms, there are more similarities than differences.
+
+`class` 형식은 객체 인스턴스에 메서드와 데이터를 저장하며 `this.`라는 접두사를 통해 접근하기 메서드와 데이터에 접근했습니다. 모듈에서는 `this.` 접두사가 아닌 스코프에 있는 변수 식별자를 이용하여 메서드와 데이터에 접근하였습니다.
 
 The `class` form stores methods and data on an object instance, which must be accessed with the `this.` prefix. With modules, the methods and data are accessed as identifier variables in scope, without any `this.` prefix.
 
+`class`에서는 인스턴스의 모든 데이터와 메스드는 바깥에서 접근 가능한 것은 물론이고 인스턴스의 "API"가 클래스 정의에 내재되어 있습니다. 모듈 팩토리 함수의 경우는 노출된 함수 그리고 함수 내부에서만 유지될 데이터와 메서드를 가지고 있는 객체를 명백하게 만들고 반환해야 하게 만들어야 됩니다.
+
 With `class`, the "API" of an instance is implicit in the class definition—also, all data and methods are public. With the module factory function, you explicitly create and return an object with any publicly exposed methods, and any data or other unreferenced methods remain private inside the factory function.
 
+2020년에 이르기까지 JS 전반에 걸쳐 공통적인 형식의 팩토리 함수에는 여러가지 변형이 있습니다. AMD (Asynchronous Module Definition), UMD (Universal Module Definition), 그리고 CommonJS (classic Node.js-style modules)와 같은 각기 다른 변형을 구동시켰던 경험이 있을 수도 있습니다. 이러한 변경은 (상호 호환이 잘 안 되는) 사소한 일이긴 합니다. 하지만, 이러한 모든 형식들은 공통된 원리 원칙에 의존하고 있습니다.
+
 There are other variations to this factory function form that are quite common across JS, even in 2020; you may run across these forms in different JS programs: AMD (Asynchronous Module Definition), UMD (Universal Module Definition), and CommonJS (classic Node.js-style modules). The variations are minor (not quite compatible). However, all of these forms rely on the same basic principles.
+
+이러한 모듈 팩토리 함수의 사용 방법("인스턴스화(instantiation)" 라고도 알려진)에 관해 알아보겠습니다.
 
 Consider also the usage (aka, "instantiation") of these module factory functions:
 
@@ -1081,6 +1107,8 @@ forAgainstLet.print();
 // October 27, 2014
 // https://davidwalsh.name/for-and-against-let
 ```
+
+딱 한가지 눈에 띄는 차이점은 `new`를 사용하지 않고 모듈 팩토리를 일반 함수처럼 부르는 것입니다.
 
 The only observable difference here is the lack of using `new`, calling the module factories as normal functions.
 
