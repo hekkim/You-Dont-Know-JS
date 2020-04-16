@@ -244,21 +244,31 @@ Beyond just using built-in iterables, you can also ensure your own data structur
 | :--- |
 | You may have noticed a nuanced shift that occurred in this discussion. We started by talking about consuming **iterators**, but then switched to talking about iterating over **iterables**. The iteration-consumption protocol expects an *iterable*, but the reason we can provide a direct *iterator* is that an iterator is just an iterable of itself! When creating an iterator instance from an existing iterator, the iterator itself is returned. |
 
-## 클로져
+## 클로져(Closure)
 
 ## Closure
 
-아마도 깨닫지 못 했겠지만, 대부분의 모든 JS 개발자들은 클로져를 사용하고 있습니다. 실은, 클로져는 대부분의 언어에서 가장 널리 사용되고 있는 기능 중 하나일 것입니다. 심지어는 클로져가 얼마나 본질적인 문제인지 이해하는 것이 값이나 반복문에 관해 이해하는 것만큼 중요할 수도 있습니다.
+아마도 깨닫지 못 했겠지만, 대부분의 모든 JS 개발자들은 클로져(Closure)를 사용하고 있습니다. 실은, 클로져는 대부분의 언어에서 가장 널리 사용되고 있는 기능 중 하나일 것입니다. 심지어는 클로져가 얼마나 본질적인 문제인지 이해하는 것이 값이나 반복문에 관해 이해하는 것만큼 중요할 수도 있습니다.
 
 Perhaps without realizing it, almost every JS developer has made use of closure. In fact, closure is one of the most pervasive programming functionalities across a majority of languages. It might even be as important to understand as variables or loops; that's how fundamental it is.
 
+여전히 클로져는 마법인 것 마냥 숨겨져 있는 것처럼 느껴지실 것입니다. 그리고 클로져는 매우 추상적이거나 매우 비공식적인 용어로 종종 얘기되곤 하는데, 이런 말은 클로져가 무엇인지 정확하게 파악하는데에 전혀 도움이 되지 않습니다.
+
 Yet it feels kind of hidden, almost magical. And it's often talked about in either very abstract or very informal terms, which does little to help us nail down exactly what it is.
+
+때때로는 클로져의 유무로 인해 때때로는 버그(혹은 성능 문제)가 발생하므로, 우선 프로그램에서 클로져가 어떻게 사용되는지 파악할 필요가 있습니다.
 
 We need to be able to recognize where closure is used in programs, as the presence or lack of closure is sometimes the cause of bugs (or even the cause of performance issues).
 
+그럼 실용적이며 구제적인 방법으로 클로져를 정의해보도록 하겠습니다.
+
 So let's define closure in a pragmatic and concrete way:
 
+> 클로져는 함수가 다른 스코프에서 불리더라도 함수가 그 바깥 스코프에 있는 변수를 접근하기위해 기억하고 지속하는 것을 말합니다.
+
 > Closure is when a function remembers and continues to access variables from outside its scope, even when the function is executed in a different scope.
+
+여기서 두 가지 명확한 특징을 찾아낼 수 있습니다. 우선, 클로져는 함수의 본질 중 일부라는 것입니다. 객체는 클로져를 가지고 있지 않지만, 함수는 가지고 있죠. 두 번째로 클로져를 관찰하기 위해서는 함수가 정의된 위치가 아닌 다른 스코프에서 함수를 실행해봐야 한다는 점입니다.
 
 We see two definitional characteristics here. First, closure is part of the nature of a function. Objects don't get closures, functions do. Second, to observe a closure, you must execute a function in a different scope than where that function was originally defined.
 
@@ -284,9 +294,15 @@ howdy("Grant");
 // Howdy, Grant!
 ```
 
+우선 `greeting(..)` 외부 함수는 실행되는데 이 때 `who(..)`라는 내부 함수의 인스턴스를 생성하게 됩니다. `who(..)` 함수는 `greeting(..)`이라는 바깥 스코프로부터 `msg`라는 파라미터를 가져오게 됩니다. 내부 함수 `who(..)`가 반환될 때, 이 참조값은 `hello`란 외부 스코프에 있는 변수에 할당됩니다. 그 후 `greeting(..)`을 두 번째 부를 때에도 새로운 내부 함수 인스턴스를 만드는데 이 때 새로운 클로져로써 새롭게 온 `msg` 변수를 함께 포함한 참조값을 반환하게되고 이는 곧 `howdy`에 할당되게 됩니다.
+
 First, the `greeting(..)` outer function is executed, creating an instance of the inner function `who(..)`; that function closes over the variable `msg`, which is the parameter from the outer scope of `greeting(..)`. When that inner function is returned, its reference is assigned to the `hello` variable in the outer scope. Then we call `greeting(..)` a second time, creating a new inner function instance, with a new closure over a new `msg`, and return that reference to be assigned to `howdy`.
 
+`greeting(..)`함수의 작업이 모두 완료되면 일반적으로 우리는 여기에 사용되었던 모든 변수가 가비지 콜렉터(garbage collector)에 의해 (메모리에서) 제거될 것이라고 생각할 것입니다. 그렇기에 각각의 `msg`가 사라질 거라고 예상되지만 실제로는 그렇지 않습니다. 이는 클로져 덕분입니다. 내부 함수 인스턴스는 여전히 (각각 `hello`와 `howdy`에 할당된 채) 살아있는 상태이기 때문에, 그들의 클로져는 여전히 `msg` 변수를 보존하게 됩니다.
+
 When the `greeting(..)` function finishes running, normally we would expect all of its variables to be garbage collected (removed from memory). We'd expect each `msg` to go away, but they don't. The reason is closure. Since the inner function instances are still alive (assigned to `hello` and `howdy`, respectively), their closures are still preserving the `msg` variables.
+
+이러한 클로져들은 `msg` 변수 값의 스냅샷(snapshot)이 아니라 변수 자체를 직접적으로 연결하고 보존하고 있습니다. 이 말인즉슨 클로져는 실제로 이 변수들의 변화를 관찰(혹은 변화를 만들수도 있고!)하고 있다는 의미입니다.
 
 These closures are not a snapshot of the `msg` variable's value; they are a direct link and preservation of the variable itself. That means closure can actually observe (or make!) updates to these variables over time.
 
@@ -310,7 +326,11 @@ incBy3();       // 6
 incBy3();       // 9
 ```
 
+내부 함수 `increateCount()`의 각 인스턴스는 외부 함수인 `counter(..)`의 스코프로부터 `count`와 `step`이란 변수를 포함하고 있습니다. `step`은 기존과 똑같지만, `count`는 내부 함수가 불릴 때마다 변동되는 값입니다. 클로져는 단순한 값의 스냅샷이 아닌 변수이기 때문에, 이러한 변화는 유지되어 보존됩니다.
+
 Each instance of the inner `increaseCount()` function is closed over both the `count` and `step` variables from its outer `counter(..)` function's scope. `step` remains the same over time, but `count` is updated on each invocation of that inner function. Since closure is over the variables and not just snapshots of the values, these updates are preserved.
+
+클로져의 콜백(callback)과 같은 비동기(asynchronous) 코드를 작업할 때 가장 흔히 볼 수 있습니다.
 
 Closure is most common when working with asynchronous code, such as with callbacks. Consider:
 
@@ -327,7 +347,11 @@ getSomeData("https://some.url/wherever");
 // Response (from https://some.url/wherever): ...
 ```
 
+내부 함수 `onResponse(..)`는 `url`을 포함하고 있고, 이는 곧 Ajax 호출이 반환되고 `onResponse(..)`를 실행할 때까지 `url` 변수를 보존하고 기억하게 됩니다. `getSomeData(..)`가 바로 끝날지라도 `url` 매개 변수는 클로져 내부에서 필요할 때까지 계속해서 살아있게 됩니다.
+
 The inner function `onResponse(..)` is closed over `url`, and thus preserves and remembers it until the Ajax call returns and executes `onResponse(..)`. Even though `getSomeData(..)` finishes right away, the `url` parameter variable is kept alive in the closure for as long as needed.
+
+외부 스코프가 일반적으로 함수이긴 하지만 꼭 그럴 필요는 없습니다. 외부 스코프에 있는 적어도 하나의 변수에 접근하는 내부 함수가 있어도 충분합니다.
 
 It's not necessary that the outer scope be a function—it usually is, but not always—just that there be at least one variable in an outer scope accessed from an inner function:
 
@@ -339,25 +363,47 @@ for (let [idx,btn] of buttons.entries()) {
 }
 ```
 
+이 반복문에서 `let` 선언문을 사용하기 때문에, 각 반복문은 `idx`, `btn`, `onClick(..)`라는 각각의 새로운 블록 스코프(지역 스코프라고도 하는)를 가지는 변수와 함수를 가지게 됩니다. 내부 함수는 `idx`를 포함하게 되는데 이 변수는 `btn`에서 클릭 이벤트 핸들러(handler)로써 계속 보존됩니다. 그러므로 버튼을 클릭할 때마다, 핸들러는 각각의 `idx` 변수를 기억하고 있기에 이 핸들러는 자신과 연관된 인덱스 값을 출력하게 됩니다.
+
 Because this loop is using `let` declarations, each iteration gets new block-scoped (aka, local) `idx` and `btn` variables;  the loop also creates a new inner `onClick(..)` function each time. That inner function closes over `idx`, preserving it for as long as the click handler is set on the `btn`. So when each button is clicked, its handler can print its associated index value, because the handler remembers its respective `idx` variable.
+
+클로져는 값(`1`, `3`과 같은)이 아닌 `idx` 변수 그 자체임을 명심해두세요.
 
 Remember: this closure is not over the value (like `1` or `3`), but over the variable `idx` itself.
 
+클로져는 어떤 언어이든간에 가장 널리 퍼져있으며 중요한 패턴중 하나입니다. 물론 JS 역시 이에 해당한다는 것은 분명한 사실입니다. 어느식으로든 클로져를 활용하지 않고 유용한 무언가를 해낸다는 것을 상상하는 건 어려운 일입니다.
+
 Closure is one of the most prevalent and important programming patterns in any language. But that's especially true of JS; it's hard to imagine doing anything useful without leveraging closure in one way or another.
+
+여전히 클로져에 관해 불분명하고 불확실하다고 느껴진다면 *스코프와 클로져(Scope & Closure)*의 주제를 집중해 주십시오.
 
 If you're still feeling unclear or shaky about closure, the majority of Book 2, *Scope & Closures* is focused on the topic.
 
+## `this` 키워드
+
 ## `this` Keyword
+
+JS의 강력한 메커니즘 중 하나인 `this`는 가장 오해받는 것 중 하나이기도 합니다. 한 일반적인 오해는 함수의 `this`라 함수 자신을 가르킨다는 것입니다. 다른 언어에서 `this`가 작동하는 방법으로 인해 생기는 또다른 오해는 `this`가 그 함수가 소속되어 있는 인스턴스를 가르키고 있다는 것입니다. 물론 둘 다 틀린 이야기입니다.
 
 One of JS's most powerful mechanisms is also one of its most misunderstood: the `this` keyword. One common misconception is that a function's `this` refers to the function itself. Because of how `this` works in other languages, another misconception is that `this` points the instance that a method belongs to. Both are incorrect.
 
+이전에 이야기했듯이 함수가 정의될 때 함수는 클로져를 통해 둘러싸인 스코프에 첨부되게 됩니다. 스코프는 변수를 참조하는 방법을 조절하는 대한 규칙의 집합입니다.
+
 As discussed previously, when a function is defined, it is *attached* to its enclosing scope via closure. Scope is the set of rules that controls how references to variables are resolved.
+
+하지만 함수 또한 그들의 스코프 외에도 그들이 접근할 수 있는 것들에 영향을 미치는 또다른 특성이 있습니다. 이 특성은 *실행 컨텍스트(execution context)*라고 가장 잘 설명될 수 있고, 이는 `this`라는 키워드를 통해 함수에 노출되게 됩니다.
 
 But functions also have another characteristic besides their scope that influences what they can access. This characteristic is best described as an *execution context*, and it's exposed to the function via its `this` keyword.
 
+스코프는 정적이며 함수를 정의하는 순간과 위치에 맞게 고정된 개수의 이용가능한 변수의 집합을 포함하게 되지만, 함수의 실행 *컨텍스트(context)*는 (어디에서 정의되고 호출되는지가 아닌) 전적으로 **어떻게 이 함수가 호출되는지**에 따라 유동적입니다.
+
 Scope is static and contains a fixed set of variables available at the moment and location you define a function, but a function's execution *context* is dynamic, entirely dependent on **how it is called** (regardless of where it is defined or even called from).
 
+`this`는 함수의 정의에 따라 고정된 특징이 아니라 함수가 매번 불릴때마다 결정되는 유동적인 특징입니다.
+
 `this` is not a fixed characteristic of a function based on the function's definition, but rather a dynamic characteristic that's determined each time the function is called.
+
+*실행 컨텍스트*에 관해 생각하는 한 가지 방법은 함수를 실행하는 와중에 프로퍼티를 사용할 수 있게해주는 실재하는 객체라는 것입니다. 스코프와 비교해서 *객체*로 여겨질 수도 있지만 *스코프 객체(scope object)*는 JS 엔진 내부에 숨겨져 있으며 하나의 함수에 관해 늘 동일할 뿐더러 이 객체의 *프로퍼티*는 함수에서 사용할 수 있는 변수 식별자 모양을 하고 있습니다.
 
 One way to think about the *execution context* is that it's a tangible object whose properties are made available to a function while it executes. Compare that to scope, which can also be thought of as an *object*; except, the *scope object* is hidden inside the JS engine, it's always the same for that function, and its *properties* take the form of identifier variables available inside the function.
 
@@ -372,11 +418,19 @@ function classroom(teacher) {
 var assignment = classroom("Kyle");
 ```
 
+외부 함수 `classroom(..)`는 `this` 키워드에 그 어떠한 참조값도 가지고 있지 않기에 익히 봐왔던 다른 함수들과 비슷해보입니다. 하지만 내부 함수 `study()`는 `this`를 참조하고 있고 이는 곧 `study()` 함수를 `this`를 알고 있는(`this`-aware) 함수라고 만들어집니다. 다른말로, 이 함수는 *실행 컨텍스트*에 의존적이라고 얘기할 수 있습니다.
+
 The outer `classroom(..)` function makes no reference to a `this` keyword, so it's just like any other function we've seen so far. But the inner `study()` function does reference `this`, which makes it a `this`-aware function. In other words, it's a function that is dependent on its *execution context*.
+
+| 노트: |
+| :--- |
+| 물론 `study()` 함수는 `teacher` 변수를 외부 스코프로부터 가져와 포함하고 있습니다. |
 
 | NOTE: |
 | :--- |
 | `study()` is also closed over the `teacher` variable from its outer scope. |
+
+내부 함수 `study()`는 `classroom("Kyle")`에 의해 반환되며 곧 `assignment`라는 변수에 할당되게 됩니다. 그렇다면 `assignment()` (`study()`라고도 알려진) 함수는 어떻게 호출될 수 있을까요?
 
 The inner `study()` function returned by `classroom("Kyle")` is assigned to a variable called `assignment`. So how can `assignment()` (aka `study()`) be called?
 
@@ -385,7 +439,11 @@ assignment();
 // Kyle says to study undefined  -- Oops :(
 ```
 
+위 예제에서 *실행 컨텍스트*를 제공하지 않고 `assignment()`를 평범하게 일반 함수처럼 호출해 보았습니다.
+
 In this snippet, we call `assignment()` as a plain, normal function, without providing it any *execution context*.
+
+이 프로그램은 엄격 모드(챕터 1 "정확하게 말하자면"을 참고)가 아니기에 컨텍스트를 알고 있는(context-aware) 함수를 **명시된 컨텍스트 없이** 호출할 경우 컨텍스트의 기본 값인 글로벌 객체(브라우저에서는 `window`인)를 컨텍스트로 갖게 됩니다. `topic` 이라는 이름을 가진 글로벌 변수(또한 글로벌 객체에 그런 프로퍼티는 없기 때문에)가 없기 때문에 `this.topic`은 `undefined`로 귀결되게 되어 있습니다.
 
 Since this program is not in strict mode (see Chapter 1, "Strictly Speaking"), context-aware functions that are called **without any context specified** default the context to the global object (`window` in the browser). As there is no global variable named `topic` (and thus no such property on the global object), `this.topic` resolves to `undefined`.
 
@@ -401,7 +459,11 @@ homework.assignment();
 // Kyle says to study JS
 ```
 
+위 예제에서는 `assignment` 함수 참조값을 복사하여 `homework` 객체의 프로퍼티에 설정되고 `homework.assignment()`라고 불립니다. 이는 곧 `homework.assignment()`를 호출에서 `this`는 `homework`란 객체가 되는 것을 의미합니다. 따라서, `this.topic`은 `"JS"`로 결정되게 됩니다.
+
 A copy of the `assignment` function reference is set as a property on the `homework` object, and then it's called as `homework.assignment()`. That means the `this` for that function call will be the `homework` object. Hence, `this.topic` resolves to `"JS"`.
+
+마지막으로,
 
 Lastly:
 
@@ -414,9 +476,15 @@ assignment.call(otherHomework);
 // Kyle says to study Math
 ```
 
+함수를 호출하는 세 번째 방법은 `call(..)` 메서드를 통해서 하는 방법인데 이 메서드는 `this`의 참조값을 설정할 수 있는 객체를 전달해 줄 수 있습니다(위 예제에서는 `otherHomework`입니다). 프로퍼티 참조를 통해 `this.topic`은 `"Math"`로 결정되게 됩니다.
+
 A third way to invoke a function is with the `call(..)` method, which takes an object (`otherHomework` here) to use for setting the `this` reference for the function call. The property reference `this.topic` resolves to `"Math"`.
 
+동일한 컨텍스트를 아는 함수는 세가지 다른 방식으로 호출될 수 있는데 `this` 객체가 무엇을 참조하냐에 따라 각기 다른 대답을 내놓게 됩니다.
+
 The same context-aware function invoked three different ways, gives different answers each time for what object `this` will reference.
+
+`this`를 알고있는 함수와 유동적인 컨텍스트의 장점은 하나의 함수를 각기 다른 객체의 데이터를 이용하여 상대적으로 더 유연한 재사용성을 가질 수 있다는 점입니다. 스코프를 포함하는 함수는 다른 스코프나 변수 집합을 절대 참조할 수 없기때문이죠. 하지만 함수가 유동적인 `this` 컨텍스트를 가지게 되면 특정 업무에 관해서 정말 유용해지게 됩니다.
 
 The benefit of `this`-aware functions—and their dynamic context—is the ability to more flexibly re-use a single function with data from different objects. A function that closes over a scope can never reference a different scope or set of variables. But a function that has dynamic `this` context awareness can be quite helpful for certain tasks.
 
