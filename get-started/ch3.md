@@ -488,13 +488,23 @@ The same context-aware function invoked three different ways, gives different an
 
 The benefit of `this`-aware functions—and their dynamic context—is the ability to more flexibly re-use a single function with data from different objects. A function that closes over a scope can never reference a different scope or set of variables. But a function that has dynamic `this` context awareness can be quite helpful for certain tasks.
 
+## 프로토타입
+
 ## Prototypes
+
+`this`가 함수를 실행하는데에 관한 특성이라면 프로토타입은 객쳉에 관한 특징입니다. 조금 더 정확하게는 프로퍼티에 접근하는 방법이죠.
 
 Where `this` is a characteristic of function execution, a prototype is a characteristic of an object, and specifically resolution of a property access.
 
+프로토타입을 두 객체를 사이의 결합 같은 것입니다. 이러한 결합은 보이지 않는 뒷면에 숨겨져있지만 이 결합을 노출하고 관찰할 수도 있습니다. 이 프로토타입 결합은 객체를 생성하고 이미 존재하는 다른 객체와 연결할 때 만들어집니다.
+
 Think about a prototype as a linkage between two objects; the linkage is hidden behind the scenes, though there are ways to expose and observe it. This prototype linkage occurs when an object is created; it's linked to another object that already exists.
 
+여럿 객체들을 프로토타입을 통해 한꺼번에 결합시키는 것을 "프로토타입 체인(prototype chain)"이라고 부릅니다.
+
 A series of objects linked together via prototypes is called the "prototype chain."
+
+프로토타입 결합(객체 B에서 객체 A로)은 B에는 없는 프로토타입/메서드에 접근권한은 A가 처리하도록 *위임*하기 위함입니다. 두 객체(혹은 그 이상의!)에게 프로퍼티/메서드에 접근권한을 위임하여 상호간에 협력하고 일을 수행할 수 있게 만들어줍니다.
 
 The purpose of this prototype linkage (i.e., from an object B to another object A) is so that accesses against B for properties/methods that B does not have, are *delegated* to A to handle. Delegation of property/method access allows two (or more!) objects to cooperate with each other to perform a task.
 
@@ -506,7 +516,11 @@ var homework = {
 };
 ```
 
+`homework` 객체는 오직 `topic`이라는 하나의 프로퍼티를 가지고 있습니다. 하지만, 프로토타입 결합은 일반적으로 내재된 메서드 `toString()`, `valueOf()` 등등의 내재된 함수를 가지고 있는 `Object.prototype`라는 객체와 기본적으로 연결되게 됩니다.
+
 The `homework` object only has a single property on it: `topic`. However, its default prototype linkage connects to the `Object.prototype` object, which has common built-in methods on it like `toString()` and `valueOf()`, among others.
+
+`homework`에서 `Object.prototype`에 프로토타입 결합을 *위임*하는 것을 볼 수 있습니다.
 
 We can observe this prototype linkage *delegation* from `homework` to `Object.prototype`:
 
@@ -514,9 +528,15 @@ We can observe this prototype linkage *delegation* from `homework` to `Object.pr
 homework.toString();    // [object Object]
 ```
 
+`homework.toString()`는 `homework`에는 `toString()`가 정의되어 있지는 않아도 사용될 수 있는데 그 이유는 위임자가 `Object.prototype.toString()`를 대신 호출하기 때문입니다.
+
 `homework.toString()` works even though `homework` doesn't have a `toString()` method defined; the delegation invokes `Object.prototype.toString()` instead.
 
+### 객체 결합
+
 ### Object Linkage
+
+객체 프로토타입 결합을 정의하기 위해서는 `Object.create(..)` 유틸리티를 사용해서 객체를 만들 수 있습니다.
 
 To define an object prototype linkage, you can create the object using the `Object.create(..)` utility:
 
@@ -530,7 +550,11 @@ var otherHomework = Object.create(homework);
 otherHomework.topic;   // "JS"
 ```
 
+`Object.create(..)`에서 첫 번째 인수 값은 새롭게 생성될 객체와 결합할 객체를 명시화하고 그 결과 새롭게 생성된 (그리고 연동된!) 객체가 반환됩니다.
+
 The first argument to `Object.create(..)` specifies an object to link the newly created object to, and then returns the newly created (and linked!) object.
+
+그림 4에서 보는 것과 같이 세 객체(`otherHomework`, `homework` 그리고 `Object.prototype`)는 프로토타입 체인을 통해 연결되어 있습니다.
 
 Figure 4 shows how the three objects (`otherHomework`, `homework`, and `Object.prototype`) are linked in a prototype chain:
 
@@ -540,7 +564,13 @@ Figure 4 shows how the three objects (`otherHomework`, `homework`, and `Object.p
     <br><br>
 </figure>
 
+프로토타입 체인을 통한 위임은 오직 프로퍼티 안에 있는 값을 살펴볼 수 있는 접근 권한을 가지고 있습니다. 만약 객체의 프로퍼티에 다른 값을 할당하려하면, 객체가 어떠한 프로토타입과 연결되어 있던지간에 객체에 직접적으로 적용이 됩니다.
+
 Delegation through the prototype chain only applies for accesses to lookup the value in a property. If you assign to a property of an object, that will apply directly to the object regardless of where that object is prototype linked to.
+
+| 팁: |
+| :--- |
+| `Object.create(null)`은 그 어떠한 프로토타입도 연결되지 않은 객체를 생성합니다. 그러므로 이 객체는 순수하게 독립된 객체이며 몇몇 환경에서는 더 나은 방법일 수도 있습니다. |
 
 | TIP: |
 | :--- |
@@ -563,7 +593,11 @@ homework.topic;
 // "JS" -- not "Math"
 ```
 
+`topic`에 할당하는 것은 `otherHomework`에 직접적으로 프로퍼티를 생성하게 됩니다. 그 결과 `homework`에 있는 프로퍼티 `topic`에는 그 어떠한 영향도 없습니다. 그 다음 명령문에서는 `otherHomework.topic`에 접근하는데 새 프로퍼티 `"Math"`가 위임되지 않은 결과로 나오는 것을 확인할 수 있습니다.
+
 The assignment to `topic` creates a property of that name directly on `otherHomework`; there's no effect on the `topic` property on `homework`. The next statement then accesses `otherHomework.topic`, and we see the non-delegated answer from that new property: `"Math"`.
+
+그림 5는 값 할당으로 인해 `otherHomework.topic` 프로퍼티가 생성된 위 예제의 객체/프로퍼티 상황을 보여줍니다.
 
 Figure 5 shows the objects/properties after the assignment that creates the `otherHomework.topic` property:
 
@@ -573,13 +607,23 @@ Figure 5 shows the objects/properties after the assignment that creates the `oth
     <br><br>
 </figure>
 
+`otherHomework`에 있는 `topic`은 체인속 `homework` 객체에 있는 프로퍼티와 동일한 이름을 가진 "그림자(shadowing)" 프로퍼티입니다.
+
 The `topic` on `otherHomework` is "shadowing" the property of the same name on the `homework` object in the chain.
+
+| 노트: |
+| :--- |
+| 솔직히 조금 더 복잡하지만 프로토타입 결합을 가진 객체를 만드는 또 다른 방법은 여전히 "원형 클래스(prototypal class)" 패턴을 이용하는 방법입니다. 이 방법은 ES6에 `class` (챕터2 "클래스") 이전부터 사용되었고 아마도 여전히 조금 더 일반적인 방법일 것입니다. 이에 관해 조금 더 자세한 것은 부록 A "원형 클래스"에서 다루도록 하겠습니다. |
 
 | NOTE: |
 | :--- |
 | Another frankly more convoluted but perhaps still more common way of creating an object with a prototype linkage is using the "prototypal class" pattern, from before `class` (see Chapter 2, "Classes") was added in ES6. We'll cover this topic in more detail in Appendix A, "Prototypal 'Classes'". |
 
+### `this`로 돌아가서
+
 ### `this` Revisited
+
+`this` 키워드에 관해 이미 살펴봤지만 프로토타입-위임된 함수의 호출을 강화할 때 그 진정한 중요성이 빛을 발하게 됩니다. 게다가 `this`가 함수가 호출되는 방법에따라 유동적인 컨텍스트를 제공하는 가장 중요한 이유 중 하나는, 프로토타입 체인을 통해 위임되는 객체의 메서드를 호출하여도 `this`를 계속해서 유지하기 위해서입니다.
 
 We covered the `this` keyword earlier, but its true importance shines when considering how it powers prototype-delegated function calls. Indeed, one of the main reasons `this` supports dynamic context based on how the function is called is so that method calls on objects which delegate through the prototype chain still maintain the expected `this`.
 
@@ -603,6 +647,7 @@ mathHomework.study();
 // Please study Math
 ```
 
+두 객체 `jsHomework`와 `mathHomework`은 각각 하나의 `study()` 함수를 갖고 있는 `homework` 객체에 연결됩니다. `jsHomework`와 `mathHomework`는 각자 그들만의 `topic` 프로퍼티가 주어지게 됩니다 (그림 6).
 The two objects `jsHomework` and `mathHomework` each prototype link to the single `homework` object, which has the `study()` function. `jsHomework` and `mathHomework` are each given their own `topic` property (see Figure 6).
 
 <figure>
@@ -611,18 +656,34 @@ The two objects `jsHomework` and `mathHomework` each prototype link to the singl
     <br><br>
 </figure>
 
+`jsHomework.study()`는 `homework.study()`에 위임되는 반면, 함수가 호출된 방법에 따라 `this`(`this.topic`)는 `jsHomework`가 됩니다. 유사하게 `mathHomework.study()` 역시 `homework.study()`에 위임하지만, 여전히 `this`는 `mathHomework`로 귀결되고 결론적으로 `this.topic`은 `"Math"`가 됩니다.
+
 `jsHomework.study()` delegates to `homework.study()`, but its `this` (`this.topic`) for that execution resolves to `jsHomework` because of how the function is called, so `this.topic` is `"JS"`. Similarly for `mathHomework.study()` delegating to `homework.study()` but still resolving `this` to `mathHomework`, and thus `this.topic` as `"Math"`.
+
+이전의 코드 예제에서 만약 `this`가 `homework`가 되었다면 훨씬 덜 유용하였을 것입니다. 하지만 많은 다른 언어에서는 `study()` 메서드가 `homework`에서 정의되었기 때문에 `this`는 `homework`가 되게 됩니다.
 
 The preceding code snippet would be far less useful if `this` was resolved to `homework`. Yet, in many other languages, it would seem `this` would be `homework` because the `study()` method is indeed defined on `homework`.
 
+그런 언어들과는 다르게 JS의 유동적인 `this`는 프로토타입 위임과 더불어 `클래스(class)`가 예상한대로 작동하는데에 중요한 요소입니다.
+
 Unlike many other languages, JS's `this` being dynamic is a critical component of allowing prototype delegation, and indeed `class`, to work as expected!
+
+## "왜?"라고 질문하기
 
 ## Asking "Why?"
 
+이 챕터에서는 표면에서 쉽게 알아차릴 수 있는 것보다 JS의 저면 아래에 있는 더 많은 것들과 연관이 있어 의도적으로 제거된 부분이 있습니다.
+
 The intended take-away from this chapter is that there's a lot more to JS under the hood than is obvious from glancing at the surface.
+
+*시작하기*를 통해 JS에 조금 더 면밀하게 배우고 알게됨에 따라 여러분이 연습하고 개선해야 할 가장 중요한 기술은 호기심 그리고 언어에 관련된 무언가를 마주할 때 "왜?"라고 질문하는 방법입니다.
 
 As you are *getting started* learning and knowing JS more closely, one of the most important skills you can practice and bolster is curiosity, and the art of asking "Why?" when you encounter something in the language.
 
+이 챕터에서 몇몇 주제에 관해 다소 깊이 다루기도 했지만, 더 많은 세부 사항들을 여전히 전반적으로 훑어보았을 뿐입니다. 더 많이 배워야 할 것들이 있고 여러분의 코드속에서 *옳은* 질문을 하기 시작해야할 방향 역시 있습니다. 옳은 질문을 함으로써 중요한 기술을 가진 더 나은 개발자가 되십시오.
+
 Even though this chapter has gone quite deep on some of the topics, many details have still been entirely skimmed over. There's much more to learn here, and the path to that starts with you asking the *right* questions of your code. Asking the right questions is a critical skill of becoming a better developer.
+
+이 책의 마지막 챕터에서는 *You Don't Know JS Yet*의 나머지 책 시리즈를 전반적으로 훑어보며, JS는 어떻게 쪼개져있는지 가볍게 살펴볼 것입니다. 또한 이 책에서 다뤘던 주요 주제들을 복습할 수 있는 연습 코드가 있는 부록 B를 그냥 지나치고 넘어가지 말아주시기 바랍니다.
 
 In the final chapter of this book, we're going to briefly look at how JS is divided, as covered across the rest of the *You Don't Know JS Yet* book series. Also, don't skip Appendix B of this book, which has some practice code to review some of the main topics covered in this book.
