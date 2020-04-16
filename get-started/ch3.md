@@ -14,23 +14,39 @@ In Chapter 2, we surveyed syntax, patterns, and behaviors at a high level. In th
 
 Be aware: this chapter digs much deeper than you're likely used to thinking about a programming language. My goal is to help you appreciate the core of how JS works, what makes it tick. This chapter should begin to answer some of the "Why?" questions that may be cropping up as you explore JS. However, this material is still not an exhaustive exposition of the language; that's what the rest of the book series is for! Our goal here is still just to *get started*, and become more comfortable with, the *feel* of JS, how it ebbs and flows.
 
-이 챕터를 너무 서둘러서 읽어 숲속에서 길을 잃지 마십시오. 이미 수차례 얘기했지만 **충분히 많은 시간을 들여주세요**.
+이 챕터를 너무 서둘러서 읽어 숲속에서 길을 잃지 마십시오. 이미 수차례 얘기했지만 **충분히 많은 시간을 들여주세요**. 그렇게 하더라도 아마도 여전히 여러분은 이 챕터를 끝내더라도 몇몇 의문점들이 남아 있을 것입니다. 괜찮습니다. 여전히 더 탐험해야만 할 시리즈가 남아있으니까요!
 
 Don't run so quickly through this material that you get lost in the weeds. As I've said a dozen times already, **take your time**. Even still, you'll probably finish this chapter with remaining questions. That's OK, because there's a whole book series ahead of you to keep exploring!
 
+## 반복문
+
 ## Iteration
+
+프로그램은 본질적으로 데이터를 처리하기 위해 만들어지기 때문에, 데이터를 단계별로 처리하는 패턴은 프로그램의 가독성에 큰 영향을 미칩니다.
 
 Since programs are essentially built to process data (and make decisions on that data), the patterns used to step through the data have a big impact on the program's readability.
 
+반복문은 수십년이 된 패턴이고, 한 덩어리의 데이터를 한 번에 처리하는데 사용되는 "표준화된" 접근법입니다. 이러한 접근법은 데이터를 순환하며 첫 일부에서부터 시작해 전체에 이르기까지 계속해서 처리하는데 아주 흔하고 도움이되는 방법입니다.
+
 The iterator pattern has been around for decades, and suggests a "standardized" approach to consuming data from a source one *chunk* at a time. The idea is that it's more common and helpful to iterate the data source—to progressively handle the collection of data by processing the first part, then the next, and so on, rather than handling the entire set all at once.
+
+일반적으로 결과물을 여러개의 열로 조직하여 주는 관계형 데이터베이스에서 `SELECT` 쿼리를 통해 얻은 자료 구조가 있다고 상상해 보십시다. 이 쿼리가 하나 혹은 몇 개의 열을 가졌을 때, 여러분은 그 결과값 전체를 한번에 처리하고 개개의 열을 지역 변수로 할당하기도 하고 데이터에 어떠한 연산이든 적절하게 수행할 수 있을지도 모릅니다.
 
 Imagine a data structure that represents a relational database `SELECT` query, which typically organizes the results as rows. If this query had only one or a couple of rows, you could handle the entire result set at once, and assign each row to a local variable, and perform whatever operations on that data that were appropriate.
 
+하지만 쿼리가 100개 혹은 1000개 혹은 그 이상의 열을 가지고 있다면 이 데이터를 처리하기 위해서는 반복적인 연산 과정을 필요로 할 것입니다.
+
 But if the query has 100 or 1,000 (or more!) rows, you'll need iterative processing to deal with this data (typically, a loop).
+
+반복문 패턴은 "반복자(iterator)"라고 부르는 자료 구조 정의하며, 이 반복자는 원본 데이터에 깔려있는 참조값을 가지며 `next()`와 같은 메서드를 가지고 있습니다. 메서드 `next()`를 호출함으로써 데이터의 그 다음 조각(데이터베이스의 쿼리에서 "레코드(record)"와 "열(row)"과 같은)을 반환받게 됩니다.
 
 The iterator pattern defines a data structure called an "iterator" that has a reference to an underlying data source (like the query result rows), which exposes a method like `next()`. Calling `next()` returns the next piece of data (i.e., a "record" or "row" from a database query).
 
+반복문에 사용될 데이터에 얼마나 많은 조각들이 있는지 항상 알지는 못하므로 이러한 패턴은 일반적으로 전체 집합을 반복하고 *끝을 지나면* 특정 값이나 예외를 통해 완료됐음을 나타냅니다.
+
 You don't always know how many pieces of data that you will need to iterate through, so the pattern typically indicates completion by some special value or exception once you iterate through the entire set and *go past the end*.
+
+반복 패턴에서 중요한 점은 데이터를 반복 처리하는 *표준* 방식을 고수하는 것입니다. 모든 데이터 구조가 각기 다른 방식으로 처리될 때와는 다르게 코드를 더 깨끗하고 이해하기 쉽게 만들어 줄 것입니다.
 
 The importance of the iterator pattern is in adhering to a *standard* way of processing data iteratively, which creates cleaner and easier to understand code, as opposed to having every data structure/source define its own custom way of handling its data.
 
