@@ -46,15 +46,23 @@ The iterator pattern defines a data structure called an "iterator" that has a re
 
 You don't always know how many pieces of data that you will need to iterate through, so the pattern typically indicates completion by some special value or exception once you iterate through the entire set and *go past the end*.
 
-반복 패턴에서 중요한 점은 데이터를 반복 처리하는 *표준* 방식을 고수하는 것입니다. 모든 데이터 구조가 각기 다른 방식으로 처리될 때와는 다르게 코드를 더 깨끗하고 이해하기 쉽게 만들어 줄 것입니다.
+반복자 패턴에서 중요한 점은 데이터를 반복 처리하는 *표준* 방식을 고수하는 것입니다. 모든 데이터 구조가 각기 다른 방식으로 처리될 때와는 다르게 코드를 더 깨끗하고 이해하기 쉽게 만들어 줄 것입니다.
 
 The importance of the iterator pattern is in adhering to a *standard* way of processing data iteratively, which creates cleaner and easier to understand code, as opposed to having every data structure/source define its own custom way of handling its data.
 
+수년에 걸친 반복문에 관한 다양한 JS 커뮤니티로부터의 노력으로 인해 ES6는 반복자 패턴을 위한 특별한 프로토콜을 표준화시켰습니다. 이 프로토콜에는 *반복자의 결과*라고도 불리는 객체를 반환하는 `next()` 메서드를 정의하고 있으며, 이 객체는 `value`, `done`과 같은 프로퍼티도 가지고 있습니다. 여기서 `done`은 데이터 원본에서 반복문이 완료되기 전까지는 `false` 상태로 남아있습니다.
+
 After many years of various JS community efforts around mutually agreed-upon iteration techniques, ES6 standardized a specific protocol for the iterator pattern directly in the language. The protocol defines a `next()` method whose return is an object called an *iterator result*; the object has `value` and `done` properties, where `done` is a boolean that is `false` until the iteration over the underlying data source is complete.
+
+### 반복자 소비하기
 
 ### Consuming Iterators
 
+ES6 반복문 프로토콜을 통해 데이터 원본 값을 적시에 소모할 수 있게 만들어주며 각각의 `next()` 호출 이후 `done`이 `true`로 바뀌면 반복문을 멈추게 합니다. 하지만 이러한 방법은 다소 수동적이기에, ES6는 반복문 처리를 위해 표준화된 몇몇 다른 방법(문법과 API들)을 가지고 있습니다.
+
 With the ES6 iteration protocol in place, it's workable to consume a data source one value at a time, checking after each `next()` call for `done` to be `true` to stop the iteration. But this approach is rather manual, so ES6 also included several mechanisms (syntax and APIs) for standardized consumption of these iterators.
+
+한 가지 예로 `for..of` 반복문이 있습니다.
 
 One such mechanism is the `for..of` loop:
 
@@ -71,13 +79,23 @@ for (let val of it) {
 // ..
 ```
 
+| 노트: |
+| :--- |
+| 여기서는 수동 반복문을 생략하겠지만 `for..of` 반복문에 비해 가동성이 좋지 않습니다! |
+
 | NOTE: |
 | :--- |
 | We'll omit the manual loop equivalent here, but it's definitely less readable than the `for..of` loop! |
 
+반복자를 소비하는 또 다른 방법은 `...` 연산자입니다. 이 연산자는 *확산(spread)* 그리고 *나머지(rest)*(혹은 제가 선호하는 명칭인 *수집(gather)*)과 같이 대칭인 두 형태를 가지고 있습니다. *확산*은 반복자-소비자와 같은 형태입니다.
+
 Another mechanism that's often used for consuming iterators is the `...` operator. This operator actually has two symmetrical forms: *spread* and *rest* (or *gather*, as I prefer). The *spread* form is an iterator-consumer.
 
+반복자를 *확산*시키는 것은 *무언가* 퍼뜨릴 것을 가지고 있어야합니다. 여기에서 JS에는 두 가지 선택지가 있는데, 하나는 배열이고 또 다른 하나는 함수 호출에 있어 인자 값의 배열인 경우입니다.
+
 To *spread* an iterator, you have to have *something* to spread it into. There are two possibilities in JS: an array or an argument list for a function call.
+
+배열을 퍼뜨릴 때:
 
 An array spread:
 
@@ -88,6 +106,8 @@ An array spread:
 var vals = [ ...it ];
 ```
 
+함수 호출에 퍼뜨릴 때:
+
 A function call spread:
 
 ```js
@@ -97,21 +117,34 @@ A function call spread:
 doSomethingUseful( ...it );
 ```
 
+두 경우 모두 반복문은 `...` 형식이고 반복자-소비 프로토콜(`for..of`와 마찬가지로)을 따라 모든 사용 가능한 값을 반복자로부터 가져오게 되고 이 값들을 수신자(배열 혹은 인자 리스트)에게 배정합니다(확산으로 알려진).
+
 In both cases, the iterator-spread form of `...` follows the iterator-consumption protocol (the same as the `for..of` loop) to retrieve all available values from an iterator and place (aka, spread) them into the receiving context (array, argument list).
+
+### 반복 가능한
 
 ### Iterables
 
+반복자-소비 프로토콜은 *이터러블(iterable)* 값들을 소비하도록 기술적 정의되어 있습니다.
+
 The iterator-consumption protocol is technically defined for consuming *iterables*; an iterable is a value that can be iterated over.
+
+이 프로토콜은 반복자 인스턴스를 이터러블 가져와 생성하고 *단순히 이 반복자 인스턴스*를 소모함으로써 끝이 납니다. 이는 곧 하나의 이터러블이 한 번 이상 소비될 수 있는데, 한 번 소모될 때마다 새로운 반복자 인스턴스가 생성되고 사용될 수 있습니다.
 
 The protocol automatically creates an iterator instance from an iterable, and consumes *just that iterator instance* to its completion. This means a single iterable could be consumed more than once; each time, a new iterator instance would be created and used.
 
+그래서 이렇게 이터러블은 어디서 찾을수 있을까요?
+
 So where do we find iterables?
+
+ES6는 JS에 기본 데이터 구조와 그 무리의 타입을 이터러블이라고 정의하고 있습니다. 여기에는 문자열, 배열, 맵(map), 집합(sets) 등등이 있습니다.
 
 ES6 defined the basic data structure/collection types in JS as iterables. This includes strings, arrays, maps, sets, and others.
 
 Consider:
 
 ```js
+// 배열은 이터러블입니다
 // an array is an iterable
 var arr = [ 10, 20, 30 ];
 
@@ -123,11 +156,15 @@ for (let val of arr) {
 // Array value: 30
 ```
 
+배열은 이터러블이므로 `...` 확산 연산자를 통해 반복자를 배열에 사용하게되면 얕은 복사(shallow-copy)를 할 수도 있습니다.
+
 Since arrays are iterables, we can shallow-copy an array using iterator consumption via the `...` spread operator:
 
 ```js
 var arrCopy = [ ...arr ];
 ```
+
+또한 문자열 역시도 한꺼번에 문자들을 반복하여 사용할 수 있습니다.
 
 We can also iterate the characters in a string one at a time:
 
@@ -139,6 +176,8 @@ chars;
 // [ "H", "e", "l", "l", "o", " ",
 //   "w", "o", "r", "l", "d", "!" ]
 ```
+
+`맵(Map)` 자료 구조는 객체를 키로 사용합니다. 이 키는 하나의 값(모든 타입의)과 객체를 연결하는데 사용됩니다. 맵은 반복문이 단순히 맵에 있는 값이 아닌 맵의 *엔트리(entries)*를 반복한다는 점에서 이전에 보았던 보이는 것과는 다소 다른 반복문을 가지게 됩니다. *엔트리(entry)*는 키와 값을 포함하고 있는 (2-원소 배열인) 튜플(tuple)입니다.
 
 A `Map` data structure uses objects as keys, associating a value (of any type) with that object. Maps have a different default iteration than seen here, in that the iteration is not just over the map's values but instead its *entries*. An *entry* is a tuple (2-element array) including both a key and a value.
 
@@ -158,7 +197,11 @@ for (let [btn,btnName] of buttonNames) {
 }
 ```
 
+맵 반복문을 통해 `for..of` 사용할 때, `[bth,btnName]` 문법("배열 분해(array destructing)"이라고 불리는)을 사용하는데 이들은 각각 키와 값의 짝(`btn1`/`"Button 1"` 그리고 `btn2`/`"Button2"`)을 갖고있는 튜플로 분해될 수 있습니다.
+
 In the `for..of` loop over the default map iteration, we use the `[btn,btnName]` syntax (called "array destructuring") to break down each consumed tuple into the respective key/value pairs (`btn1` / `"Button 1"` and `btn2` / `"Button 2"`).
+
+JS에 내장된 이터러블 각각은 기본 반복문을 노출하고 있는데, 이 반복문은 여러분의 직관감과 아마도 일치할 것입니다. 하지만 필요에 따라 특별한 반복문을 선택할 수도 잇습니다. 예를들어, `buttonNames` 맵에서 오직 값만을 사용하길 원한다면 `values()`를 호출하여 값만 가져올 수도 있습니다.
 
 Each of the built-in iterables in JS expose a default iteration, one which likely matches your intuition. But you can also choose a more specific iteration if necessary. For example, if we want to consume only the values of the above `buttonNames` map, we can call `values()` to get a values-only iterator:
 
@@ -169,6 +212,8 @@ for (let btnName of buttonNames.values()) {
 // Button 1
 // Button 2
 ```
+
+또다른 예시로 배열을 반복할 때 만약 값과 인덱스를 사용하길 원한다면 `entries()` 메서드를 통해 엔트리를 만들어 사용할 수도 있습니다.
 
 Or if we want the index *and* value in an array iteration, we can make an entries iterator with the `entries()` method:
 
@@ -183,15 +228,27 @@ for (let [idx,val] of arr.entries()) {
 // [2]: 30
 ```
 
+대다수의 경우 JS에 내장된 이터러블은 세가지 형태의 반복자를 사용할 수 있습니다. 키만 사용할 경우 (`keys()`), 값만 사용할 경우 (`values()`), 그리고 엔트리를 사용할 경우 (`entries()`).
+
 For the most part, all built-in iterables in JS have three iterator forms available: keys-only (`keys()`), values-only (`values()`), and entries (`entries()`).
 
+단순히 내장된 이터러블을 넘어서서 반복 프로토콜을 고수한 독자적인 자료 구조를 만들수도 있습니다. 이는 곧 새로운 자료구조가 `for..of` 혹은 `...`를 통해 데이터를 소비할 수 있는 기능을 사용할 수도 있다는 뜻입니다. 이러한 프로토콜에서 "표준화(standardizing)"란 전반적으로 코드를 더 빠르게 인식할 수 있고 가독성을 높이는 것을 의미합니다.
+
 Beyond just using built-in iterables, you can also ensure your own data structures adhere to the iteration protocol; doing so means you opt into the ability to consume your data with `for..of` loops and the `...` operator. "Standardizing" on this protocol means code that is overall more readily recognizable and readable.
+
+| 노트: |
+| :--- |
+| 아마 이 토론에서 미묘한 변화를 발견하셨을 수도 있습니다. **반복자**를 어떻게 소비할지에 관해 얘길하는 것으로 시작했지만 이내 곧 **이터러블**을 어떻게 반복하는지에 관해 그 주제가 바뀌었습니다. 반복문-소비 프로토콜이 *이터러블*을 요구할거라 생각되지만, *반복자*를 제공해야되는 이유는 단순히 반복자가 곧 이터러블 그 자체이기 때문입니다! 반복자 인스턴스를 이미 존재하는 반복자로부터 만들면, 그 반복자 자체가 반환됩니다. |
 
 | NOTE: |
 | :--- |
 | You may have noticed a nuanced shift that occurred in this discussion. We started by talking about consuming **iterators**, but then switched to talking about iterating over **iterables**. The iteration-consumption protocol expects an *iterable*, but the reason we can provide a direct *iterator* is that an iterator is just an iterable of itself! When creating an iterator instance from an existing iterator, the iterator itself is returned. |
 
+## 클로져
+
 ## Closure
+
+아마도 깨닫지 못 했겠지만, 대부분의 모든 JS 개발자들은 클로져를 사용하고 있습니다. 실은, 클로져는 대부분의 언어에서 가장 널리 사용되고 있는 기능 중 하나일 것입니다. 심지어는 클로져가 얼마나 본질적인 문제인지 이해하는 것이 값이나 반복문에 관해 이해하는 것만큼 중요할 수도 있습니다.
 
 Perhaps without realizing it, almost every JS developer has made use of closure. In fact, closure is one of the most pervasive programming functionalities across a majority of languages. It might even be as important to understand as variables or loops; that's how fundamental it is.
 
