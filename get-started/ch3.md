@@ -1,11 +1,20 @@
 # You Don't Know JS Yet: Get Started - 2nd Edition
+# 챕터 3: JS의 뿌리 파헤치기
 # Chapter 3: Digging to the Roots of JS
+
+이미 챕터 1, 2를 읽고 충분한 시간을 들여 소화하고 흡수했다면 이제 JS를 조금 더 잘 *알수있는* 준비가 됐을 것입니다. 그렇지 않고 이전의 챕터들을 건너 뛰셨다면(특히 챕터 2), 저는 다시 돌아가 해당 챕터들을 공부하는데 시간을 투자하길 추천드립니다.
 
 If you've read Chapters 1 and 2, and taken the time to digest and percolate, you're hopefully starting to *get* JS a little more. If you skipped/skimmed them (especially Chapter 2), I recommend going back to spend some more time with that material.
 
+챕터 2에서 우린 고등 수준의 문법과 패턴들 그리고 행동 양식들에 관해서 배웠다면, 이 챕터에서는 JS의 근간을 이루는 하위 단계의 특성들에 관해 주의깊게 살펴보고자 합니다.
+
 In Chapter 2, we surveyed syntax, patterns, and behaviors at a high level. In this chapter, our attention shifts to some of the lower-level root characteristics of JS that underpin virtually every line of code we write.
 
+프로그래밍 언어에 관해 보통 생각하는 것보다 조금 더 깊이 들어갈 것입니다. 제 목표는 JS가 어떻게 작동하는 그 핵심을 이해하는데 도움을 드리는 것입니다. 이 챕터는 JS를 탐험하는데 있어 불쑥 발생하곤 하는 "왜?"라는 질문들에 탑하는 걸로 시작해야만 할 것입니다. 하지만 이 언어에 대한 완벽하고 철저한 설명이 되진 못할 것입니다. 대신 이 책의 시리즈가 이에 관해 다룰 예정입니다! 우리의 목표는 단지 *시작하기*이며 조금 더 JS가 어떻게 작동하는지 알아 조금 더 친숙해지는 것입니다.
+
 Be aware: this chapter digs much deeper than you're likely used to thinking about a programming language. My goal is to help you appreciate the core of how JS works, what makes it tick. This chapter should begin to answer some of the "Why?" questions that may be cropping up as you explore JS. However, this material is still not an exhaustive exposition of the language; that's what the rest of the book series is for! Our goal here is still just to *get started*, and become more comfortable with, the *feel* of JS, how it ebbs and flows.
+
+이 챕터를 너무 서둘러서 읽어 숲속에서 길을 잃지 마십시오. 이미 수차례 얘기했지만 **충분히 많은 시간을 들여주세요**.
 
 Don't run so quickly through this material that you get lost in the weeds. As I've said a dozen times already, **take your time**. Even still, you'll probably finish this chapter with remaining questions. That's OK, because there's a whole book series ahead of you to keep exploring!
 
