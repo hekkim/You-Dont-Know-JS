@@ -1,11 +1,20 @@
 # You Don't Know JS Yet: Get Started - 2nd Edition
+# 챕터 4: 큰 그림
 # Chapter 4: The Bigger Picture
+
+이 책은 여러분이 JS를 *시작하기*에 알아야만 하는 지식들에 관해 설명하고 있습니다. 이 책은 JS를 처음으로 접하는 독자들이 실수할 수도 있는 것들을 방지하것을 목표로 삼고 있습니다. 또한 JS에 대해 더 자세히 알고 싶어하는 호기심을 불러일으킬 수 있을만큼 충분한 세세한 내용들을 전달하길 바랍니다.
 
 This book surveys what you need to be aware of as you *get started* with JS. The goal is to fill in gaps that readers newer to JS might have tripped over in their early encounters with the language. I also hope that we've hinted at enough deeper detail throughout to pique your curiosity to want to dig more into the language.
 
+이 시리즈의 나머지 책들에서는 이전 챕터들에서 가볍게 다룬 것보다 더 세부적인 JS에 관한 것들을 전부 알아볼 예정입니다.
+
 The rest of the books in this series are where we will unpack all of the rest of the language, in far greater detail than we could have done in a few brief chapters here.
 
+시간을 충분히 들여 곱씹어 보는 것을 명심하세요. 다음 책으로 급하게 넘어가며 모든 책을 편의상 훑어보는 것보다 다시 이전으로 돌아가 충분한 시간을 들여가며 보는 것이 훨씬 낫습니다. 여러분의 현재 프로젝트 코드를 살펴보고 이 책에서 다루었던 내용들과 한 번 비교해보시기 바랍니다.
+
 Remember to take your time, though. Rather than rushing onto the next book in an attempt to churn through all the books expediently, spend some time going back over the material in this book. Spend some more time looking through code in your current projects, and comparing what you see to what's been discussed so far.
+
+준비가 되었다면 이 마지막 챕터를 통해 JS 언어 조직을 세 개의 큰 기둥으로 나눌 수 있을 것입니다. 그리고 이를 통해 이 책의 나머지 시리즈에서 무엇을 다룰지 어떻게 나아가야 할 지 간단한 로드맵을 살펴보실 수 있을 것입니다. 부록 역시, 특히나 부록 B를, 그냥 넘어가지 말아주세요. "연습하고, 연습하고, 또 연습하십시오!".
 
 When you're ready, this final chapter divides the organization of the JS language into three main pillars, then offers a brief roadmap of what to expect from the rest of the book series, and how I suggest you proceed. Also, don't skip the appendices, especially Appendix B, "Practice, Practice, Practice!".
 
