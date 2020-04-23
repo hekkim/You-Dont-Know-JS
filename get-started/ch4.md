@@ -195,32 +195,62 @@ You'll have to shift these things little by little, over time. Work on building 
 
 That's the most important advice I can impart to help you learn JS. Always keep looking for better ways to use what JS gives us to author more readable code. Everyone who works on your code, including your future self, will thank you!
 
+## 순서
+
 ## In Order
+
+지금 JS에 관해 탐험해 나가기위해 더 넓은 관점과 남은 시리즈의 여정으로 향하기 위한 올바른 자세를 가지게 됐습니다.
 
 So now you've got a broader perspective on what's left to explore in JS, and the right attitude to approach the rest of your journey.
 
+하지만 여기서 제가 얘기할 가장 흔한 실용적인 질문은 "어떠한 순서로 이 책을 읽어야되나요?"입니다. 여기에는 직관적인 답이 있지만 상황에 따라 조금 다를수도 있습니다.
+
 But one of the most common practical questions I get at this point is, "What order should I read the books?" There is a straightforward answer... but it also depends.
+
+저는 아래와 같은 순서로 이 책을 읽어나가길 제안합니다.
 
 My suggestion for most readers is to proceed through this series in this order:
 
+1. *시작하기 <sup>Get Started</sup>* (첫번째 책)를 통해 단단한 기반을 다지십시오. 좋은 소식이 있다면 저흰 이미 이 책을 거의 끝마쳤습니다!
+
 1. Get started with a solid foundation of JS from *Get Started* (Book 1) -- good news, you've already almost finished this book!
+
+2. *스코프와 클로져 <sup>Scopes & Closures</sup>* (두번째 책)을 통해 JS의 첫번째 기둥에 관해 파헤쳐보십시오. 여기서는 렉시컬 스코프<sup>Lexical scope</sup>, 클로져<sup>Closure</sup>를 지원하는 방법, 그리고 모듈<sup>Module</sup> 방식으로 코드를 조직하는 방법에 관한 것이 있습니다.
 
 2. In *Scope & Closures* (Book 2), dig into the first pillar of JS: lexical scope, how that supports closure, and how the module pattern organizes code.
 
+3. *객체과 클래스 <sup>Objects & Classes</sup>* (세번째 책)을 통해 JS의 두번째 기둥에 관해 집중적으로 다룰 것입니다. JS에서 `this`가 어떻게 작동하는지, 객체 프로토타입<sup>Object prototypes</sup>이 위임<sup>Delegation</sup>을 어떻게 지원하는지, 그리고 프로토타입이 객체 지향 형식의 코드 구성을 위해 `class` 방식을 지원하는지에 관한 것이 있습니다.
+
 3. In *Objects & Classes* (Book 3), focus on the second pillar of JS: how JS's `this` works, how object prototypes support delegation, and how prototypes enable the `class` mechanism for OO-style code organization.
+
+4. *타입과 문법 <sup>Types & Grammar</sup>* (네번째 책)을 통해 JS의 세번째이자 마지막 기둥에 관해 뒤져볼 것입니다. 타입과 강제 타입 변화<sup>Coercion</sup> 그리고 JS의 문법이 우리가 작성한 코드를 정의하는 방법에 관한 것이 있습니다.
 
 4. In *Types & Grammar* (Book 4), tackle the third and final pillar of JS: types and type coercion, as well as how JS's syntax and grammar define how we write our code.
 
+5. **세 기둥**이 굳건히 자리잡은 상태에서 *동기와 비동기 <sup>Sync & Async</sup>* (다섯번째 책)에서는 동기적으로 (즉각 수행하는) 그리고 비동기적으로 (시간에 걸쳐) 방법으로 프로그램에서 상태 변화를 어떻게 모형화 시키는지에 관해 탐험해 볼 것입니다.
+
 5. With the **three pillars** solidly in place, *Sync & Async* (Book 5) then explores how we use flow control to model state change in our programs, both synchronously (right away) and asynchronously (over time).
+
+6. 이 시리즈는 *ES.Next 그리고 그 너머 <sup>ES.Next & Beyond</sup>* (여섯번째 책)을 통해 끝마쳐집니다. 이 책을 통해 가까운 시일 혹은 어느정도 시간에 걸쳐 추후 JS에 포함될 다양한 기능들에 관해 다룰 것입니다.
 
 6. The series concludes with *ES.Next & Beyond* (Book 6), a forward look at the near- and mid-term future of JS, including a variety of features likely coming to your JS programs before too long.
 
+이 것이 이 시리즈를 읽는 순서입니다.
+
 That's the intended order to read this book series.
+
+하지만 책 2, 3, 4는 일반적으로 여러분이 가장 궁금해하는 주제가 무엇이고 뭘 가장 먼저 알아보고 싶은지에 따라 어떠한 순서로 읽어도 상관이 없습니다. 하지만 이 세권의 책과 *타입과 문법<sup>Types & Grammar</sup>*는 이미 이 주제에 관해 알고 있을지라도 건너뛰지 말길 바랍니다.
 
 However, Books 2, 3, and 4 can generally be read in any order, depending on which topic you feel most curious about and comfortable exploring first. But I don't recommend you skip any of these three books—not even *Types & Grammar*, as some of you will be tempted to do!—even if you think you already have that topic down.
 
+책 5 (*동기와 비동기<sup>Sync & Async</sup>*)는 JS를 깊이있게 이해하기 위해 중요하지만 만약 여기서부터 시작한다거나 해당 책이 너무 어렵다면 JS와 더 친숙해질때까지 미뤄놓아도 괜찮습니다. JS를 더 많이 사용할 수록 (그리고 노력할 수록!), 이 책에 더 많이 감사하게 될 것입니다. 그러니 나중에 다시 돌아오게 될지라도 두려워하지 마십시오.
+
 Book 5 (*Sync & Async*) is crucial for deeply understanding JS, but if you start digging in and find it's too intimidating, this book can be deferred until you're more experienced with the language. The more JS you've written (and struggled with!), the more you'll come to appreciate this book. So don't be afraid to come back to it at a later time.
 
+이 시리즈의 마지막 책인 *ES.Nest 그리고 그 너머<sup>ES.Next & Beyond* 다소 그 자체로 독립적인 면이 있습니다. 제가 제안드렸던 것처럼 가장 마지막에 읽을 수도 있지만 JS의 전반에 걸쳐 좀 더 시야를 넓히기위한 지름길로 가길 원한다면 *시작하기<sup>Getting Started</sup>*를 마친 이후 읽을수도 있습니다. 이 책은 향후 갱신될 가능성이 높으므로 이따금 다시 방문하는 것이 좋습니다.
+
 The final book in the series, *ES.Next & Beyond*, in some respects stands alone. It can be read at the end, as I suggest, or right after *Getting Started* if you're looking for a shortcut to broaden your radar of what JS is all about. This book will also be more likely to receive updates in the future, so you'll probably want to re-visit it occasionally.
+
+하지만 YDKJSY를 진행함에 있어 이 책의 부록을 특히 부록 B "연습, 연습, 그리고 또 연습!"에 있는 예제들을 먼저 확인해주십시오. 연습에 관해 언급드린 일이 있었죠!? 코드를 배우는데 실제 작성하는 것보다 더 좋은 방법은 없습니다.
 
 However you choose to proceed with YDKJSY, check out the appendices of this book first, especially practicing the snippets in Appendix B, "Practice, Practice, Practice!" Did I mention you should go practice!? There's no better way to learn code than to write it.
