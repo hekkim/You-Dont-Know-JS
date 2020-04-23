@@ -54,7 +54,7 @@ Neither hoisting nor function-scoped `var` are sufficient to back the claim that
 
 Closure is a natural result of lexical scope when the language has functions as first-class values, as JS does. When a function makes reference to variables from an outer scope, and that function is passed around as a value and executed in other scopes, it maintains access to its original scope variables; this is closure.
 
-프로그래밍 전반에 걸쳐 특히나 JS에서는 클로져를 통해 모듈과 같이 가장 중요한 프로그래밍 패턴들 중 다수를 사용할 수 있도록 만들어줍니다.
+프로그래밍 전반에 걸쳐 특히나 JS에서는 클로져를 통해 모듈과 같이 가장 중요한 프로그래밍 패턴들 중 다수를 사용할 수 있도록 만들어줍니다. JS에서 코드를 조직화하는데 있어 모듈은 우리가 얻을 수 *결실*과도 같은 것입니다.
 
 Across all of programming, but especially in JS, closure drives many of the most important programming patterns, including modules. As I see it, modules are as *with the grain* as you can get, when it comes to code organization in JS.
 
@@ -106,21 +106,39 @@ JS의 세번째 기둥은 JS에서 가장 간과되는 본질중 하나입니다
 
 The third pillar of JS is by far the most overlooked part of JS's nature.
 
+개발자의 대다수는 *타입<sup>types</sup>*이 프로그래밍 언어 특히나 JS에서 어떻게 작동하는지 큰 오해를 하고 있습니다. 광범위한 JS 커뮤니티의 관심사 물결은 *정적 타입<sup>static typing<sup>* 접근법에서 타입 인식 도구<sup>type-aware tooling</sup>인 타입스크립트<sup>TypeScript</sup>나 플로우<sup>Flow</sup>를 사용하는 것으로 옮겨가고 있습니다.
+
 The vast majority of developers have strong misconceptions about how *types* work in programming languages, and especially how they work in JS. A tidal wave of interest in the broader JS community has begun to shift to "static typing" approaches, using type-aware tooling like TypeScript or Flow.
+
+JS 개발자는 타입에 관해 더 많이 배워야 하고 JS가 타입 변환을 어떻게 하는지 배워야만 한다고 생각합니다. 물론 타입 인식 도구가 개발자들에게 도움을 주지만 처음부터 이에 관한 지식을 얻고 사용한다면 더 큰 도움이 될 거라고 생각됩니다.
 
 I agree that JS developers should learn more about types, and should learn more about how JS manages type conversions. I also agree that type-aware tooling can help developers, assuming they have gained and used this knowledge in the first place!
 
+저는 JS의 타입 매커니즘이 나쁘다고 결론 짓고 그로인해 언어 외부의 솔루션으로 JS의 타입을 다루는 게 불가피한 결론이라는 의견에 전적으로 반대합니다. 프로그램에서 현명하고 믿음직한 방법인 "정적 타입"을 굳이 따를 필요는 없습니다. 단지 여러 선택지 중 하나이며 만약 대중들과 다른 길을 가고자 한다면 JS를 통해서
+
 But I don't agree at all that the inevitable conclusion of this is to decide JS's type mechanism is bad and that we need to cover up JS's types with solutions outside the language. We don't have to follow the "static typing" way to be smart and solid with types in our programs. There are other options, if you're just willing to go *against the grain* of the crowd, and *with the grain* of JS (again, more on that to come).
+
+만약 값의 타입 그리고 타입 변환(강제 변환)을 제대로 사용하지 않고 있다면 JS 프로그램이 어떠한 유익한 일도 하지 못 한다는 점에서 다른 두 기둥보다 훨씬 더 중요 사항합니다.
 
 Arguably, this pillar is more important than the other two, in the sense that no JS program will do anything useful if it doesn't properly leverage JS's value types, as well as the conversion (coercion) of values between types.
 
+만약 타입스크립트/플로우를 좋아할지라도 여러분이 그 언어에서 값의 타입을 어떻게 다루는지 깊숙이 알고있지 않다면 그러한 도구와 코딩의 접근법의 대다수를 제대로 이해할 수 없을 것입니다.
+
 Even if you love TypeScript/Flow, you are not going to get the most out of those tools or coding approaches if you aren't deeply familiar with how the language itself manages value types.
+
+JS의 타입과 강제 변환에 관해 더 배우기 위해 네번째 시리즈 *타입과 문법<sup>Types & Grammar</sup>*를 확인해주시기 바랍니다. 하지만 단순히 `===`를 사용해야만 하고 나머지는 잊어도 된다는 말을 항상 듣곤했다는 변명으로 이 주제를 건너 뛰지 말아주세요.
 
 To learn more about JS types and coercion, check out Book 4, *Types & Grammar*. But please don't skip over this topic just because you've always heard that we should use `===` and forget about the rest.
 
+이 기둥을 배우지 않고는 여러분의 JS에 대한 근본적인 지식은 쉽게 흔들리고 불완전할 것입니다.
+
 Without learning this pillar, your foundation in JS is shaky and incomplete at best.
 
+## 결실
+
 ## With the Grain
+
+
 
 I have some advice to share on continuing your learning journey with JS, and your path through the rest of this book series: be aware of the *grain* (recall various references to *grain* earlier in this chapter).
 
