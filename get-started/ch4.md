@@ -138,33 +138,60 @@ Without learning this pillar, your foundation in JS is shaky and incomplete at b
 
 ## With the Grain
 
-
+독자 여러분이 JS를 배워나가며 그리고 이 시리즈의 나머지를 읽어가는 여정에 첨언을 드리자면 *결실*에 관해 반드시 알아주길 바랍니다. (이 챕터 이전에 여러번 발언했던 *결실*에 관해 회상해주시기 바랍니다)
 
 I have some advice to share on continuing your learning journey with JS, and your path through the rest of this book series: be aware of the *grain* (recall various references to *grain* earlier in this chapter).
 
+우선, 대부분의 사람들이 어떻게 JS에 접근하고 사용하는지 생각하게 되는게 그 첫 *결실*입니다. 이미 이 시리즈가 다양한 방면에서 그러한 *결실*에 반하고 있다는것을 아마도 알아차리셨을 것입니다. YDKJSY에서는 저는 JS의 인기있는 일부만이 아닌 전반적인 모든 내용을 충분히 설명해줄만큼 독자 여러분을 존중합니다. 전 여러분이 이러한 지식을 습득하기에 유능하며 충분히 가치가 있다고 생각합니다.
+
 First, consider the *grain* (as in, wood) of how most people approach and use JS. You've probably already noticed that these books cut against that *grain* in many respects. In YDKJSY, I respect you the reader enough to explain all the parts of JS, not only some select popular parts. I believe you're both capable and deserving of that knowledge.
+
+하지만 이것이 다른 많은 자료들로부터 얻을 수 있는 게 아닙니다. 여러분이 이 책의 지침을 잘 따르고 준수할수록 어떤 코드가 최선인지 더 숙고하고 분석하게 됨으로써 더욱더 뛰어난 개발자가 될 것입니다. 이것이 좋을 수도 혹은 나쁠 수도 있습니다. 대중으로부터 벗어나길 원한다면, 그들이 일하는 방식으로부터 벗어나야만 합니다!
 
 But that is not what you'll find from a lot of other material out there. It also means that the more you follow and adhere to the guidance from these books—that you think carefully and analyze for yourself what's best in your code—the more you will stand out. That can be a good and bad thing. If you ever want to break out from the crowd, you're going to have to break from how the crowd does it!
 
+하지만 저는 많은 분들이 면접에서 이 책의 몇가지 주제와 설명을 인용하였었고 면접관이 그들의 주장이 틀렸다고 얘기했던 것을 들었습니다. 게다가 소문에 따르면 그 결과 일자리 제의를 잃은 걸 들은 바 있습니다.
+
 But I've also had many people tell me that they quoted some topic/explanation from these books during a job interview, and the interviewer told the candidate they were wrong; indeed, people have reportedly lost out on job offers as a result.
+
+가능한 한 전 이 책이 JS에 관한 완전히 정확한 정보를 제공하도록 노력하겠습니다. 하지만 여러분이 프로그램에서 최고의 효율을 위해 어떻게 JS를 해석하고 사용할지에 관한 제 의견 또한 많이 제시하려고 합니다. 제 의견을 사실처럼 혹은 그 반대로 사실을 제 의견처럼 늘어놓진 않겠습니다. 그렇기에 항상 이 책에 어떤 부분이 사실인지 의견인지 인지해주시길 바랍니다.
 
 As much as possible, I endeavor in these books to provide completely accurate information about JS, informed generally from the specification itself. But I also dose out quite a bit of my opinions on how you can interpret and use JS to the best benefit in your programs. I don't present opinion as fact, or vice versa. You'll always know which is which in these books.
 
+JS에 관한 진실은 실제로 논재의 여지가 없습니다. 사양에 설명되어 있다던가 그렇지 않거나 둘 중 하나인거죠. 사양이 나와있는 내용이나 제가 전달하는 게 마음에 들지 않으시다면 TC39로 가져가십시오! 면접 중 면접관들이 여러분에게 틀렸다고 한다면
+만약 면접을 한다던가 실제로 여러분이 틀렸다고 얘기를 한다면, 사양에서 찾아볼 수 있는지 질문하십시오. 면접관이 다시 고려하지 않는다면 어찌됐든 여러분은 그곳에서 일하고 싶지 않으실겁니다.
+
 Facts about JS are not really up for debate. Either the specification says something, or it doesn't. If you don't like what the specification says, or my relaying of it, take that up with TC39! If you're in an interview and they claim you're wrong on the facts, ask them right then and there if you can look it up in the specification. If the interviewer won't re-consider, then you shouldn't want to work there anyway.
+
+하지만 만약 저의 의견과 일치하길 바라신다면 *왜* 그렇게 생각하는지 근거를 가지고 여러분의 선택을 지지할 준비를 하셔야합니다. 제가 얘기하는 걸 그저 앵무새처럼 따라하려고 하지 마십시오. 여러분 자신의 의견으로 만드시고 그것들을 지키십시오. 그리고 만약 함께 일하고 싶어하는 이가 여러분의 의견에 반대한다면, 고개를 들고 의견을 피력하십시오. JS는 거대하며 다양한 다른 방법들이 있습니다.
 
 But if you choose to align with my opinions, you have to be prepared to back up those choices with *why* you feel that way. Don't just parrot what I say. Own your opinions. Defend them. And if someone you were hoping to work with disagrees, walk away with your head still held high. It's a big JS, and there's plenty of room for lots of different ways.
 
+다시 말해, 이 시리즈와 가르쳐왔던 것처럼 *결실*에 거스르길 두려워하지 마십시오. 그 어떤 누구도 여러분에게 어떤 방식이 JS를 제일 잘 사용하는 방법이라고 얘기할 수 없으며 결정해 줄수도 없습니다. 저는 단지 여러분 자신의 결론에 이르도록 힘을 실어주기위해 노력할 뿐입니다.
+
 In other words, don't be afraid to go against the *grain*, as I have done with these books and all my teachings. Nobody can tell you how you will best make use of JS; that's for you to decide. I'm merely trying to empower you in coming to your own conclusions, no matter what they are.
+
+다른 말로, 여러분이 진심으로 집중하고 따라야만하는 것은 JS가 언어 단계에서 어떻게 동작하는지 알아야만하는 *결실*입니다. 주어진 올바른 연습 문제와 접근법을 통해 JS에 자연스레 작동하는 것들을 그리고 절대로 해서는 안 되는 것들을 발견하게 될 것입니다.
 
 On the other hand, there's a *grain* you really should pay attention to and follow: the *grain* of how JS works, at the language level. There are things that work well and naturally in JS, given the right practice and approach, and there are things you really shouldn't try to do in the language.
 
+JS 프로그램을 자바<sup>Java</sup>, C# 혹은 펄<sup>Perl</sup> 프로그램처럼 만들 수 있을까요? 파이썬<sup>Python</sup>, 루비<sup>Ruby</sup> 혹은 PHP는 어떨까요? 다양할 정도를 할 수 있습니다. 하지만 그렇게 해야만 할까요?
+
 Can you make your JS program look like a Java, C#, or Perl program? What about Python or Ruby, or even PHP? To varying degrees, sure you can. But should you?
+
+그렇지 않다고 생각합니다. 대신 전 JS의 방식을 배우고 포용하여 JS 프로그램을 실용적이며 JS다운 방식으로 만들어야 됩니다. 몇몇은 이런 방식이 엉성하며 비형식적인 프로그래밍이라고 생각할 수도 있지만 그런 의미가 아닙니다. 단지 JS는 "JS"라고 쉽게 알아볼 수 있을만한 수많은 패턴과 어법이 있으며, *결실*과 함께하는 것이 최상의 성공까지 가는 가장 보편적인 경로라는 말입니다.
 
 No, I don't think you should. I think you should learn and embrace the JS way, and make your JS programs as JS'y as is practical. Some will think that means sloppy and informal programming, but I don't mean that at all. I just mean that JS has a lot of patterns and idioms that are recognizably "JS," and going with that *grain* is the general path to best success.
 
+마지막으로 가장 중요한 *결실*은 여러분이 작업하고 있는 이미 존재하고 있는 프로그램을 그리고 여러분과 함께 작업할 개발자들을 어떻게 받아들일지에 관한 것입니다. 이 책을 단순히 일고 모든 프로젝트에 *모든 결실*을 적용하기위해 밤을 세우는 일을 하지 마십시오. 이러한 접근법은 늘 실패할 뿐입니다.
+
 Finally, maybe the most important *grain* to recognize is how the existing program(s) you're working on, and developers you're working with, do stuff. Don't read these books and then try to change *all that grain* in your existing projects over night. That approach will always fail.
 
+단지 이러한 변화를 조금씩 조금씩 계속해서 변화시켜야만 합니다. 접근방식에 관해 다시 논의하고 고려하는 것이 중요한 이유에대해 여러분의 동료 개발자들과 합의문을 작성하십시오. 하지만 단순히 하나의 자그마한 주제에 관해 하나씩만 작성을 하고 코드의 전과 후를 비교하여 이에 관해 이야기를 나누십시오. 팀원 전체를 데려와 함께 토론을 하고, "우리의 상위 개발자가 언제나 이런식으로 해왔으니까"와 같은 관성이 아닌 분석과 근거를 토대로 결정을 내리십시오.
+
 You'll have to shift these things little by little, over time. Work on building consensus with your fellow developers on why it's important to re-visit and re-consider an approach. But do so with just one small topic at a time, and let before-and-after code comparisons do most of the talking. Bring everyone on the team together to discuss, and push for decisions that are based on analysis and evidence from the code rather than the inertia of "our senior devs have always done it this way."
+
+이것이 여러분이 JS를 배우는데 도움이 될 가장 중요한 조언입니다. 항상 JS가 우리에게 더 좋은 가독성을 가진 코드를 쓸 수 있는 더 나은 방법을 찾으십시오. 여러분을 포함해서 여러분의 코드에 작업하는 모든 이들이 여러분에게 고마워 할 것입니다!
 
 That's the most important advice I can impart to help you learn JS. Always keep looking for better ways to use what JS gives us to author more readable code. Everyone who works on your code, including your future self, will thank you!
 
