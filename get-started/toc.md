@@ -1,19 +1,18 @@
-# You Don't Know JS Yet: Get Started - 2nd Edition
+# You Don't Know JS Yet: 시작하기 - 2판
 
 ## 목차
-## Table of Contents
 
 * 머리말
 * 서문
 * 챕터 1: 자바스크립트란 무엇인가?
     * 이 책에 관해서
-    * What's With That Name?
-    * Language Specification
-    * Many Faces
-    * Backwards & Forwards
-    * What's in an Interpretation?
-    * Strictly Speaking
-    * Defined
+    * 자바스크립트, 그 이름의 유래
+    * 언어 스펙
+    * 다양한 면모
+    * 하위 호환성<sup>Backwards</sup>과 상위 호환성<sup>Forwards</sup>
+    * 인터프리트<sup>Interpretation</sup>에는 무엇들이 있을까?
+    * 정확하게 말하자면
+    * 정의된<sup>Defined</sup>
 * Chapter 2: Surveying JS
     * Each File is a Program
     * Values

@@ -1,103 +1,103 @@
 # You Don't Know JS Yet: Get Started - 2nd Edition
-# 챕터 1: 자바스크립트란 무엇인가?
-# Chapter 1: What *Is* JavaScript?
+# 챕터 1: 자바스크립트란 *무엇*인가?
 
-당신은 아직 JS를 모릅니다. 제가 완벽하게 그러하지 못 하고. 우리 중 그 누구도 그렇지 못 하죠. 하지만 우리 모두는 JS를 더 잘 알아갈 수는 있습니다.
+당신은 아직 JS를 모릅니다. 제가 완벽하게 그러하지 못 하고, 우리 중 그 누구도 그렇지 못 합니다. 다만 우리 모두는 JS를 더 잘 알아갈 수는 있습니다.
+
 You don't know JS, yet. Neither do I, not fully anyway. None of us do. But we can all start getting to know JS better.
 
-*You Don't Know JS Yet* (YDKJSY) 시리즈의 첫 책의 첫 챕터에서는 앞으로 나아가기위한 기초 지식을 쌓을 것입니다. JS 라는 언어가 실제로 무엇인지에 관한 중요한 배경 지식의 디테일, 몇몇 미신들 그리고 오해에 관해 알아갈 것입니다.
+*You Don't Know JS Yet* (YDKJSY) 시리즈의 첫 책의 첫 챕터에서는 앞으로 나아가기위한 기초 지식을 쌓을 것입니다. JS가 실제로 어떠한지에 관해 다룸으로써 몇몇 미신과 오해에 관해 명확하게 하여, JS의 세부 사항과 연관된 중요한 배경 지식들의 다방면에 대해 다룰 것입니다.
 
 In this first chapter of the first book of the *You Don't Know JS Yet* (YDKJSY) series, we will take some time to build a foundation to move forward on. We need to start by covering a variety of important background housekeeping details, clearing up some myths and misconceptions about what the language really is (and isn't!).
 
-JS의 정체성에 관한 귀중한 깨달음과 어떻게 JS 구성되어 있고 유지되어 왔는지 알게 해주는 과정이 될 것입니다. 모든 JS 개발자들은 알아야하는 것이지요. JS에 관해 알고 싶어하는 분들을 위한 그 첫 발판이 되어줄 것입니다.
+JS 개발자라면 의래 알아야 할 JS가 어떻게 구성되어 있고 유지되어 가고 있는지 그 정체성과 진행 과정에 관해 알게될 것입니다. JS를 *시작하는* 여정으로 향하는 첫 발판이 되어줄 것입니다.
 
 This is valuable insight into the identity and process of how JS is organized and maintained; all JS developers should understand it. If you want to get to know JS, this is how to *get started* taking the first steps in that journey.
 
 ## 이 책에 관해서
 
-*JS를 알아가기*는 목적지가 아닌 방향성이기 때문에 여정이란 말을 강조하고 싶습니다. 여태까지 여러분이 얼마나 많은 시간을 이 언어와 함께하던지간에, 여러분은 이 언어에 관해 항상 다른 무언가 배우고 더 잘 이해할 수 있습니다. 그러므로 단기간에 무언가를 성취하기 위해 이 책을 허겁지겁 읽는 어리석은 짓을 하지마세요. 그 대신, 인내와 집요함만이 첫 몇 발걸음을 디디는 위한 최선의 선택이 될 것 입니다.
+*JS를 알아가는* 것은 목적지가 아닌 방향성이기 때문에 여정이란 말을 강조하고 싶습니다. 여태까지 여러분이 얼마나 많은 시간을 이 언어와 함께하던지간에, 여러분은 이 책을 통해 JS에 관한 다른 무언가 배우고 더 잘 이해할 무언가를 계속해서 찾으실 수 있을겁니다. 그러므로 단기간에 무언가를 성취하기 위해 이 책을 허겁지겁 읽는 어리석은 짓을 하지마세요. 대신, 인내와 집요함만이 첫 몇 발걸음을 디디기 위한 최선의 선택이 될 것 입니다.
 
 I emphasize the word journey because *knowing JS* is not a destination, it's a direction. No matter how much time you spend with the language, you will always be able to find something else to learn and understand a little better. So don't look at this book as something to rush through for a quick achievement. Instead, patience and persistence are best as you take these first few steps.
 
-이 다음에 나올 배경 지식에 관한 챕터에서는, YDKJSY 책에서 다뤄질 이 책의 나머지부분에서 전반적으로 큰 그림들에 관해 다룰 것입니다.
+배경 지식을 다루는 현재 챕터 이후에는 YDKJSY 시리즈에서 다뤄질 주제들의 전반적인 내용들을 다룰 것입니다.
 
 Following this background chapter, the rest of the book lays out a high-level map of what you will find as you dig into and study JS with the YDKJSY books.
 
-특히, 챕터 4는 JS를 구성하는 세 가지 주요 기초 지식인 스코프와 클로져, 프로토타입과 객체, 그리고 타입과 강제 변환에 관해 알아보게 될 것입니다. JS는 다양한 특징과 이용성이 있는 암시적이고 복잡한 언어이지만, JS는 이러한 세 가지 주요 기초지식에 기반하고 있습니다.
+특히, 챕터 4는 JS를 구성하는 세 가지 주요 기반인 스코프와 클로져<sup>Scope/Closures</sup>, 프로토타입과 객체<sup>Prototypes/Objects</sup>, 그리고 타입과 강제 변환<sup>Types/Coercion</sup>에 관해 알아보게 될 것입니다. JS는 다양한 특징과 능력이 있는 암시적이고 복잡한 언어이지만, JS의 모든 특징은 위 세 가지 주요 기반에 기초하고 있습니다.
 
 In particular, Chapter 4 identifies three main pillars around which the JS language is organized: scope/closures, prototypes/objects, and types/coercion. JS is a broad and sophisticated language, with many features and capabilities. But all of JS is founded on these three foundational pillars.
 
-이 책의 주제가 "시작하기 (Get Started)"지만 단순한 초보자나 도입이 아님을 늘 새겨두세요. 이 책의 주요한 역할은 나머지 시리즈들에서 JS를 심도있게 공부하기 위함입니다. 그렇기에 나머지 시리즈는 독자분들이 이미 JS와 친숙하다고 가정한 채로 서술할 것입니다. 그러므로 *시작하기 (Get Started)*의 전반적인 지식을 얻기위해 충분히 많은 시간을 JS 코드를 작성하는데 할애하십시오.
+이 책이 "시작하기"란 제목을 가지고 있지만 단순한 초보자나 첫 시작을 위한 책이 아님을 새겨두시기 바랍니다. 이 책의 주역할은 나머지 시리즈들에서 JS를 심도있게 공부하기 위한 준비를 하는 것입니다. 그렇기에 나머지 시리즈는 독자분들이 이미 JS와 친숙하다고 가정한 채로 서술할 것입니다. 그러므로 *시작하기*에서 경험을 쌓기위해 충분히 많은 시간을 들여 JS 코드를 작성하십시오.
 
 Keep in mind that even though this book is titled "Get Started," it's **not intended as a beginner/intro book**. This book's main job is to get you ready for studying JS deeply throughout the rest of the series; it's written assuming you already have familiarity with JS over at least several months experience before moving on in YDKJSY. So to get the most out of *Get Started*, make sure you spend plenty of time writing JS code to build up your experience.
 
-만약 이미 충분히 많은 JS 코드를 작성해봤었더라도, 이 책을 그저 훑어보거나 건너뛰지 마시고, 이 책의 내용을 이해하는데 충분히 많은 시간을 들여주세요. **좋은 시작은 언제나 견고한 첫 발걸음으로부터 늘 시작한답니다**
+만약 이미 충분히 많은 JS 코드를 작성해봤었더라도, 이 책을 그저 훑어보거나 건너뛰지 마시고, 이 책의 내용들을 이해하는데 충분히 많은 시간을 들여주세요. **좋은 시작은 언제나 견고한 첫 발걸음으로부터 늘 시작합니다.**
 
 Even if you've already written a lot of JS before, this book should not be skimmed over or skipped; take your time to fully process the material here. **A good start always depends on a solid first step.**
 
-## JavaScript, 그 이름의 유래
+## 자바스크립트, 그 이름의 유래
 
-JavaScript란 이름은 아마도 가장 크게 잘못 알려지고 오해받는 프로그래밍 언어 이름일 것입니다.
+자바스크립트란 이름은 아마도 가장 크게 잘못 알려지고 오해받는 프로그래밍 언어 이름일 것입니다.
 
 The name JavaScript is probably the most mistaken and misunderstood programming language name.
 
-Java랑 연관이 있는 언어일까? Java 전용 스크립트형 언어일까? 단순 스크립트를 작성하는 실제 프로그램 작성을 위한 언어는 아닌 것일까?
+자바<sup>Java</sup>랑 연관이 있는 언어일까? 자바 전용 스크립트형 언어일까? 단순 스크립트를 작성하는 실제 프로그램 작성을 위한 언어는 아닌 것일까?
 
 Is this language related to Java? Is it only the script form for Java? Is it only for writing scripts and not real programs?
 
-진실은 JavaScript란 언어의 이름은 마케팅용 전략의 산물이란 것입니다. Brendan Eich가 처음으로 이 언어를 구상했을 때만해도 Mocha란 코드명을 가지고 있었죠. Netscape 내부에서는 LiveScript라고 이용되었었습니다. 그런데, 이 언어를 대중에게 공개할 무렵 "JavaScript"란 이름이 투표에서 이겨버렸었죠.
+진실은 자바스크립트란 언어의 이름은 마케팅용 전략의 산물이란 것입니다. Brendan Eich가 처음으로 이 언어를 구상했을 때만해도 Mocha란 코드명을 가지고 있었죠. 넷스케이프<sup>Netscape</sup> 내부에서는 라이브스크립트<sup>LiveScript</sup>라고 이용됐습니다. 하지만 이 언어를 대중에게 공개할 무렵 "자바스크립트"란 이름이 투표에서 이겨버렸었죠.
 
 The truth is, the name JavaScript is an artifact of marketing shenanigans. When Brendan Eich first conceived of the language, he code-named it Mocha. Internally at Netscape, the brand LiveScript was used. But when it came time to publicly name the language, "JavaScript" won the vote.
 
-왜죠? 왜냐하면 이 언어는 근본적으로 대부분의 Java 개발자들의 관심을 끌기위해 설계되었었고, 그 무렵만해도 가벼운 프로그램을 지칭하는데 "script"란 용어를 쓰는게 대중적이였습니다. 이러한 가벼운 "script"는 웹(Web)이라고 불리우는 페이지 내부에 처음으로 도입됐죠.
+왜죠? 왜냐하면 이 언어는 기본적으로 대부분의 자바 개발자들의 관심을 끌기위해 설계되었었고, 그 무렵만해도 가벼운 프로그램을 지칭하는데 "스크립트"란 용어를 쓰는게 일반적이였습니다. 이러한 가벼운 "스크립트"는 새로운 웹<sup>Web</sup>이라는 공간 속 페이지에서 처음으로 도입됐죠.
 
 Why? Because this language was originally designed to appeal to an audience of mostly Java programmers, and because the word "script" was popular at the time to refer to lightweight programs. These lightweight "scripts" would be the first ones to embed inside of pages on this new thing called the web!
 
-다시 말해, JavaScript는 당시 무겁고 훨씬 더 잘 알려진 Java를 빛 좋은 대용 언어로 자리잡기 위한 마케팅 전략이였죠. "WebJava"라고 쉽게 부를 수도 있습니다.
+다시 말해, 자바스크립트는 무겁고 그 당시에 훨씬 더 잘 알려진 자바를 빛 좋은 대용 언어로서 자리잡기 위한 마케팅 전략이였죠. 이러한 점에서 "웹자바<sup>WebJava</sup>"라고 쉽게 부를 수도 있습니다.
 
 In other words, JavaScript was a marketing ploy to try to position this language as a palatable alternative to writing the heavier and more well-known Java of the day. It could just as easily have been called "WebJava," for that matter.
 
-JavaScript는 Java의 코드와 다소 표면적으로 비슷해 보이는 점은 있습니다만, 그 유사함은 공통적으로 개발하기 위함이 아니라, 두 언어 모두가 C 혹은 C++ 개발자들에게 익숙한 문법을 목표로했기 때문입니다.
+자바스크립트는 자바의 코드와 다소 표면적으로 비슷해 보이는 점은 있습니다만, 그 유사함은 공통적으로 개발하기 위함이 아니라, 두 언어 모두가 C (혹은 더 넓혀서 C++) 개발자들에게 익숙한 문법을 목표로했기 때문입니다.
 
 There are some superficial resemblances between JavaScript's code and Java code. Those similarities don't particularly come from shared development, but from both languages targeting developers with assumed syntax expectations from C (and to an extent, C++).
 
-예로 들어, `{`로 시작하고 `}`로 묶여있는 코드 블락은 C/C++ 그리고 Java에서 모두 공통적으로 사용됩니다. 또한 `;`을 통해 문장의 끝맺음 짖죠.
+예로 들어, `{`로 시작하고 `}`로 끝나는 코드 블락은 C/C++ 그리고 Java에서 모두 공통적으로 사용됩니다. 또한 `;`을 통해 문장의 끝맺음 짖죠.
 
 For example, we use the `{` to begin a block of code and the `}` to end that block of code, just like C/C++ and Java. We also use the `;` to punctuate the end of a statement.
 
-어떤면에서는 법적관계는 이런 문법적인 관계보다 보다 더 깊숙이 연관되어 있습니다. 오라클 (Oracal, 전신 썬 마이크로시스템즈 - Sun)은 Java를 소유하고 운영하고 있을뿐만이 아닌 "JavaScript"의 공식 상표 역시도 소유하고 있습니다. 이 상표는 거의 시행되지 않았으며 현재로서는 사용이 불가능했을 것입니다.
+어떤면에서는 이러한 문법적인 관계보다 법적관계가 더 깊숙이 연관되어 있기도 합니다. 오라클<sup>Oracal</sup> (전신 썬 마이크로시스템즈<sup>Sun</sup>)은 자바를 소유하고 운영하고 있을뿐만이 아니라 "자바스크립트"의 (넷스케프를 통해서) 공식 상표 역시도 소유하고 있습니다. 이 상표는 거의 시행되지 않고있으며 그 당시에는 사용이 불가능했을 것입니다.
 
 In some ways, legal relationships run even deeper than the syntax. Oracle (via Sun), the company that still owns and runs Java, also owns the official trademark for the name "JavaScript" (via Netscape). This trademark is almost never enforced, and likely couldn't be at this point.
 
-이러한 이유로 인해 몇몇 사람들은 JavaScript란 말 대신 JS라고 사용하자고 제안하곤 합니다. 공식적으로 대체할 단어가 없는 상황에서는 JS는 매우 흔히 쓰이는 약어입니다. 게다가, 이 시리즈 전반적으로 JS는 JavaScript를 칭할 때 주로 쓰이게 될 것입니다.
+이러한 이유로 인해 몇몇 사람들은 자바스크립트란 말 대신 JS라고 부르자고 제안하곤 합니다. 공식적으로 대체할 단어가 없는 상황에서는 JS는 매우 흔히 쓰이는 약어입니다. 실은 이 시리즈 전체적으로 JS를 자바스크립트를 칭할 때 주로 쓰이게 될 것입니다.
 
 For these reasons, some have suggested we use JS instead of JavaScript. That is a very common shorthand, if not a good candidate for an official language branding itself. Indeed, these books use JS almost exclusively to refer to the language.
 
-오라클이 소유 상표로 부터 약간의 거리를 내자면, TC39에 의해 지정되고 ECMA 표준기군에 의해 명명된 공식 명칭은 **ECMAScript** 입니다. 게다가 2016년 이후로 개정년도를 어미로 붙여 공식적으로 사용되고 있습니다. 현재 이 책이 쓰인 년도에 따라 ECMAScript 2019 혹은 줄여서 ES2019라고 쓰이고 있죠.
+오라클이 소유한 상표와 약간의 거리를 둬보자면, TC39에 의해 명세서가 작성된 언어이자 ECMA 표준기구에 의해 공인된 명칭은 **ECMAScript** 입니다. 실제로는 2016년 이후로 공식 언어 명칭은 개정년도를 어미로 붙여 사용되고 있습니다. 현재 이 책이 쓰인 년도에 따르면 ECMAScript 2019 혹은 줄여서 ES2019라고 쓰입니다.
 
 Further distancing the language from the Oracle-owned trademark, the official name of the language specified by TC39 and formalized by the ECMA standards body is **ECMAScript**. And indeed, since 2016, the official language name has also been suffixed by the revision year; as of this writing, that's ECMAScript 2019, or otherwise abbreviated ES2019.
 
-다시 말해, 당신의 브라우저 혹은 Node.js에서 실행되는 JavaScript 혹은 JS는 ES2019 표준의 구현체란 것이지요.
+다시 말해, 여러분의 브라우저 혹은 Node.js에서 실행되는 자바스크립트 혹은 JS는 ES2019 표준의 *하나의* 구현체입니다.
 
 In other words, the JavaScript/JS that runs in your browser or in Node.js, is *an* implementation of the ES2019 standard.
 
 | 노트: |
 | :--- |
-| 이 언어를 언급할 때 "JS6" 또는 "ES8"과 같은 말로 명명해주지 말아주세요. 몇몇은 그렇게 사용하기도 하지만 이러한 용어들은 혼란을 지속시킬 뿐입니다. "ES20xx" 혹은 단순히 "JS" 란 용어를 지속해서 사용해주세요. |
+| 이 언어를 언급할 때 "JS6" 또는 "ES8"과 같이 명명해주지 말아주십시오. 몇몇은 그렇게 사용할지라도 이러한 용어들은 혼란을 지속시킬 뿐입니다. "ES20xx" 혹은 단순히 "JS" 란 용어를 지속해서 사용해주시기 바랍니다. |
 
 | NOTE: |
 | :--- |
 | Don't use terms like "JS6" or "ES8" to refer to the language. Some do, but those terms only serve to perpetuate confusion. "ES20xx" or just "JS" are what you should stick to. |
 
-이 언어를 JavaScript, JS, ECMAScript 혹은 ES2019 중 뭐라고 부르던간에, 이 언어는 정말 진심으로 Java의 변형이 아닙니다.
+이 언어를 자바스크립트, JS, ECMAScript 혹은 ES2019 뭐라고 부르던간에, 이 언어는 절대로 자바의 변형이 아닙니다!
 
 Whether you call it JavaScript, JS, ECMAScript, or ES2019, it's most definitely not a variant of the Java language!
 
-> "Java는 JavaScript에게 있어 햄과 햄스터의 관계와 같다." --Jeremy Keith, 2009
+> "자바는 자바스크립트에게 있어 햄과 햄스터의 관계와 같다." --Jeremy Keith, 2009
 
 > "Java is to JavaScript as ham is to hamster." --Jeremy Keith, 2009
 
-## 언어 지침서
+## 언어 명세서
 
 이전에 언급하였던 TC39란 JS를 관리하는 기술 운영 위원회를 말합니다. 그들의 주요 업무는 언어의 공식 스펙을 관리하는 것이지요. 그들은 주기적으로 만나 변경점을 투표하고 ECMA란 표준 기구에 그 결과를 제출합니다.
 
@@ -159,7 +159,7 @@ All major browsers and device makers have committed to keeping their JS implemen
 
 That means you can learn **one JS**, and rely on that same JS everywhere.
 
-### JS의 지배자 웹 The Web Rules Everything About (JS)
+### 웹 규칙의 모든 것 (JS 관한)
 
 JS 환경이 브라우저에서 서버 그너머 로봇 등등 지속적으로 넓혀진데에 반해 JS를 지배한 단 하나의 환경은 웹입니다. 이 말인 즉슨 어떻게 JS가 웹을 위해 구현되는지가 실질적으로 중요한 현실이란 것입니다.
 
@@ -197,7 +197,7 @@ Section B.3 includes some conflicts where code may run in both web and non-web J
 
 Appendix B *gotchas* aren't encountered very often, but it's still a good idea to avoid these constructs to be future safe. Wherever possible, adhere to the JS specification and don't rely on behavior that's only applicable in certain JS engine environments.
 
-### Not All (Web) JS...
+### JS가 아닌 것 (웹)...
 
 이것은 JS 프로그램 코드 일까요?
 
@@ -235,7 +235,7 @@ Most of the cross-browser differences people complain about with "JS is so incon
 
 So an `alert(..)` call *is* JS, but `alert` itself is really just a guest, not part of the official JS specification.
 
-### It's Not Always JS
+### 항상 JS인 건 아니다
 
 브라우저의 개발자툴에서나 Node 환경에서 console 혹은 REPL(Read-Evaluate-Print-Loop)을 사용하는 것은 언뜻보기에는 매우 마치 JS 환경인 것 같은 느낌을 줍니다. 하지만 실제로 그렇지 않죠.
 
@@ -331,7 +331,7 @@ JavaScript 또한 다중 패러다임 언어입니다. JavaScript에서는 절�
 
 JavaScript is most definitely a multi-paradigm language. You can write procedural, class-oriented, or FP-style code, and you can make those decisions on a line-by-line basis instead of being forced into an all-or-nothing choice.
 
-## 하위 호환성 그리고 상위 호환성
+## 하위 호환성<sup>Backwards</sup>과 상위 호환성<sup>Forwards</sup>
 
 JavaScript가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*의 보호하자는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관되어 있지만 다른 용어인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
 
@@ -458,9 +458,7 @@ You may wonder: why go to the trouble of using a tool to convert from a newer sy
 
 Developers should focus on writing the clean, new syntax forms, and let the tools take care of producing a forwards-compatible version of that code that is suitable to deploy and run on the oldest-supported JS engine environments.
 
-### 버전간 간극을 채워넣기
-
-### Filling the Gaps
+### 버전간 간극을 채우기
 
 만약 상위 호환 문제가 새로운 문법과 연관없다면 새롭게 추가된 API 함수로 인해 생긴 문제일 것입니다. 가장 흔한 해결법은 오래된 브라우저에서는 빠져있는 API 함수들을 정의해줘 마치 그런 오래된 환경에서도 이미 존재하고 작동했던 것처럼 만들어주는 방법이 있습니다. 이러한 방식을 폴리필(polyfill) 혹은 쉼(shim)이라고 부릅니다.
 
@@ -537,9 +535,7 @@ Always write code using the most appropriate features to communicate its ideas a
 
 Transpilation and polyfilling are two highly effective techniques for addressing that gap between code that uses the latest stable features in the language and the old environments a site or application needs to still support. Since JS isn't going to stop improving, the gap will never go away. Both techniques should be embraced as a standard part of every JS project's production chain going forward.
 
-## 인터프리트(Interpretation)에는 무엇들이 있을까?
-
-## What's in an Interpretation?
+## 인터프리트<sup>Interpretation</sup>에는 무엇들이 있을까?
 
 JS에서 오래동안 논쟁된 이야기 중 하나는 이것이 인터프리트 스크립트(interpreted script)인지 아니면 컴파일된 프로그램(compiled program)인지에 관한 질문이다. 대다수의 의견은 JS는 인터프리트 (스크립트) 언어라고 얘기하곤 하지만 그 실상은 훨씬 더 복잡하다.
 
@@ -665,8 +661,6 @@ And again, the reason that matters is, since JS is compiled, we are informed of 
 
 ### 웹 어셈블리 (WASM)
 
-### Web Assembly (WASM)
-
 JS의 진화를 주도하는 주요 관심사 중 하나는 성능입니다. JS가 얼마나 빠르게 파싱하고 컴파일하는지 그리고 얼마나 빠르게 컴파일된 코드를 실행시키는지에 관해서죠.
 
 One dominating concern that has driven a significant amount of JS's evolution is performance, both how quickly JS can be parsed/compiled and how quickly that compiled code can be executed.
@@ -720,8 +714,6 @@ This book isn't about WASM, so I won't spend much more time discussing it, excep
 But let me just state simply: WASM will not replace JS. WASM significantly augments what the web (including JS) can accomplish. That's a great thing, entirely orthogonal to whether some people will use it as an escape hatch from having to write JS.
 
 ## *정확하게* 말하자면
-
-## *Strict*ly Speaking
 
 다시 돌아가 2009년 ES5가 배포되던 당시 JS는 더 나은 JS 프로그램을 만들기 위한 옵트 인(opt-in) 방식으로 *엄격 모드(strict mode)*를 추가했습니다.
 
@@ -808,8 +800,6 @@ Moreover, a wide shift is happening toward more/most new JS code being written u
 Taken together, strict mode is largely the de facto default even though technically it's not actually the default.
 
 ## 정의된
-
-## Defined
 
 JS는 ECMAScript 표준(여기서는 ES2019 버전)의 구현체이고 이는 ECMA에 의해 주최되는 TC39에 의해 그 방향이 결정되고 있습니다. JS는 브라우저 그리고 Node.js와 같은 환경 모두에서 동작할 수 있습니다.
 
