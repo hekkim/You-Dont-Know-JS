@@ -97,17 +97,17 @@ Whether you call it JavaScript, JS, ECMAScript, or ES2019, it's most definitely 
 
 > "Java is to JavaScript as ham is to hamster." --Jeremy Keith, 2009
 
-## 언어 명세서
+## 언어 명세서<sup>Specification</sup>
 
-이전에 언급하였던 TC39란 JS를 관리하는 기술 운영 위원회를 말합니다. 그들의 주요 업무는 언어의 공식 스펙을 관리하는 것이지요. 그들은 주기적으로 만나 변경점을 투표하고 ECMA란 표준 기구에 그 결과를 제출합니다.
+이전에 언급하였던 TC39란 JS를 관리하는 기술 운영 위원회를 말합니다. 그들의 주요 업무는 언어의 공식 명세<sup>Specification</sup>를 관리하는 것입니다. 그들은 주기적으로 만나 합의된 변경안에 관해 투표하고 표준 기구인 ECMA에 그 결과를 제출합니다.
 
 I mentioned TC39, the technical steering committee that manages JS. Their primary task is managing the official specification for the language. They meet regularly to vote on any agreed changes, which they then submit to ECMA, the standards organization.
 
-ES 지침서에는 이러한 JS의 문법과 행동 양식이 정의되어 있습니다.
+ES 명세서에는 JS의 문법과 행동 양식이 정의되어 있습니다.
 
 JS's syntax and behavior are defined in the ES specification.
 
-ES2019는 1995년 JS 창설 이래로있는 10번째 메이저 지침서이자 수정본이고, ECMA가 호스팅하고 있는 공식 URL을 통해 "10.0" 버전을 찾아볼 수 있습니다.
+ES2019는 1995년 JS 창설 이래로 있는 10번째 메이저 명세서이자 수정본<sup>Revision</sup>이고, ECMA가 관리하고 있는 공식 URL을 통해 "10.0" 버전을 찾아볼 수 있습니다.
 
 https://www.ecma-international.org/ecma-262/10.0/
 
@@ -115,43 +115,43 @@ ES2019 happens to be the 10th major numbered specification/revision since JS's i
 
 https://www.ecma-international.org/ecma-262/10.0/
 
-TC39 위원회는 모질라, 구글, 애플과 같은 웹 투자 회사 혹은 삼성과 같은 장비 개발사의 다방면에서 일하고 있는 50 ~ 100명으로 구성되어 있습니다. 아마도 회사로부터 많은 보상을 받고 있겠지만은 구성원 모두 자발적 참여자입니다.
+TC39 위원회는 브라우저 제작자(모질라<sup>Mozilla</sup>, 구글<sup>Google</sup>, 애플<sup>Apple</sup>) 혹은 장비 개발사(삼성<sup>Samsung</sup> 등등)와 같은 웹 투자사의 다양한 집단에서 일하고 있는 50 ~ 100명 사람들로 구성되어 있습니다. 그 중 대다수가 이러한 기업의 직원이고 아마도 회사로부터 위원회로써의 의무를 다함으로써 보상을 받겠지만은 구성원 모두가 자발적 참여자입니다.
 
 The TC39 committee is comprised of between 50 and about 100 different people from a broad section of web-invested companies, such as browser makers (Mozilla, Google, Apple) and device makers (Samsung, etc). All members of the committee are volunteers, though many of them are employees of these companies and so may receive compensation in part for their duties on the committee.
 
-TC39는 일반적으로 매달 모여 지난 회의 이후로의 작업물을 3일에 걸쳐 검토하고 문제에 관해 토론하고 제안들에 관해 투표를 합니다. 회의 장소는 회의를 주최하려는 회사들 사이에서 교대로 주최하게 됩니다.
+TC39는 일반적으로 매달 모여 약 3일에 걸쳐 지난 회의 이후로의 작업물을 검토하고, 문제에 관해 토론하고, 의견들에 관해 투표를 합니다. 회의 장소는 회의를 주최하려는 구성원들의 회사들 사이에서 순환됩니다.
 
 TC39 meets generally about every other month, usually for about three days, to review work done by members since the last meeting, discuss issues, and vote on proposals. Meeting locations rotate among member companies willing to host.
 
-모든 TC39 제안 과정은 스테이지 0부터 스테이지 4까지의 5개의 단계 통해 진행됩니다. 진행 과정에 관해서는 다음의 공식 사이트에서 더 자세히 알 수 있습니다 https://tc39.es/process-document/
+모든 TC39 제안 과정은 0 단계부터 4 단계까지 총 5개의 단계<sup>Stage</sup> 통해 진행됩니다. 진행 과정에 관해서는 다음의 공식 사이트에서 더 자세히 알 수 있습니다 https://tc39.es/process-document/
 
 All TC39 proposals progress through a five-stage process—of course, since we're programmers, it's 0-based!—Stage 0 through Stage 4. You can read more about the Stage process here: https://tc39.es/process-document/
 
-스테이지 0는 간단히 얘기하자면 TC39 중 누군가가 괜찮은 아이디어에 관해 생각하고는 이를 주장하고 작업을 착수할 계획을 세웁니다. 즉, TC39의 위원회가 아닌 사람들도 소셜 네트워크나 블로그와 같은 비공식적인 채널을 통해 제안한 여러가지 아이디어는 실질적으로 "사전 스테이지 0"임을 뜻합니다. 이는 곧 TC39 위원회원이 "스테이지 0"에 공식적으로 제안을 주장할 수 있다는 뜻입니다.
+단계 0는 간단히 얘기하자면 TC39 중 누군가가 괜찮은 방안을 고안해내고 이를 주장<sup>Champion</sup>하고 작업을 착수할 계획을 세웁니다. 이는 곧 TC39의 위원회가 아닌 사람들이 소셜 네트워크나 블로그와 같은 비공식적인 방법을 통해 "제안한" 여러가지 방안은 실질적으로 "0 단계 이전"이라는 얘기입니다. 공식적인 "단계 0"가 되기위해서는 한 TC39 회원이 이 제안을 주장해야만 합니다.
 
 Stage 0 means roughly, someone on TC39 thinks it's a worthy idea and plans to champion and work on it. That means lots of ideas that non-TC39 members "propose," through informal means such as social media or blog posts, are really "pre-stage 0." You have to get a TC39 member to champion a proposal for it to be considered "Stage 0" officially.
 
-일단 어떠한 제안이 "스테이지 4"에 이르게 되면, 이는 그 다음해의 개정판에 포함되기 충분한 준비가 된 상태임을 뜻 합니다. 이러한 제안들은 그 과정이 몇 개월에서 몇 년까지도 걸리기도 합니다.
+일단 어떠한 제안이 "단계 4"에 이르게 되면, 이는 그 다음해의 개정판에 포함되기 충분한 준비가 된 상태가 되었단 얘기입니다. 하나의 제안이 이러한 단계를 거치는데 몇 개월에서 몇 년까지도 걸리수도 있습니다.
 
 Once a proposal reaches "Stage 4" status, it is eligible to be included in the next yearly revision of the language. It can take anywhere from several months to a few years for a proposal to work its way through these stages.
 
-TC39의 Github 저장소에 모든 제안들은 공식적으로 관리되고 있습니다: https://github.com/tc39/proposals
+TC39의 Github 저장소에 모든 제안들은 공개되어 관리되고 있습니다: https://github.com/tc39/proposals
 
 All proposals are managed in the open, on TC39's Github repository: https://github.com/tc39/proposals
 
-TC39 위원회든 아니든간에 이런 공공 토론장과 과정에 참여하는 것은 환영받는 일입니다. 하지만 오직 TC39 위원회만이 회의에 참여하고 제안과 그 변경에 관해 투표할 수 있습니다. 따라서 사실상 TC39 위원회의 목소리가 JS가 미래 방향에 관해 많은 비중을 차지하고 있는 셈이지요.
+TC39 위원회든 아니든간에 이런 공공 토론장과 제안서 작업 과정에 참여하는 것은 환영받는 일입니다. 하지만 오직 TC39 위원회만이 회의에 참여할 수 있고 제안과 그 변경에 관해 투표할 수 있습니다. 따라서 사실상 TC39 위원회의 목소리가 JS가 미래 방향에 관해 많은 비중을 차지하고 있는 셈입니다.
 
 Anyone, whether on TC39 or not, is welcome to participate in these public discussions and the processes for working on the proposals. However, only TC39 members can attend meetings and vote on the proposals and changes. So in effect, the voice of a TC39 member carries a lot of weight in where JS will go.
 
-일부는 확신하고 절망적일만큼 지속되고 있는 미신과는 달리, 여러가지 버전의 JavaScript는 *존재하지 않습니다*. 오직 *한 가지 버전의 JS*만이 TC39와 ECMA에 의해 관리되고 있습니다.
+일부는 확신하고 절망적일만큼 계속되고 있는 미신과는 달리, 여러가지 버전의 자바스크립트는 *존재하고 있지 않습니다*. 오직 **한 가지 버전의 JS**만이 TC39와 ECMA에 의해 관리되고 있습니다.
 
 Contrary to some established and frustratingly perpetuated myth, there are *not* multiple versions of JavaScript in the wild. There's just **one JS**, the official standard as maintained by TC39 and ECMA.
 
-2000년대 초반으로 돌아가 마이크로소프트가 관리하던 분리되어지고 역공학된(reverse-engineered) 버전의 "JScript" (심지어는 완전히 호환되지도 않던)라고 명명됐던 JS는 여러 버전의 JS가 있었습니다. 하지만 이로부터 시간이 흘렀고 오늘날의 JS에 관해 얘기할 때 여러 버전의 JS가 있다는 것은 이제 완전히 구식이고 맞지않는 주장이 되었습니다.
+2000년대 초반으로 돌아가 마이크로소프트가 분리 관리하고<sup>Forked</sup> 역공학하여<sup>Reverse-engineered</sup> 관리하던 "JScript"가 있던 시절엔, JS는 분명히 "여러 버전"의 JS가 있었습니다. 하지만 이로부터 많은 시간이 흘렀습니다. 현재의 JS에 관해 얘기할 때 이러한 주장은 이제는 완전히 구식이고 더 이상 맞지 않습니다.
 
 Back in the early 2000s, when Microsoft maintained a forked and reverse-engineered (and not entirely compatible) version of JS called "JScript," there were legitimately "multiple versions" of JS. But those days are long gone. It's outdated and inaccurate to make such claims about JS today.
 
-이제는 중앙 통제하에 모든 주요 브라우저들과 장비 제작자들은 그들의 JS 구현체를 준수하고 있습니다. 물론, 각 엔진의 특징들은 때때로 다르기도 합니다. 하지만 이는 v8 엔진 (크롬의 JS 엔진)의 특정 기능이 SpiderMonkey 엔진 (모질라의 JS 엔진)과 다르다거나 혹은 비호환적으로 작동한다는 뜻이 아닙니다.
+모든 주요 브라우저 및 장비 제작자들은 그들의 JS 구현체가 하나의 중앙화된 명세서에 따라 유지하자고 약속했습니다. 물론, 엔진들은 기능을 각기 다른 시간에 구현합니다. 하지만 이는 v8 엔진 (크롬의 JS 엔진)이 구현한 특정 기능이 스파이더몽키<sup>SpiderMonkey</sup> 엔진 (모질라의 JS 엔진)과 다르거나 혹은 호환적이 안 된다는 뜻이 아닙니다.
 
 All major browsers and device makers have committed to keeping their JS implementations compliant with this one central specification. Of course, engines implement features at different times. But it should never be the case that the v8 engine (Chrome's JS engine) implements a specified feature differently or incompatibly as compared to the SpiderMonkey engine (Mozilla's JS engine).
 
