@@ -193,7 +193,7 @@ Section B.1 and B.2 cover *additions* to JS (syntax and APIs) that web JS includ
 
 Section B.3 includes some conflicts where code may run in both web and non-web JS engines, but where the behavior *could* be observably different, resulting in different outcomes. Most of the listed changes involve situations that are labeled as early errors when code is running in strict mode.
 
-부록 B *올ㅋ (gotchas)*에선 흔히 마주치긴 어렵지만 미래의 안전을 위해 피해야만하는 구조들에 관한 좋은 방안에 관해 다룰 것입니다. 가능한 한 특정 JS 환경에서만 적용되는 동작에 의존하지 마시고 어디서든 사용 가능한 JS 명세서를 준수하시기 바랍니다.
+부록 B *깨달음(gotchas)*에선 흔히 마주치긴 어렵지만 미래의 안전을 위해 피해야만하는 구조들에 관한 좋은 방안에 관해 다룰 것입니다. 가능한 한 특정 JS 환경에서만 적용되는 동작에 의존하지 마시고 어디서든 사용 가능한 JS 명세서를 준수하시기 바랍니다.
 
 Appendix B *gotchas* aren't encountered very often, but it's still a good idea to avoid these constructs to be future safe. Wherever possible, adhere to the JS specification and don't rely on behavior that's only applicable in certain JS engine environments.
 
@@ -237,43 +237,43 @@ So an `alert(..)` call *is* JS, but `alert` itself is really just a guest, not p
 
 ### 항상 JS인 건 아니다
 
-브라우저의 개발자툴에서나 Node 환경에서 console 혹은 REPL(Read-Evaluate-Print-Loop)을 사용하는 것은 언뜻보기에는 매우 마치 JS 환경인 것 같은 느낌을 줍니다. 하지만 실제로 그렇지 않죠.
+브라우저의 개발자 도구<sup>Developer tools</sup>(혹은 Node)에서 콘솔<sup>Console</sup> 혹은 REPL(Read-Evaluate-Print-Loop)을 사용하는 것은 언뜻보기에는 마치 JS 환경인 것 같은 느낌을 줍니다. 하지만 실제로 그렇지 않습니다.
 
 Using the console/REPL (Read-Evaluate-Print-Loop) in your browser's Developer Tools (or Node) feels like a pretty straightforward JS environment at first glance. But it's not, really.
 
-개발자 툴은 그저 개발자들을 위한 도구일 뿐입니다. 개발자 도구는 개발자들의 삶을 편하게 만들어 주는 게 주요 목적입니다. 개발자 경험 (DX - Developer Experience)을 최우선시하고 있죠. JS의 엄격한 스펙의 미효한 차이를 정확하고 순수하게 반영하기 위한 도구가 *아닙니다*. 그렇기에 콘솔을 *순수한* JS 환경이라고 여긴다면 많은 우연과도 같은 일들이 "깨달음"을 줬다고 착각해버릴 여지가 있습니다.
+개발자 도구는 그저 개발자들을 위한 도구일 뿐입니다. 개발자 도구는 개발자들의 삶을 조금 더 편하게 만들어 주는 게 주요 목적입니다. 개발자 도구들은 개발자 경험<sup>DX (Developer Experience)</sup>을 최우선으로 합니다. JS의 동작의 미묘한 차이를 정확하고 순수하게 반영하기 위한 도구가 *아닙니다*. 그렇기에 콘솔을 *순수한* JS 환경이라고 여긴다면 많은 우연과도 같은 일들이 "깨달음"을 줬다고 착각해버릴 여지가 있습니다.
 
 Developer Tools are... tools for developers. Their primary purpose is to make life easier for developers. They prioritize DX (Developer Experience). It is *not* a goal of such tools to accurately and purely reflect all nuances of strict-spec JS behavior. As such, there's many quirks that may act as "gotchas" if you're treating the console as a *pure* JS environment.
 
-어쨋든 이러한 편의성은 큰 장점입니다. 전 개발자 도구가 여타 다른 개발자들의 삶을 쉽게 만들어 준다는 사실에 정말 기쁩니다. 변수와 같은 것들을 자동 완성해주는 매력적인 UX를 가지고 있다는 사실에 매우 만족스럽습니다. 하지만 이러한 개발자 도구들이 JS 프로그램의 엄격한 작동 양식과 늘 동일하게 작동할 거라고 기대하지 않았으면 좋겠다는 점을 짚고 넘어가고 싶습니다. 왜냐하면 그런 용도의 도구들이 아니기 때문이지요.
+어쨋든 이러한 편의성은 큰 장점입니다. 전 개발자 도구가 여타 다른 개발자들의 삶을 쉽게 만들어 준다는 사실에 정말 기쁩니다. 변수<sup>Variable</sup>나 프로퍼티<sup>Property</sup>를 자동 완성해주는 것과 같은 매력적인 UX를 가지고 있다는 사실에 매우 만족스럽습니다. 하지만 이러한 개발자 도구들이 JS 프로그램의 엄격한 작동 양식과 늘 동일하게 작동할 거라고 기대하지 않았으면 좋겠다는 점을 짚고 넘어가고 싶습니다. 왜냐하면 그런 용도의 도구들이 아니기 때문이지요.
 
 This convenience is a good thing, by the way! I'm glad Developer Tools make developers' lives easier! I'm glad we have nice UX charms like auto-complete of variables/properties, etc. I'm just pointing out that we can't and shouldn't expect such tools to *always* adhere strictly to the way JS programs are handled, because that's not the purpose of these tools.
 
-그러한 도구들의 행동 양식은 브라우저별로 다를뿐더러 순식간에 바뀔 때도 있기에 저는 이 곳에서 그 도구들의 디테일한 부분까지 굳이 "하드코드" 하는 것 처럼 다루지 않을 것입니다. 그렇게 될 경우 이 책의 내용들은 너무나도 순식간에 구식의 내용에 관해서 다루게 될 것이니까요.
+이런 도구들의 동작 방식은 브라우저별로 다를뿐더러 바뀌기도 하기에 (때로는 다소 자주) 저는 이 곳에서 그 도구들의 디테일한 부분까지 굳이 "하드코드" 하는 것 처럼 다루지 않을 것입니다. 그렇게 될 경우 이 책의 내용들은 너무나도 순식간에 구식의 내용에 관해서 다루게 될 것이니까요.
 
 Since such tools vary in behavior from browser to browser, and since they change (sometimes rather frequently), I'm not going to "hardcode" any of the specific details into this text, thereby ensuring this book text is outdated quickly.
 
-다만, 저는 네이티비 JS에서 동작하지 않을 거라는 가정을 부각시키기위해 각기 다른 JS 콘솔 환경에서 사실처럼 여겨지던 몇몇의 우연의 예시들에 관한 힌드들만 드리도록 하겠습니다.
+다만, 저는 기본 JS의 동작과 다르다는 점 부각시키기위해 몇몇 JS 콘솔 환경에서 사실처럼 여겨지던 몇몇의 우연히 일어날 수 있는 몇몇 예시들에 관한 힌트만 드리도록 하겠습니다.
 
 But I'll just hint at some examples of quirks that have been true at various points in different JS console environments, to reinforce my point about not assuming native JS behavior while using them:
 
-* 콘솔의 top-level에서 행해지는 `var(변수)` 혹은 `function(함수)` 선언은 글로벌 변수(`window`에 반영될 프로퍼티)를 생성할까요?
+* 콘솔의 최상위층<sup>Top-level</sup> "글로벌 스코프<sup>Global scope</sup>"에서 선언된 `var` 혹은 `function`은 실제로 글로벌 변수(그리고 그에 상응하는 `window`의 프로퍼티)를 생성할까요?
 
 * Whether a `var` or `function` declaration in the top-level "global scope" of the console actually creates a real global variable (and mirrored `window` property, and vice versa!).
 
-* "글로벌 스코프"이자 top-level에서는 여러번의 `let` 혹은 `const` 선언할 경우 무슨 일이 생길까요?
+* 최상위층 "글로벌 스코프"에서 여러번 `let` 혹은 `const`를 선언할 경우 무슨 일이 생길까요?
 
 * What happens with multiple `let` and `const` declarations in the top-level "global scope."
 
-* .js 파일에서 `"use strict";`를 실행하면 해당 세션을 strict 모드로 바꿔주는 것처럼 첫 실행문에서 `"use strict";`를 수행하도록 `<enter>`를 눌러 명령문을 실행할 경우 경우 모든 콘솔 세션을 strict 모드로 전환하게 할까요?
+* .js 파일에서 `"use strict";`를 실행하면 해당 세션을 엄격 모드<sup>Strict mode</sup>로 바꿔주는 것처럼 첫 실행문에서 `"use strict";` (`<enter>`를 누름으로) 수행하면 해당 콘솔 세션의 나머지는 엄격 모드로 전환될까요?
 
 * Whether `"use strict";` on one line-entry (pressing `<enter>` after) enables strict mode for the rest of that console session, the way it would on the first line of a .js file, as well as whether you can use `"use strict";` beyond the "first line" and still get strict mode turned on for that session.
 
-* non-strict 모드에서 함수 호출의 경우 `this`는 어떻게 바인딩될까요? 그리고 "global 객체"는 글로벌 변수들을 모두 포함하고 있을까요?
+* 비엄격 모드<sup>Non-strict mode</sup>에서 함수 호출을 하면 `this`는 어떻게 바인딩될까요? 그리고 "글로벌 객체<sup>Global object</sup>"는 글로벌 변수들을 모두 포함하고 있을까요?
 
 * How non-strict mode `this` default-binding works for function calls, and whether the "global object" used will contain expected global variables.
 
-* 여러줄의 엔트리에서 호이스팅은 어떻게 작동할까요?
+* 여러줄에 걸쳐 입력을 하면 호이스팅<sup>Hoisting</sup>(책 2 *스코프와 클로져<sup>Scope and Closures</sup>* 참고)은 어떻게 작동할까요?
 
 * How hoisting (see Book 2, *Scope & Closures*) works across multiple line entries.
 
@@ -281,59 +281,59 @@ But I'll just hint at some examples of quirks that have been true at various poi
 
 * ...several others
 
-개발자 콘솔은 마치 JS 컴파일러가 JS 엔진을 통해 .js에 있는 코드를 실행하는 것처럼 행동하려고 노력하지 않습니다. 단지, 여러분에게서 간단한 몇 줄의 코드들을 빠르게 입력받고 그 결과를 재빠르게 확인할 수 있도록 쉽게 도와줄 뿐입니다. 이러한 부분들은 전반적으로 실사용 사례와 다를 뿐더러 각각의 환경에서 불합리한 다른 결과 도출하기도 합니다.
+개발자 콘솔은 마치 JS 컴파일러가 JS 엔진을 통해 .js에 있는 코드를 실행하는 것처럼 행동하려고 노력하지 않습니다. 단지, 여러분에게서 간단한 몇 줄의 코드를 빠르게 입력받고 그 결과를 즉각적으로 보여줘 여러분을 도와줄 뿐입니다. 이러한 부분들은 전적으로 실사용 사례와 다를 뿐더러, 하나의 도구가 개발자 도구와 실환경 모두 동일하게 결과를 내놓으라고 기대하는 것은 불합리하기도 합니다.
 
 The developer console is not trying to pretend to be a JS compiler that handles your entered code exactly the same way the JS engine handles a .js file. It's trying to make it easy for you to quickly enter a few lines of code and see the results immediately. These are entirely different use cases, and as such, it's unreasonable to expect one tool to handle both equally.
 
-JS 문법으로 표현되는 개발자 도구에서 보여주는 결과와 행동 양식을 믿지 마세요. 대신해서 스펙을 참고하고 콘솔을 "JS 친화적" 환경이라고 생각하세요. 개발자 도구는 그렇기 위해 존재하는 유용한 친구들입니다.
+개발자 도구에서 보여지는 동작을 JS 문법 *그대로* 나타난다고 믿지 마시고, 명세서를 읽으십시오. 대신해서 콘솔을 "JS 친화적인" 환경이라고 생각하십시오. 개발자 도구는 그럴만한 권리가 있는 유용한 도구입니다.
 
 Don't trust what behavior you see in a developer console as representing *exact* to-the-letter JS semantics; for that, read the specification. Instead, think of the console as a "JS-friendly" environment. That's useful in its own right.
 
 ## 다양한 면모
 
-프로그래밍 언어의 맥락에서 "패러다임"이란 용어는 넓은 사고 방식과 코드의 구조화하는 접근법을 말한다. 패러다임에는 각각의 프로그램들을 구별짓는 스타일과 형태의 무수히 많은 차이가 있다. 예를들어 코드에 담긴 그들만의 특별한 많은 라이브러리나 프레임워크들이 각기 가지고 있는 특징과 같은 것들이다.
+프로그래밍 언어의 그 흐름에서 "패러다임<sup>Paradigm</sup>"이란 말은 코드의 구조화하기 위한 전반적인 사고 방식과 접근법을 말합니다. 패러다임에는 프로그램을 구분하게 해주는 무수히 많은 변형된 방식과 형태들이 존재하고 있습니다. 예를들어 코드에 담긴 그들만의 독특한 특징들을 포함한 셀수없이 많은 라이브러리나 프레임워크들이 그렇습니다.
 
 The term "paradigm" in programming language context refers to a broad (almost universal) mindset and approach to structuring code. Within a paradigm, there are myriad variations of style and form that distinguish programs, including countless different libraries and frameworks that leave their unique signature on any given code.
 
-하지만 프로그램 고유 스타일이 어떠하든 패러다임에 관한 전반적인 모습은 거의 늘 항상 모든 프로그램을 한 눈에 알 수 있도록 구분되어 있습니다.
+하지만 프로그램 개개의 모양새가 어떠하든 패러다임에 관한 전반적인 모습은 거의 늘 항상 모든 프로그램을 한 눈에 알 수 있도록 구분되어 있습니다.
 
 But no matter what a program's individual style may be, the big picture divisions around paradigms are almost always evident at first glance of any program.
 
-대표적인 패러다임 레벨의 코드 범주로는 절차지향적(prodedural), 객체지향(object-oriented - OO/classes), 그리고 함수형 프로그래밍(functional - FP)들이 있습니다.
+대표적인 패러다임 수준의 코드 범주로는 절차지향적<sup>Prodedural</sup> 객체지향<sup>Object-oriented (OO/classes)</sup>, 그리고 함수형 프로그래밍<sup>Functional (FP)</sup>이 있습니다.
 
 Typical paradigm-level code categories include procedural, object-oriented (OO/classes), and functional (FP):
 
-* 절차지향적 스타일은 절차(procedure)라고 불리우는 단위들이 함께 묶여서 구성하고, 이러한 절차들을 미리 결정되어있는 작업들의 순서에 맞춰 절차지향적(linear progression)인 과정을 통해 탑-다운(top-down) 형태로 구성된 스타일입니다.
+* 절차지향적 방식은 절차<sup>Procedure</sup>라고 불리는 상호 연관된 단위들이 함께 묶고, 이러한 절차들을 미리 결정되어있는 작업들의 순서에 맞춰 절차지향적<sup>linear progression</sup>인 과정인 형태인 탑-다운<sup>top-down</sup>으로 코드를 구성합니다.
 
 * Procedural style organizes code in a top-down, linear progression through a pre-determined set of operations, usually collected together in related units called procedures.
 
-* 객체지향 스타일은 데이터와 연산 로직들로 구성된 코드들을 하나의 클래스라는 단위로 묶어 구성하는 형태를 얘기합니다.
+* 객체지향 방식은 데이터와 연산 로직을 하나의 클래스라는 단위로 묶어 구성하는 형태를 얘기합니다.
 
 * OO style organizes code by collecting logic and data together into units called classes.
 
-* 함수형 프로그래밍은 코드들을 각각의 절차(procedure)와는 다르게 순수 함수형태로 코드들을 구성하고 이렇게 구성된 함수들을 값으로써 이용하는 모습을 합니다.
+* 함수형 프로그래밍은 코드들을 함수(절차지향과는 다르게 순수 함수 형태로)에 구성하고, 이렇게 구성된 함수들을 값으로써 이용합니다.
 
 * FP style organizes code into functions (pure computations as opposed to procedures), and the adaptations of those functions as values.
 
-패러다임은 옳고 그름의 문제가 아닙니다. 단지 패러다임이란 프로그래머가 문제와 해결책의 접근 방법에 관해 안내해주고, 코드의 구성과 유지 방법에 관한 방향성에 관한 이야기입니다.
+패러다임은 옳고 그름의 문제가 아닙니다. 단지 패러다임이란 프로그래머가 문제와 해결책에 대한 접근 방법을 안내하고 이를 통해 만들 수 있게해주며, 코드를 정리하고 유지 방법에 관한 방향성에 관한 이야기입니다.
 
 Paradigms are neither right nor wrong. They're orientations that guide and mold how programmers approach problems and solutions, how they structure and maintain their code.
 
-몇몇 언어들은 하나의 패러다임에 지나치게 편향되어 있기도 합니다. C는 절차지향적인 반면 Java와 C++는 전반적으로 클래스 지향적이고 Haskell는 함수형 프로그래밍의 연속이죠.
+몇몇 언어들은 하나의 패러다임에 지나치게 편향되어 있기도 합니다. C는 절차지향적인 반면 자바와 C++는 거의 전적으로 클래스 지향적이고 하스켈<sup>Haskell</sup>는 함수형 프로그래밍의 연속이죠.
 
 Some languages are heavily slanted toward one paradigm—C is procedural, Java/C++ are almost entirely class oriented, and Haskell is FP through and through.
 
-하지만 많은 언어들은 다양한 여럿 패러다임으로부터 유래한 코드 패턴들을 지원하고 심지어는 이들을 같이 사용할 수도 있게 설계되어 있습니다. 그래서 이러한 언어들을 다중 패러다임 언어(multi-paradigm language)라고 부르며 무한한 사용성을 가지고 있습니다. 한 프로그램에서 여러 패러다임들이 혼용되어 사용되는 경우도 있습니다.
+하지만 많은 언어들은 다양한 패러다임으로부터 유래한 코딩 양식들을 지원하고 심지어는 이들을 같이 사용할 수도 있게 설계되어 있습니다. 그래서 이러한 언어들을 "다중 패러다임 언어<sup>Multi-paradigm language</sup>"라고 부르며 무한한 사용성을 가지고 있습니다. 몇몇 경우 한 프로그램에서 여러 패러다임들이 혼용되어 사용되는 경우도 있습니다.
 
 But many languages also support code patterns that can come from, and even mix and match from, different paradigms. So called "multi-paradigm languages" offer ultimate flexibility. In some cases, a single program can even have two or more expressions of these paradigms sitting side by side.
 
-JavaScript 또한 다중 패러다임 언어입니다. JavaScript에서는 절차지향적으로 클래스 중심으로 혹은 함수형 형태로도 코드를 짤수 있습니다. 코드 전반에 걸쳐 혹은 특정 패러다임만을 이용할 수 있도록 강요하지 않고 한 줄 한 줄 각각 다른 선택을 할 수 있도록 되어있습니다.
+자바스크립트 또한 다중 패러다임 언어입니다. 자바스크립트는 절차지향적으로도, 클래스 중심으로도, 혹은 함수형 프로그래밍 형식으로도 코드를 짤수 있습니다. 코드 전반에 걸쳐 혹은 특정 하나의 패러다임만을 이용할 수 있도록 강요하지 않고 한줄 한줄 각각 다른 선택을 할 수 있도록 되어있습니다.
 
 JavaScript is most definitely a multi-paradigm language. You can write procedural, class-oriented, or FP-style code, and you can make those decisions on a line-by-line basis instead of being forced into an all-or-nothing choice.
 
 ## 하위 호환성<sup>Backwards</sup>과 상위 호환성<sup>Forwards</sup>
 
-JavaScript가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*의 보호하자는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관되어 있지만 다른 용어인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
+자바스크립트가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*의 보호하자는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관되어 있지만 다른 용어인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
 
 One of the most foundational principles that guides JavaScript is preservation of *backwards compatibility*. Many are confused by the implications of this term, and often confuse it with a related but different term: *forwards compatibility*.
 
