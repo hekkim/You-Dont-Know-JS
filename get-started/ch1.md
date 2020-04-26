@@ -207,31 +207,31 @@ Is this code a JS program?
 alert("Hello, JS!");
 ```
 
-위 코드를 어떻게 바로보냐에 따라 달려있습니다. 위의 `alert(..)` 함수는 JS 스펙에는 포함돼있지는 않지만 모든 웹 JS 관경에 *존재*하고 있습니다. 하지만, 부록 B에서 이에 관해 찾진 못 할 것입니다.
+이는 위 코드를 어떻게 바로보냐에 따라 달려있습니다. `alert(..)` 함수<sup>Function</sup>는 JS 명세서에는 없지만, 모든 웹 JS 환경에 *존재*합니다. 하지만, 부록 B에서 이에 관해 찾을 수 없을겁니다.
 
 Depends on how you look at things. The `alert(..)` function shown here is not included in the JS specification, but it *is* in all web JS environments. Yet, you won't find it in Appendix B, so what gives?
 
-브라우저 JS 엔진 Node.js 등등의 다양한 JS 환경에서는 브라우저에서 뜨는 경고창과 같은 특정 환경에 친화적인 여러 API가 여러분의 JS 프로그램에 추가되어 있습니다.
+다양한 JS 환경(브라우저 JS 엔진, Node.js 등등)에서는 사용자의 브라우저에서 뜨는 경고창과 같이 특정 환경에 특화된 여러 API가 여러분의 JS 프로그램에 추가되어 있습니다.
 
 Various JS environments (like browser JS engines, Node.js, etc.) add APIs into the global scope of your JS programs that give you environment-specific capabilities, like being able to pop an alert-style box in the user's browser.
 
-실은 `fetch(..)`, `getCurrentLocation(..)` 혹은 `getUserMedia(..)`와 같이 다양한 JS의 API로 보이는 것들은 JS API로 가장한 웹 API들입니다. 반면, Node.js 환경에서는 `fs.write(..)`과 같은 다양한 모듈들을 내장하고 있죠.
+실제로 `fetch(..)`, `getCurrentLocation(..)` 그리고 `getUserMedia(..)`와 같이 다양한 JS의 API로 보이는 것들은 웹 API입니다. 반면, Node.js 환경에서는 `fs.write(..)`과 같은 내장된 다양한 모듈<sup>Module</sup>을 내장하고 있습니다.
 
 In fact, a wide range of JS-looking APIs, like `fetch(..)`, `getCurrentLocation(..)`, and `getUserMedia(..)`, are all web APIs that look like JS. In Node.js, we can access hundreds of API methods from various built-in modules, like `fs.write(..)`.
 
-`console.log(..)`처럼 모든 `console.*` 함수들은 역시 위와 같은 예입니다. 그것들은 JS에 특정되어 스펙화되어 있지는 않지만, 어느정도의 합의에 따라 보편적인 이용성때문에 대부분의 JS 환경에서 정의되어 있습니다.
+`console.log(..)`(그리고 모든 `console.*` 메서드)는 역시 위와 같은 경우입니다. 이러한 것들은 JS에 명시화되어 있지는 않지만, 어느정도의 합의 하에 보편적인 이용성을 위해 거의 모든 JS 환경에서 정의되어 있습니다.
 
 Another common example is `console.log(..)` (and all the other `console.*` methods!). These are not specified in JS, but because of their universal utility are defined by pretty much every JS environment, according to a roughly agreed consensus.
 
-그래서 결론적으로 `alert(..)` 혹은 `console.log(..)`와 같은 것들은 JS에 의해 정의되어 있지는 않습니다. 다만 JS 처럼 *여겨질뿐*입니다. JS 문법을 잘 지키는 그저 함수나 객체의 함수들입니다. 그들의 작동 방식은 JS 엔진의 환경에의해 관리되지만 표면적으로 그들은 JS의 환경에서 제 역할을 하기위해 JS를 따르고 있을 뿐입니다.
+그래서 결론적으로 `alert(..)` 혹은 `console.log(..)`와 같은 것들은 JS에 정의되어 있지 않습니다. 다만 JS 처럼 *여겨질뿐*입니다. JS 문법을 잘 지키는 그저 함수 혹은 객체 메서드입니다. 이러한 것들이 JS의 환경에서 제 역할을 하기위해 표면적으로 JS에 내재되어 있는 것처럼 보이지만, 그들의 작동 방식은 JS 엔진을 구동하는 환경에의해 관리됩니다.
 
 So `alert(..)` and `console.log(..)` are not defined by JS. But they *look* like JS. They are functions and object methods and they obey JS syntax rules. The behaviors behind them are controlled by the environment running the JS engine, but on the surface they definitely have to abide by JS to be able to play in the JS playground.
 
-대부분의 브라우저간 차이에 관해 "JS는 너무 일관성이 없어"라고 불평하곤하는 주장들은 실제로는 JS의 작동 양식이 아닌 그들의 환경의 차이로 인해 발생하는 것입니다.
+브라우저간<sup>Cross-browser</sup> 차이로 인해 발생하는 대부분의 "JS는 너무 일관성이 없다!"란 불평은 실제로는 JS 자체의 작동 방식이 아닌 그들의 환경의 작동 방식의 차이로 인한 것입니다.
 
 Most of the cross-browser differences people complain about with "JS is so inconsistent!" claims are actually due to differences in how those environment behaviors work, not in how the JS itself works.
 
-그래서 `alert(..)`를 호출하는 것은 JS지만 `alert` 자체는 공식 JS의 스펙의 일부가 아닌 그저 단순한 손님과도 같은 것입니다.
+그래서 `alert(..)`를 호출하는 것은 JS지만 `alert` 자체는 공식 JS 명세서의 부분이 아닌 그저 단순한 손님과도 같은 것입니다.
 
 So an `alert(..)` call *is* JS, but `alert` itself is really just a guest, not part of the official JS specification.
 
