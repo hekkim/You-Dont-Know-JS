@@ -61,3 +61,11 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Pragma: 프래그마
 * Comment: 주석
 * Whitespace: 빈공백
+* Literal: 리터럴
+* Build process tool: 빌드 프로세스 툴
+* Namespace: 네임스페이스
+* State: 상태값
+* Delimit: 범위를 정하다
+* Back-tick: 백틱
+* Interpolation: 인터폴레이션
+* Boolean: 불리언

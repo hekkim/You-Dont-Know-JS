@@ -801,7 +801,7 @@ Moreover, a wide shift is happening toward more/most new JS code being written u
 
 Taken together, strict mode is largely the de facto default even though technically it's not actually the default.
 
-## 정의된
+## 정의된<sup>Defined</sup>
 
 JS는 ECMAScript 표준(이 시리즈에서는 ES2019 버전)의 구현체이고 이는 ECMA에 의해 주최되는 TC39에 의해 그 방향이 결정되고 있습니다. JS는 브라우저 그리고 Node.js와 같은 환경 모두에서 동작할 수 있습니다.
 
