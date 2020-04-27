@@ -35,7 +35,6 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Exception: 오류
 * Transpliation: 트랜스파일
 * Babel: 바벨
-* Scope: 스코프
 * Scoped: 스코프에 갇힌
 * Promise: 프로미스
 * Interpretation: 인터프리트
@@ -69,3 +68,12 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Back-tick: 백틱
 * Interpolation: 인터폴레이션
 * Boolean: 불리언
+* Index: 인덱스
+* Synbol: 심볼
+* Low-level: 하위층
+* Key: 키
+* Built-in: 내장형
+* Return: 반환값, 반환하다
+* Block: 블록
+* Mutation: 뮤테이션
+* Associate: 연동

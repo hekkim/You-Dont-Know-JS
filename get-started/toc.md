@@ -16,7 +16,7 @@
 * Chapter 2: JS 알아보기
     * 각 파일은 프로그램이다
     * 값<sup>Values</sup>
-    * Declaring and Using Variables
+    * 변수의 선언과 사용
     * Functions
     * Comparisons
     * How We Organize in JS
