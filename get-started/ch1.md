@@ -53,7 +53,7 @@ The truth is, the name JavaScript is an artifact of marketing shenanigans. When 
 
 Why? Because this language was originally designed to appeal to an audience of mostly Java programmers, and because the word "script" was popular at the time to refer to lightweight programs. These lightweight "scripts" would be the first ones to embed inside of pages on this new thing called the web!
 
-다시 말해, 자바스크립트는 무겁고 그 당시에 훨씬 더 잘 알려진 자바를 빛 좋은 대용 언어로서 자리잡기 위한 마케팅 전략이였죠. 이러한 점에서 "웹자바<sup>WebJava</sup>"라고 쉽게 부를 수도 있습니다.
+다시 말해, 자바스크립트는 무겁고 그 당시에 훨씬 더 잘 알려진 자바를 빛 좋은 대용 언어로서 자리잡기 위한 마케팅 전략이였죠. 이러한 점에서 "웹자바"<sup>WebJava</sup>라고 쉽게 부를 수도 있습니다.
 
 In other words, JavaScript was a marketing ploy to try to position this language as a palatable alternative to writing the heavier and more well-known Java of the day. It could just as easily have been called "WebJava," for that matter.
 
@@ -65,7 +65,7 @@ There are some superficial resemblances between JavaScript's code and Java code.
 
 For example, we use the `{` to begin a block of code and the `}` to end that block of code, just like C/C++ and Java. We also use the `;` to punctuate the end of a statement.
 
-어떤면에서는 이러한 문법적인 관계보다 법적관계가 더 깊숙이 연관되어 있기도 합니다. 오라클<sup>Oracal</sup> (전신 썬 마이크로시스템즈<sup>Sun</sup>)은 자바를 소유하고 운영하고 있을뿐만이 아니라 "자바스크립트"의 (넷스케프를 통해서) 공식 상표 역시도 소유하고 있습니다. 이 상표는 거의 시행되지 않고있으며 그 당시에는 사용이 불가능했을 것입니다.
+어떤면에서는 이러한 문법적인 관계보다 법적관계가 더 깊숙이 연관되어 있기도 합니다. 전신 썬 마이크로시스템즈<sup>Sun</sup>인 오라클<sup>Oracal</sup>은 자바를 소유하고 운영하고 있을뿐만이 아니라 넷스케프를 통해서 "자바스크립트"의 공식 상표 역시도 소유하고 있습니다. 이 상표는 거의 시행되지 않고있으며 그 당시에는 사용이 불가능했을 것입니다.
 
 In some ways, legal relationships run even deeper than the syntax. Oracle (via Sun), the company that still owns and runs Java, also owns the official trademark for the name "JavaScript" (via Netscape). This trademark is almost never enforced, and likely couldn't be at this point.
 
@@ -151,7 +151,7 @@ Contrary to some established and frustratingly perpetuated myth, there are *not*
 
 Back in the early 2000s, when Microsoft maintained a forked and reverse-engineered (and not entirely compatible) version of JS called "JScript," there were legitimately "multiple versions" of JS. But those days are long gone. It's outdated and inaccurate to make such claims about JS today.
 
-모든 주요 브라우저 및 장비 제작자들은 그들의 JS 구현체가 하나의 중앙화된 명세서에 따라 유지하자고 약속했습니다. 물론, 엔진들은 기능을 각기 다른 시간에 구현합니다. 하지만 이는 v8 엔진 (크롬의 JS 엔진)이 구현한 특정 기능이 스파이더몽키<sup>SpiderMonkey</sup> 엔진 (모질라의 JS 엔진)과 다르거나 혹은 호환적이 안 된다는 뜻이 아닙니다.
+모든 주요 브라우저 및 장비 제작자들은 그들의 JS 구현체가 하나의 중앙화된 명세서에 따라 유지하자고 약속했습니다. 물론, 엔진들은 기능을 각기 다른 시간에 구현합니다. 하지만 이는 크롬의 JS 엔진인 v8 엔진 이 구현한 특정 기능이 모질라의 JS 엔인 스파이더몽키<sup>SpiderMonkey</sup> 엔진 과 다르거나 혹은 호환이 안 된다는 뜻이 아닙니다.
 
 All major browsers and device makers have committed to keeping their JS implementations compliant with this one central specification. Of course, engines implement features at different times. But it should never be the case that the v8 engine (Chrome's JS engine) implements a specified feature differently or incompatibly as compared to the SpiderMonkey engine (Mozilla's JS engine).
 
@@ -159,7 +159,7 @@ All major browsers and device makers have committed to keeping their JS implemen
 
 That means you can learn **one JS**, and rely on that same JS everywhere.
 
-### 웹 규칙의 모든 것 (JS 관한)
+### JS 관한 웹 규칙의 모든 것
 
 JS 환경이 브라우저에서 서버 그너머 로봇 등등 지속적으로 넓혀진데에 반해 JS를 지배한 단 하나의 환경은 웹입니다. 이는 곧 어떻게 JS가 웹을 위해 구현되는지가 실질적으로 중요한 현실이란 것입니다.
 
@@ -197,7 +197,7 @@ Section B.3 includes some conflicts where code may run in both web and non-web J
 
 Appendix B *gotchas* aren't encountered very often, but it's still a good idea to avoid these constructs to be future safe. Wherever possible, adhere to the JS specification and don't rely on behavior that's only applicable in certain JS engine environments.
 
-### JS가 아닌 것 (웹)...
+### JS가 아니고 웹인 것들...
 
 이것은 JS 프로그램 코드 일까요?
 
@@ -211,7 +211,7 @@ alert("Hello, JS!");
 
 Depends on how you look at things. The `alert(..)` function shown here is not included in the JS specification, but it *is* in all web JS environments. Yet, you won't find it in Appendix B, so what gives?
 
-다양한 JS 환경(브라우저 JS 엔진, Node.js 등등)에서는 사용자의 브라우저에서 뜨는 경고창과 같이 특정 환경에 특화된 여러 API가 여러분의 JS 프로그램에 추가되어 있습니다.
+브라우저 JS 엔진, Node.js 등등의 다양한 JS 환경에서는 사용자의 브라우저에서 뜨는 경고창과 같이 특정 환경에 특화된 여러 API가 여러분의 JS 프로그램에 추가되어 있습니다.
 
 Various JS environments (like browser JS engines, Node.js, etc.) add APIs into the global scope of your JS programs that give you environment-specific capabilities, like being able to pop an alert-style box in the user's browser.
 
@@ -219,7 +219,7 @@ Various JS environments (like browser JS engines, Node.js, etc.) add APIs into t
 
 In fact, a wide range of JS-looking APIs, like `fetch(..)`, `getCurrentLocation(..)`, and `getUserMedia(..)`, are all web APIs that look like JS. In Node.js, we can access hundreds of API methods from various built-in modules, like `fs.write(..)`.
 
-`console.log(..)`(그리고 모든 `console.*` 메서드)는 역시 위와 같은 경우입니다. 이러한 것들은 JS에 명시화되어 있지는 않지만, 어느정도의 합의 하에 보편적인 이용성을 위해 거의 모든 JS 환경에서 정의되어 있습니다.
+`console.log(..)`을 비롯해 모든 `console.*` 메서드는 역시 위와 같은 경우입니다. 이러한 것들은 JS에 명시화되어 있지는 않지만, 어느정도의 합의 하에 보편적인 이용성을 위해 거의 모든 JS 환경에서 정의되어 있습니다.
 
 Another common example is `console.log(..)` (and all the other `console.*` methods!). These are not specified in JS, but because of their universal utility are defined by pretty much every JS environment, according to a roughly agreed consensus.
 
@@ -237,7 +237,7 @@ So an `alert(..)` call *is* JS, but `alert` itself is really just a guest, not p
 
 ### 항상 JS인 건 아니다
 
-브라우저의 개발자 도구<sup>Developer tools</sup>(혹은 Node)에서 콘솔<sup>Console</sup> 혹은 REPL(Read-Evaluate-Print-Loop)을 사용하는 것은 언뜻보기에는 마치 JS 환경인 것 같은 느낌을 줍니다. 하지만 실제로 그렇지 않습니다.
+브라우저의 개발자 도구<sup>Developer tools</sup> 혹은 Node에서 콘솔<sup>Console</sup> 혹은 REPL (Read-Evaluate-Print-Loop)을 사용하는 것은 언뜻보기에는 마치 JS 환경인 것 같은 느낌을 줍니다. 하지만 실제로 그렇지 않습니다.
 
 Using the console/REPL (Read-Evaluate-Print-Loop) in your browser's Developer Tools (or Node) feels like a pretty straightforward JS environment at first glance. But it's not, really.
 
@@ -249,7 +249,7 @@ Developer Tools are... tools for developers. Their primary purpose is to make li
 
 This convenience is a good thing, by the way! I'm glad Developer Tools make developers' lives easier! I'm glad we have nice UX charms like auto-complete of variables/properties, etc. I'm just pointing out that we can't and shouldn't expect such tools to *always* adhere strictly to the way JS programs are handled, because that's not the purpose of these tools.
 
-이런 도구들의 동작 방식은 브라우저별로 다를뿐더러 바뀌기도 하기에 (때로는 다소 자주) 저는 이 곳에서 그 도구들의 디테일한 부분까지 굳이 "하드코드" 하는 것 처럼 다루지 않을 것입니다. 그렇게 될 경우 이 책의 내용들은 너무나도 순식간에 구식의 내용에 관해서 다루게 될 것이니까요.
+이런 도구들의 동작 방식은 브라우저별로 다를뿐더러 (때로는 다소 자주) 바뀌기도 하고 저는 이 곳에서 그 도구들의 디테일한 부분까지 굳이 "하드코드" 하는 것 처럼 다루지 않을 것입니다. 그렇게 될 경우 이 책의 내용들은 너무나도 순식간에 구식의 내용에 관해서 다루게 될 것이니까요.
 
 Since such tools vary in behavior from browser to browser, and since they change (sometimes rather frequently), I'm not going to "hardcode" any of the specific details into this text, thereby ensuring this book text is outdated quickly.
 
@@ -257,7 +257,7 @@ Since such tools vary in behavior from browser to browser, and since they change
 
 But I'll just hint at some examples of quirks that have been true at various points in different JS console environments, to reinforce my point about not assuming native JS behavior while using them:
 
-* 콘솔의 최상위층<sup>Top-level</sup> "글로벌 스코프<sup>Global scope</sup>"에서 선언된 `var` 혹은 `function`은 실제로 글로벌 변수(그리고 그에 상응하는 `window`의 프로퍼티)를 생성할까요?
+* 콘솔의 최상위층<sup>Top-level</sup> "글로벌 스코프"<sup>Global scope</sup>에서 선언된 `var` 혹은 `function`은 실제로 글로벌 변수와 그에 상응하는 `window`의 프로퍼티를 생성할까요?
 
 * Whether a `var` or `function` declaration in the top-level "global scope" of the console actually creates a real global variable (and mirrored `window` property, and vice versa!).
 
@@ -265,11 +265,11 @@ But I'll just hint at some examples of quirks that have been true at various poi
 
 * What happens with multiple `let` and `const` declarations in the top-level "global scope."
 
-* .js 파일에서 `"use strict";`를 실행하면 해당 세션을 엄격 모드<sup>Strict mode</sup>로 바꿔주는 것처럼 첫 실행문에서 `"use strict";` (`<enter>`를 누름으로) 수행하면 해당 콘솔 세션의 나머지는 엄격 모드로 전환될까요?
+* .js 파일에서 `"use strict";`를 실행하면 해당 세션을 엄격 모드<sup>Strict mode</sup>로 바꿔주는 것처럼 첫 실행문에서 `"use strict";` 입력후 `<enter>`를 눌러 해당 명령문을 수행하면 해당 콘솔 세션의 나머지는 엄격 모드로 전환될까요?
 
 * Whether `"use strict";` on one line-entry (pressing `<enter>` after) enables strict mode for the rest of that console session, the way it would on the first line of a .js file, as well as whether you can use `"use strict";` beyond the "first line" and still get strict mode turned on for that session.
 
-* 비엄격 모드<sup>Non-strict mode</sup>에서 함수 호출을 하면 `this`는 어떻게 바인딩될까요? 그리고 "글로벌 객체<sup>Global object</sup>"는 글로벌 변수들을 모두 포함하고 있을까요?
+* 비엄격 모드<sup>Non-strict mode</sup>에서 함수 호출을 하면 `this`는 어떻게 바인딩될까요? 그리고 "글로벌 객체"<sup>Global object</sup>는 글로벌 변수들을 모두 포함하고 있을까요?
 
 * How non-strict mode `this` default-binding works for function calls, and whether the "global object" used will contain expected global variables.
 
@@ -291,7 +291,7 @@ Don't trust what behavior you see in a developer console as representing *exact*
 
 ## 다양한 면모
 
-프로그래밍 언어의 그 흐름에서 "패러다임<sup>Paradigm</sup>"이란 말은 코드의 구조화하기 위한 전반적인 사고 방식과 접근법을 말합니다. 패러다임에는 프로그램을 구분하게 해주는 무수히 많은 변형된 방식과 형태들이 존재하고 있습니다. 예를들어 코드에 담긴 그들만의 독특한 특징들을 포함한 셀수없이 많은 라이브러리나 프레임워크들이 그렇습니다.
+프로그래밍 언어의 그 흐름에서 "패러다임"<sup>Paradigm</sup>이란 말은 코드의 구조화하기 위한 전반적인 사고 방식과 접근법을 말합니다. 패러다임에는 프로그램을 구분하게 해주는 무수히 많은 변형된 방식과 형태들이 존재하고 있습니다. 예를들어 코드에 담긴 그들만의 독특한 특징들을 포함한 셀수없이 많은 라이브러리나 프레임워크들이 그렇습니다.
 
 The term "paradigm" in programming language context refers to a broad (almost universal) mindset and approach to structuring code. Within a paradigm, there are myriad variations of style and form that distinguish programs, including countless different libraries and frameworks that leave their unique signature on any given code.
 
@@ -311,7 +311,7 @@ Typical paradigm-level code categories include procedural, object-oriented (OO/c
 
 * OO style organizes code by collecting logic and data together into units called classes.
 
-* 함수형 프로그래밍은 코드들을 함수(절차지향과는 다르게 순수 함수 형태로)에 구성하고, 이렇게 구성된 함수들을 값으로써 이용합니다.
+* 함수형 프로그래밍은 코드들을 절차지향과는 다르게 순수 함수 형태로 함수에 구성하고, 이렇게 구성된 함수들을 값으로써 이용합니다.
 
 * FP style organizes code into functions (pure computations as opposed to procedures), and the adaptations of those functions as values.
 
@@ -323,7 +323,7 @@ Paradigms are neither right nor wrong. They're orientations that guide and mold 
 
 Some languages are heavily slanted toward one paradigm—C is procedural, Java/C++ are almost entirely class oriented, and Haskell is FP through and through.
 
-하지만 많은 언어들은 다양한 패러다임으로부터 유래한 코딩 양식들을 지원하고 심지어는 이들을 같이 사용할 수도 있게 설계되어 있습니다. 그래서 이러한 언어들을 "다중 패러다임 언어<sup>Multi-paradigm language</sup>"라고 부르며 무한한 사용성을 가지고 있습니다. 몇몇 경우 한 프로그램에서 여러 패러다임들이 혼용되어 사용되는 경우도 있습니다.
+하지만 많은 언어들은 다양한 패러다임으로부터 유래한 코딩 양식들을 지원하고 심지어는 이들을 같이 사용할 수도 있게 설계되어 있습니다. 그래서 이러한 언어들을 "다중 패러다임 언어"<sup>Multi-paradigm language</sup>라고 부르며 무한한 사용성을 가지고 있습니다. 몇몇 경우 한 프로그램에서 여러 패러다임들이 혼용되어 사용되는 경우도 있습니다.
 
 But many languages also support code patterns that can come from, and even mix and match from, different paradigms. So called "multi-paradigm languages" offer ultimate flexibility. In some cases, a single program can even have two or more expressions of these paradigms sitting side by side.
 
@@ -333,7 +333,7 @@ JavaScript is most definitely a multi-paradigm language. You can write procedura
 
 ## 하위 호환성<sup>Backwards</sup>과 상위 호환성<sup>Forwards</sup>
 
-자바스크립트가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*을 유지하는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관은 있지만 다른 의미인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
+자바스크립트가 지향하는 근본적 원리 중 하나는 *하위 호환성*을 유지하는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관은 있지만 다른 의미인 *상위 호환성*과 종종 헷갈려하기도 합니다.
 
 One of the most foundational principles that guides JavaScript is preservation of *backwards compatibility*. Many are confused by the implications of this term, and often confuse it with a related but different term: *forwards compatibility*.
 
@@ -357,7 +357,7 @@ That "guarantee" is no small thing. Maintaining backwards compatibility, stretch
 
 The costs of sticking to this principle should not be casually dismissed. It necessarily creates a very high bar to including changing or extending the language; any decision becomes effectively permanent, mistakes and all. Once it's in JS, it can't be taken out because it might break programs, even if we'd really, really like to remove it!
 
-이러한 규칙에 작은 예외들도 있습니다. JS에는 몇몇 하위 비호환<sup>Backwards-imcompatible</sup>되는 변경점들을 가지고 있는데 TC39는 절대 이러한 예외적인 기능을 사용하지 말아달라고 경고합니다. TC39는 이러한 예외적인 기능들이 만들어내는 결과을 측정하기위해 웹상에 존재하는 코드들(수집된 브라우저 데이터를 통해)을 연구하곤 하는데, 이를 통해 브라우저들은 결과적으로 사용자들에게 이런 미세한 예외들을 고칠 때 어떠한 이득에 반하는지 미세한 영향을 가늠하고 감수할지말지 결론을 짓고 투표를 합니다.
+이러한 규칙에 작은 예외들도 있습니다. JS에는 몇몇 하위 비호환<sup>Backwards-imcompatible</sup>되는 변경점들을 가지고 있는데 TC39는 절대 이러한 예외적인 기능을 사용하지 말아달라고 경고합니다. TC39는 이러한 예외적인 기능들이 만들어내는 결과을 측정하기위해 수집된 브라우저 데이터를 통해 웹상에 존재하는 코드들을 연구하곤 하는데, 이를 통해 브라우저들은 결과적으로 사용자들에게 이런 미세한 예외들을 고칠 때 어떠한 이득에 반하는지 미세한 영향을 가늠하고 감수할지말지 결론을 짓고 투표를 합니다.
 
 There are some small exceptions to this rule. JS has had some backwards-incompatible changes, but TC39 is extremely cautious in doing so. They study existing code on the web (via browser data gathering) to estimate the impact of such breakage, and browsers ultimately decide and vote on whether they're willing to take the heat from users for a very small-scale breakage weighed against the benefits of fixing or improving some aspect of the language for many more sites (and users).
 
@@ -377,7 +377,7 @@ HTML and CSS, by contrast, are forwards-compatible but not backwards-compatible.
 
 It may seem desirable for forwards-compatibility to be included in programming language design, but it's generally impractical to do so. Markup (HTML) or styling (CSS) are declarative in nature, so it's much easier to "skip over" unrecognized declarations with minimal impact to other recognized declarations.
 
-반면 프로그래밍 언어 엔진이 선택적으로 인식되지 않는 특정 문장(혹은 표현문!)을 선택적으로 거르게 되면 혼돈과 비결정성이 따라오게 될 것입니다. 마치, 프로그래밍 언어 엔진이 예측하지 못하게 무시되어진 부분이 프로그램의 일부가 제대로 처리될지 안될지 확신을 주지 못 합니다.
+반면 프로그래밍 언어 엔진이 선택적으로 인식되지 않는 특정 문장 혹은 표현문을 선택적으로 거르게 되면 혼돈과 비결정성이 따라오게 될 것입니다. 마치, 프로그래밍 언어 엔진이 예측하지 못하게 무시되어진 부분이 프로그램의 일부가 제대로 처리될지 안될지 확신을 주지 못 합니다.
 
 But chaos and non-determinism would ensue if a programming language engine selectively skipped statements (or even expressions!) that it didn't understand, as it's impossible to ensure that a subsequent part of the program wasn't expecting the skipped-over part to have been processed.
 
@@ -391,7 +391,7 @@ JS는 상위 호환적이지 않기때문에 유효한 JS 코드로 작성할 �
 
 Since JS is not forwards-compatible, it means that there is always the potential for a gap between code that you can write that's valid JS, and the oldest engine that your site or application needs to support. If you run a program that uses an ES2019 feature in an engine from 2016, you're very likely to see the program break and crash.
 
-만약 새로 추가된 문법을 사용하면 프로그램은 일반적으로 완벽하게 컴파일되고 실행되지 않고 일반적으로는 문법 오류<sup>Syntax error</sup>를 만들것입니다. 반면 새로 추가된 API(ES6에서 `Object.is(..)`와 같은)를 사용하면 프로그램은 아마도 해당 지점 직전까진 정상적으로 작동하겠지만 해당 문구에서 알수 없는 API를 참조하고 말하며 런타임 오류<sup>Runtime exception</sup>가 발생시키며 작동을 멈출 것입니다.
+만약 새로 추가된 문법을 사용하면 프로그램은 일반적으로 완벽하게 컴파일되고 실행되지 않고 일반적으로는 문법 오류<sup>Syntax error</sup>를 만들것입니다. 반면 ES6에서 `Object.is(..)`와 같이 새로 추가된 API를 사용하면 프로그램은 아마도 해당 지점 직전까진 정상적으로 작동하겠지만 해당 문구에서 알수 없는 API를 참조하고 말하며 런타임 오류<sup>Runtime exception</sup>가 발생시키며 작동을 멈출 것입니다.
 
 If the feature is a new syntax, the program will in general completely fail to compile and run, usually throwing a syntax error. If the feature is an API (such as ES6's `Object.is(..)`), the program may run up to a point but then throw a runtime exception and stop once it encounters the reference to the unknown API.
 
@@ -403,7 +403,7 @@ Does this mean JS developers should always lag behind the pace of progress, usin
 
 But it does mean that JS developers need to take special care to address this gap.
 
-새롭지만 호환성이 없는 문법들의 경우 트랜스파일링<sup>Transpiling</sup>으로 해결할 수 있습니다. 트랜스파일링은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 사용하는 것을 말합니다. 대표적으로 문법과 연관된 상위 호환성 문제는 트랜스파일러<sup>Transpiler</sup> (가장 흔히 바벨<sup>Babel</sup> (https://babeljs.io))를 통해 새로운 JS 문법을 그와 동일하지만 구식의 문법을 가진 형태로 변경해줌으로써 이러한 문제를 해결합니다.
+새롭지만 호환성이 없는 문법들의 경우 트랜스파일링<sup>Transpiling</sup>으로 해결할 수 있습니다. 트랜스파일링은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 사용하는 것을 말합니다. 대표적으로 문법과 연관된 상위 호환성 문제는 트랜스파일러<sup>Transpiler</sup>(가장 흔히 바벨<sup>Babel</sup> (https://babeljs.io))를 통해 새로운 JS 문법을 그와 동일하지만 구식의 문법을 가진 형태로 변경해줌으로써 이러한 문제를 해결합니다.
 
 For new and incompatible syntax, the solution is transpiling. Transpiling is a contrived and community-invented term to describe using a tool to convert the source code of a program from one form to another (but still as textual source code). Typically, forwards-compatibility problems related to syntax are solved by using a transpiler (the most common one being Babel (https://babeljs.io)) to convert from that newer JS syntax version to an equivalent older syntax.
 
@@ -444,7 +444,7 @@ The original snippet relied on `let` to create block-scoped `x` variables in bot
 
 | NOTE: |
 | :--- |
-| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일을 하는데 "타겟<sup>target</sup>"은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 오직 그 이상 버전에서만 작동하기위해 사용됩니다. |
+| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일을 하는데 "타겟"<sup>target</sup>은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 오직 그 이상 버전에서만 작동하기위해 사용됩니다. |
 
 | NOTE: |
 | :--- |
@@ -460,7 +460,7 @@ Developers should focus on writing the clean, new syntax forms, and let the tool
 
 ### 버전간 간극을 채우기
 
-만약 상위 호환 문제가 새로운 문법과 연관없다면 새롭게 추가된 API 메서드의 부래로 인해 생긴 문제일 것입니다. 가장 흔한 해결법은 오래된 브라우저에서는 빠져있는 API 메서드를 정의해줘 마치 오래된 환경에서도 이미 존재했던 것처럼 만들어주는 방법이 있습니다. 이러한 방식을 폴리필<sup>Polyfill</sup>(심<sup>Shim</sup>으로도 알려진)이라고 부릅니다.
+만약 상위 호환 문제가 새로운 문법과 연관없다면 새롭게 추가된 API 메서드의 부래로 인해 생긴 문제일 것입니다. 가장 흔한 해결법은 오래된 브라우저에서는 빠져있는 API 메서드를 정의해줘 마치 오래된 환경에서도 이미 존재했던 것처럼 만들어주는 방법이 있습니다. 이러한 방식을 폴리필<sup>Polyfill</sup> 혹은 심<sup>Shim</sup>이라고 부릅니다.
 
 If the forwards-compatibility issue is not related to new syntax, but rather to a missing API method that was only recently added, the most common solution is to provide a definition for that missing API method that stands in and acts as if the older environment had already had it natively defined. This pattern is called a polyfill (aka "shim").
 
@@ -539,7 +539,7 @@ Transpilation and polyfilling are two highly effective techniques for addressing
 
 ## 인터프리트<sup>Interpretation</sup>에는 무엇들이 있을까?
 
-JS가 인터프리트 스크립트<sup>Interpreted script</sup>인지 아니면 컴파일된 프로그램<sup>Compiled program</sup>인지는 오래동안 이어져온 논쟁입니다. 대다수의 의견은 JS는 인터프리트 (스크립트) 언어라고 얘기하곤 하지만 그 실상은 훨씬 더 복잡합니다.
+JS가 인터프리트 스크립트<sup>Interpreted script</sup>인지 아니면 컴파일된 프로그램<sup>Compiled program</sup>인지는 오래동안 이어져온 논쟁입니다. 대다수의 의견은 JS는 인터프리트 언어 혹은 스크립트 언어라고 얘기하곤 하지만 그 실상은 훨씬 더 복잡합니다.
 
 A long-debated question for code written in JS: is it an interpreted script or a compiled program? The majority opinion seems to be that JS is an interpreted (scripting) language. But the truth is more complicated than that.
 
@@ -547,7 +547,7 @@ A long-debated question for code written in JS: is it an interpreted script or a
 
 For much of the history of programming languages, "interpreted" languages and "scripting" languages have been looked down on as inferior compared to their compiled counterparts. The reasons for this acrimony are numerous, including the perception that there is a lack of performance optimization, as well as dislike of certain language characteristics, such as scripting languages generally using dynamic typing instead of the "more mature" statically typed languages.
 
-"컴파일" 언어라고 여겨지는 언어들은 일반적으로 추후에 실행되기 위해 배포되는 프로그램을 이식 가능한 (이진법의<sup>Binary</sup>) 상태로 만듭니다. 우린 이러한 종류의 모델을 JS에서 발견하지 못 하기때문에 (우린 이진형태가 아닌 소스 코드를 배포합니다), 많은 사람들은 JS는 컴파일 언어의 범주에 넣기에는 자격요건을 충족시키지 못 한다고 주장합니다. 하지만 실제로 "실행 가능한<sup>Executable</sup>" 형태의 프로그램을 위한 배포 모델은 굉장히 다양해져왔고 또한 서로간의 연관성 역시 떨어져가고 있습니다. 다시 질문으로 돌아와 프로그램의 형태가 어떻던간에 큰 문제가 되지 않습니다.
+"컴파일" 언어라고 여겨지는 언어들은 일반적으로 추후에 실행되기 위해 배포되는 프로그램을 이식 가능한 이진법의<sup>Binary</sup> 형태로 만듭니다. 이진형태가 아닌 소스 코드를 배포하기에 이러한 종류의 모델을 JS에서 발견하지 못 하기에, 많은 사람들은 JS는 컴파일 언어의 범주에 넣기에는 자격요건을 충족시키지 못 한다고 주장합니다. 하지만 실제로 "실행 가능한"<sup>Executable</sup> 형태의 프로그램을 위한 배포 모델은 굉장히 다양해져왔고 또한 서로간의 연관성 역시 떨어져가고 있습니다. 다시 질문으로 돌아와 프로그램의 형태가 어떻던간에 큰 문제가 되지 않습니다.
 
 Languages regarded as "compiled" usually produce a portable (binary) representation of the program that is distributed for execution later. Since we don't really observe that kind of model with JS (we distribute the source code, not the binary form), many claim that disqualifies JS from the category. In reality, the distribution model for a program's "executable" form has become drastically more varied and also less relevant over the last few decades; to the question at hand, it doesn't really matter so much anymore what form of a program gets passed around.
 
@@ -569,7 +569,7 @@ Historically, scripted or interpreted languages were executed in generally a top
 
 In scripted or interpreted languages, an error on line 5 of a program won't be discovered until lines 1 through 4 have already executed. Notably, the error on line 5 might be due to a runtime condition, such as some variable or value having an unsuitable value for an operation, or it may be due to a malformed statement/command on that line. Depending on context, deferring error handling to the line the error occurs on may be a desirable or undesirable effect.
 
-그림 2에 나와있는 것처럼 실행하기 전에 있는 처리 단계(일반적으로 파싱<sup>parsing</sup>이라 부르는)를 거치는 언어들과 비교해 보십시오.
+그림 2에 나와있는 것처럼 실행하기 전에 일반적으로 파싱<sup>parsing</sup>이라 부르는 단계를 거치는 언어들과 비교해 봅시다.
 
 Compare that to languages which do go through a processing step (typically, called parsing) before any execution occurs, as illustrated in Figure 2:
 
@@ -579,7 +579,7 @@ Compare that to languages which do go through a processing step (typically, call
     <br><br>
 </figure>
 
-이러한 처리 모델에서는 5번째 줄에 있는 부정확한 명령어(예를들어 문법 오류)는 실행되기 전에 파싱 단계에서 잡힐 것이고 프로그램은 실행되지 않을 것입니다. 문법<sup>Syntax</sup>(혹은 "정적"<sup>Static</sup>) 오류를 찾아내는 것은 잘못된 부분의 일부를 실행하기 전에 발견하는 것이 일반적으로는 더 좋습니다.
+이러한 처리 모델에서는 예를들어 5번째 줄에 있는 문법 오류와 같은 부정확한 문장은 실행되기 전에 파싱 단계에서 잡힐 것이고 프로그램은 실행되지 않을 것입니다. 문법<sup>Syntax</sup> 혹은 "정적"<sup>Static</sup> 오류를 찾아내는 것은 잘못된 부분의 일부를 실행하기 전에 발견하는 것이 일반적으로는 더 좋습니다.
 
 In this processing model, an invalid command (such as broken syntax) on line 5 would be caught during the parsing phase, before any execution has begun, and none of the program would run. For catching syntax (or otherwise "static") errors, generally it's preferred to know about them ahead of any doomed partial execution.
 
@@ -603,11 +603,11 @@ JS source code is parsed before it is executed. The specification requires as mu
 
 So **JS is a parsed language**, but is it *compiled*?
 
-이에 대한 대답은 참에 조금 더 근접합니다. 파싱된 JS는 최적화된 (이진법의) 형태로 바뀌고 그 후 "코드"의 실행됩니다 (그림 2). 파싱하는 힘든 작업을 모두 끝마친 이후에는 비효율적인 이유로 인해 엔진이 코드를 한 줄씩 실행하는 형태로 돌아가진 않습니다 (그림 1).
+이에 대한 대답은 참에 조금 더 근접합니다. 파싱된 JS는 최적화된 이진법의 형태로 바뀌고 그 후 "코드"의 실행됩니다 (그림 2). 파싱하는 힘든 작업을 모두 끝마친 이후에는 비효율적인 이유로 인해 엔진이 코드를 한 줄씩 실행하는 형태로 돌아가진 않습니다 (그림 1).
 
 The answer is closer to yes than no. The parsed JS is converted to an optimized (binary) form, and that "code" is subsequently executed (Figure 2); the engine does not commonly switch back into line-by-line execution (like Figure 1) mode after it has finished all the hard work of parsing—most languages/engines wouldn't, because that would be highly inefficient.
 
-조금 더 명확하게 "컴파일"은 이진 바이트<sup>Byte</sup> 코드(그 일부)를 생성하고 이 코드들은 "JS 가상 머신"<sup>JS virtual machine</sup>에게 넘겨집니다. 누군가는 이 가상 머신은 바이트 코드를 "인터프리트"한다고 얘기하고 싶어할 것입니다. 하지만 이 말은 자바나 자바와 그외의 수십가지의 JVM 중심의 언어 역시도 컴파일이 아닌 인터프리트 된다고 주장하는 것과 같습니다. 물론 이 말은 자바와 같은 언어들이 컴파일 언어라는 일반적인 주장과 상반되어 있습니다.
+조금 더 명확하게 "컴파일"은 이진 바이트<sup>Byte</sup> 코드를 생성하고 이 코드들은 "JS 가상 머신"<sup>JS virtual machine</sup>에게 넘깁니다. 누군가는 이 가상 머신은 바이트 코드를 "인터프리트"한다고 얘기하고 싶어할 수도 있습니다. 하지만 이 말은 자바나 자바와 그외의 수십가지의 JVM 중심의 언어 역시도 컴파일이 아닌 인터프리트 된다고 주장하는 것과 같습니다. 물론 이 말은 자바와 같은 언어들이 컴파일 언어라는 일반적인 주장과 상반되어 있습니다.
 
 To be specific, this "compilation" produces a binary byte code (of sorts), which is then handed to the "JS virtual machine" to execute. Some like to say this VM is "interpreting" the byte code. But then that means Java, and a dozen other JVM-driven languages, for that matter, are interpreted rather than compiled. Of course, that contradicts the typical assertion that Java/etc are compiled languages.
 
@@ -615,7 +615,7 @@ To be specific, this "compilation" produces a binary byte code (of sorts), which
 
 Interestingly, while Java and JavaScript are very different languages, the question of interpreted/compiled is pretty closely related between them!
 
-또다른 불편한 주장은 JS 엔진이 이미 (파싱 이후에) 생성된 코드에서 각각의 시간에 맞게<sup>JIT</sup>(Just-In-Time) 처리 및 최적화를 여러 단계에 걸쳐 할 수 있다고 얘기하는 것입니다. 그리고 이러한 주장은 또다시 관점에 따라 "컴파일"과 "인터프리트"란 꼬리표를 달게 만듭니다. 이는 실제로 JS엔진의 저면 아래에 있는 몹시 복잡한 상황과 연관이 있습니다.
+또다른 불편한 주장은 JS 엔진이 이미 파싱을 통해 생성된 코드에서 각각의 시간에 맞게<sup>JIT</sup>(Just-In-Time) 처리 및 최적화를 여러 단계에 걸쳐 할 수 있다고 얘기하는 것입니다. 그리고 이러한 주장은 또다시 관점에 따라 "컴파일"과 "인터프리트"란 꼬리표를 달게 만듭니다. 이는 실제로 JS엔진의 저면 아래에 있는 몹시 복잡한 상황과 연관이 있습니다.
 
 Another wrinkle is that JS engines can employ multiple passes of JIT (Just-In-Time) processing/optimization on the generated code (post parsing), which again could reasonably be labeled either "compilation" or "interpretation" depending on perspective. It's actually a fantastically complex situation under the hood of a JS engine.
 
@@ -623,19 +623,19 @@ Another wrinkle is that JS engines can employ multiple passes of JIT (Just-In-Ti
 
 So what do these nitty-gritty details boil down to? Step back and consider the entire flow of a JS source program:
 
-1. 프로그램이 개발자 도구로부터 떠난 뒤로, 이 프로그램은 바벨(Babel) 트랜스파일되고 웹팩(Webpack)과 같은 빌드 툴을 통해 포장되어진 후, 각기 다른 형태의 JS 엔진으로 배포된다.
+1. 프로그램이 개발자 도구로부터 떠난 뒤로, 이 프로그램은 바벨을 통해 트랜스파일되고 웹팩<sup>Webpack</sup>과 같은 빌드 툴을 통해 포장되어진 후, 매우 다른 형태로 JS 엔진으로 배포된다.
 
 1. After a program leaves a developer's editor, it gets transpiled by Babel, then packed by Webpack (and perhaps half a dozen other build processes), then it gets delivered in that very different form to a JS engine.
 
-2. JS 엔진은 코드를 AST로 파싱한다.
+2. JS 엔진은 코드를 AST 형태로 파싱한다.
 
 2. The JS engine parses the code to an AST.
 
-3. 엔진은 AST를 일종의 이진(binary) 중간 표현식(intermediate representation(IR))을 가진 바이트 코드로 변경시키고, 이는 다시 최적화 JIT 컴파일러를 통해 정제되거나 변경된다.
+3. 엔진은 AST를 이진 중간 표현식<sup>Intermediate representation</sup>(IR)인 바이트 코드의 일종으로 변경시키고, 이는 다시 최적화 JIT 컴파일러를 통해 정제되거나 변경된다.
 
 3. Then the engine converts that AST to a kind-of byte code, a binary intermediate representation (IR), which is then refined/converted even further by the optimizing JIT compiler.
 
-4. 마지막으로, JS 가상 머신(VM)은 프로그램을 실행한다.
+4. 마지막으로, JS 가상 머신은 프로그램을 실행한다.
 
 4. Finally, the JS VM executes the program.
 
@@ -657,71 +657,71 @@ Is JS handled more like an interpreted, line-by-line script, as in Figure 1, or 
 
 I think it's clear that in spirit, if not in practice, **JS is a compiled language**.
 
-다시 돌아가, 이러한 논쟁이 중요한 이유는 동적 오류(문법 오류와 같은)를 JS는 컴파일됨으로써 코드를 실행하기 전에도 알 수 있다는 것입니다. 이는 전통적인 "스크립트" 프로그램으로 부터 얻는 장점과는 다른 상호 작용 모델(interaction model)이고, 아마도 더 도움이 됩니다.
+다시 돌아가, 이러한 논쟁이 중요한 이유는 JS에서 문법 오류와 같은 정적 오류를 컴파일 과정을 통해 코드를 실행하기 전에도 알 수 있다는 것입니다. 이는 전통적인 "스크립트" 프로그램으로 부터 얻는 장점과는 다른 상호 작용할 수 있는 모델이고, 아마도 더 도움이 됩니다!
 
 And again, the reason that matters is, since JS is compiled, we are informed of static errors (such as malformed syntax) before our code is executed. That is a substantively different interaction model than we get with traditional "scripting" programs, and arguably more helpful!
 
 ### 웹 어셈블리 (WASM)
 
-JS의 진화를 주도하는 주요 관심사 중 하나는 성능입니다. JS가 얼마나 빠르게 파싱하고 컴파일하는지 그리고 얼마나 빠르게 컴파일된 코드를 실행시키는지에 관해서죠.
+JS의 진화를 주도하는 주요 관심사 중 하나는 성능입니다. JS가 얼마나 빠르게 파싱하고 컴파일하며 얼마나 빠르게 컴파일된 코드를 실행시키는지에 관해서죠.
 
 One dominating concern that has driven a significant amount of JS's evolution is performance, both how quickly JS can be parsed/compiled and how quickly that compiled code can be executed.
 
-2013년 Mozilla Firefox 개발자들은 언리얼 3 게임 엔진을 C에서 JS로 포팅(port)하는데 성공했었습니다. 브라우저의 JS 엔진이 최적화를 통해 최대 60fps 성능으로 이 코드가 작동하리라고 예상됐었습니다. 왜냐하면 언리얼 엔진의 JS 버전은 "ASM.js"라는 JS 언어의 하위 세트에 유리한 코딩 스타일을 사용했기 때문입니다.
+2013년 모질라 파이어폭스<sup>Mozilla Firefox</sup> 개발자들은 언리얼 3 게임 엔진을 C에서 JS로 포팅<sup>Port</sup>하는데 성공했었습니다. 브라우저의 JS 엔진이 최적화를 통해 최대 60fps 성능으로 이 코드가 작동하리라고 예상됐었습니다. 왜냐하면 언리얼 엔진의 JS 버전은 "ASM.js"라는 JS의 부분 집합에 잘 맞는 코드 형태를 사용했기 때문입니다.
 
 In 2013, engineers from Mozilla Firefox demonstrated a port of the Unreal 3 game engine from C to JS. The ability for this code to run in a browser JS engine at full 60fps performance was predicated on a set of optimizations that the JS engine could perform specifically because the JS version of the Unreal engine's code used a style of code that favored a subset of the JS language, named "ASM.js".
 
-이 하위 세트는 다소 흔히 쓰이지 않는 코딩 스타일이지만 유효한 JS로 쓰여있었지만, 특정 중요한 정보를 엔진에 전달하고 이를 통해 중요한 최적화 되게됩니다. ASM.js는 JS의 런타임 성능에 가해지는 압력을 다루는 방식 중 하나로 도입됐습니다.
+이 부분 집합은 평상시에는 흔히 쓰이지 않는 코딩 스타일이지만 유효한 JS로 쓰였는데 특정 중요한 입력 정보가 엔진에 전달되고 이를 통해 중요한 최적화 되게됩니다. ASM.js는 JS의 런타임 성능에 가해지는 압력을 가하기 위해 도입됐습니다.
 
 This subset is valid JS written in ways that are somewhat uncommon in normal coding, but which signal certain important typing information to the engine that allow it to make key optimizations. ASM.js was introduced as one way of addressing the pressures on the runtime performance of JS.
 
-하지만 중요한 점은 개발자가 ASM.js를 직접 작성할 의도로 만들어지는게 아니고 (C와 같은) 다른 언어로부터 트랜스파일된 프로그램의 표현식이고 이러한 곳에는 자동으로 "주석(annotations)"이라고 삽입된다.
+하지만 중요한 점은 개발자가 ASM.js를 직접 작성할 의도로 만들어지는게 아니고 C와 같은 다른 언어로부터 트랜스파일된 프로그램의 표현식이고 이러한 곳에는 자동으로 "주석<sup>annotations</sup>"이라고 삽입된다.
 
 But it's important to note that ASM.js was never intended to be code that was authored by developers, but rather a representation of a program having been transpiled from another language (such as C), where these typing "annotations" were inserted automatically by the tooling.
 
-수년 후 ASM.js가 JS 엔진에 의해 도구를 작성된 프로그램의 버전이 더욱더 효율적으로 처리할 수 있음을 증명하였고, 또다른 기술자 집단(물론 초기에는 Mozilla에서)은 웹 어셈브리 (WASM)을 출시했습니다.
+수년 후 프로그램을 통해 만들어진 ASM.js가 JS 엔진으로 더 효율적으로 처리될 수 있어 그 유효성이 증명되었고, 다른 기술자들(물론 초기에는 Mozilla에서)이 웹 어셈브리<sup>WASM</sup>을 출시했습니다.
 
 Several years after ASM.js demonstrated the validity of tooling-created versions of programs that can be processed more efficiently by the JS engine, another group of engineers (also, initially, from Mozilla) released Web Assembly (WASM).
 
-WASM은 이것의 원본의 성향이 JS 이외의 언어(C 등등의) 프로그램이 JS 엔진에서 구동될 수 있는 형태로 변경시키고자 하는 방향성이 ASM.js과 유사했습니다. 반면 WASM은 ASM.js와는 다르게 JS와는 전혀 다른 형태의 프로그램으로 표현함으로써 프로그램이 실행되기 전에 JS에서 파싱/컴파일에 들어가는 추가적인 지연 시간을 살펴보는 방식을 택했습니다.
+WASM은 C와 같은 JS가 아닌 프로그램이 JS 엔진에서 실행될 수 있는 형태로 변경시키고자 하는 방향성 자체는 ASM.js과 유사했습니다. 하지만 WASM은 ASM.js와는 다르게 프로그램이 실행되기 전에 JS에서 추가적인 파싱과 컴파일을 과정을 내장해 JS와는 전혀 다른 형태의 프로그램으로 표현하는 방식을 택했습니다.
 
 WASM is similar to ASM.js in that its original intent was to provide a path for non-JS programs (C, etc.) to be converted to a form that could run in the JS engine. Unlike ASM.js, WASM chose to additionally get around some of the inherent delays in JS parsing/compilation before a program can execute, by representing the program in a form that is entirely unlike JS.
 
-WASM는 어셈블리(이것의 이름에도 그러하듯이)와 유사항 형태로 표현되어 있고 이것은 JS 엔진에 의해 일반적으로 행해지는 파싱/컴파일 단계는 건너뛰어 실행이 가능하도록 되어있습니다. WASM이 목표로 삼고있는 프로그램의 파싱/컴파일 단계는 미리(ahead of time (AOT)) 발생하고 JS가 아주 작은 가공을 통해 실행할 수 있는 이진형태로 배포됩니다.
+WASM는 이름에도 드러나는 것과 같이 어셈블리<sup>Assembly</sup>와 유사항 형태로 표현되어 있고 이것은 JS 엔진이 일반적으로 하는 파싱과 컴파일 과정은 건너뛰고 실행되게 됩니다. WASM이 목표로 삼고있는 프로그램의 파싱과 컴파일 단계는 미리<sup>Ahead of time </sup> (AOT) 발생하고 JS 엔진은 최소한의 가공과 함께 이 프로그램을 실행할 수 있는 이진형태로 배포되게 됩니다.
 
 WASM is a representation format more akin to Assembly (hence, its name) that can be processed by a JS engine by skipping the parsing/compilation that the JS engine normally does. The parsing/compilation of a WASM-targeted program happen ahead of time (AOT); what's distributed is a binary-packed program ready for the JS engine to execute with very minimal processing.
 
-WASM의 초기 의도는 잠재적 성능 향상에 목표로 하고 있습니다. 그리고 초기 의도에 집중하는 동시에 WASM은 JS 이외의 언어에 대한 더 많은 패리티(parity)를 웹 플랫폼으로 가져오는 것을 추가적인 목표로 삼았습니다. 예를들어 Go와 같은 언어에서 지원되는 스레드 프로그래밍(threaded programming)은 JS에서는 지원되지 않지만 WASM은 JS 언어 자체에 스레드 관련 기능이 추후에 추가되지 않더라도 Go 프로그램이 JS 엔진에서도 이해 가능한 형태로 변경될 잠재력을 제공해줍니다.
+WASM의 초기 의도는 잠재적인 성능 향상입니다. 초기 목표에 계속해서 집중하는 한 편, WASM은 JS 이외의 언어를 위해 더 많은 동등한 지위<sup>Parity</sup>를 웹 부여하여 웹 플랫폼으로 끌어들이는 것을 추가적인 목표로 삼았습니다. 예를들어 Go와 같은 언어에서 지원되는 스레드 프로그래밍<sup>Threaded programming</sup>은 JS에서는 지원되지 않지만, WASM은 JS 언어 자체에 스레드 관련 기능이 추후에 추가되지 않더라도 Go 프로그램이 JS 엔진에서도 이해 가능한 형태로 변경될 여지를 제공해줍니다.
 
 An initial motivation for WASM was clearly the potential performance improvements. While that continues to be a focus, WASM is additionally motivated by the desire to bring more parity for non-JS languages to the web platform. For example, if a language like Go supports threaded programming, but JS (the language) does not, WASM offers the potential for such a Go program to be converted to a form the JS engine can understand, without needing a threads feature in the JS language itself.
 
-다시 말해, WASM은 JS에 다른 언어로부터 트랜스파일된 프로그램에만 일반적으로 그리고 독점적으로 쓰일 기능을 추가해야만하는 압박을 덜어주었습니다. 이는 곧 JS 기능 개발은 다른 언어의 이해관계나 요구에 의해 왜곡될 필요 없이 그 개발 스펙에 관해 (TC39으로부터) 결정내릴 수 있으며, 그와 동시에 다른 언어들이 웹으로 오기 위해 독자적인 방법을 채택할 수 있게됐다는 뜻입니다.
+다시 말해, WASM은 JS에 다른 언어로부터 트랜스파일된 프로그램에만 일반적으로 혹은 독점적으로 쓰이는 기능을 추가해야만하는 압박을 덜어주었습니다. 이는 곧 JS 기능 개발은 다른 언어의 이해관계나 요구사항에 의해 왜곡되지 않고도, TC39이 개발 명세서에 관해 결정내릴 수 있으며, 그와 동시에 다른 언어들이 웹으로 오기 위해 독자적인 방법을 채택할 수 있게됐다는 뜻입니다.
 
 In other words, WASM relieves the pressure to add features to JS that are mostly/exclusively intended to be used by transpiled programs from other languages. That means JS feature development can be judged (by TC39) without being skewed by interests/demands in other language ecosystems, while still letting those languages have a viable path onto the web.
 
-또다른 WASM의 등장에 관한 또다른 관점은 놀랍게도 웹과 직접적인 연관이 없습니다. WASM은 일단 프로그램이 컴파일되면 다양한 시스템 환경에 구동될 수 있는 크로스 플랫폼(cross-platform) 가상 머신(virtual machine(VM))의 일종으로 진화하고 있습니다.
+또다른 WASM의 등장에 관한 또다른 관점은 흥미롭게도 웹과 직접적인 연관이 없습니다. WASM은 프로그램이 일단 컴파일되고 다양한 시스템 환경에 실행가능한 형태가 됨으로써 크로스 플랫폼<sup>Cross-platform</sup> 가상 머신<sup>virtual machine</su[> (VM)의 일종으로 진화해 나가고 있습니다.
 
 Another perspective on WASM that's emerging is, interestingly, not even directly related to the web (W). WASM is evolving to become a cross-platform virtual machine (VM) of sorts, where programs can be compiled once and run in a variety of different system environments.
 
-그래서 WASM은 단순 웹만을 위하거나 JS만을 위한 것이 아닙니다. WASM은 JS 엔진에서 구동됨에도 불구하고 WASM은 정적 타이핑 정보(static typing information)에 지나치게 의존하고 있으므로 JS는 WASM 프로그램을 위한 가장 적합한 언어입니다. 심지어 표면적으로 JS와 정적 타입의 조합인 타입스크립트(TS)는 WASM으로 트랜스파일되기 적절한 언어는 아니지만 어셈블리 스크립트(AssenblyScript)와 같은 변형된 언어는 JS/TS 그리고 WASM 간의 간극에 다리를 놓으려고 계속해서 시도하고 있습니다.
+그래서 WASM은 단순 웹 혹은 JS만을 위한 것이 아닙니다. WASM은 JS 엔진에서 구동됨에도 불구하고, JS는 WASM 프로그램을 위한 가정 적절하지 않은 언어입니다. 왜냐하면 WASM은 정적 타입에 지나치게 의존하고 있기 때문입니다. 심지어 표면적으로 JS와 정적 타입의 조합인 타입스크립트<sup>TypeScript</sup>(TS)는 WASM으로 트랜스파일되기 적절한 언어는 아니지만 어셈블리 스크립트<sup>AssenblyScript</sup>와 같은 변형된 언어는 JS/TS 그리고 WASM 간의 간극에 다리를 놓으려고 계속해서 시도하고 있습니다.
 
 So, WASM isn't only for the web, and WASM also isn't JS. Ironically, even though WASM runs in the JS engine, the JS language is one of the least suitable languages to source WASM programs with, because WASM relies heavily on static typing information. Even TypeScript (TS)—ostensibly, JS + static types—is not quite suitable (as it stands) to transpile to WASM, though language variants like AssemblyScript are attempting to bridge the gap between JS/TS and WASM.
 
-이 책은 WASM 관한 것이 아니기에 한 가지 마지막 요점에 관해 얘기하며 더 많은 시간을 토론하는데 소비하지 않겠습니다. *몇몇* 사람들은 JS가 웹에서 비중이 작아지고 그 부분을 WASM이 채울 것이라고 말해오고 있습니다. 이러한 분들은 종종 JS에 관한 안 좋은 생각을 가지고 있고 JS를 대체할 또다른 언어들을 원합니다. WASM은 다른 언어가 JS 엔진에서도 구동될 수 있게 도와주므로 이것의 실상은 완전히 환상적인 동화같은 것은 아닙니다.
+이 책은 WASM 관한 것이 아니기에 한 가지 마지막 요점에 관해 얘기하며 더 많은 시간을 토론하는데 소비하지 않겠습니다. *몇몇* 사람들은 WASM이 JS가 웹에서 비중이 작게 만드는 걸 목표로 하고 있다고 말하고 있습니다. 이런 사람들은 종종 JS에 관한 안 좋은 생각을 가지고 있고 JS를 대체할 다른 언어를 원합니다. WASM은 다른 언어가 JS 엔진에서도 구동될 수 있게 도와주므로 이것의 실상은 완전히 환상적인 동화같은 이야기는 아닙니다.
 
 This book isn't about WASM, so I won't spend much more time discussing it, except to make one final point. *Some* folks have suggested WASM points to a future where JS is excised from, or minimized in, the web. These folks often harbor ill feelings about JS, and want some other language—any other language!—to replace it. Since WASM lets other languages run in the JS engine, on its face this isn't an entirely fanciful fairytale.
 
-제가 간단히 정리해드리겠습니다. WASM은 JS의 대체물이 아닙니다. WASM은 웹에 (JS를 포함하여) 성취할 수 있는 것을 상당히 많이 강화해줄 수 있습니다. JS를 사용하는 것으로부터 몇몇 사람들에게는 탈출구 역할을 할 수도 있는 전혀 다른 방향을 제시해주는 대단한 일이 될 수도 있습니다.
+제가 간단히 정리해드리겠습니다. WASM은 JS의 대체물이 아닙니다. WASM은 JS를 포함해 웹이 성취할 수 있는 것을 상당부분 강화해줄 수 있습니다. 몇몇 사람들에게는 JS를 사용하는 것으로부터 탈출구 역할을 할 수도 있는 전혀 다른 방향을 제시해주는 대단한 일이 될 수도 있습니다.
 
 But let me just state simply: WASM will not replace JS. WASM significantly augments what the web (including JS) can accomplish. That's a great thing, entirely orthogonal to whether some people will use it as an escape hatch from having to write JS.
 
 ## *정확하게* 말하자면
 
-다시 돌아가 2009년 ES5가 배포되던 당시 JS는 더 나은 JS 프로그램을 만들기 위한 옵트 인(opt-in) 방식으로 *엄격 모드(strict mode)*를 추가했습니다.
+다시 돌아가 2009년 ES5가 배포되던 당시 JS는 더 나은 JS 프로그램을 만들기 위한 사정 동의<sup>Opt-in</sup> 방식으로 *엄격 모드<sup>Strict mode</sup>*를 추가했습니다.
 
 Back in 2009 with the release of ES5, JS added *strict mode* as an opt-in mechanism for encouraging better JS programs.
 
-엄격 모드의 장점은 그 비용 대비하여 몹시 크지만, 오래된 습관을 버리긴 힘들뿐더러 이미 광성처럼 존재하는 (흔히 "레거시(legacy)"라고 알려진) 코드 기반은 바꾸기 어렵습니다. 그래서 슬프지만 10년이 지난 후에도 엄격 모드의 *선택성*은 엄격 모드가 JS 프로그래머들을 기본 선택 사항(default)이 아님을 의미합니다.
+엄격 모드의 장점은 그 비용 대비하여 몹시 크지만, 오래된 습관을 버리긴 힘들뿐더러 이미 관성처럼 존재하고 있는 (흔히 "레거시"<sup>Legacy</sup>라고 알려진) 코드 기반은 바꾸기 어렵습니다. 그래서 슬프지만 10년이 지난 후에도 엄격 모드의 *선택성*은 엄격 모드가 JS 프로그래머들을 기본값<sup>Default</sup>이 아님을 뜻합니다.
 
 The benefits of strict mode far outweigh the costs, but old habits die hard and the inertia of existing (aka "legacy") code bases is really hard to shift. So sadly, more than 10 years later, strict mode's *optionality* means that it's still not necessarily the default for JS programmers.
 
