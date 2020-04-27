@@ -77,3 +77,9 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Block: 블록
 * Mutation: 뮤테이션
 * Associate: 연동
+* Cluase: 절
+* Statement: 명령문
+* Expression: 표현식
+* Argument: 인수
+* Equality: 동등
+* Equivalence: 등가

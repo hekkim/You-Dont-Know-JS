@@ -17,7 +17,7 @@
     * 각 파일은 프로그램이다
     * 값<sup>Values</sup>
     * 변수의 선언과 사용
-    * Functions
+    * 함수<sup>Functions</sup>
     * Comparisons
     * How We Organize in JS
     * The Rabbit Hole Deepens

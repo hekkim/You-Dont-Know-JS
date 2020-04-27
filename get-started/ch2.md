@@ -440,7 +440,7 @@ catch (err) {
 }
 ```
 
-여기서 `err`은 블록 스코프 변수로 `catch` 절에서 마치 `let`을 통해 선언된 것처럼 존재합니다.
+여기서 `err`은 블록 스코프 변수로 `catch` 절에서 마치 `let`을 통해 선언된 것처럼 존재하게 됩니다.
 
 The `err` is a block-scoped variable that exists only inside the `catch` clause, as if it had been declared with `let`.
 
@@ -448,15 +448,15 @@ The `err` is a block-scoped variable that exists only inside the `catch` clause,
 
 ## Functions
 
-"함수"란 단어는 프로그램에서 다양한 의미를 가지고 있습니다. 예를 들어, 함수형 프로그램에서 "함수"는 정확한 수학적 정의를 가지고 있으며 엄격한 규칙의 집합을 가지고 있습니다.
+"함수"란 단어는 프로그램에서 다양한 의미를 가지고 있습니다. 예를 들어, 함수형 프로그램에서 "함수"란 정확한 수학적 정의를 가지고 있으며 엄격한 규칙의 집합을 가진다는 의미합니다.
 
 The word "function" has a variety of meanings in programming. For example, in the world of Functional Programming, "function" has a precise mathematical definition and implies a strict set of rules to abide by.
 
-JS에서 "함수"를 바라볼 때 "절차(procedure)"라는 또 다른 연관된 용어의 넓은 의미를 고려해야합니다. 절차는 여러번 불릴 수 있고 입력을 받을 수도 있기도 하고 하나 혹은 여러개의 결과를 다시 돌려줄 수도 있는 명령문의 집합입니다.
+JS에서 "함수"를 바라볼 때 "절차"라는 연관된 단어가 가지는 넓은 의미 역시 함께 고려해야합니다. 절차는 여러번 불릴 수 있고, 입력을 받을 수도 있으며, 하나 혹은 여러개의 결과를 다시 돌려줄 수도 있는 명령문의 집합입니다.
 
 In JS, we should consider "function" to take the broader meaning of another related term: "procedure." A procedure is a collection of statements that can be invoked one or more times, may be provided some inputs, and may give back one or more outputs.
 
-초기의 JS로 부터 함수의 정의는 아래와 같습니다.
+초기의 JS로 부터 함수를 정의하는 방법은 아래와 같습니다.
 
 From the early days of JS, function definition looked like:
 
@@ -467,11 +467,11 @@ function awesomeFunction(coolThings) {
 }
 ```
 
-이는 함수의 선언이라고도 불리는데 다른 명령문의 수식으로써가 아니라 명령문 그 자체로 나타나기 때문입니다. 이러한 연합체 식별자 `awesomeFunction`와 함수 값이 연계되는 건 코드가 실행되기 전 코드의 컴파일 단계에서 일어납니다.
+이는 함수 선언이라고도 부르는데 다른 명령문<sup>Statement</sup>에서 표현식<sup>Expression</sup>으로 나타나지 않고 명령문 그 자체로 나타나기 때문입니다. 이렇게 식별자 `awesomeFunction`와 함수 값이 연계되는 건 코드가 실행되기 전 코드의 컴파일 단계에서 일어납니다.
 
 This is called a function declaration because it appears as a statement by itself, not as an expression in another statement. The association between the identifier `awesomeFunction` and the function value happens during the compile phase of the code, before that code is executed.
 
-반대로 함수의 선언문과 다르게 함수 표현식은 아래와 같이 정의되고 할당될 수 있습니다.
+반대로 함수의 선언문과 다르게 함수 표현식은 아래와 같이 정의되고 할당될 수도 있습니다.
 
 In contrast to a function declaration statement, a function expression can be defined and assigned like this:
 
@@ -484,15 +484,15 @@ var awesomeFunction = function(coolThings) {
 };
 ```
 
-이 함수는 변수 `awesomeFunction`에 할당되는 표현식입니다. 함수 선언문과 다르게 함수 표현식은 식발자와 해당 명령문이 실제 실행 단계(runtime)에 이르기 전까지는 서로 연결되지 않습니다.
+위는 변수 `awesomeFunction`에 함수가 할당되는 표현식입니다. 함수 선언문과 다른 점은 함수 표현식의 경우 런타임 도중 해당 명령문에 이르기 전까지 식발자와 서로 연결되지 않는다는 것입니다.
 
 This function is an expression that is assigned to the variable `awesomeFunction`. Different from the function declaration form, a function expression is not associated with its identifier until that statement during runtime.
 
-이는 JS에서 굉장히 중요한 부분인데 함수는 값으로 다른 곳으로 전달될 수도 있고 (위 예제와 같이) 값으로 할당이 될 수도 있습니다. 실제로 JS 함수는 객체의 특별한 타입입니다. 모든 언어에서 함수를 값으로 다루진 않지만 JS 코드처럼 함수형 프로그래밍 패턴을 지원하는 언어에서는 필수적인 요소입니다.
+이는 JS에서 굉장히 중요한 부분인데 함수를 값으로 다른 곳으로 전달될 수도 있고 위 예제와 같이 값으로 할당이 될 수도 있습니다. 실제로 JS에서 함수는 객체의 특별한 타입입니다. 모든 언어에서 함수를 값으로 다루진 않지만, JS 코드처럼 함수형 프로그래밍 패턴을 지원하는 언어에서는 필수적인 요소입니다.
 
 It's extremely important to note that in JS, functions are values that can be assigned (as shown in this snippet) and passed around. In fact, JS functions are a special type of the object value type. Not all languages treat functions as values, but it's essential for a language to support the functional programming pattern, as JS does.
 
-JS 함수는 매개 변수(parameter)를 입력값으로 받을 수도 있습니다.
+JS 함수는 매개 변수를 입력값으로 받을 수도 있습니다.
 
 JS functions can receive parameter input:
 
@@ -504,11 +504,11 @@ function greeting(myName) {
 greeting("Kyle");   // Hello, Kyle!
 ```
 
-이 예제에서 `myName`는 매개 변수라고 불리우며 함수 내부에서 지역 변수로 활약하게 됩니다. 함수는 특별한 제약없이 함수의 역할에 맞도록 무한개의 매개 변수를 받을 수 있게 정의될 수 있습니다. 각 매개 변수는 호출될 때 전달받는 인수 값(argument)을 할당 받습니다 (위 에졔에서는 `"Kyle"`이 이에 해당합니다).
+이 예제에서 `myName`는 매개 변수라고 불리우며 함수 내부에서 지역 변수<sup>Local variable</sup>와 같은 역할을 합니다. 함수는 역할에 맞게 여러개의 매개 변수를 제약없이 받을 수 있도록 정의될 수 있습니다. 각 매개 변수는 호출될 때 전달받는 인수 <sup>Argument</sup>를 할당 받습니다. 위 에졔에서는 `"Kyle"`이 함수 호출시 `myName`에 할당되게 됩니다.
 
 In this snippet, `myName` is called a parameter, which acts as a local variable inside the function. Functions can be defined to receive any number of parameters, from none upward, as you see fit. Each parameter is assigned the argument value that you pass in that position (`"Kyle"`, here) of the call.
 
-또한 함수는 `return`이란 키워드를 통해 값을 반환할 수도 있습니다.
+또한 함수는 `return` 키워드를 통해 값을 반환할 수도 있습니다.
 
 Functions also can return values using the `return` keyword:
 
@@ -522,11 +522,11 @@ var msg = greeting("Kyle");
 console.log(msg);   // Hello, Kyle!
 ```
 
-`return`으로 오직 한 개의 값만 반환할 수 있지만 여러개의 값을 반환하고 싶을 때는 그 값들을 하나의 객체나 배열로 감싸 반환할 수도 있습니다.
+`return`은 오직 한 개의 값만 반환할 수 있지만, 여러개의 값을 반환하고 싶다면 하나의 객체나 배열로 감싸 반환할 수도 있습니다.
 
 You can only `return` a single value, but if you have more values to return, you can wrap them up into a single object/array.
 
-함수는 값이기도 하기에 객체의 프로퍼티에 할당할 수도 있습니다.
+함수는 값이므로 객체의 프로퍼티에 할당할 수도 있습니다.
 
 Since functions are values, they can be assigned as properties on objects:
 
@@ -547,7 +547,7 @@ whatToSay.greeting();
 // Hello!
 ```
 
-위 예제에서는 세 개의 함수(`greeting()`, `question()`, `answer()`)가 `whatToSay` 변수에 의해 객체안에 포함되어 있습니다. 각 함수는 객체의 프로퍼티에 접근해 함수 참조값을 가져옴으로써 호출될 수 있습니다. 함수를 객체 안에 선언하는 직관적인 방법과 조금 더 복잡한 `class` 문법에 정의하는 방법은 추후 이 챕터에서 다루도록 하겠습니다.
+위 예제에서는 세 개의 함수 `greeting()`, `question()` 그리고 `answer()`는 `whatToSay`란 변수가 가지는 객체안에 포함되어 있습니다. 각 함수는 객체의 프로퍼티에 접근하여 함수 참조값을 가져와 호출할 수 있습니다. 함수를 객체 안에 선언하는 직관적인 방법과 조금 더 복잡한 `class` 문법에 정의하는 방법은 추후 이 챕터에서 다루도록 하겠습니다.
 
 In this snippet, references to three functions (`greeting()`, `question()`, and `answer()`) are included in the object held by `whatToSay`. Each function can be called by accessing the property to retrieve the function reference value. Compare this straightforward style of defining functions on an object to the more sophisticated `class` syntax discussed later in this chapter.
 
@@ -559,7 +559,7 @@ There are many varied forms that `function`s take in JS. We dig into these varia
 
 ## Comparisons
 
-프로그램에서 값을 어떠한 결정을 내릴 때 비교할 때에는 이들의 정체와 관계에 관해 밝혀내어 값을 비교하곤 합니다. JS에는 몇몇 값을 비교하는 방법이 있고 이에 관해 조금 더 살펴보도록 하겠습니다.
+프로그램에서 무언가 결정을 내릴때는 값의 정체와 상호 관계를 비교하는 과정이 요구됩니다. JS는 몇몇 값을 비교하는 방법이 있고 이에 관해 자세히 살펴보도록 하겠습니다.
 
 Making decisions in programs requires comparing values to determine their identity and relationship to each other. JS has several mechanisms to enable value comparison, so let's take a closer look at them.
 
@@ -571,19 +571,19 @@ JS 프로그램에서 대부분의 일반적인 비교는 질문을 하는 것�
 
 The most common comparison in JS programs asks the question, "Is this X value *the same as* that Y value?" What exactly does "the same as" really mean to JS, though?
 
-인체 공학적이고 역사적인 이유에 의해 그 의미는 명백하게 *정확한 동일성*과 같은 의미보다는 조금 더 복잡합니다. 때때로 동등 비교는 *정확한* 동일을 지향하기도 하지만 그에 반해 *거의 유사하다*거나 *서로 교환할 수 있다* 같은 조금 더 큰 의미의 비교를 원할 때도 있습니다. 다른 말로 **동등(equality)** 비교와 **등가(equivalance)** 비교의 미묘한 차이를 알아야만 한다는 뜻입니다.
+인체 공학적이고 역사적인 이유로인해 그 의미는 명백하게 *동일하다*와 같은 의미보다는 조금 더 복잡합니다. 때때로 동등 비교<sup>Equality comparison</sup>는 *정확한* 일치를 지향하기도 하지만 그에 반해 *근접하다*거나 *서로 교환할 수 있다* 같은 조금 더 큰 의미의 비교를 요구할 때도 있습니다. 즉 **동등<sup>Equality</sup>** 비교와 **등가<sup>Equivalance</sup>** 비교의 미묘한 차이를 알아야만 한다는 뜻입니다.
 
 For ergonomic and historical reasons, the meaning is more complicated than the obvious *exact identity* sort of matching. Sometimes an equality comparison intends *exact* matching, but other times the desired comparison is a bit broader, allowing *closely similar* or *interchangeable* matching. In other words, we must be aware of the nuanced differences between an **equality** comparison and an **equivalence** comparison.
 
-JS에 관해 일하고 읽어볼 때 "삼중 등호(triple-equals)" `===` 연산자를 본 것은 물론이고 이 연산자가 "엄격한 동등" 연산자라고 설명되는 것을 본 적이 있을 것입니다. 이 설명이 조금 더 직관적이라고 생각될 것입니다. "엄격하다"는 말은 곧 한정되며 *정확하단* 의미를 내포하고 있습니다.
+JS에 관해 일하고 읽어볼 때 "삼중 등호<sup>Triple-equals</sup>" `===` 연산자를 본 것은 물론이고 이 연산자가 "엄격한 동등<sup>Strict equality</sup>" 연산자라고 설명되는 것을 본 적이 있을 것입니다. 이 설명이 조금 더 직관적이라고 생각될 것입니다. "엄격하다"는 말은 곧 한정되며 *정확하단* 의미를 내포하고 있습니다.
 
 If you've spent any time working with and reading about JS, you've certainly seen the so-called "triple-equals" `===` operator, also described as the "strict equality" operator. That seems rather straightforward, right? Surely, "strict" means strict, as in narrow and *exact*.
 
-딱 *정확하*진 않지만요.
+하지만 이 설명은 *정확하*진 않습니다.
 
 Not *exact*ly.
 
-`===` 동등 비교에 들어가는 대부분의 값들의 경우 *정확하게 같음*과 직관적으로 적합합니다. 아래의 예제를 살펴보도록 하겠습니다.
+`===` 동등 비교에 들어가는 대부분의 값들의 경우 *정확하게 동일하다*란 의미와 부합합니다. 아래의 예제를 살펴보도록 하겠습니다.
 
 Yes, most values participating in an `===` equality comparison will fit with that *exact same* intuition. Consider some examples:
 
@@ -603,13 +603,13 @@ null === undefined;     // false
 
 | 노트: |
 | :--- |
-| `===`의 동등 비교는 "두 값과 타입을 확인한다"라로 설명되기도 합니다. `42 === "42"`와 같은 위 예시의 몇몇 경우 두 값의 *타입*(숫자와 문자열 기타 등등)은 구분할 수 있을만한 요소로 보입니다. 하지만 여기에는 조금 더 자세히 살펴볼 사항이 있습니다. `===` 뿐만이 아니라 JS에 있는 **모든** 값 비교는 값의 타입 역시 고려하고 비교합니다. 특별히 `===` 연산자가 단지 특이하게도 값을 비교하는데 있어 타입 변환("강제 변환(coercion)"이라고 알려진)을 허용하지 않고 다른 JS 비교 연산자들은 이를 혀용하는 차이가 있을 뿐입니다. |
+| `===` 동등 비교는 "두 값과 타입을 확인한다"라로 설명되기도 합니다. 위 예시에서 본 것과 같이 `42 === "42"`에서는 숫자 혹은 문자열과 같은 *타입*은 두 값을 구분하기 위한 요소로 보입니다. 하지만 이를 조금 더 자세히 살펴볼 필요가 있습니다. `===` 뿐만이 아니라 JS에 있는 **모든** 비교 연산은 값의 타입 역시 고려합니다. `===` 연산자가 단지 특이하게도 값을 비교하는데 있어 타입 변환(강제 변환)을 허용하지 않는 반면 다른 JS 비교 연산자들은 강제 변환을 허용할 뿐입니다. |
 
 | NOTE: |
 | :--- |
 | Another way `===`'s equality comparison is often described is, "checking both the value and the type". In several of the examples we've looked at so far, like `42 === "42"`, the *type* of both values (number, string, etc.) does seem to be the distinguishing factor. There's more to it than that, though. **All** value comparisons in JS consider the type of the values being compared, not *just* the `===` operator. Specifically, `===` disallows any sort of type conversion (aka, "coercion") in its comparison, where other JS comparisons *do* allow coercion. |
 
-하지만 `===` 연산자는 많은 JS 개발자들을 속이고 손해 보게하는 미묘한 차이를 가지고 있습니다. `===` 연산자는 특수 값인 `NaN`와 `-0`의 경우에 *거짓말*하도록 설계되어 있습니다.
+하지만 `===` 연산자는 많은 JS 개발자들을 속여 손해를 보게하는 미묘한 차이를 가지고 있습니다. `===` 연산자는 특수 값인 `NaN`와 `-0`의 경우에 *거짓말*하도록 설계되어 있습니다.
 
 But the `===` operator does have some nuance to it, a fact many JS developers gloss over, to their detriment. The `===` operator is designed to *lie* in two cases of special values: `NaN` and `-0`. Consider:
 
@@ -618,19 +618,19 @@ NaN === NaN;            // false
 0 === -0;               // true
 ```
 
-`NaN`의 경우 `===` 연산자는 `NaN`는 또다른 `NaN`와는 다르다고 *거짓말합니다*. `-0`의 경우에는 (실제로 의도적으로 구분되는 값으로 사용할 수도 있습니다!) `===` 연산자는 일반적인 `0`값과 같다고 *거짓말합니다*.
+`NaN`의 경우 `===` 연산자는 `NaN`는 또다른 `NaN`와는 다르다고 *거짓말합니다*. `-0`의 경우에는 `===` 연산자는 일반적인 `0`값과 같다고 *거짓말하며* 이를 실제로 프로그램에서 의도적으로 구분을 하기위해 사용할 수도 있습니다.
 
 In the case of `NaN`, the `===` operator *lies* and says that an occurrence of `NaN` is not equal to another `NaN`. In the case of `-0` (yes, this is a real, distinct value you can use intentionally in your programs!), the `===` operator *lies* and says it's equal to the regular `0` value.
 
-이러한 비교는 성가시게 작용하기도 하기에 `===`은 이 값들을 위해서는 사용하지 않는 것이 최선책입니다. `NaN` 비교를 위해서는 *거짓말*을 하지 않는 `Number.isNaN(..)` 유틸리티를 사용하고 `-0`의 비교를 위해서는 역시나 *거짓말* 하지 않는 `Object.is(..)` 유틸리티를 사용하십시오. 물론 선호에 따라 `Object.is(..)`는 `NaN`를 위해서도 사용될 수 있습니다. 우습기도 하지만 `Object.is(..)`를 정말 정말 엄격한 비교를 하는 "사중 등호(quadruple-equals)" `====` 라고 생각할 수도 있습니다.
+이러한 비교 연산 속 *거짓말*이 성가시게 작용하기도 하기에, 이런 값들을 위해서는 `===`를 사용하지 않는 것이 최선책입니다. `NaN` 비교를 위해서는 *거짓말* 하지 않는 `Number.isNaN(..)` 유틸리티를 사용하고, `-0`의 비교를 위해서는 역시나 *거짓말* 하지 않는 `Object.is(..)` 유틸리티를 사용하십시오. 물론 선호에 따라 `Object.is(..)`는 `NaN`를 위해서도 사용될 수 있습니다. 우습기도 하지만 `Object.is(..)`를 정말 정말 엄격한 비교를 하는 "사중 등호<sup>Quadruple-equals</sup>" `====` 라고 생각할 수도 있겠습니다.
 
 Since the *lying* about such comparisons can be bothersome, it's best to avoid using `===` for them. For `NaN` comparisons, use the `Number.isNaN(..)` utility, which does not *lie*. For `-0` comparison, use the `Object.is(..)` utility, which also does not *lie*. `Object.is(..)` can also be used for non-*lying* `NaN` checks, if you prefer. Humorously, you could think of `Object.is(..)` as the "quadruple-equals" `====`, the really-really-strict comparison!
 
-이러한 *거짓말들*에는 조금 더 깊이있는 역사적이고 기술적인 이유가 있습니다만 `===`가 실제로는 *가장 엄격하게*라는 의미하는 *엄격하고 정확한 동등* 비교를 하지 않는다는 점은 여전히 변화가 없습니다.
+이러한 *거짓말*에는 조금 더 깊이있는 역사적이고 기술적인 이유가 있지만, *가장 엄격하다*는 의미에서 바라보면 `===`가 실질적으로는 *엄격하게 동등한* 비교를 하지 않는다는 점은 여전히 변화가 없습니다.
 
 There are deeper historical and technical reasons for these *lies*, but that doesn't change the fact that `===` is not actually *strictly exactly equal* comparison, in the *strictest* sense.
 
-객체 값(원시값이 아닌)의 비교는 조금 더 복잡합니다.
+원시 값이 아닌 객체를 비교하는 것은 조금 더 복잡합니다.
 
 The story gets even more complicated when we consider comparisons of object values (non-primitives). Consider:
 
@@ -644,22 +644,22 @@ The story gets even more complicated when we consider comparisons of object valu
 
 What's going on here?
 
-동등성 비교는 값의 *본질*과 *내용물*을 비교한다고 생각하는 게 조금 더 합리적이라고 생각될 수도 있습니다. `42 === 42`는 실제 `42` 값을 비교하는 것처럼 말입니다. 하지만 객체를 비교할 경우 내용 비교는 "구조적 동등성(structural equality)"를 일반적으로 말합니다.
+동등 비교는 값의 *본질*과 *내용물*을 고려한다고 생각하는 게 조금 더 합리적일 수도 있습니다. `42 === 42`에서 `42`란 실제값을 고려하고 이를 비교하는 것처럼 말입니다. 하지만 객체를 비교할 경우 내용 비교<sup>Content-aware comparison</sup>는 "구조적 동등함<sup>Structural equality</sup>"을 보통 말합니다.
 
 It may seem reasonable to assume that an equality check considers the *nature* or *contents* of the value; after all, `42 === 42` considers the actual `42` value and compares it. But when it comes to objects, a content-aware comparison is generally referred to as "structural equality."
 
-JS는 `===`를 객체 값들에 관해 *구조적 동등성*을 비교하도록 정의되어 있지 않습니다. 대신 객체 값들에 관해서는 `===`는 *정체성 일치(identity equality)*를 위해 사용됩니다.
+JS에서 `===`는 객체를 비교할 때 *구조적으로 동등한지* 확인하지 않습니다. 대신 객체를 비교할 때 `===`는 *정체성 일치<sup>Identity equality</sup>* 확인합니다.
 
 JS does not define `===` as *structural equality* for object values. Instead, `===` uses *identity equality* for object values.
 
-JS에서 모든 객체 값은 이것의 참조값(부록 A "값과 참조"를 참고해주세요)을 가지고 있습니다. 이 참조값은 복사되어 값에 할당하고 전달되기도 합니다. **그리고** 객체 값들은 참조 (정체성) 동일함을 비교하도록 되어 있습니다.
+JS에서 모든 객체는 참조값<sup>Reference</sup>을 통해 유지됩니다. (부록 A "값과 참조"를 참고). 또한 객체는 참조값 복사를 통해 할당되거나 전달됩니다. **마지막으로** 객체는 참조값(정체성)이 동일한지 비교합니다.
 
 In JS, all object values are held by reference (see "Values vs References" in Appendix A), are assigned and passed by reference-copy, **and** to our current discussion, are compared by reference (identity) equality. Consider:
 
 ```js
 var x = [ 1, 2, 3 ];
 
-// 참조 복사를 통해 값이 할당되어,
+// 참조값 복사를 통해 값이 할당되어,
 // y는 x의 또다른 복사본이 아닌,
 // x와 *동일한* 배열을 참조하게 됩니다.
 
@@ -673,15 +673,15 @@ y === [ 1, 2, 3 ];    // false
 x === [ 1, 2, 3 ];    // false
 ```
 
-이 예제에서 처음에는 `x`와 `y` 두 변수 모두 하나의 동일한 배열을 참조하므로 `y === x`는 참이 되게 됩니다. 하지만 `=== [1,2,3]` 비교에서는 `x`와 `y` 각각 새로운 *다른* 배열 `[1,2,3]`과 비교를 하기에 모두 실패하게 됩니다. 객체 비교에 있어서 **참조 정체성**만이 중요하고 그 구조와 내용물은 중요하지 않습니다.
+이 예제에서 우선 `x`와 `y` 두 변수 모두 하나의 동일한 배열의 참조값을 가지고 있으므로 `y === x`는 참이 되게 됩니다. 하지만 `=== [1,2,3]` 비교에서는 `x`와 `y`는 새로운 *다른* 배열인 `[1,2,3]`과 비교를 하기에 모두 실패하게 됩니다. 객체 비교에 있어서 **참조 정체성**만이 중요하고 그 구조와 내용물은 중요하지 않습니다.
 
 In this snippet, `y === x` is true because both variables hold a reference to the same initial array. But the `=== [1,2,3]` comparisons both fail because `y` and `x`, respectively, are being compared to new *different* arrays `[1,2,3]`. The array structure and contents don't matter in this comparison, only the **reference identity**.
 
-JS는 객체 비교에 있어 참조 동일성 비교는 그 방법을 제공해주지만 구조적 동일성을 비교하는 방법은 제공해주지 않습니다. 구조 동일 비교를 하기 위해서는 직접 비교를 하는 방법밖에 없습니다.
+JS는 객체 비교에 있어 참조값이 동일한지 비교할 순 있지만 구조적으로 동일한지 비교하는 방법은 제공해주지 않습니다. 구조적으로 동일한지 비교하기 위해서는 여러분이 직접 확인하는 방법을 구현해야 합니다.
 
 JS does not provide a mechanism for structural equality comparison of object values, only reference identity comparison. To do structural equality comparison, you'll need to implement the checks yourself.
 
-하지만 이는 생각보다 더 복잡하다는 점을 명심해주시기 바랍니다. 예를 들어, 두 함수의 참조가 "구조적으로 동일한지" 어떻게 비교할 수 있을까요? 두 원본 코드를 문자열 화를 비교한다 하더라도 이는 "클로져(closure)"와 같은 것들을 고려할 수는 없을 것입니다. 아주 다루기 힘든 모든 경우의 수를 모두 다루는 것은 일반적으로 아주 어렵기에 JS는 구조적 동일 비교는 제공하지 않습니다!
+하지만 생각보다 더 복잡하다는 점을 명심해주시기 바랍니다. 예를 들어, 두 함수가 "구조적으로 동일한지" 어떻게 결론을 내릴 수 있을까요? 두 원본 코드를 문자열로 바꿔 비교한다 하더라도 이는 "클로져"와 같은 문제들까지 고려할 수는 없습니다. 아주 처리하기 힘든 모든 경우의 수를 다 다루는 것은 일반적으로 매우 어렵기에 JS는 구조적 동일 비교는 제공하지 않습니다!
 
 But beware, it's more complicated than you'll assume. For example, how might you determine if two function references are "structurally equivalent"? Even stringifying to compare their source code text wouldn't take into account things like closure. JS doesn't provide structural equality comparison because it's almost intractable to handle all the corner cases!
 
