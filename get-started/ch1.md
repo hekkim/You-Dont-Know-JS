@@ -169,7 +169,7 @@ While the array of environments that run JS is constantly expanding (from browse
 
 For the most part, the JS defined in the specification and the JS that runs in browser-based JS engines is the same. But there are some differences that must be considered.
 
-때때로 JS 명세서는 새롭거나 재정의된 동작을 지시하기도 하지만 브라우저 기반 JS 엔진에서 작동하는 방식과 정확하게 일치하지 않는 경우도 있습니다. 이러한 불일치는 역사적인 문제에 기반하고 있는데, JS 엔진은 웹 컨텐츠가 사용하고있는 기능들의 코너 케이스<sup>Corner case</sup>까지 20년이 넘도록 지원해주고 있습니다. 그로인해 이런 웹 컨텐츠의 손상을 방지하고자 JS 엔진은 때때로 명세서의 변경 사항들을 따르지 않을 수도 있습니다.
+때때로 JS 명세서는 새롭거나 재정의된 동작을 지시하기도 하지만 브라우저 기반 JS 엔진에서 작동하는 방식과 정확하게 일치하지 않는 경우도 있습니다. 이러한 불일치는 역사적인 문제에 기반하고 있는데, JS 엔진은 웹 컨텐츠가 사용하고있는 기능들의 특이한 경우<sup>Corner case</sup>까지 20년이 넘도록 지원해주고 있습니다. 그로인해 이런 웹 컨텐츠의 손상을 방지하고자 JS 엔진은 때때로 명세서의 변경 사항들을 따르지 않을 수도 있습니다.
 
 Sometimes the JS specification will dictate some new or refined behavior, and yet that won't exactly match with how it works in browser-based JS engines. Such a mismatch is historical: JS engines have had 20+ years of observable behaviors around corner cases of features that have come to be relied on by web content. As such, sometimes the JS engines will refuse to conform to a specification-dictated change because it would break that web content.
 
@@ -189,7 +189,7 @@ The solution? Appendix B, "Additional ECMAScript Features for Web Browsers".[^sp
 
 Section B.1 and B.2 cover *additions* to JS (syntax and APIs) that web JS includes, again for historical reasons, but which TC39 does not plan to formally specify in the core of JS. Examples include `0`-prefixed octal literals, the global `escape(..)` / `unescape(..)` utilities, String "helpers" like `anchor(..)` and `blink()`, and the RegExp `compile(..)` method.
 
-섹션 B.3에서는 웹과 웹이 아닌 JS 엔진에서 똑같이 사용가능하지만 작동 방식이 다르다던가 그 결과물이 다른 경우에 관해 다룰 것입니다. 위에 나열한 변경점들 대다수는 엄격 모드<sup>Strict mode</sup>에서 작동할 경우 초기 에러들<sup>Early errors</sup>로 분류되는 상황들입니다.
+섹션 B.3에서는 웹과 웹이 아닌 JS 엔진에서 똑같이 사용가능하지만 작동 방식이 다르다던가 그 결과물이 다른 경우에 관해 다룰 것입니다. 위에 나열한 변경점들 대다수는 엄격 모드<sup>Strict mode</sup>에서 작동할 경우 조기 오류들<sup>Early errors</sup>로 분류되는 상황들입니다.
 
 Section B.3 includes some conflicts where code may run in both web and non-web JS engines, but where the behavior *could* be observably different, resulting in different outcomes. Most of the listed changes involve situations that are labeled as early errors when code is running in strict mode.
 
@@ -403,7 +403,7 @@ Does this mean JS developers should always lag behind the pace of progress, usin
 
 But it does mean that JS developers need to take special care to address this gap.
 
-새롭지만 호환성이 없는 문법들의 경우 트랜스파일링<sup>Transpiling</sup>으로 해결할 수 있습니다. 트랜스파일링은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 사용하는 것을 말합니다. 대표적으로 문법과 연관된 상위 호환성 문제는 트랜스파일러<sup>Transpiler</sup>(가장 흔히 바벨<sup>Babel</sup> (https://babeljs.io))를 통해 새로운 JS 문법을 그와 동일하지만 구식의 문법을 가진 형태로 변경해줌으로써 이러한 문제를 해결합니다.
+새롭지만 호환성이 없는 문법들의 경우 트랜스파일<sup>Transpiling</sup>을 통해 해결할 수 있습니다. 트랜스파일은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 사용하는 것을 말합니다. 대표적으로 문법과 연관된 상위 호환성 문제는 트랜스파일러<sup>Transpiler</sup>(가장 흔히 바벨<sup>Babel</sup> (https://babeljs.io))를 통해 새로운 JS 문법을 그와 동일하지만 구식의 문법을 가진 형태로 변경해줌으로써 이러한 문제를 해결합니다.
 
 For new and incompatible syntax, the solution is transpiling. Transpiling is a contrived and community-invented term to describe using a tool to convert the source code of a program from one form to another (but still as textual source code). Typically, forwards-compatibility problems related to syntax are solved by using a transpiler (the most common one being Babel (https://babeljs.io)) to convert from that newer JS syntax version to an equivalent older syntax.
 
@@ -438,13 +438,13 @@ else {
 }
 ```
 
-원본 코드는 블록에 한정된<sup>block-scoped</sup> `x`를 `let`을 이용하여 `if`와 `else`문에 걸쳐 생성하고 있지만 상호간 간섭받는 관계에 있지 않습니다. 바벨이 최소한의 재작업을 통해 만든 동일한 프로그램은 두 변수에 각기 다른 이름을 부여하여 그들이 서로간의 혼선을 방지한 결과물을 만들었습니다.
+원본 코드는 블록 스코프에 갇힌<sup>block-scoped</sup> `x`를 `let`을 이용하여 `if`와 `else`문에 걸쳐 생성하고 있지만 상호간 간섭받는 관계에 있지 않습니다. 바벨이 최소한의 재작업을 통해 만든 동일한 프로그램은 두 변수에 각기 다른 이름을 부여하여 그들이 서로간의 혼선을 방지한 결과물을 만들었습니다.
 
 The original snippet relied on `let` to create block-scoped `x` variables in both the `if` and `else` clauses which did not interfere with each other. An equivalent program (with minimal re-working) that Babel can produce just chooses to name two different variables with unique names, producing the same non-interference outcome.
 
 | NOTE: |
 | :--- |
-| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일을 하는데 "타겟"<sup>target</sup>은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 오직 그 이상 버전에서만 작동하기위해 사용됩니다. |
+| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일을 하는데 "타겟"<sup>Target</sup>은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 오직 그 이상 버전에서만 작동하기위해 사용됩니다. |
 
 | NOTE: |
 | :--- |
@@ -480,7 +480,7 @@ startSpinner();
 
 pr
 .then(renderRecords)   // 성공시 데이터를 보여줍니다
-.catch(showError)      // 그렇지 않다면 에러를 보여줍니다
+.catch(showError)      // 그렇지 않다면 오류를 보여줍니다
 .finally(hideSpinner)  // 성공, 실패에 상관없이 스피너를 숨겨줍니다
 ```
 
@@ -565,7 +565,7 @@ Historically, scripted or interpreted languages were executed in generally a top
     <br><br>
 </figure>
 
-스크립트 그리고 인터프리트 언어에서 프로그램의 5번째 줄에 있는 에러는 1번째 줄에서 4번째 줄까지 실행될 때까지 발견되지 않습니다. 뚜렷하게도 5번째 줄에 있는 에러는 런타임<sup>Runtime</sup> 상황에서 발생합니다. 예를들어 변수가 값이 작업을 수행하기에 적절하지 않다던가 잘못된 문장이나 명령어로 인한 문제입니다. 그 맥락에 따라 해당 줄에서 오류 처리를 미루는 것이 바람직할 수도 그렇지 않을 수도 있습니다.
+스크립트 그리고 인터프리트 언어에서 프로그램의 5번째 줄에 있는 오류는 1번째 줄에서 4번째 줄까지 실행될 때까지 발견되지 않습니다. 뚜렷하게도 5번째 줄에 있는 오류는 런타임<sup>Runtime</sup> 상황에서 발생합니다. 예를들어 변수가 값이 작업을 수행하기에 적절하지 않다던가 잘못된 문장이나 명령어로 인한 문제입니다. 그 맥락에 따라 해당 줄에서 오류 처리를 미루는 것이 바람직할 수도 그렇지 않을 수도 있습니다.
 
 In scripted or interpreted languages, an error on line 5 of a program won't be discovered until lines 1 through 4 have already executed. Notably, the error on line 5 might be due to a runtime condition, such as some variable or value having an unsuitable value for an operation, or it may be due to a malformed statement/command on that line. Depending on context, deferring error handling to the line the error occurs on may be a desirable or undesirable effect.
 
@@ -683,35 +683,35 @@ But it's important to note that ASM.js was never intended to be code that was au
 
 Several years after ASM.js demonstrated the validity of tooling-created versions of programs that can be processed more efficiently by the JS engine, another group of engineers (also, initially, from Mozilla) released Web Assembly (WASM).
 
-WASM은 C와 같은 JS가 아닌 프로그램이 JS 엔진에서 실행될 수 있는 형태로 변경시키고자 하는 방향성 자체는 ASM.js과 유사했습니다. 하지만 WASM은 ASM.js와는 다르게 프로그램이 실행되기 전에 JS에서 추가적인 파싱과 컴파일을 과정을 내장해 JS와는 전혀 다른 형태의 프로그램으로 표현하는 방식을 택했습니다.
+웹 어셈블리은 C와 같은 JS가 아닌 프로그램이 JS 엔진에서 실행될 수 있는 형태로 변경시키고자 하는 방향성 자체는 ASM.js과 유사했습니다. 하지만 WASM은 ASM.js와는 다르게 프로그램이 실행되기 전에 JS에서 추가적인 파싱과 컴파일을 과정을 내장해 JS와는 전혀 다른 형태의 프로그램으로 표현하는 방식을 택했습니다.
 
 WASM is similar to ASM.js in that its original intent was to provide a path for non-JS programs (C, etc.) to be converted to a form that could run in the JS engine. Unlike ASM.js, WASM chose to additionally get around some of the inherent delays in JS parsing/compilation before a program can execute, by representing the program in a form that is entirely unlike JS.
 
-WASM는 이름에도 드러나는 것과 같이 어셈블리<sup>Assembly</sup>와 유사항 형태로 표현되어 있고 이것은 JS 엔진이 일반적으로 하는 파싱과 컴파일 과정은 건너뛰고 실행되게 됩니다. WASM이 목표로 삼고있는 프로그램의 파싱과 컴파일 단계는 미리<sup>Ahead of time </sup> (AOT) 발생하고 JS 엔진은 최소한의 가공과 함께 이 프로그램을 실행할 수 있는 이진형태로 배포되게 됩니다.
+웹 어셈블리는 이름에도 드러나는 것과 같이 어셈블리<sup>Assembly</sup>와 유사항 형태로 표현되어 있고 이것은 JS 엔진이 일반적으로 하는 파싱과 컴파일 과정은 건너뛰고 실행되게 됩니다. 웹 어셈블리가 목표로 삼고있는 프로그램의 파싱과 컴파일 단계는 미리<sup>Ahead of time </sup> (AOT) 발생하고 JS 엔진은 최소한의 가공과 함께 이 프로그램을 실행할 수 있는 이진형태로 배포되게 됩니다.
 
 WASM is a representation format more akin to Assembly (hence, its name) that can be processed by a JS engine by skipping the parsing/compilation that the JS engine normally does. The parsing/compilation of a WASM-targeted program happen ahead of time (AOT); what's distributed is a binary-packed program ready for the JS engine to execute with very minimal processing.
 
-WASM의 초기 의도는 잠재적인 성능 향상입니다. 초기 목표에 계속해서 집중하는 한 편, WASM은 JS 이외의 언어를 위해 더 많은 동등한 지위<sup>Parity</sup>를 웹 부여하여 웹 플랫폼으로 끌어들이는 것을 추가적인 목표로 삼았습니다. 예를들어 Go와 같은 언어에서 지원되는 스레드 프로그래밍<sup>Threaded programming</sup>은 JS에서는 지원되지 않지만, WASM은 JS 언어 자체에 스레드 관련 기능이 추후에 추가되지 않더라도 Go 프로그램이 JS 엔진에서도 이해 가능한 형태로 변경될 여지를 제공해줍니다.
+웹 어셈블리의 초기 의도는 잠재적인 성능 향상입니다. 초기 목표에 계속해서 집중하는 한 편, 웹 어셈블리는 JS 이외의 언어를 위해 더 많은 동등한 지위<sup>Parity</sup>를 웹 부여하여 웹 플랫폼으로 끌어들이는 것을 추가적인 목표로 삼았습니다. 예를들어 Go와 같은 언어에서 지원되는 스레드 프로그래밍<sup>Threaded programming</sup>은 JS에서는 지원되지 않지만, 웹 어셈블리는 JS 언어 자체에 스레드 관련 기능이 추후에 추가되지 않더라도 Go 프로그램이 JS 엔진에서도 이해 가능한 형태로 변경될 여지를 제공해줍니다.
 
 An initial motivation for WASM was clearly the potential performance improvements. While that continues to be a focus, WASM is additionally motivated by the desire to bring more parity for non-JS languages to the web platform. For example, if a language like Go supports threaded programming, but JS (the language) does not, WASM offers the potential for such a Go program to be converted to a form the JS engine can understand, without needing a threads feature in the JS language itself.
 
-다시 말해, WASM은 JS에 다른 언어로부터 트랜스파일된 프로그램에만 일반적으로 혹은 독점적으로 쓰이는 기능을 추가해야만하는 압박을 덜어주었습니다. 이는 곧 JS 기능 개발은 다른 언어의 이해관계나 요구사항에 의해 왜곡되지 않고도, TC39이 개발 명세서에 관해 결정내릴 수 있으며, 그와 동시에 다른 언어들이 웹으로 오기 위해 독자적인 방법을 채택할 수 있게됐다는 뜻입니다.
+다시 말해, 웹 어셈블리는 JS에 다른 언어로부터 트랜스파일된 프로그램에만 일반적으로 혹은 독점적으로 쓰이는 기능을 추가해야만하는 압박을 덜어주었습니다. 이는 곧 JS 기능 개발은 다른 언어의 이해관계나 요구사항에 의해 왜곡되지 않고도, TC39이 개발 명세서에 관해 결정내릴 수 있으며, 그와 동시에 다른 언어들이 웹으로 오기 위해 독자적인 방법을 채택할 수 있게됐다는 뜻입니다.
 
 In other words, WASM relieves the pressure to add features to JS that are mostly/exclusively intended to be used by transpiled programs from other languages. That means JS feature development can be judged (by TC39) without being skewed by interests/demands in other language ecosystems, while still letting those languages have a viable path onto the web.
 
-또다른 WASM의 등장에 관한 또다른 관점은 흥미롭게도 웹과 직접적인 연관이 없습니다. WASM은 프로그램이 일단 컴파일되고 다양한 시스템 환경에 실행가능한 형태가 됨으로써 크로스 플랫폼<sup>Cross-platform</sup> 가상 머신<sup>virtual machine</su[> (VM)의 일종으로 진화해 나가고 있습니다.
+웹 어셈블리의 등장에 관한 또다른 관점은 흥미롭게도 웹과 직접적인 연관이 없습니다. 웹 어셈블리는 프로그램이 일단 컴파일되고 다양한 시스템 환경에 실행가능한 형태가 됨으로써 플랫폼 간<sup>Cross-platform</sup>에 가상 머신<sup>Virtual machine</sup> (VM)의 일종으로 진화해 나가고 있습니다.
 
 Another perspective on WASM that's emerging is, interestingly, not even directly related to the web (W). WASM is evolving to become a cross-platform virtual machine (VM) of sorts, where programs can be compiled once and run in a variety of different system environments.
 
-그래서 WASM은 단순 웹 혹은 JS만을 위한 것이 아닙니다. WASM은 JS 엔진에서 구동됨에도 불구하고, JS는 WASM 프로그램을 위한 가정 적절하지 않은 언어입니다. 왜냐하면 WASM은 정적 타입에 지나치게 의존하고 있기 때문입니다. 심지어 표면적으로 JS와 정적 타입의 조합인 타입스크립트<sup>TypeScript</sup>(TS)는 WASM으로 트랜스파일되기 적절한 언어는 아니지만 어셈블리 스크립트<sup>AssenblyScript</sup>와 같은 변형된 언어는 JS/TS 그리고 WASM 간의 간극에 다리를 놓으려고 계속해서 시도하고 있습니다.
+그래서 웹 어셈블리는 단순 웹 혹은 JS만을 위한 것이 아닙니다. 웹 어셈블리는 JS 엔진에서 구동됨에도 불구하고, JS는 웹 어셈블리 프로그램을 위한 가정 적절하지 않은 언어입니다. 왜냐하면 웹 어셈블리는 정적 타입에 지나치게 의존하고 있기 때문입니다. 심지어 표면적으로 JS와 정적 타입의 조합인 타입스크립트<sup>TypeScript</sup>(TS)는 웹 어셈블리로 트랜스파일되기 적절한 언어는 아니지만 어셈블리 스크립트<sup>AssenblyScript</sup>와 같은 변형된 언어는 JS/TS 그리고 웹 어셈블리 간의 간극에 다리를 놓으려고 계속해서 시도하고 있습니다.
 
 So, WASM isn't only for the web, and WASM also isn't JS. Ironically, even though WASM runs in the JS engine, the JS language is one of the least suitable languages to source WASM programs with, because WASM relies heavily on static typing information. Even TypeScript (TS)—ostensibly, JS + static types—is not quite suitable (as it stands) to transpile to WASM, though language variants like AssemblyScript are attempting to bridge the gap between JS/TS and WASM.
 
-이 책은 WASM 관한 것이 아니기에 한 가지 마지막 요점에 관해 얘기하며 더 많은 시간을 토론하는데 소비하지 않겠습니다. *몇몇* 사람들은 WASM이 JS가 웹에서 비중이 작게 만드는 걸 목표로 하고 있다고 말하고 있습니다. 이런 사람들은 종종 JS에 관한 안 좋은 생각을 가지고 있고 JS를 대체할 다른 언어를 원합니다. WASM은 다른 언어가 JS 엔진에서도 구동될 수 있게 도와주므로 이것의 실상은 완전히 환상적인 동화같은 이야기는 아닙니다.
+이 책은 웹 어셈블리 관한 것이 아니기에 한 가지 마지막 요점에 관해 얘기하며 더 많은 시간을 토론하는데 소비하지 않겠습니다. *몇몇* 사람들은 웹 어셈블리가 JS가 웹에서 비중이 작게 만드는 걸 목표로 하고 있다고 말하고 있습니다. 이런 사람들은 종종 JS에 관한 안 좋은 생각을 가지고 있고 JS를 대체할 다른 언어를 원합니다. 웹 어셈블리는 다른 언어가 JS 엔진에서도 구동될 수 있게 도와주므로 이것의 실상은 완전히 환상적인 동화같은 이야기는 아닙니다.
 
 This book isn't about WASM, so I won't spend much more time discussing it, except to make one final point. *Some* folks have suggested WASM points to a future where JS is excised from, or minimized in, the web. These folks often harbor ill feelings about JS, and want some other language—any other language!—to replace it. Since WASM lets other languages run in the JS engine, on its face this isn't an entirely fanciful fairytale.
 
-제가 간단히 정리해드리겠습니다. WASM은 JS의 대체물이 아닙니다. WASM은 JS를 포함해 웹이 성취할 수 있는 것을 상당부분 강화해줄 수 있습니다. 몇몇 사람들에게는 JS를 사용하는 것으로부터 탈출구 역할을 할 수도 있는 전혀 다른 방향을 제시해주는 대단한 일이 될 수도 있습니다.
+제가 간단히 정리해드리겠습니다. 웹 어셈블리는 JS의 대체물이 아닙니다. 웹 어셈블리는 JS를 포함해 웹이 성취할 수 있는 것을 상당부분 강화해줄 수 있습니다. 몇몇 사람들에게는 JS를 사용하는 것으로부터 탈출구 역할을 할 수도 있는 전혀 다른 방향을 제시해주는 대단한 일이 될 수도 있습니다.
 
 But let me just state simply: WASM will not replace JS. WASM significantly augments what the web (including JS) can accomplish. That's a great thing, entirely orthogonal to whether some people will use it as an escape hatch from having to write JS.
 
@@ -725,19 +725,19 @@ Back in 2009 with the release of ES5, JS added *strict mode* as an opt-in mechan
 
 The benefits of strict mode far outweigh the costs, but old habits die hard and the inertia of existing (aka "legacy") code bases is really hard to shift. So sadly, more than 10 years later, strict mode's *optionality* means that it's still not necessarily the default for JS programmers.
 
-어째서 엄격 모드를 사용할까요? 엄격 모드는 여러분의 능력에 관한 제약이 아닌 JS 엔진이 코드를 최적화하고 효율적으로 구동하기위한 최선책을 갖게하기위한 최선의 방법으로 가는 안내서와 같은 것입니다. 대부분의 JS 코드는 개발자들에 의해 작업되기에 엄격 모드의 *엄격*함은 비엄격 모드에서 발생할 수도 있는 실수를 피하게 해줘 자주 협업을 도와주게 됩니다.
+어째서 엄격 모드를 사용할까요? 엄격 모드는 여러분이 할 수 없는 것에 금지시키는 게 아니라 JS 엔진이 코드를 최적화하고 효율적으로 구동하기위한 최선책을 갖게하기위한 최선의 길로 안내해주는 것과 같습니다. 대부분의 JS 코드는 개발자들에 의해 작업되기에 엄격 모드의 *엄격*함은 비엄격 모드에서 발생할 수도 있는 실수를 피하게해줘 협업하는 것을 종종 도와주게 됩니다.
 
 Why strict mode? Strict mode shouldn't be thought of as a restriction on what you can't do, but rather as a guide to the best way to do things so that the JS engine has the best chance of optimizing and efficiently running the code. Most JS code is worked on by teams of developers, so the *strict*-ness of strict mode (along with tooling like linters!) often helps collaboration on code by avoiding some of the more problematic mistakes that slip by in non-strict mode.
 
-대부분의 엄격 모드는 *조기 오류(early errors)*와 같은 형태로 제어됩니다. 이 말인 즉슨 엄밀하겐 문법 오류는 아니지만 컴파일 단계(코드가 실행되기 전인)에서 오류를 발견할 수 있다는 애기입니다. 예를 들어 엄격 모드는 두 함수 파라미터를 같은 이름을 갖게 못하고 그 결과를 조기 에러 단계에서 만들어줍니다. `this`가 전역 객체 대신 `undefined`로 기본값을 갖고 있는 것처럼 엄격 모드가 런타임에서만 제어되기도 합니다.
+대부분의 엄격 모드는 *조기 오류*와 같은 형태로 제어됩니다. 이 말인 즉슨 엄밀하겐 문법 오류는 아니지만 코드가 실행되기 전인 컴파일 단계에서 오류를 발견할 수 있다는 애기입니다. 예를 들어 엄격 모드에서는 두 함수 파라미터를 같은 이름을 갖지 못하고 그 결과를 조기 오류를 발생시킵니다. `this`가 전역 객체 대신 `undefined`로 기본값을 갖고 있는 것처럼 엄격 모드가 런타임에서만 제어되기도 합니다.
 
 Most strict mode controls are in the form of *early errors*, meaning errors that aren't strictly syntax errors but are still thrown at compile time (before the code is run). For example, strict mode disallows naming two function parameters the same, and results in an early error. Some other strict mode controls are only observable at runtime, such as how `this` defaults to `undefined` instead of the global object.
 
-부모님이 하지 말라는 것에 반항하는 아이들처럼 엄격 모드에 관해 토론하고 논쟁하는 대신 가장 좋은 마음 가짐은 엄격 모드를 JS가 최상의 품질과 성능을 위해 쓰이도록 돕는 린터와 같이 생각하는 것입니다. 엄격 모드에서 일하려고 노력하는게 마치 자기 자신에게 수갑을 채우는 것처럼만 느껴진다면, 그 것은 다시 백업하고 전체 접근법에 관해 다시 고려해봐야할 필요가 있는 빨간 경고 표시와 같은 것입니다.
+부모님이 하지 말라는 것을 무시하는 아이들처럼 엄격 모드에 관해 토론하고 논쟁하는 것보다, 엄격 모드를 JS가 최상의 품질과 성능을 가지도록 돕는 린터<sup>Linter</sup>와 같이 생각하는 것이 가장 좋은 마음 가짐입니다. 엄격 모드에서 일하려고 노력하는게 마치 자기 자신에게 수갑을 채우는 것처럼만 느껴진다면, 다시 백업하고 전체 접근법에 관해 다시 고려해봐야할 필요가 있다는 빨간 경고 깃발과 같은 것입니다.
 
 Rather than fighting and arguing with strict mode, like a kid who just wants to defy whatever their parents tell them not to do, the best mindset is that strict mode is like a linter reminding you how JS *should* be written to have the highest quality and best chance at performance. If you find yourself feeling handcuffed, trying to work around strict mode, that should be a blaring red warning flag that you need to back up and rethink the whole approach.
 
-특수 프로그마(pragma)를 이용해 파일별로 엄격 모드로 바꿀 수 있습니다 (이 프래그마 이전에는 주석이나 빈공백(whitespace)을 제외하고는 그 어떠한 것도 있을 수 없습니다).
+특수 프래그마<sup>Pragma</sup>를 이용해 파일별로 엄격 모드로 바꿀 수 있습니다. 이 프래그마 이전에는 주석이나 빈공백<sup>whitespace</sup>을 제외하고는 그 어떠한 것도 있을 수 없습니다.
 
 Strict mode is switched on per file with a special pragma (nothing allowed before it except comments/whitespace):
 
@@ -746,13 +746,13 @@ Strict mode is switched on per file with a special pragma (nothing allowed befor
 // only whitespace and comments are allowed
 // before the use-strict pragma
 "use strict";
-// 엄격 모드로 구동될 파일의 나머지 부분
+// 엄격 모드가 적용될 파일의 나머지 부분
 // the rest of the file runs in strict mode
 ```
 
 | 경고: |
 | :--- |
-| 심지어 `;` 조차 엄격 모드 프래그마 이전에 위치한다면 이 프래그마는 무용지물로 만들어 버립니다. 이 프래그마는 오류도 발생하지 않는데 이는 단지 문자열 리터럴 표현을 가지고 있는 우효한 JS이기 때문입니다. 물론 묵시적으로 엄격 모드로 바꾸지도 *않습니다*! |
+| 엄격 모드 프래그마 이전에 `;`라도 있다면 이 프래그마는 무용지물이 됩니다. 이 프래그마는 오류도 발생하지 않는데 이는 단지 문자열 리터럴 표현을 가지고 있는 유효한 JS이기 때문입니다. 물론 암묵적으로 엄격 모드로 바꾸지조차 *않습니다*! |
 
 | WARNING: |
 | :--- |
@@ -768,7 +768,7 @@ function someOperations() {
     // whitespace and comments are fine here
     "use strict";
 
-    // 엄격 모드로 작동할 모든 코드들입니다
+    // 엄격 모드가 적용될 모든 코드들입니다
     // all this code will run in strict mode
 }
 ```
@@ -777,11 +777,11 @@ function someOperations() {
 
 Interestingly, if a file has strict mode turned on, the function-level strict mode pragmas are disallowed. So you have to pick one or the other.
 
-함수별로 엄격 모드를 사용하는 타당한 경우는 **오직** 비엄격 모드의 프로그램 파일을 그 일부만을 바꿔야할 때 뿐입니다. 그 외에는 한 파일/프로그램의 전체를 엄격 모드로 바꾸는 게 훨씬 더 낫습니다.
+함수별로 엄격 모드를 사용하는 타당한 경우는 **오직** 비엄격 모드의 프로그램 파일을 그 일부를 조금씩 시간에 걸쳐 바꿔야할 때 뿐입니다. 그 외에는 한 파일/프로그램의 전체를 엄격 모드로 바꾸는 게 훨씬 더 낫습니다.
 
 The **only** valid reason to use a per-function approach to strict mode is when you are converting an existing non-strict mode program file and need to make the changes little by little over time. Otherwise, it's vastly better to simply turn strict mode on for the entire file/program.
 
-많은 이들이 JS를 엄격 모드를 기본값으로 만드는 적절한 시기에 관해 궁금해합니다. 이에대한 대답은 거의 확실하게 할 수 없다입니다. 이미 일전에 하위 호환성에 관해 이야기 했듯이 만약 엄격 모드라고 적혀있지 않더라도 엄격 모드라고 여기도록 JS 엔진을 업데이트하면, 엄격 모드의 규제로 인해 코드가 고장날 수도 있기 때문입니다.
+많은 이들이 JS를 엄격 모드를 기본값으로 만드는 적절한 시기가 있을지 궁금해합니다. 이에대한 대답은 거의 확실하게 할 수 없다입니다. 이미 일전에 하위 호환성에 관해 이야기 했듯이 만약 엄격 모드라고 적혀있지 않더라도 엄격 모드가 적용되게 JS 엔진을 변경하면, 엄격 모드의 규제로 인해 코드가 고장날 수도 있기 때문입니다.
 
 Many have wondered if there would ever be a time when JS made strict mode the default? The answer is, almost certainly not. As we discussed earlier around backwards compatibility, if a JS engine update started assuming code was strict mode even if it's not marked as such, it's possible that this code would break as a result of strict mode's controls.
 
@@ -789,7 +789,7 @@ Many have wondered if there would ever be a time when JS made strict mode the de
 
 However, there are a few factors that reduce the future impact of this non-default "obscurity" of strict mode.
 
-우선 첫번째로, 원본 소스코드가 그렇지 않더라고 트랜스파일된 모든 가상의 코드를 엄격 모드로 끝나게 트랜스파일 할 수 있습니다. 제품에 있는 대부분의 JS 코드는 트랜스파일 되어왔고, 그렇기에 이는 곧 대부분의 JS는 엄격 모드에 기생하고 있다고 볼 수 있습니다. 또한 이러한 가정을 원상태로 돌려놓을수도 있지만 실제로 되돌려야 할 가능성은 매우 낮습니다.
+우선 첫번째로, 원본 소스코드에 엄격 모드를 적용하지 않았더라도 트랜스파일된 모든 가상의 코드를 엄격 모드가 적용되게 만들 수 있습니다. 제품에 있는 대부분의 JS 코드는 트랜스파일 되어왔고, 그렇기에 이는 곧 대부분의 JS는 엄격 모드에 기생하고 있다고 볼 수 있습니다. 또한 이러한 가정을 원상태로 돌려놓을수도 있지만 실제로 되돌려야 할 가능성은 매우 낮습니다.
 
 For one, virtually all transpiled code ends up in strict mode even if the original source code isn't written as such. Most JS code in production has been transpiled, so that means most JS is already adhering to strict mode. It's possible to undo that assumption, but you really have to go out of your way to do so, so it's highly unlikely.
 
@@ -797,25 +797,25 @@ For one, virtually all transpiled code ends up in strict mode even if the origin
 
 Moreover, a wide shift is happening toward more/most new JS code being written using the ES6 module format. ES6 modules assume strict mode, so all code in such files is automatically defaulted to strict mode.
 
-종합해서, 기술적으로보아 엄격 모드가 실제로 기본값이 아닐지라도 사실상 기본값이라고 볼 수 있습니다.
+종합해서, 기술적으로는 엄격 모드가 기본값이 아닐지라도 사실상 기본값이라고 볼 수 있습니다.
 
 Taken together, strict mode is largely the de facto default even though technically it's not actually the default.
 
 ## 정의된
 
-JS는 ECMAScript 표준(여기서는 ES2019 버전)의 구현체이고 이는 ECMA에 의해 주최되는 TC39에 의해 그 방향이 결정되고 있습니다. JS는 브라우저 그리고 Node.js와 같은 환경 모두에서 동작할 수 있습니다.
+JS는 ECMAScript 표준(이 시리즈에서는 ES2019 버전)의 구현체이고 이는 ECMA에 의해 주최되는 TC39에 의해 그 방향이 결정되고 있습니다. JS는 브라우저 그리고 Node.js와 같은 환경 모두에서 동작할 수 있습니다.
 
 JS is an implementation of the ECMAScript standard (version ES2019 as of this writing), which is guided by the TC39 committee and hosted by ECMA. It runs in browsers and other JS environments such as Node.js.
 
-JS는 다중 패러다임 언어입니다. 이는 곧 개발자들이 절차지향적, 객체지향 혹은 그리고 함수형 프로그래밍과 같은 다양한 주요 패러다임들의 개념들을 혼합하고 그에 맞춰 사용할 수 있는 문법과 사용성을 가지고 의미입니다.
+JS는 다중 패러다임 언어입니다. 이는 곧 개발자들이 절차지향적, 객체지향 혹은 그리고 함수형 프로그래밍과 같은 다양한 주요 패러다임들의 개념들을 혼합하고 그에 맞춰 유연하게 사용할 수 있는 문법과 사용성을 가지고 있습니다.
 
 JS is a multi-paradigm language, meaning the syntax and capabilities allow a developer to mix and match (and bend and reshape!) concepts from various major paradigms, such as procedural, object-oriented (OO/classes), and functional (FP).
 
-JS는 컴파일 언어입니다. JS는 이것이 실행되기 전에 프로그램 관련한 처리를 진행하고 유효성을 검사하는 도구(JS 엔진을 포함한)임을 의미합니다.
+JS는 컴파일 언어입니다. JS는 이것이 실행되기 전에 프로그램 관련한 가공하고 유효성을 검사하는 도구입니다.
 
 JS is a compiled language, meaning the tools (including the JS engine) process and verify a program (reporting any errors!) before it executes.
 
-이제 *정의된* 언어와 함께 이것의 자세한 안과 밖에관해 알아가봅시다.
+이제 함께 *정의내린* 이 언어와 함께 이것의 자세한 안과 밖에관해 더 자세히 알아가보도록 하겠습니다.
 
 With our language now *defined*, let's start getting to know its ins and outs.
 
