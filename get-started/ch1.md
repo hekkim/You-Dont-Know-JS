@@ -333,7 +333,7 @@ JavaScript is most definitely a multi-paradigm language. You can write procedura
 
 ## 하위 호환성<sup>Backwards</sup>과 상위 호환성<sup>Forwards</sup>
 
-자바스크립트가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*의 보호하자는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관되어 있지만 다른 용어인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
+자바스크립트가 지향하는 근본적 원리 중 하나는 *하위 호환성(backwards compatibility)*을 유지하는 것입니다. 많은 이들이 이 용어의 함축된 의미를 혼동을 하곤하기도 하고 연관은 있지만 다른 의미인 *상위 호환성(forwards compatibility)*과 종종 헷갈려하기도 합니다.
 
 One of the most foundational principles that guides JavaScript is preservation of *backwards compatibility*. Many are confused by the implications of this term, and often confuse it with a related but different term: *forwards compatibility*.
 
@@ -341,47 +341,47 @@ One of the most foundational principles that guides JavaScript is preservation o
 
 Let's set the record straight.
 
-하위 호완성은 만약 JS에 적합하다고 일단 인정되어진 어떠한 특징들은 JS에서 부적합하다고 변경될 일이 없다는 것을 뜻합니다. 원시적이고 제한된 환경이기도 했던 1995에 작성된 코드일지라도 오늘날에도 여전히 작동되야 된다는 것이죠. TC39의 한 명으로써 말하자면 "저흰 웹을 파괴하지 않을 것입니다!"
+하위 호완성은 만약 JS에 적합하다고 일단 인정이 된다면, 추후에 JS에서 부적합하다고 변경될 일이 없다는 것을 뜻합니다. 원시적이고 제한된 환경이기도 했던 1995에 작성된 코드일지라도 오늘날에도 여전히 작동되야 된다는 것입니다. "저흰 웹을 파괴하지 않을 것입니다!"라고 TC39의 구성원들은 종종 주장하곤 합니다.
 
 Backwards compatibility means that once something is accepted as valid JS, there will not be a future change to the language that causes that code to become invalid JS. Code written in 1995—however primitive or limited it may have been!—should still work today. As TC39 members often proclaim, "we don't break the web!"
 
-이러한 발상은 브라우저 업데이트로 인해 예상치 못 하게 작동하지 않는 일이 없도록 해주고 이러한 신뢰를 바탕으로 JS 개발자들이 코드를 작성할 수 있는데 기여합니다. 이로인해 향후 수 년 동안 프로그램을 위해 JS를 선택하는게 안전하며 현명한 투자가 되도록 해줍니다.
+이러한 발상은 브라우저 업데이트로 인해 JS 개발자가 작성한 코드가 예상치 못 하게 작동하지 않는 일이 없도록 해주고 이러한 신뢰를 바탕으로 개발자들이 코드를 작성할 수 있게해줍니다. 이는 곧 향후 수 년 동안 프로그램을 위해 JS를 선택하는게 안전하며 현명한 투자가 되도록 해줍니다.
 
 The idea is that JS developers can write code with confidence that their code won't stop working unpredictably because a browser update is released. This makes the decision to choose JS for a program a more wise and safe investment, for years into the future.
 
-이러한 "보장(gurantee)"는 결코 작은 일이 아닙니다. 거의 25년에 가까운 언어의 역사에 긴 역사를 가진 언어의 하위 호환성을 유지하는 것은 몹시 부담스러운 일이고 각기 다른 고유의 도전 과제들의 항연이기도 합니다. 위원회가 하위호환성을 보존하기위해 다양한 예제들을 찾아보는 것에 큰 압박을 받을 수도 있습니다.
+이러한 "보장"은 결코 작은 일이 아닙니다. 거의 25년에 가까운 긴 역사를 가진 언어의 하위 호환성을 유지하는 것은 굉장히 부담스러운 일이고 각기 다른 도전 과제들의 항연이기도 합니다. 위원회가 하위호환성을 보존하기 위해 계산하고 산정하는 일은 많이 어려울 것입니다.
 
 That "guarantee" is no small thing. Maintaining backwards compatibility, stretched out across almost 25 years of the language's history, creates an enormous burden and a whole slew of unique challenges. You'd be hard pressed to find many other examples in computing of such a commitment to backwards compatibility.
 
-이러한 원칙을 지키는데 들어가는 비용은 결코 쉽게 넘어갈 수 없습니다. 언어를 변경시키고 확장하는 일은 정말로 높은 기준치를 불가피하게 만드는 것까지 포함하고 있습니다. 실수이든 아니든 그 어떠한 결정도 결론적으로 영구적이기 때문입니다. 일단 JS에 들어오게되면 정말 진심으로 이러한 특징을 제거하고 싶더라도 결코 빼는 것은 불가능합니다. 왜냐하면 이건 아마도 프로그램을 망가뜨릴 수도 있기 때문입니다.
+이러한 원칙을 지키는데 들어가는 비용은 결코 쉽게 넘어갈 수 없습니다. 언어를 변경시키고 확장학 위해 정말로 높은 기준치를 만드는 것은 불가피합니다. 실수이든 아니든 그 어떠한 결정도 결론적으로 영구적이기 때문입니다. 일단 JS에 포함되면, 정말 진심으로 어떠한 기능을 제거하고 싶더라도 결코 빼는 것은 불가능합니다. 왜냐하면 이로인해 아마도 프로그램을 망가뜨릴 수도 있기 때문입니다.
 
 The costs of sticking to this principle should not be casually dismissed. It necessarily creates a very high bar to including changing or extending the language; any decision becomes effectively permanent, mistakes and all. Once it's in JS, it can't be taken out because it might break programs, even if we'd really, really like to remove it!
 
-이러한 규칙에 아주 작은 예외들도 있습니다. JS에는 몇몇 하위 비호환(backwards-imcompatible)되는 변경점들을 가지고 있는데 TC39는 절대 이러한 특징을 사용하지 않길 경고합니다. TC39는 이러한 예외들이 만들어내는 결과를 측정하기위해 웹상에 존재하는 코드들(수집된 브라우저 데이터를 통해)을 연구하곤 하는데, 이를 통해 브라우저들은 결과적으로 사용자들에게 미세한 예외들을 고칠 때 어떠한 이득에 반하는지 미세한 영향을 가늠하고 감수할지말지 결론을 짓고 투표를 합니다.
+이러한 규칙에 작은 예외들도 있습니다. JS에는 몇몇 하위 비호환<sup>Backwards-imcompatible</sup>되는 변경점들을 가지고 있는데 TC39는 절대 이러한 예외적인 기능을 사용하지 말아달라고 경고합니다. TC39는 이러한 예외적인 기능들이 만들어내는 결과을 측정하기위해 웹상에 존재하는 코드들(수집된 브라우저 데이터를 통해)을 연구하곤 하는데, 이를 통해 브라우저들은 결과적으로 사용자들에게 이런 미세한 예외들을 고칠 때 어떠한 이득에 반하는지 미세한 영향을 가늠하고 감수할지말지 결론을 짓고 투표를 합니다.
 
 There are some small exceptions to this rule. JS has had some backwards-incompatible changes, but TC39 is extremely cautious in doing so. They study existing code on the web (via browser data gathering) to estimate the impact of such breakage, and browsers ultimately decide and vote on whether they're willing to take the heat from users for a very small-scale breakage weighed against the benefits of fixing or improving some aspect of the language for many more sites (and users).
 
-이러한 종류의 변경은 몹시 드물고 대부분의 사이트에서 눈에 띄지 않게 깨지지 않는 특이한 경우들이 그 대부분을 차지합니다.
+이러한 종류의 변경은 몹시 드물고 대부분의 사이트에서 눈에 띄지 않게 발생하는 특이한 경우들이 그 대부분을 차지합니다.
 
 These kinds of changes are rare, and are almost always in corner cases of usage that are unlikely to be observably breaking in many sites.
 
-*하위 호환성*과 대응 관계에 있는 *상위 호환성*과 비교해봅시다. 상위 호환이 된다는 것은 프로그램의 언어에 새로운 추가 기능을 포함해도 이전 버전의 JS 엔진에서 실행된 경우 해당 프로그램이 중단되지 않는다는 얘기입니다. 많은 이들이 원하거나 심지어는 오해하는 경우도 있지만 **JS는 상위 호환적이지 않습니다**.
+*하위 호환성*과 대응 관계에 있는 *상위 호환성<sup>Forwards compatibility</sup>*과 비교해 보겠습니다. 상위 호환이 된다는 것은 프로그램의 언어에 새로운 추가 기능을 포함해도 이전 버전의 JS 엔진에서 실행된 경우 해당 프로그램이 중단되지 않는다는 얘기입니다. 많은 이들이 원하거나 심지어는 오해하는 경우도 있지만 **JS는 상위 호환적이지 않습니다**.
 
 Compare *backwards compatibility* to its counterpart, *forwards compatibility*. Being forwards-compatible means that including a new addition to the language in a program would not cause that program to break if it were run in an older JS engine. **JS is not forwards-compatible**, despite many wishing such, and even incorrectly believing the myth that it is.
 
-반대로 HTML 그리고 CSS는 하위 호환적이지 않고 상위 호환적입니다. 1995년에 작성된 HTML이나 CSS 지금 살펴보면 불완전하게 작동한다던가 아니면 그 당시와는 다르게 작동하는 경우가 있습니다. 하지만 만약 2019년에 추가된 기능을 2010년에 만들어진 브라우저에서 사용할 경우 페이지가 망가진 않습니다 -- 인식되지 않는 CSS/HTML는 무시하고 그렇지 않는 CSS/HTML은 정상적으로 그에 맞게 작동합니다.
+반대로 HTML 그리고 CSS는 하위 호환적이지 않고 상위 호환적입니다. 1995년에 작성된 HTML이나 CSS 지금 살펴보면 작동하지 않는다던가 그 당시와는 다르게 작동할 수도 있습니다. 하지만 만약 2019년에 추가된 기능을 2010년에 만들어진 브라우저에서 사용할 경우 페이지가 망가진 않습니다. 2010년 브라우저에서는 인식되지 않는 CSS/HTML의 경우 무시하고 그렇지 않는 CSS/HTML은 정상적으로 그에 맞게 작동합니다.
 
 HTML and CSS, by contrast, are forwards-compatible but not backwards-compatible. If you dug up some HTML or CSS written back in 1995, it's entirely possible it would not work (or work the same) today. But, if you use a new feature from 2019 in a browser from 2010, the page isn't "broken" -- the unrecognized CSS/HTML is skipped over, while the rest of the CSS/HTML would be processed accordingly.
 
-프로그래밍 언어 설계에 있어서 상위 호환성을 추구하는게 이상적인 것처럼 보이지만 이는 대게 비현실적입니다. HTML과 같은 마크업(Markup) 혹은 CSS와 같은 스타일링(styling)은 서술적이고 그래서 훨씬 더 인식되지 않는 선언문에 관해 최소한의 인식되는 선언문들에 최소한의 영향을 미치며 "무시"하는 것이 쉽습니다.
+프로그래밍 언어 설계에 있어서 상위 호환성을 추구하는게 이상적인 것처럼 보이지만 이는 일반적으로는 비현실적입니다. 마크업<sup>Markup</sup>(HTML) 혹은 스타일<sup>Styling</sup>(CSS)은 일반적으로 서술적이고, 그렇기에 인식되는 선언문들에 최소한의 영향을 미치며 인식되지 않는 선언문을 "무시"하는 것이 쉽습니다.
 
 It may seem desirable for forwards-compatibility to be included in programming language design, but it's generally impractical to do so. Markup (HTML) or styling (CSS) are declarative in nature, so it's much easier to "skip over" unrecognized declarations with minimal impact to other recognized declarations.
 
-반면 프로그래밍 언어 엔진이 선택적으로 인식되지 않는 특정 문장 혹은 표현문이라도 선택적으로 거르게 될 경우 혼돈과 비결정성이 따라오게 될 것입니다. 마치, 프로그래밍 언어 엔진이 예측하지 못하게 무시되어진 부분이 프로그램의 일부가 제대로 처리될지 안될지 확신을 주지 못 합니다.
+반면 프로그래밍 언어 엔진이 선택적으로 인식되지 않는 특정 문장(혹은 표현문!)을 선택적으로 거르게 되면 혼돈과 비결정성이 따라오게 될 것입니다. 마치, 프로그래밍 언어 엔진이 예측하지 못하게 무시되어진 부분이 프로그램의 일부가 제대로 처리될지 안될지 확신을 주지 못 합니다.
 
 But chaos and non-determinism would ensue if a programming language engine selectively skipped statements (or even expressions!) that it didn't understand, as it's impossible to ensure that a subsequent part of the program wasn't expecting the skipped-over part to have been processed.
 
-JS는 상위 호환적이지 않고 그럴 수 없음에도 불구하고 JS에 있는 하위 호환성을 통해 얻어지는 웹 환경에 지속적인 이득과 제약 그리고 어려움을 걸 알고 있는 것은 중요합니다.
+JS는 상위 호환적이지 않고 그럴수도 없지도 않습니다. 다만, JS에 있는 하위 호환성에 대해 인지하고 또한 이를 통해 얻어지는 웹 환경에 제공되는 지속적인 이득과 제약 그리고 어려움에 관해 알고 있는 것은 중요합니다.
 
 Though JS isn't, and can't be, forwards-compatible, it's critical to recognize JS's backwards compatibility, including the enduring benefits to the web and the constraints and difficulties it places on JS as a result.
 
@@ -391,11 +391,11 @@ JS는 상위 호환적이지 않기때문에 유효한 JS 코드로 작성할 �
 
 Since JS is not forwards-compatible, it means that there is always the potential for a gap between code that you can write that's valid JS, and the oldest engine that your site or application needs to support. If you run a program that uses an ES2019 feature in an engine from 2016, you're very likely to see the program break and crash.
 
-만약 새로 추가된 문법을 사용하면 프로그램은 일반적으로 완벽하게 컴파일되고 실행되지 않을 것이고 대게 문법 오류(syntax error)를 야기할 것입니다. 반면 ES6에서 새로 추가된 `Object.is(..)` API를 사용하면 프로그램은 아마도 해당 지점 직전까진 정상적으로 작동하겠지만 해당 문구에서 런타임 오류(runtime exception)을 만들 것이고 알수 없는 API를 만났다고 말하며 멈출 것입니다.
+만약 새로 추가된 문법을 사용하면 프로그램은 일반적으로 완벽하게 컴파일되고 실행되지 않고 일반적으로는 문법 오류<sup>Syntax error</sup>를 만들것입니다. 반면 새로 추가된 API(ES6에서 `Object.is(..)`와 같은)를 사용하면 프로그램은 아마도 해당 지점 직전까진 정상적으로 작동하겠지만 해당 문구에서 알수 없는 API를 참조하고 말하며 런타임 오류<sup>Runtime exception</sup>가 발생시키며 작동을 멈출 것입니다.
 
 If the feature is a new syntax, the program will in general completely fail to compile and run, usually throwing a syntax error. If the feature is an API (such as ES6's `Object.is(..)`), the program may run up to a point but then throw a runtime exception and stop once it encounters the reference to the unknown API.
 
-그래서 이것이 JS 개발자들이 항상 추가적인 기능들로부터 뒤쳐져야만 하고 오래된 JS 엔진 환경의 흔적들을 쫓아 코딩해야 된다는 뜻일까요? 그렇지 않습니다!
+그래서 이것이 JS 개발자들이 항상 추가적인 기능들로부터 뒤쳐져야만 하고 오래된 JS 엔진 환경의 흔적들 사이에서 코딩해야 된다는 뜻일까요? 그렇지 않습니다!
 
 Does this mean JS developers should always lag behind the pace of progress, using only code that is on the trailing edge of the oldest JS engine environments they need to support? No!
 
@@ -403,7 +403,7 @@ Does this mean JS developers should always lag behind the pace of progress, usin
 
 But it does mean that JS developers need to take special care to address this gap.
 
-새롭지만 호환성이 없는 문법들의 경우 트랜스파일링(transpiling)이 해결책이 됩니다. 트랜스파일링은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 말합니다. 예를들어, 문법과 연관된 상위 호환성 문제는 트랜스파일러(transpiler) (대부분의 경우 babel (https://babeljs.io))를 통해 새로운 JS 문법을 그와 똑같이 동작하지만 구식의 문법으로 변경해줌으로써 이러한 문제를 해결할 수 있습니다.
+새롭지만 호환성이 없는 문법들의 경우 트랜스파일링<sup>Transpiling</sup>으로 해결할 수 있습니다. 트랜스파일링은 커뮤니티에 의해 고안된 용어로 프로그램의 원본 소스 코드를 또다른 소스 코드로 바꿔주는 도구를 사용하는 것을 말합니다. 대표적으로 문법과 연관된 상위 호환성 문제는 트랜스파일러<sup>Transpiler</sup> (가장 흔히 바벨<sup>Babel</sup> (https://babeljs.io))를 통해 새로운 JS 문법을 그와 동일하지만 구식의 문법을 가진 형태로 변경해줌으로써 이러한 문제를 해결합니다.
 
 For new and incompatible syntax, the solution is transpiling. Transpiling is a contrived and community-invented term to describe using a tool to convert the source code of a program from one form to another (but still as textual source code). Typically, forwards-compatibility problems related to syntax are solved by using a transpiler (the most common one being Babel (https://babeljs.io)) to convert from that newer JS syntax version to an equivalent older syntax.
 
@@ -422,7 +422,7 @@ else {
 }
 ```
 
-어플리케이션의 소스 코드는 보통 위와 같은 방식으로 구성되어 있기 마련입니다. 하지만 공식 웹사이트에 해당 파일을 생성-배포할 때, 바벨 트랜스파일러 (Babel transpiler)는 이러한 코드를 아래와 같은 코드로 바꿀 것입니다:
+어플리케이션의 소스 코드는 보통 위와 같은 방식으로 구성되어 있기 마련입니다. 하지만 공개 웹사이트에 배포할 파일을 생성할 때, 바벨 트랜스파일러<sup>Babel transpiler</sup>는 이러한 코드를 아래와 같은 코드로 바꿀 것입니다.
 
 This is how the code would look in the source code tree for that application. But when producing the file(s) to deploy to the public website, the Babel transpiler might convert that code to look like this:
 
@@ -438,23 +438,23 @@ else {
 }
 ```
 
-원본 코드는 블록에 한정되어(block-scoped) `let`을 이용해 변수 `x`들을 `if`와 `else`문에 걸쳐 생성하고 있지만 상호간 간섭받는 관계에 있지 않습니다. 바벨이 최소한의 재작업을 통해 만든 동일한 프로그램은 두 변수에 각기 다른 이름을 부여하여 그들이 서로간의 혼선을 방지한 결과물을 만들었습니다.
+원본 코드는 블록에 한정된<sup>block-scoped</sup> `x`를 `let`을 이용하여 `if`와 `else`문에 걸쳐 생성하고 있지만 상호간 간섭받는 관계에 있지 않습니다. 바벨이 최소한의 재작업을 통해 만든 동일한 프로그램은 두 변수에 각기 다른 이름을 부여하여 그들이 서로간의 혼선을 방지한 결과물을 만들었습니다.
 
 The original snippet relied on `let` to create block-scoped `x` variables in both the `if` and `else` clauses which did not interfere with each other. An equivalent program (with minimal re-working) that Babel can produce just chooses to name two different variables with unique names, producing the same non-interference outcome.
 
 | NOTE: |
 | :--- |
-| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일에서 "target"은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 그 이상 버전에서만 작동하도록 도와줍니다. |
+| `let`은 2015년 ES6에 추가된 키워드입니다. 앞선 트랜스파일리의 예제에서는 어플리케이션이 ES6 이전 JS 환경에서도 돌아갈 수 있도록 적용되어진 단순한 실례를 보여주기 위함입니다. ES6가 처음 나왔을 때만해도 트랜스파일의 거의 필수적이였지만 2020년에 이르러서는 ES6 이전의 환경을 지원할 필요성은 상대적으로 적어졌습니다. 트랜스파일을 하는데 "타겟<sup>target</sup>"은 사이트/어플리케이션이 오래된 브라우저/엔진에서 지원 중단이 결정된 경우 오직 그 이상 버전에서만 작동하기위해 사용됩니다. |
 
 | NOTE: |
 | :--- |
-| The `let` keyword was added in ES6 (in 2015). The preceding example of transpiling would only need to apply if an application needed to run in a pre-ES6 supporting JS environment. The example here is just for simplicity of illustration. When ES6 was new, the need for such a transpilation was quite prevalent, but in 2020 it's much less common to need to support pre-ES6 environments.   |
+| The `let` keyword was added in ES6 (in 2015). The preceding example of transpiling would only need to apply if an application needed to run in a pre-ES6 supporting JS environment. The example here is just for simplicity of illustration. When ES6 was new, the need for such a transpilation was quite prevalent, but in 2020 it's much less common to need to support pre-ES6 environments. The "target" used for transpiliation is thus a sliding window that shifts upward only as decisions are made for a site/application to stop supporting some old browser/engine. |
 
-왜 새로운 버전의 문법을 오래된 버전의 문법으로 변경시키기 위해 도구를 사용하는 어려움을 겪어나가야만 하는지 궁금하실 겁니다. 두 변수를 따로 사용하고 `let`이란 키워드를 사용하지 않으면 문제없는 게 아닐까요? 그 이유는 개발자들간 최신 버전의 JS를 사용하여 코드를 깔끔하고 효율적인 의사소통을 도와주기 위함입니다. rm dldbsms roqkfwkemfdl chlt
+왜 새로운 버전의 문법을 오래된 버전의 문법으로 변경시키기 위해 도구를 사용하는 어려움을 겪어나가야만 하는지 궁금하실 겁니다. 두 변수를 따로 사용하고 `let`이란 키워드를 사용하지 않으면 문제 없는게 아닐까요? 그 이유는 개발자들간 최신 버전의 JS를 이용해 코드를 깔끔하고 효율적인 의사소통을 도와주기 위함입니다.
 
 You may wonder: why go to the trouble of using a tool to convert from a newer syntax version to an older one? Couldn't we just write the two variables and skip using the `let` keyword? The reason is, it's strongly recommended that developers use the latest version of JS so that their code is clean and communicates its ideas most effectively.
 
-개발자들은 새로운 문법을 통해 코드를 깨끗하고 유지해야 합니다. 또한, 트랜스파일러를 이용하여 지원하기로 결정된 특정 버전 이상의 JS 엔진에서는 코드들이 적절하게 동작하는 상위 호환적인 버전의 결과물을 만드는데 집중해야 합니다.
+개발자들은 새로운 문법을 통해 코드를 깨끗하고 유지하기위해 노력해야 됩니다. 또한, 트랜스파일러를 통해 지원하기로 결정된 특정 버전 이상의 JS 엔진에서 코드들이 적절하게 동작하는 상위 호환적인 결과물을 만들 수 있도록 도와줘야 됩니다.
 
 Developers should focus on writing the clean, new syntax forms, and let the tools take care of producing a forwards-compatible version of that code that is suitable to deploy and run on the oldest-supported JS engine environments.
 
