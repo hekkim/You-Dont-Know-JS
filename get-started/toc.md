@@ -18,7 +18,7 @@
     * 값<sup>Values</sup>
     * 변수의 선언과 사용
     * 함수<sup>Functions</sup>
-    * Comparisons
+    * 비교
     * How We Organize in JS
     * The Rabbit Hole Deepens
 * Chapter 3: Digging To The Roots Of JS
@@ -36,7 +36,7 @@
 * Appendix A: Exploring Further
     * Values vs. References
     * So Many Function Forms
-    * Coercive Conditional Comparison
+    * 강제 조건 비교<sup>Coercive Conditional Comparison</sup>
     * Prototypal "Classes"
 * Appendix B: Practice, Practice, Practice!
     * Practicing Comparisons

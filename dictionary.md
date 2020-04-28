@@ -83,3 +83,5 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Argument: 인수
 * Equality: 동등
 * Equivalence: 등가
+* Loose equality: 느슨한 동등
+* Relational comparison operator: 상대 비교 연산자
