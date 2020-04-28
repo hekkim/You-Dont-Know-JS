@@ -1233,14 +1233,14 @@ If your module only needs a single instance, you can skip the extra layers of co
 
 ## The Rabbit Hole Deepens
 
-이 챕터의 상단에서 약속했듯이 JS 언어의 전반적인 주요 사항들에 관해 광범위한 표면들을 훑어보았습니다. 여전히 여러분의 머리속에 맴돌고 있겠지만 이는 전적으로 자연스러운 일입니다!
+이 챕터의 상단에서 약속했듯이 JS 언어의 전반적인 주요 부분들의 광범위한 표면을 훑어보았습니다. 여전히 여러분의 머리속에 맴돌고 있겠지만 이는 많은 양의 정보를 습득한 후 있는 정말 자연스러운 일입니다!
 
 As promised at the top of this chapter, we just glanced over a wide surface area of the main parts of the JS language. Your head may still be spinning, but that's entirely natural after such a firehose of information!
 
-단지 JS에 관한 "짧게" 살펴보았을 뿐이지만 이미 조심 스럽게 살펴보고 친숙한지 확실히 해야만 할 수많은 세부 내용들의 전반에 관해 다루었고 자그마한 암시들 역시 알게되었습니다. 진지하게 저는 이 챕터를 몇 번이고 다시 읽어보길 제안해드립니다.
+단지 JS에 관한 "간단히" 살펴보았을 뿐이지만, 이미 주의 깊게 고려하고 편안하게 다루어야 할 많은 세부 내용들에 관해 다루었고 암시를 해주기도 했습니다. 진지하게 이 챕터를 몇 번이고 다시 읽어보는 걸 추천해드립니다.
 
 Even with just this "brief" survey of JS, we covered or hinted at a ton of details you should carefully consider and ensure you are comfortable with. I'm serious when I suggest: re-read this chapter, maybe several times.
 
-다음 챕터에서는 JS가 그 중심부에서 어떻게 작동하는지 몇몇 중요한 면모에 관해 조금 더 깊이 파고들 예정입니다. 더 깊은 도끼 굴에 따라들어오기 전에 우리가 다루었던 것들을 충분히 소화할 시간을 가지시길 바랍니다.
+다음 챕터에서는 JS가 그 중심부에서 어떻게 작동하는지 몇몇 중요한 면모에 관해 조금 더 깊이 파고들 예정입니다. 더 깊은 도끼 굴에 따라들어오기 전에 우리가 다루었던 많은 것들을 충분히 소화할 수 있는 시간을 가지시길 바랍니다.
 
 In the next chapter, we're going to dig much deeper into some important aspects of how JS works at its core. But before you follow that rabbit hole deeper, make sure you've taken adequate time to fully digest what we've just covered here.
