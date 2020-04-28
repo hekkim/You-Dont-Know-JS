@@ -780,11 +780,11 @@ Coercive comparisons crop up in other places in JS, such as conditionals (`if`, 
 
 ## How We Organize in JS
 
-JS 환경에 넓리 사용되는 코드(데이터와 연산)를 구성하는 주요 두 가지 패턴은 클래스(classes)와 모듈(modules)입니다. 이 패턴은 배타적인 관계는 아니고 많은 프로그램은 둘 다 사용 가능하며 사용하고 있습니다. 다른 프로그램은 오직 한 가지 패턴에 집착하거나 그 어떠한 패턴도 사용하지 않기도 합니다!
+JS 환경에 널리 사용되는 코드(데이터와 동작 방식)를 구성하는 주요 두 가지 방식은 클래스<sup>Classes</sup>와 모듈<sup>Modules</sup>입니다. 이 방식들은 배타적인 관계는 아니고 많은 프로그램은 둘 다 사용 가능하며 이미 사용하고 있습니다. 다른 프로그램은 이 중 오직 한 가지 방법만 사용하거나 그 어떠한 방법도 사용되지 않기도 합니다!
 
 Two major patterns for organizing code (data and behavior) are used broadly across the JS ecosystem: classes and modules. These patterns are not mutually exclusive; many programs can and do use both. Other programs will stick with just one pattern, or even neither!
 
-몇몇 부분에서 이러한 패턴들은 아주 다릅니다. 하지만 흥미롭게도 이 패턴들은 동전의 양면과도 같습니다. JS에 능숙해지기 위해서는 두 패턴 모두에 관해 깊이있게 이해하고 어느 상황에 적절하고 그렇지 않은지 알아야만 합니다.
+몇몇 부분에서 이러한 방법들은 아주 다릅니다. 하지만 흥미롭게도 다른 방면에서 이 두 방법들은 동전의 양면과도 같습니다. JS에 능숙해지기 위해서는 두 방법 모두 깊이 이해하고 어느 상황에 잘 맞고 그렇지 않은지 알아야만 합니다.
 
 In some respects, these patterns are very different. But interestingly, in other ways, they're just different sides of the same coin. Being proficient in JS requires understanding both patterns and where they are appropriate (and not!).
 
@@ -792,15 +792,15 @@ In some respects, these patterns are very different. But interestingly, in other
 
 ### Classes
 
-"객체 지향(object-oriented)", "클래스 지향(class-oriented)" "클래스(classes)"는 그 세부 사항과 미묘한 차이까지 매우 잘 포괄한 용어입니다. 그 정의에 따르면 이것들은 보편적이지는 않습니다.
+"객체 지향", "클래스 지향" 그리고 "클래스"는 그 세부 사항과 미묘한 차이까지 매우 잘 포괄한 용어입니다. 그 정의에 따르면 이것들은 보편적이지는 않습니다.
 
 The terms "object-oriented," "class-oriented," and "classes" are all very loaded full of detail and nuance; they're not universal in definition.
 
-C++, Java와 같은 "객체 지향" 언어에 대한 배경 지식이 있는 분들에게 가장 친숙한 일반적이며 다소 전통적인 정의를 사용해보겠습니다.
+C++, Java와 같은 "객체 지향" 언어와 그 배경 지식이 있는 분들에겐 가장 익숙한 방법으로 보편적이고 다소 전통적인 정의를 사용해보겠습니다.
 
 We will use a common and somewhat traditional definition here, the one most likely familiar to those with backgrounds in "object-oriented" languages like C++ and Java.
 
-프로그램에서 클래스란 데이터와 데이터 간의 연산들에 관해 정의한 행동 양식 모두를 포함한 자료 구조 "타입"입니다. 클래스 이러한 데이터 구조가 어떻게 작동을 할지 정의하지만 클래스 그 자체로 실체가 있는 값은 아닙니다. 프로그램에서 실체가 있는 값을 얻기 위해서는 클래스는 *인스턴스화(instantiated)* (`new`란 키워드를 통해) 되어야만 합니다.
+프로그램에서 클래스란 데이터와 데이터 간의 동작들을 모두 포괄하고 있는 임의의 자료 구조 "타입"입니다. 클래스 이러한 데이터 구조가 어떻게 작동을 할지 정의하지만 클래스 그 자체로 실체가 있는 값은 아닙니다. 프로그램에서 실체가 있는 값을 사용하기 위해서는 클래스를 `new`란 키워드를 통해 *초기화<sup>Instantiated</sup>* 해야만 합니다.
 
 A class in a program is a definition of a "type" of custom data structure that includes both data and behaviors that operate on that data. Classes define how such a data structure works, but classes are not themselves concrete values. To get a concrete value that you can use in the program, a class must be *instantiated* (with the `new` keyword) one or more times.
 
@@ -842,11 +842,11 @@ mathNotes.print();
 // ..
 ```
 
-`Page` 클래스에는 `this.text`라는 멤버 프로퍼티(member property) 내부에 문자열 형태의 데이터를 가지고 있습니다. 그리고 `print()`라는 이 문자열을 콘솔에 출력하는 메서드(method)를 가지고 있습니다.
+`Page` 클래스에는 `this.text`라는 멤버 프로퍼티<sup>Member property</sup>가 문자열 형태의 데이터를 가지고 있습니다. 그리고 `print()`라는 이 문자열을 콘솔에 출력하는 메서드를 가지고 있습니다.
 
 In the `Page` class, the data is a string of text stored in a `this.text` member property. The behavior is `print()`, a method that dumps the text to the console.
 
-`Notebook` 클래스에서는 `Page`이 인스턴스 배열을 데이터 가지고 있습니다. 또한 `addPage(..)`는 `Page`를 초기화하고 배열안에 추가하는 메서드입니다. 마찬가지로 `print()`는 노트북에 있는 모든 페이지를 출력하는 메서드입니다.
+`Notebook` 클래스에서는 `Page` 인스턴스<sup>Instance</sup> 배열을 데이터 가지고 있습니다. 또한 `addPage(..)` 메서드는 `Page`를 초기화하고 배열안에 추가하는 메서드입니다. 마찬가지로 `print()`는 노트북에 있는 모든 페이지를 출력하는 메서드입니다.
 
 For the `Notebook` class, the data is an array of `Page` instances. The behavior is `addPage(..)`, a method that instantiates new `Page` pages and adds them to the list, as well as `print()` (which prints out all the pages in the notebook).
 
@@ -854,19 +854,19 @@ For the `Notebook` class, the data is an array of `Page` instances. The behavior
 
 The statement `mathNotes = new Notebook()` creates an instance of the `Notebook` class, and `page = new Page(text)` is where instances of the `Page` class are created.
 
-메서드(methods)는 (클래스 스스로가 아닌) 인스턴스를 통해서만 불리울 수 있습니다. 예를들어 `mathNotes.addPage(..)`나 `page.print()`와 같이 말입니다.
+메서드는 클래스 스스로가 아니라 인스턴스에서 불릴 수 있습니다. 예를들어 `mathNotes.addPage(..)`나 `page.print()`와 같이 말입니다.
 
 Behavior (methods) can only be called on instances (not the classes themselves), such as `mathNotes.addPage(..)` and `page.print()`.
 
-`class`를 이용하여 데이터(`text`와 `page`)를 묶을 수 있고 그들의 행동 양식(`addPage(..)`와 `print()`)을 함께 구성해 낼 수 있습니다. `class` 정의를 하나도 하지 않고 동일한 프로그램을 구성할 수도 있지만, 이렇게 될 경우 코드가 잘 구조화되어 있지 않게 되고 코드를 읽고 이유를 추론하는 것이 어려워지며 더 많은 버그와를 수준이하의 유지보수성을 가지게 될 수 있습니다.
+`class`를 이용하여 `text`와 `page`같은 데이터를 감싸안고 `addPage(..)`와 `print()` 같은 데이터의 동작 방식을 함께 구성해 낼 수 있습니다. `class` 정의를 하나도 하지 않고 동일한 프로그램을 구성할 수도 있지만, 이렇게 될 경우 코드가 잘 구조화되어 있지 않게 되고 코드를 읽고 이유를 추론하는 것이 어려워지며 더 많은 버그와를 수준이하의 유지보수성을 가지게 될 수 있습니다.
 
 The `class` mechanism allows packaging data (`text` and `pages`) to be organized together with their behaviors (e.g., `addPage(..)` and `print()`). The same program could have been built without any `class` definitions, but it would likely have been much less organized, harder to read and reason about, and more susceptible to bugs and subpar maintenance.
 
-#### 클래스 상속
+#### 클래스 상속<sup>Inheritance</sup>
 
 #### Class Inheritance
 
-JS에 조금은 덜 사용되긴 하지만 전통적인 "클래스 지향" 설계에 내재된 또다른 특징은 "상속(inheritance)" (그리고 "다형성(polymorphism)")이 있습니다.
+JS에 조금은 덜 사용되긴 하지만 전통적인 "클래스 지향" 설계에 내장된 또다른 특징은 "상속"과 "다형성<sup>Polymorphism</sup>"이 있습니다.
 
 Another aspect inherent to traditional "class-oriented" design, though a bit less commonly used in JS, is "inheritance" (and "polymorphism"). Consider:
 
@@ -888,11 +888,11 @@ class Publication {
 }
 ```
 
-`Publication` 클래스는 출판에 필요한 일반적인 행동 양식을 정의하고 있습니다.
+`Publication` 클래스는 아마도 출판에 필요한 일반적인 동작 방식을 정의하고 있습니다.
 
 This `Publication` class defines a set of common behavior that any publication might need.
 
-`Book`이나 `BlogPost`처럼 조금 더 특별한 타입의 출판에 관해 생각해 보도록 하겠습니다.
+`Book`이나 `BlogPost`처럼 조금 더 특별한 종류의 출판에 관해 살펴보도록 하겠습니다.
 
 Now let's consider more specific types of publication, like `Book` and `BlogPost`:
 
@@ -930,9 +930,11 @@ class BlogPost extends Publication {
 }
 ```
 
-`Book`과 `BlogPost` 모두 `extends`라는 절을 사용해 `Publication`의 공통된 정의 그리고 추가적인 행동 양식을 포함해서 조금 더 확장하였습니다. 각 생성자(constructor)에서는 `super(..)`를 호출하여 부모 클래스 `Publication`의 생성자에 초기화 작업을 위임하였고, 그 이후 각각의 출판 타입("서브 클래스(sub-class)" 혹은 "자식 클래스(child class)"라도 알려진)에 맞는 조금 더 상세한 작업을 수행하였습니다.
+`Book`과 `BlogPost` 모두 `extends`라는 절을 사용해 `Publication`의 공통적으로 정의된 양식에 추가적인 동작법을 덧붙여 확장하였습니다. 각 생성자<sup>Constructor</sup>에서는 `super(..)`를 호출하여 부모 클래스 `Publication`의 생성자에 초기화 작업을 위임하였습니다. 그 이후 "서브 클래스<sup>Sub-class</sup>" 혹은 "자식 클래스<sup>Child class</sup>"라고 불리는 각자의 출판 형식에 맞게 조금 더 상세한 작업을 수행하였습니다.
 
 Both `Book` and `BlogPost` use the `extends` clause to *extend* the general definition of `Publication` to include additional behavior. The `super(..)` call in each constructor delegates to the parent `Publication` class's constructor for its initialization work, and then they do more specific things according to their respective publication type (aka, "sub-class" or "child class").
+
+이러한 자식 클래스를 사용하는 방법을 예제를 통해 알아보겠습니다.
 
 Now consider using these child classes:
 
@@ -966,15 +968,15 @@ forAgainstLet.print();
 // https://davidwalsh.name/for-and-against-let
 ```
 
-두 자식 클래스의 인스턴스 부모 `Publication` 클래스로부터 상속되고 `print()` 자식 클래스에서 오버라이드된(overridden)된 `print()` 메서드를 가지고 있는 걸 신경 써서 봐주시기 바랍니다. 각 오버라이드된 클래스의 `print()` 메서드는 `super.print()`를 통해 부모로부터 상속받은 `print()` 메서드를 호출할 수 잇습니다.
+부모 클래스 `Publication` 으로부터 *상속받은* `print()` 메서드를 각 자식 클래스에서 오버라이드<sup>Override</sup> 했고, 두 자식 클래스의 인스턴스는 이렇게 오바라이드된 메서드를 가지게 된 것을 신경써서 봐주시기 바랍니다. 각 자식 클래에서 오바라이드 된 `print()` 메서드는 `super.print()`를 통해 부모로부터 상속받은 `print()` 메서드를 호출할 수 잇습니다.
 
 Notice that both child class instances have a `print()` method, which was an override of the *inherited* `print()` method from the parent `Publication` class. Each of those overridden child class `print()` methods call `super.print()` to invoke the inherited version of the `print()` method.
 
-상속받거나 오버라이드된 메서드 모두 동일한 이름을 가지고 동시에 존재할 수 있는 현상을 *다형성(polymorphism)*이라고 부릅니다.
+상속받거나 오버라이드 된 메서드 모두 동일한 이름을 가지고 동시에 존재할 수 있는 현상을 *다형성*이라고 부릅니다.
 
 The fact that both the inherited and overridden methods can have the same name and co-exist is called *polymorphism*.
 
-상속은 데이터와 그 행동 양식을 분리된 논리 단위(클래스라고 하는)로 나누며 자식 클래스가 그 부모의 데이터와 행동 양식을 사용하고 접근하여 협력할 수 있게 하는 훌륭한 방법입니다.
+상속은 데이터와 그 동작 방법을 클래스라 불리는 분리된 논리 단위 속에 구성하며, 자식 클래스가 부모 클래스 속 데이터와 동작 방법을 접근하며 사용하여 부모와 협력할 수 있게 하는 훌륭한 방법입니다.
 
 Inheritance is a powerful tool for organizing data/behavior in separate logical units (classes), but allowing the child class to cooperate with the parent by accessing/using its behavior and data.
 
@@ -982,11 +984,11 @@ Inheritance is a powerful tool for organizing data/behavior in separate logical 
 
 ### Modules
 
-모듈 패턴은 근본적으로 클래스 패턴과 같이 데이터와 그 행동 양식을 각각의 논리적인 단위로 모아 놓는다는 동일한 목표를 가지고 있습니다. 모듈은 협력을 목표로하고 다른 모듈을 "포함"할 때도 있고 "접근"할 때도 있습니다.
+모듈 방식은 근본적으로 데이터와 그 동작 양식을 논리 단위로 한데모아 놓는다는 점에서 클래스 패턴과 동일한 목적을 가지고 있습니다. 또한 모듈은 협력하기 위해 다른 모듈을 "포함"하거나 "접근"할 수도 있습니다.
 
 The module pattern has essentially the same goal as the class pattern, which is to group data and behavior together into logical units. Also like classes, modules can "include" or "access" the data and behaviors of other modules, for cooperation sake.
 
-하지만 모듈은 클래스와 몇몇 중요한 차이점들이 있습니다. 가장 눈에 띄는 차이점은 뭄법이 전반적으로 다르다는 것입니다.
+하지만 모듈은 클래스와 몇몇 중요한 차이점들이 있습니다. 가장 눈에 띄는 차이점은 문법이 전혀 다르다는 것입니다.
 
 But modules have some important differences from classes. Most notably, the syntax is entirely different.
 
@@ -994,19 +996,19 @@ But modules have some important differences from classes. Most notably, the synt
 
 #### Classic Modules
 
-ES6가 JS 문법에 모듈 문법을 추가했었습니다. 그러나 초기의 JS에서부터 모듈은 특별한 문법이 없음에도 불구하고 수많은 JS 프로그램에서 이용되는 중요하고 일반적인 패턴이였습니다.
+ES6가 JS 문법에 모듈 문법을 추가했고 이에 관해 잠시 살펴보도록 하겠습니다. ES6에 추가된 방법이지만, 초기의 JS에서부터 모듈은 특별한 문법이 없음에도 불구하고 수많은 JS 프로그램에서 활용되는 중요하고 일반적인 패턴이였습니다.
 
 ES6 added a module syntax form to native JS syntax, which we'll look at in a moment. But from the early days of JS, modules was an important and common pattern that was leveraged in countless JS programs, even without a dedicated syntax.
 
-*전통 모듈*의 중요한 특징은 내부 데이터와 이를 조작할 몇몇 접근 가능한 함수를 가진 모듈 "인스턴스"를 반환하는 외부 함수(최소 한 번은 실행되는)라는 것입니다.
+*전통 모듈*의 중요한 특징은 최소 한 번은 실행되는 외부 함수라는 것이고, 이 함수는 내부의 숨겨진 데이터를 조작할 수 있는 몇몇 함수를 노출하는 모듈의 "인스턴스"를 반환하게 됩니다.
 
 The key hallmarks of a *classic module* are an outer function (that runs at least once), which returns an "instance" of the module with one or more functions exposed that can operate on the module instance's internal (hidden) data.
 
-이러한 형식의 모듈은 *단지 함수*였고 이 함수를 호출하여 모듈의 *인스턴스*를 생성하였기에 이 함수를 "모듈 팩토리(module factories)"라고 설명하기도 했습니다.
+이런 형태의 모듈은 *단지 함수*였고 이 함수를 호출하여 모듈의 "인스턴스"를 생성하였기에 이 함수를 "모듈 팩토리<sup>Module factories</sup>"라고 설명되기도 했습니다.
 
 Because a module of this form is *just a function*, and calling it produces an "instance" of the module, another description for these functions is "module factories".
 
-한 번 `Publication`, `Book`, `BlogPost`를 전통 모듈에선 어떤 형식이였을지 살펴봅시다.
+한 번 `Publication`, `Book`, `BlogPost`를 전통 모듈에선 어떤 형식이였을지 살펴보겠습니다.
 
 Consider the classic module form of the earlier `Publication`, `Book`, and `BlogPost` classes:
 
@@ -1063,19 +1065,19 @@ function BlogPost(title,author,pubDate,URL) {
 
 Comparing these forms to the `class` forms, there are more similarities than differences.
 
-`class` 형식은 객체 인스턴스에 메서드와 데이터를 저장하며 `this.`라는 접두사를 통해 접근하기 메서드와 데이터에 접근했습니다. 모듈에서는 `this.` 접두사가 아닌 스코프에 있는 변수 식별자를 이용하여 메서드와 데이터에 접근하였습니다.
+`class` 형식은 객체 인스턴스에 메서드와 데이터를 저장하며 `this.` 접두사를 통해 메서드와 데이터에 접근했습니다. 모듈에서는 `this.` 접두사 없이 스코프에 있는 변수 식별자를 이용하여 메서드와 데이터에 접근하였습니다.
 
 The `class` form stores methods and data on an object instance, which must be accessed with the `this.` prefix. With modules, the methods and data are accessed as identifier variables in scope, without any `this.` prefix.
 
-`class`에서는 인스턴스의 모든 데이터와 메스드는 바깥에서 접근 가능한 것은 물론이고 인스턴스의 "API"가 클래스 정의에 내재되어 있습니다. 모듈 팩토리 함수의 경우는 노출된 함수 그리고 함수 내부에서만 유지될 데이터와 메서드를 가지고 있는 객체를 명백하게 만들고 반환해야 하게 만들어야 됩니다.
+`class`에서는 인스턴스의 모든 데이터와 메스드는 바깥에서 접근 가능한 것은 물론이고 인스턴스의 "API"가 클래스 정의에 내재되어 있습니다. 모듈 팩토리 함수에는 바깥으로 노출되는 메서드와 팩토리 함수 내부에서만 유지될 데이터 그리고 그 외의 메서드를 포괄하는 객체를 명시적으로 만들고 이를 반환해야 하게 만들어야 됩니다.
 
 With `class`, the "API" of an instance is implicit in the class definition—also, all data and methods are public. With the module factory function, you explicitly create and return an object with any publicly exposed methods, and any data or other unreferenced methods remain private inside the factory function.
 
-2020년에 이르기까지 JS 전반에 걸쳐 공통적인 형식의 팩토리 함수에는 여러가지 변형이 있습니다. AMD (Asynchronous Module Definition), UMD (Universal Module Definition), 그리고 CommonJS (classic Node.js-style modules)와 같은 각기 다른 변형을 구동시켰던 경험이 있을 수도 있습니다. 이러한 변경은 (상호 호환이 잘 안 되는) 사소한 일이긴 합니다. 하지만, 이러한 모든 형식들은 공통된 원리 원칙에 의존하고 있습니다.
+2020년에 이르기까지 JS 전반에 걸쳐 AMD (Asynchronous Module Definition), UMD (Universal Module Definition), 그리고 CommonJS (classic Node.js-style modules)와 같은 여러가지 변형된 팩토리 함수가 꽤 흔하게 존재합니다. 각기 다른 변형을 구동시켰던 경험이 있을 수도 있습니다. 이러한 변형은 상호 호환이 잘 안 되지만 사소한 일이긴 합니다. 하지만 이러한 모든 형식들은 공통된 원리 원칙에 의존하고 있습니다.
 
 There are other variations to this factory function form that are quite common across JS, even in 2020; you may run across these forms in different JS programs: AMD (Asynchronous Module Definition), UMD (Universal Module Definition), and CommonJS (classic Node.js-style modules). The variations are minor (not quite compatible). However, all of these forms rely on the same basic principles.
 
-이러한 모듈 팩토리 함수의 사용 방법("인스턴스화(instantiation)" 라고도 알려진)에 관해 알아보겠습니다.
+"인스턴스화<sup>Instantiation</sup>" 라고도 알려진 모듈 팩토리 함수의 사용 사례를 한 번 살펴보도록 하겠습니다.
 
 Consider also the usage (aka, "instantiation") of these module factory functions:
 
@@ -1113,11 +1115,11 @@ forAgainstLet.print();
 
 The only observable difference here is the lack of using `new`, calling the module factories as normal functions.
 
-#### ES 모듈
+#### ES 모듈 <sup>ES Modules</sup>
 
 #### ES Modules
 
-ES 모듈(ES modules(ESM))은 ES6에서 JS에 처음으로 소개되었고 이미 존재하는 *전통 모듈*과 동일한 목표를 제공해줍니다. 특히, 중요한 변형이나 ADM, UMD, CommonJS와 같은 사용 관례를 고려하여 만들어졌습니다.
+ES 모듈(ESM)은 ES6에서 JS에 처음으로 소개되었고 이미 존재하는 *전통 모듈*과 동일한 목적으로 쓰입니다. 특히, ADM, UMD, CommonJS와 같은 중요한 변형들과 사용 사례를 고려하여 만들어졌습니다.
 
 ES modules (ESM), introduced to the JS language in ES6, are meant to serve much the same spirit and purpose as the existing *classic modules* just described, especially taking into account important variations and use cases from AMD, UMD, and CommonJS.
 
@@ -1125,21 +1127,23 @@ ES modules (ESM), introduced to the JS language in ES6, are meant to serve much 
 
 The implementation approach does, however, differ significantly.
 
-우선 모듈을 *정의*하기 위한 하나의 감싸진 함수가 없습니다. 대신, 하나의 파일에 이에 관해 감싸져 있습니다. ESM은 항상 파일을 기반으로 하고 있습니다. 하나의 파일은 하나의 모듈이죠.
+우선 모듈을 *정의*하기 위한 하나의 감싸진 함수 같은 것이 없습니다. 대신, 하나의 파일을 감싸고 있습니다. ESM은 항상 파일을 기반으로 하고 있습니다. 하나의 파일은 하나의 모듈이죠.
 
 First, there's no wrapping function to *define* a module. The wrapping context is a file. ESMs are always file-based; one file, one module.
 
-두번째로 모듈의 "API"와 명시적으로 상호작용하지 않는 대신 `export`라는 키워드를 사용하여 변수나 함수를 공공 API에 노출시켜줍니다. 모듈 내에 `export` 없이 정의된 것들은 (*전통 모듈*에서도 그러했듯이) 감춰진 상태로 머무르게 됩니다.
+두번째로 모듈의 "API"와 명시적으로 상호작용하지 않는 대신 `export`라는 키워드를 사용하여 변수나 함수를 공공 API에 노출시켜줍니다. 모듈 내에 `export` 없이 정의된 것들은 *전통 모듈*에서 그러했듯이 모듈 내부에 감춰져 있습니다.
 
 Second, you don't interact with a module's "API" explicitly, but rather use the `export` keyword to add a variable or method to its public API definition. If something is defined in a module but not `export`ed, then it stays hidden (just as with *classic modules*).
 
-세번째로 아마도 이전에 얘기했던 패턴과 가장 눈에 띄는 차이점은 ES 모듈을 "인스턴스화(instantiate)" 하지 않는 다는 것입니다. 대신 `import`를 사용하여 하나의 인스턴스를 사용할 수 있습니다. 실은, ESM는 프로그램에서 `import`를 처음으로 부를 때 하나의 인스턴스만 생성되고 그 이외에의 모든 `import`에서는 이미 만들어진 인스턴스의 참조값만 가져오도록 되어있는 "싱글턴(singletons)" 패턴입니다. 만약 모듈이 여러개의 인스턴스를 필요로 한다면 *전통 모듈 형태(classic module-style)*의 팩토리 함수를 ESM에 그 용도에 맞게 정의하고 제공해줘야 될 것입니다.
+세번째로 아마도 이전에 얘기했던 방법과 가장 눈에 띄는 차이점은 ES 모듈은 "인스턴스화" 하지 않는 다는 것입니다. 대신 `import`를 사용하여 하나의 인스턴스를 사용할 수 있습니다. 실은, ESM은 프로그램에서 `import`를 처음으로 부를 때 하나의 인스턴스만 생성되고 그 이외에의 모든 `import`에서는 이미 만들어진 인스턴스의 참조값만 가져오도록 되어있는 "싱글턴(singletons)" 방식입니다. 만약 모듈이 여러개의 인스턴스를 필요로 한다면 *전통 모듈 방식*의 팩토리 함수를 ESM에 그 용도에 맞게 정의하여 제공해줘야 될 것입니다.
 
 Third, and maybe most noticeably different from previously discussed patterns, you don't "instantiate" an ES module, you just `import` it to use its single instance. ESMs are, in effect, "singletons," in that there's only one instance ever created, at first `import` in your program, and all other `import`s just receive a reference to that same single instance. If your module needs to support multiple instantiations, you have to provide a *classic module-style* factory function on your ESM definition for that purpose.
 
-ESM과 *전통 모듈*을 석어 사용하는 아래 예제를 통해 여러개의 인스턴스에 관해 알 수 있을 것입니다.
+아래 예제를 통해 ESM과 *전통 모듈*을 섞어 사용하여 여러개의 인스턴스 사용할 수 있는 방법을 알 수 있을 것입니다.
 
 In our running example, we do assume multiple-instantiation, so these following snippets will mix both ESM and *classic modules*.
+
+`publication.js` 예제를 한 번 살펴보겠습니다.
 
 Consider the file `publication.js`:
 
@@ -1163,7 +1167,7 @@ export function create(title,author,pubDate) {
 }
 ```
 
-이 모듈을 다른 ES 모듈(`blogpost.js`)에서 가져와 사용하는 방법은 아래와 같습니다.
+위 모듈을 다른 ES 모듈 `blogpost.js`와 같은 곳에서 가져와 사용하는 방법은 아래와 같습니다.
 
 To import and use this module, from another ES module like `blogpost.js`:
 
@@ -1211,17 +1215,17 @@ forAgainstLet.print();
 
 | 노트: |
 | :--- |
-| `import` 문에 있는 `as newBlogPost` 절은 선택적으로 사용할 수 있습니다. 만약 해당 절이 없을 경우에는 단지 `create(..)`라는 이름으로 불릴 것입니다. 이 경우 가독성을 향상시키기 위한 목적으로 이름을 다시 지은 것입니다. `create(..)`의 일반적인 팩토리 이름이 그 용도에 맞게 조금 더 상세한 이름인 `newBlogPost(..)` 갖게 됐습니다. |
+| `import` 문에 있는 `as newBlogPost` 절은 선택적으로 사용할 수 있습니다. 만약 해당 절이 없을 경우에는 `create(..)`라는 이름으로 불릴 것입니다. 이 경우에는 가독성을 향상시키기 위한 목적으로 이름을 다시 지어준 것입니다. 이를 통해 `create(..)`라는 평범한 팩토리 이름이 그 용도에 맞게 더 상세한 이름인 `newBlogPost(..)` 갖게 됐습니다. |
 
 | NOTE: |
 | :--- |
 | The `as newBlogPost` clause in the `import` statement is optional; if omitted, a top-level function just named `create(..)` would be imported. In this case, I'm renaming it for readability sake; its more generic factory name of `create(..)` becomes more semantically descriptive of its purpose as `newBlogPost(..)`. |
 
-보시는 바와 같이 ES 모듈은 여러개의 인스턴스를 지원해야 할 필요가 있을 경우 *전통 모듈*을 내부적으로 사용할 수도 있습니다. 동일한 결과를 만드는 또 다른 방법으로는 `create(..)`라는 팩토리 함수가 아닌 `클래스(class)`를 노출시킬 수도 있습니다. 하지만 이 시점에 ESM을 이미 사용하고 있으므로 *전통 모듈*을 `클래스(class)` 대신 사용하는 것을 추천드립니다.
+보시는 바와 같이 ES 모듈은 여러개의 인스턴스를 지원해야 할 필요가 있을 경우 *전통 모듈*을 내부적으로 사용할 수도 있습니다. 동일한 결과를 만드는 또 다른 방법으로는 `create(..)`라는 팩토리 함수가 아닌 `class`를 노출시킬 수도 있습니다. 하지만 이 시점에 ESM을 이미 사용하고 있으므로 *전통 모듈*을 `class` 대신 사용하는 것을 추천드립니다.
 
 As shown, ES modules can use *classic modules* internally if they need to support multiple-instantiation. Alternatively, we could have exposed a `class` from our module instead of a `create(..)` factory function, with generally the same outcome. However, since you're already using ESM at that point, I'd recommend sticking with *classic modules* instead of `class`.
 
-오직 한개의 인스턴스만을 필요로 한다면 `export`를 이용해 공용 함수들을 직접 내보냄으로써 복잡한 추가 과정을 건너 뛸 수 있습니다.
+오직 하나의 인스턴스만 필요하다면 공용 메서드를 직접 `export` 하여 복잡한 추가 과정을 건너 뛸 수 있습니다.
 
 If your module only needs a single instance, you can skip the extra layers of complexity: `export` its public methods directly.
 

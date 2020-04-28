@@ -77,7 +77,7 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Block: 블록
 * Mutation: 뮤테이션
 * Associate: 연동
-* Cluase: 절
+* Clause: 절
 * Statement: 명령문
 * Expression: 표현식
 * Argument: 인수
@@ -85,3 +85,9 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Equivalence: 등가
 * Loose equality: 느슨한 동등
 * Relational comparison operator: 상대 비교 연산자
+* Coercive comparison: 강제 비교
+* Coercive conditional comparison: 강제 조건 비교
+* Instance: 인스턴스
+* Inheritance: 상속
+* Constructor: 생성자
+* Delegate: 위임하다
