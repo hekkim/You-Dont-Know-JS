@@ -23,9 +23,9 @@
     * 토끼굴 파헤치기
 * 챕터 3: JS의 뿌리 파헤치기
     * 반복문<sup>Iteration</sup>
-    * Closure
-    * `this` Keyword
-    * Prototypes
+    * 클로져<sup>Closure</sup>
+    * `this` 키워드
+    * 프로토타입<sup>Prototypes</sup>
     * Asking "Why?"
 * 챕터 4: The Bigger Picture
     * Pillar 1: Scope and Closure

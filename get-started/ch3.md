@@ -396,27 +396,29 @@ If you're still feeling unclear or shaky about closure, the majority of Book 2, 
 
 ## `this` Keyword
 
-JS의 강력한 메커니즘 중 하나인 `this`는 가장 오해받는 것 중 하나이기도 합니다. 한 일반적인 오해는 함수의 `this`라 함수 자신을 가르킨다는 것입니다. 다른 언어에서 `this`가 작동하는 방법으로 인해 생기는 또다른 오해는 `this`가 그 함수가 소속되어 있는 인스턴스를 가르키고 있다는 것입니다. 물론 둘 다 틀린 이야기입니다.
+`this` 키워드는 JS에서 강력한 메커니즘 중 하나인 동시에 가장 오해받는 기능 중 하나이기도 합니다. 흔한 오해 중 하나는 함수에서 쓰이는 `this`가 함수 자신을 가르킨다는 것입니다. 다른 언어에서 `this`가 작동하는 방법으로 인해 생기는 또 다른 오해는 `this`가 메서드가 소속되어 있는 인스턴스를 가르키고 있다는 것입니다. 둘 다 틀린 이야기입니다.
 
 One of JS's most powerful mechanisms is also one of its most misunderstood: the `this` keyword. One common misconception is that a function's `this` refers to the function itself. Because of how `this` works in other languages, another misconception is that `this` points the instance that a method belongs to. Both are incorrect.
 
-이전에 이야기했듯이 함수가 정의될 때 함수는 클로져를 통해 둘러싸인 스코프에 첨부되게 됩니다. 스코프는 변수를 참조하는 방법을 조절하는 대한 규칙의 집합입니다.
+이전에 이야기했듯이 함수가 정의될 때 함수는 클로져를 통해 이 함수를 둘러싼 스코프에 첨부되게 됩니다. 스코프는 규칙의 집합이며 이 규칙들을 통해 어떻게 변수를 참조할지 결정하게 됩니다.
 
 As discussed previously, when a function is defined, it is *attached* to its enclosing scope via closure. Scope is the set of rules that controls how references to variables are resolved.
 
-하지만 함수 또한 그들의 스코프 외에도 그들이 접근할 수 있는 것들에 영향을 미치는 또다른 특성이 있습니다. 이 특성은 *실행 컨텍스트(execution context)*라고 가장 잘 설명될 수 있고, 이는 `this`라는 키워드를 통해 함수에 노출되게 됩니다.
+하지만 함수 역시 그들의 스코프 외에도 그들이 접근할 수 있는 것들에 영향을 미치는 또다른 특성이 있습니다. 이 특성은 *실행 컨텍스트<sup>Execution context</sup>*라고 가장 잘 설명될 수 있고, 이는 `this`라는 키워드를 통해 함수에 노출되게 됩니다.
 
 But functions also have another characteristic besides their scope that influences what they can access. This characteristic is best described as an *execution context*, and it's exposed to the function via its `this` keyword.
 
-스코프는 정적이며 함수를 정의하는 순간과 위치에 맞게 고정된 개수의 이용가능한 변수의 집합을 포함하게 되지만, 함수의 실행 *컨텍스트(context)*는 (어디에서 정의되고 호출되는지가 아닌) 전적으로 **어떻게 이 함수가 호출되는지**에 따라 유동적입니다.
+스코프는 정적입니다. 스코프는 함수를 정의하는 시점과 위치에 따라 고정된 개수의 변수만을 포함하고 있으며 이 변수만을 이용할 수 밖에 없습니다. 하지만 함수의 실행 *컨텍스트*는 동적입니다. 실행 *컨텍스트*는 함수가 정의된 위치나 함수를 호출하는 위치가 아닌 **함수를 호출하는 방법**에 따라 전혀 달라집니다.
 
 Scope is static and contains a fixed set of variables available at the moment and location you define a function, but a function's execution *context* is dynamic, entirely dependent on **how it is called** (regardless of where it is defined or even called from).
 
-`this`는 함수의 정의에 따라 고정된 특징이 아니라 함수가 매번 불릴때마다 결정되는 유동적인 특징입니다.
+`this`는 함수의 정의에 따라 고정된 특성이 아닌 함수가 매번 불릴때마다 결정되는 유동적인 특징입니다.
 
 `this` is not a fixed characteristic of a function based on the function's definition, but rather a dynamic characteristic that's determined each time the function is called.
 
-*실행 컨텍스트*에 관해 생각하는 한 가지 방법은 함수를 실행하는 와중에 프로퍼티를 사용할 수 있게해주는 실재하는 객체라는 것입니다. 스코프와 비교해서 *객체*로 여겨질 수도 있지만 *스코프 객체(scope object)*는 JS 엔진 내부에 숨겨져 있으며 하나의 함수에 관해 늘 동일할 뿐더러 이 객체의 *프로퍼티*는 함수에서 사용할 수 있는 변수 식별자 모양을 하고 있습니다.
+*실행 컨텍스트*는 함수가 실행되는동안 존재하며 내부 프로퍼티를 사용할 수 있는 객체라고 생각할 수 있습니다.
+
+*실행 컨텍스트*를 스코프와 비교하면 *스코프 객체*는 JS 엔진 내부에 숨겨져 있단 점만 제외하고는 똑같다고 여길 수도 있습니다. 스코프와 비교하면 실행 컨텍스트를 하나의 *객체*라고 생각할 수도 있습니다. 다만 이 *스코프 객체<sup>Scope object</sup>*는 JS 엔진 내부에 숨겨져 있으며, 하나의 함수에 관해 늘 동일하며, 이 객체의 *프로퍼티*는 함수에서 사용할 수 있는 변수 식별자 모양을 하고 있다는 점만 제외한다면 말입니다.
 
 One way to think about the *execution context* is that it's a tangible object whose properties are made available to a function while it executes. Compare that to scope, which can also be thought of as an *object*; except, the *scope object* is hidden inside the JS engine, it's always the same for that function, and its *properties* take the form of identifier variables available inside the function.
 
@@ -431,19 +433,19 @@ function classroom(teacher) {
 var assignment = classroom("Kyle");
 ```
 
-외부 함수 `classroom(..)`는 `this` 키워드에 그 어떠한 참조값도 가지고 있지 않기에 익히 봐왔던 다른 함수들과 비슷해보입니다. 하지만 내부 함수 `study()`는 `this`를 참조하고 있고 이는 곧 `study()` 함수를 `this`를 알고 있는(`this`-aware) 함수라고 만들어집니다. 다른말로, 이 함수는 *실행 컨텍스트*에 의존적이라고 얘기할 수 있습니다.
+외부 함수 `classroom(..)`은 `this` 키워드에 그 어떠한 참조값도 가지고 있지 않기에 이전에 봐왔던 다른 함수들과 비슷합니다. 하지만 내부 함수 `study()`는 `this`를 참조하고 있고, 이는 곧 `study()`가 `this`를 인식하는<sup>`this`-aware</sup> 함수란 얘기입니다. 즉, 이 함수는 *실행 컨텍스트*에 의존적이라고 얘기할 수 있습니다.
 
 The outer `classroom(..)` function makes no reference to a `this` keyword, so it's just like any other function we've seen so far. But the inner `study()` function does reference `this`, which makes it a `this`-aware function. In other words, it's a function that is dependent on its *execution context*.
 
 | 노트: |
 | :--- |
-| 물론 `study()` 함수는 `teacher` 변수를 외부 스코프로부터 가져와 포함하고 있습니다. |
+| 물론 `study()` 함수는 외부 스코프로부터 가져온 `teacher` 변수를 포함하고 있습니다. |
 
 | NOTE: |
 | :--- |
 | `study()` is also closed over the `teacher` variable from its outer scope. |
 
-내부 함수 `study()`는 `classroom("Kyle")`에 의해 반환되며 곧 `assignment`라는 변수에 할당되게 됩니다. 그렇다면 `assignment()` (`study()`라고도 알려진) 함수는 어떻게 호출될 수 있을까요?
+`classroom("Kyle")`를 호출하면 내부 함수 `study()`가 반환되어 `assignment`라는 변수에 할당되게 됩니다. 그렇다면 `assignment()` (`study()`라고도 알려진) 함수는 어떻게 호출될 수 있을까요?
 
 The inner `study()` function returned by `classroom("Kyle")` is assigned to a variable called `assignment`. So how can `assignment()` (aka `study()`) be called?
 
@@ -452,13 +454,15 @@ assignment();
 // Kyle says to study undefined  -- Oops :(
 ```
 
-위 예제에서 *실행 컨텍스트*를 제공하지 않고 `assignment()`를 평범하게 일반 함수처럼 호출해 보았습니다.
+위 예제에서는 *실행 컨텍스트*를 제공하지 않고 `assignment()`를 평범하게 일반 함수처럼 호출해 보았습니다.
 
 In this snippet, we call `assignment()` as a plain, normal function, without providing it any *execution context*.
 
-이 프로그램은 엄격 모드(챕터 1 "정확하게 말하자면"을 참고)가 아니기에 컨텍스트를 알고 있는(context-aware) 함수를 **명시된 컨텍스트 없이** 호출할 경우 컨텍스트의 기본 값인 글로벌 객체(브라우저에서는 `window`인)를 컨텍스트로 갖게 됩니다. `topic` 이라는 이름을 가진 글로벌 변수(또한 글로벌 객체에 그런 프로퍼티는 없기 때문에)가 없기 때문에 `this.topic`은 `undefined`로 귀결되게 되어 있습니다.
+이 프로그램은 엄격 모드(챕터 1 "정확하게 말하자면"을 참고)가 아니기에 컨텍스트를 인식하는<sup>Context-aware</sup> 함수를 **명시된 컨텍스트 없이** 호출할 경우 글로벌 객체(브라우저의 경우 `window`)를 컨텍스트의 기본값으로 갖게 됩니다. `topic` 이라는 이름을 가진 글로벌 변수가 없고 또한 글로벌 객체에 그런 프로퍼티는 없기 때문에 `this.topic`은 `undefined`로 귀결되게 되어 있습니다.
 
 Since this program is not in strict mode (see Chapter 1, "Strictly Speaking"), context-aware functions that are called **without any context specified** default the context to the global object (`window` in the browser). As there is no global variable named `topic` (and thus no such property on the global object), `this.topic` resolves to `undefined`.
+
+아래 예제를 살펴보도록 하겠습니다.
 
 Now consider:
 
@@ -472,11 +476,11 @@ homework.assignment();
 // Kyle says to study JS
 ```
 
-위 예제에서는 `assignment` 함수 참조값을 복사하여 `homework` 객체의 프로퍼티에 설정되고 `homework.assignment()`라고 불립니다. 이는 곧 `homework.assignment()`를 호출에서 `this`는 `homework`란 객체가 되는 것을 의미합니다. 따라서, `this.topic`은 `"JS"`로 결정되게 됩니다.
+위 예제에서는 `assignment` 함수 참조값을 복사하여 `homework` 객체의 프로퍼티에 넣어둔 뒤 `homework.assignment()`를 호출합니다. 그로인해 `homework.assignment()` 호출에서 `this`는 `homework` 객체가 됩니다. 따라서, `this.topic`은 `"JS"`가 됩니다.
 
 A copy of the `assignment` function reference is set as a property on the `homework` object, and then it's called as `homework.assignment()`. That means the `this` for that function call will be the `homework` object. Hence, `this.topic` resolves to `"JS"`.
 
-마지막으로,
+마지막으로 `this`에 관한 하나의 예제를 더 보겠습니다.
 
 Lastly:
 
@@ -489,37 +493,39 @@ assignment.call(otherHomework);
 // Kyle says to study Math
 ```
 
-함수를 호출하는 세 번째 방법은 `call(..)` 메서드를 통해서 하는 방법인데 이 메서드는 `this`의 참조값을 설정할 수 있는 객체를 전달해 줄 수 있습니다(위 예제에서는 `otherHomework`입니다). 프로퍼티 참조를 통해 `this.topic`은 `"Math"`로 결정되게 됩니다.
+함수를 호출하는 세 번째 방법은 `call(..)` 메서드를 통해서 하는 방법입니다. 이 메서드는 하나의 객체를 가져가 `this`가 이 객체를 참조한 채로 호출되게 만들어줍니다(위 예제에서는 `otherHomework`입니다). 그래서 위 예제의 `this.topic`는 `"Math"`가 됩니다.
 
 A third way to invoke a function is with the `call(..)` method, which takes an object (`otherHomework` here) to use for setting the `this` reference for the function call. The property reference `this.topic` resolves to `"Math"`.
 
-동일한 컨텍스트를 아는 함수는 세가지 다른 방식으로 호출될 수 있는데 `this` 객체가 무엇을 참조하냐에 따라 각기 다른 대답을 내놓게 됩니다.
+동일한 컨텍스트를 인식하는 함수는 세 가지 다른 방식으로 호출해 보았는데, `this` 객체가 무엇을 참조하냐에 따라 각기 다른 결과를 만들었습니다.
 
 The same context-aware function invoked three different ways, gives different answers each time for what object `this` will reference.
 
-`this`를 알고있는 함수와 유동적인 컨텍스트의 장점은 하나의 함수를 각기 다른 객체의 데이터를 이용하여 상대적으로 더 유연한 재사용성을 가질 수 있다는 점입니다. 스코프를 포함하는 함수는 다른 스코프나 변수 집합을 절대 참조할 수 없기때문이죠. 하지만 함수가 유동적인 `this` 컨텍스트를 가지게 되면 특정 업무에 관해서 정말 유용해지게 됩니다.
+`this`를 인식하는 함수, 즉 유동적인 컨텍스트는 하나의 함수가 각기 다른 객체 데이터를 통해 더 유연한 재사용성을 가지게 만들었습니다. 스코프를 포함하는 함수는 다른 스코프나 변수를 절대 참조할 수 없습니다. 하지만 함수가 유동적인 `this` 컨텍스트를 인식하게되면 되면 특정 업무에 관해서 정말 유용해지게 됩니다.
 
 The benefit of `this`-aware functions—and their dynamic context—is the ability to more flexibly re-use a single function with data from different objects. A function that closes over a scope can never reference a different scope or set of variables. But a function that has dynamic `this` context awareness can be quite helpful for certain tasks.
 
-## 프로토타입
+## 프로토타입<sup>Prototypes</sup>
 
 ## Prototypes
 
-`this`가 함수를 실행하는데에 관한 특성이라면 프로토타입은 객쳉에 관한 특징입니다. 조금 더 정확하게는 프로퍼티에 접근하는 방법이죠.
+`this`가 함수를 실행하는데에 관한 특성이라면 프로토타입은 객체에 관한 특징입니다. 조금 더 정확하게는 객체의 프로퍼티에 접근하는 특별한 방법입니다.
 
 Where `this` is a characteristic of function execution, a prototype is a characteristic of an object, and specifically resolution of a property access.
 
-프로토타입을 두 객체를 사이의 결합 같은 것입니다. 이러한 결합은 보이지 않는 뒷면에 숨겨져있지만 이 결합을 노출하고 관찰할 수도 있습니다. 이 프로토타입 결합은 객체를 생성하고 이미 존재하는 다른 객체와 연결할 때 만들어집니다.
+프로토타입을 두 객체를 사이의 결합<sup>Linkage</sup> 같은 것입니다. 이러한 결합은 보이지 않게 숨겨져있지만 이 결합을 노출하고 관찰할 수도 있습니다. 객체를 생성할 때 이미 존재하는 또다른 객체와 연결하여 프로토타입 결합이 발생하게 됩니다.
 
 Think about a prototype as a linkage between two objects; the linkage is hidden behind the scenes, though there are ways to expose and observe it. This prototype linkage occurs when an object is created; it's linked to another object that already exists.
 
-여럿 객체들을 프로토타입을 통해 한꺼번에 결합시키는 것을 "프로토타입 체인(prototype chain)"이라고 부릅니다.
+여럿 객체들을 프로토타입을 통해 한꺼번에 결합시키는 것을 "프로토타입 체인<sup>Prototype chain</sup>"이라고 부릅니다.
 
 A series of objects linked together via prototypes is called the "prototype chain."
 
-프로토타입 결합(객체 B에서 객체 A로)은 B에는 없는 프로토타입/메서드에 접근권한은 A가 처리하도록 *위임*하기 위함입니다. 두 객체(혹은 그 이상의!)에게 프로퍼티/메서드에 접근권한을 위임하여 상호간에 협력하고 일을 수행할 수 있게 만들어줍니다.
+예를 들어 객체 B를 객체 A에 결합하는 목적은 B에는 없는 프로퍼티나 메서드에 대해 접근을 A가 처리하도록 *위임<sup>Delegate</sup>*하기 위함입니다. 다수의 객체에게 각각의 프로퍼티/메서드에 접근하도록 위임하여 상호간에 협력하고 일을 수행할 수 있게 만들어줍니다.
 
 The purpose of this prototype linkage (i.e., from an object B to another object A) is so that accesses against B for properties/methods that B does not have, are *delegated* to A to handle. Delegation of property/method access allows two (or more!) objects to cooperate with each other to perform a task.
+
+객체를 평범한 리터럴로 정의하는 예시를 한 번 보겠습니다.
 
 Consider defining an object as a normal literal:
 
@@ -529,7 +535,7 @@ var homework = {
 };
 ```
 
-`homework` 객체는 오직 `topic`이라는 하나의 프로퍼티를 가지고 있습니다. 하지만, 프로토타입 결합은 일반적으로 내재된 메서드 `toString()`, `valueOf()` 등등의 내재된 함수를 가지고 있는 `Object.prototype`라는 객체와 기본적으로 연결되게 됩니다.
+`homework` 객체는 오직 하나의 프로퍼티 `topic`만을 가지고 있습니다. 하지만 프로토타입 결합은 `Object.prototype`라는 객체에 기본적으로 연결이 됩니다. 그리고 `Object.prototype`은 보통 `toString()`, `valueOf()`과 같은 내재된 메서드를 가지고 있습니다.
 
 The `homework` object only has a single property on it: `topic`. However, its default prototype linkage connects to the `Object.prototype` object, which has common built-in methods on it like `toString()` and `valueOf()`, among others.
 

@@ -95,4 +95,8 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Itarator: 반복자
 * Protocol: 프로토콜
 * Spread: 확산
-* Iterable: ...
+* Iterable: 이터러블
+* Collection: 집합
+* Map: 맵
+* Set: 세트
+* Execution context: 실행 컨텍스트
