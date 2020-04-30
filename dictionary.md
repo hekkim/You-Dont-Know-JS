@@ -91,3 +91,8 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Inheritance: 상속
 * Constructor: 생성자
 * Delegate: 위임하다
+* Iteration: 반복문
+* Itarator: 반복자
+* Protocol: 프로토콜
+* Spread: 확산
+* Iterable: ...

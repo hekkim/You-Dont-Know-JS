@@ -13,21 +13,21 @@
     * 인터프리트<sup>Interpretation</sup>에는 무엇들이 있을까?
     * 정확하게 말하자면
     * 정의된<sup>Defined</sup>
-* Chapter 2: JS 알아보기
+* 챕터 2: JS 알아보기
     * 각 파일은 프로그램이다
     * 값<sup>Values</sup>
     * 변수의 선언과 사용
     * 함수<sup>Functions</sup>
     * 비교
-    * How We Organize in JS
-    * The Rabbit Hole Deepens
-* Chapter 3: Digging To The Roots Of JS
+    * JS에서 코드를 구성하는 방법
+    * 토끼굴 파헤치기
+* 챕터 3: JS의 뿌리 파헤치기
+    * 반복문<sup>Iteration</sup>
     * Closure
     * `this` Keyword
     * Prototypes
-    * Iteration
     * Asking "Why?"
-* Chapter 4: The Bigger Picture
+* 챕터 4: The Bigger Picture
     * Pillar 1: Scope and Closure
     * Pillar 2: Prototypes
     * Pillar 3: Types and Coercion

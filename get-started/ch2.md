@@ -1229,7 +1229,7 @@ As shown, ES modules can use *classic modules* internally if they need to suppor
 
 If your module only needs a single instance, you can skip the extra layers of complexity: `export` its public methods directly.
 
-## 토끼굴 깊이 파고들기
+## 토끼굴 파헤치기
 
 ## The Rabbit Hole Deepens
 
