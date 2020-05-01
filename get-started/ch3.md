@@ -675,15 +675,15 @@ The two objects `jsHomework` and `mathHomework` each prototype link to the singl
     <br><br>
 </figure>
 
-`jsHomework.study()`는 `homework.study()`에 위임되는 반면, 함수가 호출된 방법에 따라 `this`(`this.topic`)는 `jsHomework`가 됩니다. 유사하게 `mathHomework.study()` 역시 `homework.study()`에 위임하지만, 여전히 `this`는 `mathHomework`로 귀결되고 결론적으로 `this.topic`은 `"Math"`가 됩니다.
+`jsHomework.study()`는 `homework.study()`에 위임되는 반면, 함수가 호출된 방법에 따라 `this`(`this.topic`)는 `jsHomework`가 됩니다. 동일하게 `mathHomework.study()` 역시 `homework.study()`에 위임하지만, 여전히 `this`는 `mathHomework`가 되고, 결론적으로 `this.topic`은 `"Math"`가 됩니다.
 
 `jsHomework.study()` delegates to `homework.study()`, but its `this` (`this.topic`) for that execution resolves to `jsHomework` because of how the function is called, so `this.topic` is `"JS"`. Similarly for `mathHomework.study()` delegating to `homework.study()` but still resolving `this` to `mathHomework`, and thus `this.topic` as `"Math"`.
 
-이전의 코드 예제에서 만약 `this`가 `homework`가 되었다면 훨씬 덜 유용하였을 것입니다. 하지만 많은 다른 언어에서는 `study()` 메서드가 `homework`에서 정의되었기 때문에 `this`는 `homework`가 되게 됩니다.
+이전의 코드 예제에서 만약 `this`가 `homework`가 되었다면 훨씬 덜 유용하였을 것입니다. 반면 많은 다른 언어에서 `study()` 메서드가 `homework`에서 정의되었기 때문에 `this`는 `homework`가 되게 됩니다.
 
 The preceding code snippet would be far less useful if `this` was resolved to `homework`. Yet, in many other languages, it would seem `this` would be `homework` because the `study()` method is indeed defined on `homework`.
 
-그런 언어들과는 다르게 JS의 유동적인 `this`는 프로토타입 위임과 더불어 `클래스(class)`가 예상한대로 작동하는데에 중요한 요소입니다.
+그러한 언어들과는 다르게 JS에서 `this`의 유동성은 프로토타입 위임과 더불어 `class`가 예상한대로 작동하는데에 중요한 요소입니다.
 
 Unlike many other languages, JS's `this` being dynamic is a critical component of allowing prototype delegation, and indeed `class`, to work as expected!
 
@@ -691,18 +691,18 @@ Unlike many other languages, JS's `this` being dynamic is a critical component o
 
 ## Asking "Why?"
 
-이 챕터에서는 표면에서 쉽게 알아차릴 수 있는 것보다 JS의 저면 아래에 있는 더 많은 것들과 연관이 있어 의도적으로 제거된 부분이 있습니다.
+이 챕터에서는 한 눈에 쉽게 알아차릴 수 있는 것보다 JS의 저면 아래에 있는 더 많은 것들과 연관이 있어 의도적으로 제거된 부분이 있습니다.
 
 The intended take-away from this chapter is that there's a lot more to JS under the hood than is obvious from glancing at the surface.
 
-*시작하기*를 통해 JS에 조금 더 면밀하게 배우고 알게됨에 따라 여러분이 연습하고 개선해야 할 가장 중요한 기술은 호기심 그리고 언어에 관련된 무언가를 마주할 때 "왜?"라고 질문하는 방법입니다.
+*시작하기*를 통해 JS에 조금 더 면밀하게 배우고 알게됨에 따라 여러분이 연습하고 개선해야 할 가장 중요한 기술은 호기심 그리고 언어에서 무언가를 마주할 때 "왜?"라고 질문하는 방법입니다.
 
 As you are *getting started* learning and knowing JS more closely, one of the most important skills you can practice and bolster is curiosity, and the art of asking "Why?" when you encounter something in the language.
 
-이 챕터에서 몇몇 주제에 관해 다소 깊이 다루기도 했지만, 더 많은 세부 사항들을 여전히 전반적으로 훑어보았을 뿐입니다. 더 많이 배워야 할 것들이 있고 여러분의 코드속에서 *옳은* 질문을 하기 시작해야할 방향 역시 있습니다. 옳은 질문을 함으로써 중요한 기술을 가진 더 나은 개발자가 되십시오.
+이 챕터에서 몇몇 주제에 관해 다소 깊이 다루기도 했지만, 더 많은 세부 사항들을 여전히 전반적으로 훑어보았을 뿐입니다. 더 많이 배워야 할 것들이 있고 여러분의 코드속에서 *옳은* 질문을 하기 시작해나가야 합니다. 옳은 질문 하는 것은 더 나은 개발자가 되기 위한 중요한 기술입니다.
 
 Even though this chapter has gone quite deep on some of the topics, many details have still been entirely skimmed over. There's much more to learn here, and the path to that starts with you asking the *right* questions of your code. Asking the right questions is a critical skill of becoming a better developer.
 
-이 책의 마지막 챕터에서는 *You Don't Know JS Yet*의 나머지 책 시리즈를 전반적으로 훑어보며, JS는 어떻게 쪼개져있는지 가볍게 살펴볼 것입니다. 또한 이 책에서 다뤘던 주요 주제들을 복습할 수 있는 연습 코드가 있는 부록 B를 그냥 지나치고 넘어가지 말아주시기 바랍니다.
+이 책의 마지막 챕터에서는 *You Don't Know JS Yet*의 나머지 책 시리즈를 전반적으로 훑어보며, JS는 어떻게 나눠져있는지 가볍게 살펴볼 것입니다. 또한 이 책에서 다뤘던 주요 주제들을 복습할 수 있는 연습 코드가 있는 부록 B를 그냥 지나치고 넘어가지 말아주시기 바랍니다.
 
 In the final chapter of this book, we're going to briefly look at how JS is divided, as covered across the rest of the *You Don't Know JS Yet* book series. Also, don't skip Appendix B of this book, which has some practice code to review some of the main topics covered in this book.
