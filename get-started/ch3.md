@@ -555,7 +555,7 @@ homework.toString();    // [object Object]
 
 ### Object Linkage
 
-객체 프로토타입 결합을 정의하기 위해서는 `Object.create(..)` 유틸리티를 사용해서 객체를 만들 수 있습니다.
+객체 프로토타입 결합에 관해 알아보기위해 `Object.create(..)` 유틸리티를 사용해서 객체를 만들어 보겠습니다.
 
 To define an object prototype linkage, you can create the object using the `Object.create(..)` utility:
 
@@ -569,21 +569,21 @@ var otherHomework = Object.create(homework);
 otherHomework.topic;   // "JS"
 ```
 
-`Object.create(..)`에서 첫 번째 인수 값은 새롭게 생성될 객체와 결합할 객체를 명시화하고 그 결과 새롭게 생성된 (그리고 연동된!) 객체가 반환됩니다.
+`Object.create(..)`에서 첫 번째 인수 값은 새롭게 생성될 객체와 결합할 객체를 명시화하고 그 결과 결합된 새 객체가 반환됩니다.
 
 The first argument to `Object.create(..)` specifies an object to link the newly created object to, and then returns the newly created (and linked!) object.
 
-그림 4에서 보는 것과 같이 세 객체(`otherHomework`, `homework` 그리고 `Object.prototype`)는 프로토타입 체인을 통해 연결되어 있습니다.
+그림 4에서 보는 것과 같이 세 객체 `otherHomework`, `homework` 그리고 `Object.prototype`는 프로토타입 체인을 통해 연결되어 있습니다.
 
 Figure 4 shows how the three objects (`otherHomework`, `homework`, and `Object.prototype`) are linked in a prototype chain:
 
 <figure>
     <img src="images/fig4.svg" width="200" alt="Prototype chain with 3 objects" align="center">
-    <figcaption><em>Fig. 4: Objects in a prototype chain</em></figcaption>
+    <figcaption><em>Fig. 4: 프로토타입 체인 내 객체</em></figcaption>
     <br><br>
 </figure>
 
-프로토타입 체인을 통한 위임은 오직 프로퍼티 안에 있는 값을 살펴볼 수 있는 접근 권한을 가지고 있습니다. 만약 객체의 프로퍼티에 다른 값을 할당하려하면, 객체가 어떠한 프로토타입과 연결되어 있던지간에 객체에 직접적으로 적용이 됩니다.
+프로토타입 체인을 통해 일을 위임하는 것은 오직 프로퍼티 내부에 있는 값을 살펴볼 목적으로만 사용 가능합니다. 객체 프로퍼티에 값을 할당하면 객체가 어느 프로토타입과 결합되어 있던 해당 객체에 직접 적용됩니다.
 
 Delegation through the prototype chain only applies for accesses to lookup the value in a property. If you assign to a property of an object, that will apply directly to the object regardless of where that object is prototype linked to.
 
@@ -612,27 +612,27 @@ homework.topic;
 // "JS" -- not "Math"
 ```
 
-`topic`에 할당하는 것은 `otherHomework`에 직접적으로 프로퍼티를 생성하게 됩니다. 그 결과 `homework`에 있는 프로퍼티 `topic`에는 그 어떠한 영향도 없습니다. 그 다음 명령문에서는 `otherHomework.topic`에 접근하는데 새 프로퍼티 `"Math"`가 위임되지 않은 결과로 나오는 것을 확인할 수 있습니다.
+`topic`에 할당하는 것은 `otherHomework`에 직접 프로퍼티를 생성하게 됩니다. 그 결과 `homework`에 있는 프로퍼티 `topic`에는 그 어떠한 영향도 없습니다. 그 다음 명령문에서 `otherHomework.topic`에 접근하면 `otherHomework`에 새로 생성된 프로퍼티인 `"Math"`가 나오는 것을 확인할 수 있습니다. 이는 곧 `otherHomework.topic`은 프로토타입 체인을 통해 위임된 값을 가져오는 것이 아님을 알 수 있습니다.
 
 The assignment to `topic` creates a property of that name directly on `otherHomework`; there's no effect on the `topic` property on `homework`. The next statement then accesses `otherHomework.topic`, and we see the non-delegated answer from that new property: `"Math"`.
 
-그림 5는 값 할당으로 인해 `otherHomework.topic` 프로퍼티가 생성된 위 예제의 객체/프로퍼티 상황을 보여줍니다.
+그림 5는 할당문이 `otherHomework.topic`에 새로운 프로퍼티를 생성한 이후의 객체와 객체 내 프로퍼티 상황을 보여줍니다.
 
 Figure 5 shows the objects/properties after the assignment that creates the `otherHomework.topic` property:
 
 <figure>
     <img src="images/fig5.svg" width="200" alt="3 objects linked, with shadowed property" align="center">
-    <figcaption><em>Fig. 5: Shadowed property 'topic'</em></figcaption>
+    <figcaption><em>Fig. 5: 숨겨진<sup>Shadowed</sup> 프로퍼티 'topic'</em></figcaption>
     <br><br>
 </figure>
 
-`otherHomework`에 있는 `topic`은 체인속 `homework` 객체에 있는 프로퍼티와 동일한 이름을 가진 "그림자(shadowing)" 프로퍼티입니다.
+`otherHomework`에 있는 `topic`은 체인 속 객체 `homework`에서 동일한 이름을 가진 프로퍼티 `topic`을 "숨기고" 있습니다.
 
 The `topic` on `otherHomework` is "shadowing" the property of the same name on the `homework` object in the chain.
 
 | 노트: |
 | :--- |
-| 솔직히 조금 더 복잡하지만 프로토타입 결합을 가진 객체를 만드는 또 다른 방법은 여전히 "원형 클래스(prototypal class)" 패턴을 이용하는 방법입니다. 이 방법은 ES6에 `class` (챕터2 "클래스") 이전부터 사용되었고 아마도 여전히 조금 더 일반적인 방법일 것입니다. 이에 관해 조금 더 자세한 것은 부록 A "원형 클래스"에서 다루도록 하겠습니다. |
+| 솔직히 조금 더 복잡하지만 프로토타입 결합을 가진 객체를 만드는 또 다른 방법은 여전히 "원형 클래스<sup>Prototypal class</sup>"를 이용하는 방법입니다. 이 방법은 ES6에 `class`가 추가되기 전부터 사용되었고 아마도 여전히 조금 더 일반적인 방법일 것입니다. 이에 관해 조금 더 자세한 것은 부록 A "원형 클래스"에서 다루도록 하겠습니다. |
 
 | NOTE: |
 | :--- |
@@ -642,7 +642,7 @@ The `topic` on `otherHomework` is "shadowing" the property of the same name on t
 
 ### `this` Revisited
 
-`this` 키워드에 관해 이미 살펴봤지만 프로토타입-위임된 함수의 호출을 강화할 때 그 진정한 중요성이 빛을 발하게 됩니다. 게다가 `this`가 함수가 호출되는 방법에따라 유동적인 컨텍스트를 제공하는 가장 중요한 이유 중 하나는, 프로토타입 체인을 통해 위임되는 객체의 메서드를 호출하여도 `this`를 계속해서 유지하기 위해서입니다.
+`this` 키워드에 관해 이전에 살펴봤지만 프로토타입-위임된 함수의 호출할 때 그 진정한 중요성이 빛을 발하게 됩니다. 게다가 `this`가 함수가 호출되는 방법에따라 유동적인 컨텍스트를 제공하는 가장 중요한 이유 중 하나는 프로토타입 체인을 통해 접근 권한을 위임하는 객체의 메서드를 호출하여도 `this`를 계속해서 유지하기 위해서입니다.
 
 We covered the `this` keyword earlier, but its true importance shines when considering how it powers prototype-delegated function calls. Indeed, one of the main reasons `this` supports dynamic context based on how the function is called is so that method calls on objects which delegate through the prototype chain still maintain the expected `this`.
 
@@ -666,12 +666,12 @@ mathHomework.study();
 // Please study Math
 ```
 
-두 객체 `jsHomework`와 `mathHomework`은 각각 하나의 `study()` 함수를 갖고 있는 `homework` 객체에 연결됩니다. `jsHomework`와 `mathHomework`는 각자 그들만의 `topic` 프로퍼티가 주어지게 됩니다 (그림 6).
+두 객체 `jsHomework`와 `mathHomework`는 각각 하나의 `study()` 함수를 갖고 있는 `homework` 객체에 연결됩니다. `jsHomework`와 `mathHomework`는 각자 그들만의 `topic` 프로퍼티를 가집니다 (그림 6).
 The two objects `jsHomework` and `mathHomework` each prototype link to the single `homework` object, which has the `study()` function. `jsHomework` and `mathHomework` are each given their own `topic` property (see Figure 6).
 
 <figure>
     <img src="images/fig6.svg" width="495" alt="4 objects prototype linked" align="center">
-    <figcaption><em>Fig. 6: Two objects linked to a common parent</em></figcaption>
+    <figcaption><em>Fig. 6: 공통된 부모와 연결된 두 객체</em></figcaption>
     <br><br>
 </figure>
 

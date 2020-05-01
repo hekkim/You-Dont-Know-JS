@@ -561,7 +561,7 @@ Historically, scripted or interpreted languages were executed in generally a top
 
 <figure>
     <img src="images/fig1.svg" width="650" alt="Interpreting a script to execute it" align="center">
-    <figcaption><em>Fig. 1: Interpreted/Scripted Execution</em></figcaption>
+    <figcaption><em>Fig. 1: 인터프리트/스크립트 언어의 실행 과정</em></figcaption>
     <br><br>
 </figure>
 
@@ -575,7 +575,7 @@ Compare that to languages which do go through a processing step (typically, call
 
 <figure>
     <img src="images/fig2.svg" width="650" alt="Parsing, compiling, and executing a program" align="center">
-    <figcaption><em>Fig. 2: Parsing + Compilation + Execution</em></figcaption>
+    <figcaption><em>Fig. 2: 파싱, 컴파일, 실행 과정</em></figcaption>
     <br><br>
 </figure>
 
@@ -645,7 +645,7 @@ To visualize those steps, again:
 
 <figure>
     <img src="images/fig3.svg" width="650" alt="Steps of JS compilation and execution" align="center">
-    <figcaption><em>Fig. 3: Parsing, Compiling, and Executing JS</em></figcaption>
+    <figcaption><em>Fig. 3: JS에서 파싱, 컴파일 그리고 실행 과정</em></figcaption>
     <br><br>
 </figure>
 
