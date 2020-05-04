@@ -23,7 +23,7 @@ I emphasize the word journey because *knowing JS* is not a destination, it's a d
 
 Following this background chapter, the rest of the book lays out a high-level map of what you will find as you dig into and study JS with the YDKJSY books.
 
-특히, 챕터 4는 JS를 구성하는 세 가지 주요 기반인 스코프와 클로져<sup>Scope/Closures</sup>, 프로토타입과 객체<sup>Prototypes/Objects</sup>, 그리고 타입과 강제 변환<sup>Types/Coercion</sup>에 관해 알아보게 될 것입니다. JS는 다양한 특징과 능력이 있는 암시적이고 복잡한 언어이지만, JS의 모든 특징은 위 세 가지 주요 기반에 기초하고 있습니다.
+특히, 챕터 4는 JS를 구성하는 세 가지 주요 기반인 스코프<sup>Scope</sup>와 클로져<sup>Closure</sup>, 프로토타입<sup>Prototype</sup>과 객체<sup>Object</sup>, 그리고 타입<sup>Types</sup>과 강제 변환<sup>Coercion</sup>에 관해 알아보게 될 것입니다. JS는 다양한 특징과 능력이 있는 암시적이고 복잡한 언어이지만, JS의 모든 특징은 위 세 가지 주요 기반에 기초하고 있습니다.
 
 In particular, Chapter 4 identifies three main pillars around which the JS language is organized: scope/closures, prototypes/objects, and types/coercion. JS is a broad and sophisticated language, with many features and capabilities. But all of JS is founded on these three foundational pillars.
 
@@ -193,7 +193,7 @@ Section B.1 and B.2 cover *additions* to JS (syntax and APIs) that web JS includ
 
 Section B.3 includes some conflicts where code may run in both web and non-web JS engines, but where the behavior *could* be observably different, resulting in different outcomes. Most of the listed changes involve situations that are labeled as early errors when code is running in strict mode.
 
-부록 B *깨달음(gotchas)*에선 흔히 마주치긴 어렵지만 미래의 안전을 위해 피해야만하는 구조들에 관한 좋은 방안에 관해 다룰 것입니다. 가능한 한 특정 JS 환경에서만 적용되는 동작에 의존하지 마시고 어디서든 사용 가능한 JS 명세서를 준수하시기 바랍니다.
+부록 B *깨달음*에선 흔히 마주치긴 어렵지만 미래의 안전을 위해 피해야만하는 구조들에 관한 좋은 방안에 관해 다룰 것입니다. 가능한 한 특정 JS 환경에서만 적용되는 동작에 의존하지 마시고 어디서든 사용 가능한 JS 명세서를 준수하시기 바랍니다.
 
 Appendix B *gotchas* aren't encountered very often, but it's still a good idea to avoid these constructs to be future safe. Wherever possible, adhere to the JS specification and don't rely on behavior that's only applicable in certain JS engine environments.
 
@@ -273,7 +273,7 @@ But I'll just hint at some examples of quirks that have been true at various poi
 
 * How non-strict mode `this` default-binding works for function calls, and whether the "global object" used will contain expected global variables.
 
-* 여러줄에 걸쳐 입력을 하면 호이스팅<sup>Hoisting</sup>(책 2 *스코프와 클로져<sup>Scope and Closures</sup>* 참고)은 어떻게 작동할까요?
+* 여러줄에 걸쳐 입력을 하면 호이스팅<sup>Hoisting</sup>(책 2 *스코프<sup>Scope</sup>와 클로져<sup>Closure</sup>* 참고)은 어떻게 작동할까요?
 
 * How hoisting (see Book 2, *Scope & Closures*) works across multiple line entries.
 
@@ -365,7 +365,7 @@ There are some small exceptions to this rule. JS has had some backwards-incompat
 
 These kinds of changes are rare, and are almost always in corner cases of usage that are unlikely to be observably breaking in many sites.
 
-*하위 호환성*과 대응 관계에 있는 *상위 호환성<sup>Forwards compatibility</sup>*과 비교해 보겠습니다. 상위 호환이 된다는 것은 프로그램의 언어에 새로운 추가 기능을 포함해도 이전 버전의 JS 엔진에서 실행된 경우 해당 프로그램이 중단되지 않는다는 얘기입니다. 많은 이들이 원하거나 심지어는 오해하는 경우도 있지만 **JS는 상위 호환적이지 않습니다**.
+*하위 호환성*과 대응 관계에 있는 *상위 호환성<sup>Forwards compatibility</sup>* 과 비교해 보겠습니다. 상위 호환이 된다는 것은 프로그램의 언어에 새로운 추가 기능을 포함해도 이전 버전의 JS 엔진에서 실행된 경우 해당 프로그램이 중단되지 않는다는 얘기입니다. 많은 이들이 원하거나 심지어는 오해하는 경우도 있지만 **JS는 상위 호환적이지 않습니다**.
 
 Compare *backwards compatibility* to its counterpart, *forwards compatibility*. Being forwards-compatible means that including a new addition to the language in a program would not cause that program to break if it were run in an older JS engine. **JS is not forwards-compatible**, despite many wishing such, and even incorrectly believing the myth that it is.
 
@@ -717,7 +717,7 @@ But let me just state simply: WASM will not replace JS. WASM significantly augme
 
 ## *정확하게* 말하자면
 
-다시 돌아가 2009년 ES5가 배포되던 당시 JS는 더 나은 JS 프로그램을 만들기 위한 사정 동의<sup>Opt-in</sup> 방식으로 *엄격 모드<sup>Strict mode</sup>*를 추가했습니다.
+다시 돌아가 2009년 ES5가 배포되던 당시 JS는 더 나은 JS 프로그램을 만들기 위한 사정 동의<sup>Opt-in</sup> 방식으로 *엄격 모드<sup>Strict mode</sup>* 를 추가했습니다.
 
 Back in 2009 with the release of ES5, JS added *strict mode* as an opt-in mechanism for encouraging better JS programs.
 

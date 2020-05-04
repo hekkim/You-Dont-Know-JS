@@ -58,7 +58,7 @@ Closure is a natural result of lexical scope when the language has functions as 
 
 Across all of programming, but especially in JS, closure drives many of the most important programming patterns, including modules. As I see it, modules are as *with the grain* as you can get, when it comes to code organization in JS.
 
-스코프, 클로져 그리고 모듈의 작동 방식에대해 더 깊이있게 파고들기 위해서는 두 번째 책 *스코프와 클로져<sup>Scope & Closures</sup>* 를 읽어보시기 바랍니다.
+스코프, 클로져 그리고 모듈의 작동 방식에대해 더 깊이있게 파고들기 위해서는 두 번째 책 *스코프<sup>Scope</sup>와 클로져<sup>Closure</sup>* 를 읽어보시기 바랍니다.
 
 To dig further into scope, closures, and how modules work, read Book 2, *Scope & Closures*.
 
@@ -90,7 +90,7 @@ Classes are just one pattern you can build on top of such power. But another app
 
 But class inheritance gets almost all the attention. And the rest goes to functional programming (FP), as the sort of "anti-class" way of designing programs. This saddens me, because it snuffs out any chance for exploration of delegation as a viable alternative.
 
-세 번째 책 *객체와 클래스<sup>Objects & Classes</sup>* 에서 충분한 시간을 들여 객체 위임<sup>Object delegation</sup>이 저희가 알고 있는 것보다 훨씬 더 강한 힘을 가지고 있는지 알아볼 수 있길 바랍니다. 디만 반-`클래스`를 지향하라는 얘기가 아니라 "클래스만이 객체를 사용할 유일한 방법이 아니다"라는 걸 더 많은 JS 개발자분들이 알아주셨으면 좋겠다는 얘기입니다.
+세 번째 책 *객체<sup>Object</sup>와 클래스<sup>Class</sup>* 에서 충분한 시간을 들여 객체 위임<sup>Object delegation</sup>이 저희가 알고 있는 것보다 훨씬 더 강한 힘을 가지고 있는지 알아볼 수 있길 바랍니다. 디만 반-`클래스`를 지향하라는 얘기가 아니라 "클래스만이 객체를 사용할 유일한 방법이 아니다"라는 걸 더 많은 JS 개발자분들이 알아주셨으면 좋겠다는 얘기입니다.
 
 I encourage you to spend plenty of time deep in Book 3, *Objects & Classes*, to see how object delegation holds far more potential than we've perhaps realized. This isn't an anti-`class` message, but it is intentionally a "classes aren't the only way to use objects" message that I want more JS developers to consider.
 
@@ -126,7 +126,7 @@ Arguably, this pillar is more important than the other two, in the sense that no
 
 Even if you love TypeScript/Flow, you are not going to get the most out of those tools or coding approaches if you aren't deeply familiar with how the language itself manages value types.
 
-JS의 타입과 강제 변환에 관해 더 배우기 위해 네 번째 책 *타입과 문법<sup>Types & Grammar</sup>* 을 확인해주시기 바랍니다. 하지만 단순히 `===`를 사용해야만 하고 나머지는 잊어도 된다는 말을 항상 듣곤했다는 변명으로 이 주제를 건너 뛰진 말아주시기 바랍니다.
+JS의 타입과 강제 변환에 관해 더 배우기 위해 네 번째 책 *타입<sup>Type</sup>과 문법<sup>Grammar</sup>* 을 확인해주시기 바랍니다. 하지만 단순히 `===`를 사용해야만 하고 나머지는 잊어도 된다는 말을 항상 듣곤했다는 변명으로 이 주제를 건너 뛰진 말아주시기 바랍니다.
 
 To learn more about JS types and coercion, check out Book 4, *Types & Grammar*. But please don't skip over this topic just because you've always heard that we should use `===` and forget about the rest.
 
@@ -238,7 +238,7 @@ My suggestion for most readers is to proceed through this series in this order:
 
 That's the intended order to read this book series.
 
-하지만 책 2, 3, 4는 일반적으로 여러분이 가장 궁금해하는 주제가 무엇이고 뭘 가장 먼저 알아보고 싶은지에 따라 어떠한 순서로 읽어도 상관이 없습니다. 하지만 이 세권의 책 하물며 *타입과 문법<sup>Types & Grammar</sup>* 라도 이미 그 주제에 관해 알고 있을지라도 건너뛰지 않길 추천해드립니다.
+하지만 책 2, 3, 4는 일반적으로 여러분이 가장 궁금해하는 주제가 무엇이고 뭘 가장 먼저 알아보고 싶은지에 따라 어떠한 순서로 읽어도 상관이 없습니다. 하지만 이 세권의 책 하물며 *타입<sup>Type</sup>과 문법<sup>Grammar</sup>* 라도 이미 그 주제에 관해 알고 있을지라도 건너뛰지 않길 추천해드립니다.
 
 However, Books 2, 3, and 4 can generally be read in any order, depending on which topic you feel most curious about and comfortable exploring first. But I don't recommend you skip any of these three books—not even *Types & Grammar*, as some of you will be tempted to do!—even if you think you already have that topic down.
 
@@ -246,7 +246,7 @@ However, Books 2, 3, and 4 can generally be read in any order, depending on whic
 
 Book 5 (*Sync & Async*) is crucial for deeply understanding JS, but if you start digging in and find it's too intimidating, this book can be deferred until you're more experienced with the language. The more JS you've written (and struggled with!), the more you'll come to appreciate this book. So don't be afraid to come back to it at a later time.
 
-이 시리즈의 마지막 책인 *ES.Nest 그리고 그 너머<sup>ES.Next & Beyond* 다소 그 자체로 독립적인 면이 있습니다. 제가 제안드렸던 것처럼 가장 마지막에 읽을 수도 있지만 JS의 전반에 걸쳐 좀 더 시야를 넓히기위한 지름길로 가길 원한다면 *시작하기<sup>Getting Started</sup>*를 마친 이후 읽을수도 있습니다. 이 책은 향후 갱신될 가능성이 높으므로 이따금 다시 방문하는 것이 좋습니다.
+이 시리즈의 마지막 책인 *ES.Nest 그리고 그 너머* 다소 그 자체로 독립적인 면이 있습니다. 제가 제안드렸던 것처럼 가장 마지막에 읽을 수도 있지만 JS의 전반에 걸쳐 좀 더 시야를 넓히기위한 지름길로 가길 원한다면 *시작하기<sup>Getting Started</sup>* 를 마친 이후 읽을수도 있습니다. 이 책은 향후 갱신될 가능성이 높으므로 이따금 다시 방문하는 것이 좋습니다.
 
 The final book in the series, *ES.Next & Beyond*, in some respects stands alone. It can be read at the end, as I suggest, or right after *Getting Started* if you're looking for a shortcut to broaden your radar of what JS is all about. This book will also be more likely to receive updates in the future, so you'll probably want to re-visit it occasionally.
 

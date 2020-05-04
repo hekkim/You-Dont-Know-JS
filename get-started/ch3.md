@@ -189,7 +189,7 @@ chars;
 //   "w", "o", "r", "l", "d", "!" ]
 ```
 
-`맵` 자료 구조는 키 기반의 객체를 사용합니다. 이 키는 하나의 값을 객체를 연결하는데 사용됩니다. 맵은 반복문이 단순히 맵에 있는 값이 아닌 맵의 *엔트리<sup>Entry</sup>*를 반복한다는 점에서 이전에 보았던 보이는 것과는 다소 다른 반복문을 가지게 됩니다. *엔트리*는 키와 값을 포함하고 있는 2-원소 배열인 튜플<sup>Tuple</sup>입니다.
+`맵` 자료 구조는 키 기반의 객체를 사용합니다. 이 키는 하나의 값을 객체를 연결하는데 사용됩니다. 맵은 반복문이 단순히 맵에 있는 값이 아닌 맵의 *엔트리<sup>Entry</sup>* 를 반복한다는 점에서 이전에 보았던 보이는 것과는 다소 다른 반복문을 가지게 됩니다. *엔트리*는 키와 값을 포함하고 있는 2-원소 배열인 튜플<sup>Tuple</sup>입니다.
 
 A `Map` data structure uses objects as keys, associating a value (of any type) with that object. Maps have a different default iteration than seen here, in that the iteration is not just over the map's values but instead its *entries*. An *entry* is a tuple (2-element array) including both a key and a value.
 
@@ -388,7 +388,7 @@ Remember: this closure is not over the value (like `1` or `3`), but over the var
 
 Closure is one of the most prevalent and important programming patterns in any language. But that's especially true of JS; it's hard to imagine doing anything useful without leveraging closure in one way or another.
 
-여전히 클로져에 관해 불분명하고 불확실하다고 느껴진다면 두 번째 책 *스코프와 클로져<sup>Scope & Closure</sup>*의 주제에 집중해 주시기 바랍니다.
+여전히 클로져에 관해 불분명하고 불확실하다고 느껴진다면 두 번째 책 *스코프<sup>Scope</sup>와 클로져<sup>Closure</sup>* 의 주제에 집중해 주시기 바랍니다.
 
 If you're still feeling unclear or shaky about closure, the majority of Book 2, *Scope & Closures* is focused on the topic.
 
@@ -404,7 +404,7 @@ One of JS's most powerful mechanisms is also one of its most misunderstood: the 
 
 As discussed previously, when a function is defined, it is *attached* to its enclosing scope via closure. Scope is the set of rules that controls how references to variables are resolved.
 
-하지만 함수 역시 그들의 스코프 외에도 그들이 접근할 수 있는 것들에 영향을 미치는 또다른 특성이 있습니다. 이 특성은 *실행 컨텍스트<sup>Execution context</sup>*라고 가장 잘 설명될 수 있고, 이는 `this`라는 키워드를 통해 함수에 노출되게 됩니다.
+하지만 함수 역시 그들의 스코프 외에도 그들이 접근할 수 있는 것들에 영향을 미치는 또다른 특성이 있습니다. 이 특성은 *실행 컨텍스트<sup>Execution context</sup>* 라고 가장 잘 설명될 수 있고, 이는 `this`라는 키워드를 통해 함수에 노출되게 됩니다.
 
 But functions also have another characteristic besides their scope that influences what they can access. This characteristic is best described as an *execution context*, and it's exposed to the function via its `this` keyword.
 
@@ -416,9 +416,7 @@ Scope is static and contains a fixed set of variables available at the moment an
 
 `this` is not a fixed characteristic of a function based on the function's definition, but rather a dynamic characteristic that's determined each time the function is called.
 
-*실행 컨텍스트*는 함수가 실행되는동안 존재하며 내부 프로퍼티를 사용할 수 있는 객체라고 생각할 수 있습니다.
-
-*실행 컨텍스트*를 스코프와 비교하면 *스코프 객체*는 JS 엔진 내부에 숨겨져 있단 점만 제외하고는 똑같다고 여길 수도 있습니다. 스코프와 비교하면 실행 컨텍스트를 하나의 *객체*라고 생각할 수도 있습니다. 다만 이 *스코프 객체<sup>Scope object</sup>*는 JS 엔진 내부에 숨겨져 있으며, 하나의 함수에 관해 늘 동일하며, 이 객체의 *프로퍼티*는 함수에서 사용할 수 있는 변수 식별자 모양을 하고 있다는 점만 제외한다면 말입니다.
+*실행 컨텍스트*는 함수가 실행되는동안 존재하며 내부 프로퍼티를 사용할 수 있는 객체라고 생각할 수 있습니다. *실행 컨텍스트*를 스코프와 비교하면 객체는 JS 엔진 내부에 숨겨져 있단 점만 제외하고는 똑같다고 여길 수도 있습니다. 스코프와 비교하면 실행 컨텍스트를 하나의 *객체*라고 생각할 수도 있습니다. 다만 이 *스코프 객체<sup>Scope object</sup>* 는 JS 엔진 내부에 숨겨져 있으며, 하나의 함수에 관해 늘 동일하며, 이 객체의 *프로퍼티*는 함수에서 사용할 수 있는 변수 식별자 모양을 하고 있다는 점만 제외한다면 말입니다.
 
 One way to think about the *execution context* is that it's a tangible object whose properties are made available to a function while it executes. Compare that to scope, which can also be thought of as an *object*; except, the *scope object* is hidden inside the JS engine, it's always the same for that function, and its *properties* take the form of identifier variables available inside the function.
 
@@ -521,7 +519,7 @@ Think about a prototype as a linkage between two objects; the linkage is hidden 
 
 A series of objects linked together via prototypes is called the "prototype chain."
 
-예를 들어 객체 B를 객체 A에 결합하는 목적은 B에는 없는 프로퍼티나 메서드에 대해 접근을 A가 처리하도록 *위임<sup>Delegate</sup>*하기 위함입니다. 다수의 객체에게 각각의 프로퍼티/메서드에 접근하도록 위임하여 상호간에 협력하고 일을 수행할 수 있게 만들어줍니다.
+예를 들어 객체 B를 객체 A에 결합하는 목적은 B에는 없는 프로퍼티나 메서드에 대해 접근을 A가 처리하도록 *위임<sup>Delegate</sup>* 하기 위함입니다. 다수의 객체에게 각각의 프로퍼티/메서드에 접근하도록 위임하여 상호간에 협력하고 일을 수행할 수 있게 만들어줍니다.
 
 The purpose of this prototype linkage (i.e., from an object B to another object A) is so that accesses against B for properties/methods that B does not have, are *delegated* to A to handle. Delegation of property/method access allows two (or more!) objects to cooperate with each other to perform a task.
 
