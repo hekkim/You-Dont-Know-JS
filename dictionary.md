@@ -100,3 +100,10 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Map: 맵
 * Set: 세트
 * Execution context: 실행 컨텍스트
+* Lexical scope: 렉시컬 스코프
+* Temporal dead zone: 일시적 사각 지대 (TDZ)
+* Prototypal inheritance: 프로토타입형 상속
+* Prototype chain: 프로토타입 체인
+* Behavior delegation: 동작 위임
+* Static type: 정적 타입
+* Type-aware tooling: 타입 인식 도구
