@@ -107,3 +107,6 @@ This is how I translated the words from English to Korean, since I'd like to uni
 * Behavior delegation: 동작 위임
 * Static type: 정적 타입
 * Type-aware tooling: 타입 인식 도구
+* Value-copy: 값 복사
+* Reference-copy: 참조 복사
+* Name inference: 이름 추론

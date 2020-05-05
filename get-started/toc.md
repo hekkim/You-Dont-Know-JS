@@ -33,12 +33,12 @@
     * 기반 3: 타입<sup>Type</sup>과 강제 변환<sup>Coercion</sup>
     * 결실
     * 순서
-* Appendix A: Exploring Further
-    * Values vs. References
-    * So Many Function Forms
+* 부록 A: 더 알아보기
+    * 값<sup>Value</sup> 대 참조<sup>Reference</sup>
+    * 많은 함수 형태
     * 강제 조건 비교<sup>Coercive Conditional Comparison</sup>
     * Prototypal "Classes"
-* Appendix B: Practice, Practice, Practice!
+* 부록 B: 연습, 연습, 그리고 또 연습!
     * Practicing Comparisons
     * Practicing Closure
     * Practicing Prototypes
