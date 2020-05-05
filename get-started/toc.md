@@ -37,9 +37,9 @@
     * 값<sup>Value</sup> 대 참조<sup>Reference</sup>
     * 많은 함수 형태
     * 강제 조건 비교<sup>Coercive Conditional Comparison</sup>
-    * Prototypal "Classes"
+    * 프로토타입형 "클래스"
 * 부록 B: 연습, 연습, 그리고 또 연습!
-    * Practicing Comparisons
-    * Practicing Closure
-    * Practicing Prototypes
-    * Suggested Solutions
+    * 비교 연습하기
+    * 클로져 연습하기
+    * 프로토타입 연습하기
+    * 제안된 답안
